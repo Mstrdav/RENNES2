@@ -1,0 +1,998 @@
+---
+title: "Master 1 MAS - (Re)prise en main de R - Cours 1"
+author: "Magalie Fromont et Ioana Gavra"
+format: html
+editor: visual
+---
+
+# Présentation générale
+
+R est un système d'analyse statistique et de traitement des données créé par Ross Ihaka et Robert Gentleman (Université d'Auckland, Nouvelle-Zélande).
+
+C'est à la fois un logiciel et un langage de programmation interprété basé sur la notion de vecteur, proche du langage S développé par R. Becker, J. Chambers et A. Wilks des Bell laboratories, utilisable sur la plupart des systèmes d'exploitation.
+
+R est diffusé selon le principe de licence GNU. Il s'agit donc d'un logiciel libre, signifiant qu'il est téléchargeable gratuitement (sur le site officiel du CRAN - Comprehensive R Archive Network- \url{https://cran.r-project.org}), mais aussi que son code source est accessible, réutilisable ou modifiable en vue d'une diffusion publique. Son développement est à présent géré par la \emph{R Development Core Team} dont les principales tâches consistent à proposer des mises à jour régulières du logiciel et de sa documentation.
+
+\medskip
+
+R est un langage de programmation interprété basé sur la notion de vecteur.
+
+\medskip
+
+Le socle commun de R, mis à dispositin lors du téléchargement, contient un certain nombre de fonctions mathématiques et statistiques de première nécessité (somme, produit, moyenne, variance...) regroupées dans une bibliothèque ou librairie ou paquet (*package* en anglais) nommée simplement 'base'.
+
+Par son caractère libre, R peut être enrichi individuellement **pour chaque nouvelle session de travail** de nombreuses autres librairies développées par une communauté très active d'utilisateurs et d'utilisatrices au gré des avancées statistiques.
+
+Attention : ces librairies additionnelles doivent être installées d'abord, puis appelées à chaque nouvelle session.
+
+\medskip
+
+Quelques références :
+
+-   Plusieurs documents sont disponibles sur le site du [CRAN](https://cran.r-project.org/manuals.html) ;
+-   [Introduction à la programmation en R](https://cran.r-project.org/doc/contrib/Goulet_introduction_programmation_R.pdf), de V. Goulet ;
+-   R pour la statistique et la science des données, de P. A. Cornillon et al. Presses Universitaires de Rennes, France ;
+-   Le logiciel R, de P. Lafaye de Micheaux, R. Drouilhet, B. Liquet (2014), Springer-Verlag France ;
+-   [Logiciel R et programmation](http://egallic.fr/Enseignement/R/m1_stat_eco_logiciel_R.pdf), de E. Gallic ;
+-   [Introduction à R](https://perso.univ-rennes2.fr/system/files/users/fromont_m/InitiationR.pdf), de M. Fromont.
+
+# L'interface RStudio et les sessions de travail
+
+## L'interface proposée par RStudio
+
+L'interface proposée par RStudio, qui sera utilisée dans ce cours, est divisée en 4 fenêtres :
+
+-   En haut à gauche - fenêtre de script : c'est un éditeur de texte permettant de taper ses commandes et programmes dans des scripts ou des projets pouvant être sauvegardés sur son espace personnel ;
+-   En bas à gauche - fenêtre de console : c'est la partie logiciel dans laquelle les commandes peuvent être exécutées et où apparaissent les résultats ;
+-   En haut à droite - fenêtre environnement : y sont recensés les données et résultats ainsi que les fonctions gardées en mémoire ;
+-   En bas à droite - fenêtre gestion des sorties : constituée de plusieurs onglets, elle permet d'accéder au répertoire courant ou répertoire de travail dans l'onglet **Files**, de voir les sorties graphiques dans l'onglet **Plots**, de voir les packages installés et chargés dans l'onglet **Packages** et d'accéder à l'aide en ligne dans l'onglet **Help**.
+
+À noter que ces fenêtres peuvent être agencées différemment.
+
+RStudio peut être téléchargé gratuitement à l'adresse: \url{ https://www.rstudio.com/}.
+
+## Les sessions de travail
+
+Ouvrir RStudio permet d'ouvrir une session de travail R.
+
+Dans la console, le prompt \> s'affiche à la fin du message de démarrage, indiquant que R attend une instruction ou commande.
+
+Une instruction est exécutée dans la console en appuyant sur la touche 'Entrée'.
+
+Si l'instruction est complète, le prompt s'affiche à nouveau.
+
+Si l'instruction est incomplète, le prompt est remplacé par + : on peut alors soit compléter l'instruction puis exécuter, soit cliquer sur STOP ou appuyer sur Echap.
+
+Si l'instruction est erronée, un message d'erreur apparaît.
+
+Les flèches au clavier permettent de rappeler des instructions.
+
+`history(n)` permet de récupérer l'historique des $n$ dernières instructions (on peut aussi retrouver l'historique complète depuis l'onglet **History**).
+
+Le caractère spécial `;` permet de séparer des instructions sur une même ligne ou d'exécuter une instruction sans en afficher le résultat, $\sharp$ permet de commenter (la ligne qui suit ce caractère n'est pas comprise comme une instruction).
+
+\medskip
+
+Le répertoire courant ou répertoire de travail est le dossier à partir duquel le logiciel va chercher les fichiers de scripts et de données. Tout ce qui a été fait au cours d'une session de travail peut être enregistré dans ce répertoire courant (données, historique des fonctions...) : cette possibilité est offerte à l'issue de la session, lorsque l'on quitte R.
+
+On peut connaître le répertoire courant soit dans l'onglet **Files**, soit avec la commande `getwd()`, et le changer soit à partir de l'outil **Session** de l'interface, soit avec la commande `setwd()`.
+
+**Attention** : les répertoires dans lesquels sont enregistrés les scripts et projets sont indépendants du répertoire courant.
+
+\medskip
+
+Au cours d'une session, un nouveau script peut être créé et enregistré sous le nom de son choix dans un répertoire de son choix (pas nécessairement le répertoire courant), depuis le Menu **File**.
+
+Un ancien script peut être récupéré depuis le Menu **File** ou en cliquant sur l'onglet correspondant dans l'éditeur de texte s'il apparaît.
+
+\medskip
+
+**Exercice 1.** Ouvrir RStudio et regarder quel est le répertoire courant. Changer ce répertoire courant pour un répertoire personnel de son choix (un dossier spécifique dédié au cours de logiciel R en Master 1 pourra être créé au préalable) en testant les trois méthodes possibles : utilisation de l'onglet **Files**, exécution de commande dans la console, exécution de commande à partir d'un script R que l'on aura pris soin de sauvegarder dans un répertoire de son choix.
+
+\medskip
+
+Pour clore une session de travail, il suffit de quitter R depuis la console avec la commande `q()` ou en fermant l'application RStudio de façon classique.
+
+On peut alors choisir de sauvegarder ou non l'image de la session (objets créés et historique des commandes) dans des fichiers cachés `.RData` et `.Rhistory` du répertoire courant.
+
+Pour charger dans une nouvelle session les objets contenus dans `.RData` et/ou l'historique contenue dans `.Rhistory` : depuis la console, on utilisera `load(".RData")` et `loadhistory(".Rhistory")` ; depuis l'onglet **Files**, on cliquera sur `.RData` ou `.Rhistory`.
+
+On peut aussi utiliser `save.image (".../travail.RData")` pour sauvegarder les objets de la session dans un fichier de son choix, puis `load (".../travail.RData")` pour charger ces objets dans une nouvelle session.
+
+\medskip
+
+**Attention** : les chemins dans R sont écrits à l'aide d'un slash et non d'un anti-slash !
+
+## À propos des entrées/sorties
+
+Pour gérer les entrées/sorties au sein des programmes :
+
+-   `source("mescommandes.txt")` permet d'exécuter les commandes contenues dans le fichier "mescommandes.txt" ;
+-   `sink("messorties.txt")` permet de rediriger les sorties vers le fichier "messorties.txt" jusqu'à l'arrêt de la redirection ordonné par `sink()`.
+
+## À propos de l'aide
+
+Consulter l'aide de R est **indispensable**. Pour ce faire, on peut soit utiliser l'onglet **Help**, soit exécuter une commande spécifique.
+
+**Exercice 2.** Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+help.start()
+
+help(package = "base") # affiche l'aide du package base dans l'onglet Help
+library(help = "base") # idem mais dans la fenêtre de script
+
+help(mean) # affiche l'aide de la fonction dans l'onglet Help
+help.search("mean") # affiche les aides incluant la fonction mean
+?mean # idem à help(mean)
+??mean # idem à help.search(mean)
+help(for) # for doit être écrit entre guillemets
+help("for") # affiche l'aide sur les boucles for
+```
+
+On peut également chercher de l'aide en ligne dans :
+
+-   le moteur de recherche de son choix ou un moteur de recherche spécifique à R (basé sur google) : http://www.rseek.org/ (sur rseek les requêtes sont à formuler en anglais).
+
+-   des cheat sheets (antisèches) : https://www.rstudio.com/resources/cheatsheets/
+
+-   des forums ou groupes d'échanges comme `Grrr` sur Slack (francophone) ou `StackOverflow` (anglophone).
+
+## À propos des packages
+
+`library()` permet de visualiser tous les packages disponibles.
+
+`library(MASS)` permet d'appeler le package additionnel MASS dans la session de travail.
+
+Les outils de l'onglet **Packages** permettent également de charger des packages installés (en cochant la case du package installé souhaité) ou d'installer de nouveaux packages.
+
+# Premiers pas dans R avec quelques calculs simples
+
+**Exercice 3.** Exécuter dans un script et/ou dans la console les commandes suivantes :
+
+```{r eval=FALSE}
+ 2+2
+ # blabla
+ blabla
+ 2+2 # ceci est une addition
+```
+
+R respecte les priorités opératoires :
+
+```{r eval=FALSE}
+1+3/5*5
+(1+3/5)*5
+```
+
+R connaît quelques fonctions numériques et constantes mathématiques de base :
+
+```{r eval=FALSE}
+pi 
+exp(2)
+log(10)
+factorial(4)
+log(0)
+sin(5*pi)
+```
+
+Commenter les deux derniers résultats : que s'attendait-on à obtenir ?
+
+\medskip
+
+Exécuter les 4 lignes de code suivantes et commenter.
+
+```{r eval=FALSE}
+ 0.1+0.2==0.3
+ 0.6+0.1+0.3==0.1+0.7+0.2
+ 0.6+0.1+0.3==0.2+0.7+0.1
+ all.equal(0.6+0.1+0.3,0.2+0.7+0.1)
+```
+
+Pour visualiser la valeur exacte d'un vecteur numérique dans R, on peut utiliser :
+
+```{r eval=FALSE}
+sprintf("%.54f",0.1)
+sprintf("%.55f",0.1)
+sprintf("%.54f",0.2)
+sprintf("%.100f",0.2)
+sprintf("%.54f",0.3)
+sprintf("%.54f",0.1+0.2)
+sprintf("%.54f",0.6+0.1+0.3)
+sprintf("%.54f",0.1+0.7+0.2)
+sprintf("%.54f",0.6+0.1+0.3)
+sprintf("%.54f",0.2+0.7+0.1)
+```
+
+# Objets de R
+
+## Création, modification, suppression
+
+Afin de faciliter l'utilisation répétée d'une même quantité, on peut *affecter* un nom à une valeur ou au résultat d'une instruction à l'aide des symboles flèches `<-` ou `->` ou tout simplement égal `=`.
+
+Si aucun objet portant ce nom n'existe, l'affectation le crée. Sinon, elle modifie la valeur de l'objet.
+
+**Exercice 4.** Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+ x <- 3*5 + sin(5*pi/6)
+ print(x)
+ x
+ y <- x
+ y
+ (x <- exp(3)+2)
+ x
+ x*3
+ (z = log(x-2))
+ x
+ y -> x
+```
+
+**Remarque sur les noms d'objets :** Pour les noms d'objets, on peut utiliser toutes les lettres minuscules a--z et majuscules A--Z (qui se distinguent dans R), les chiffres 0--9, le point « . » et le caractère « \_ ». En fonction de la configuration de l'ordinateur on peut utiliser aussi des lettres accentuées, mais il est fortement déconseillé de le faire.
+
+R stocke en mémoire tous les objets de la session. On peut visualiser les objets gardés en mémoire avec la fonction `objects()` ou avec la fonction `ls()`.
+
+Autres commandes pour visualiser des objets :
+
+-   `ls(pat="a")` affiche la liste des objets contenant le caractère "a" ;
+-   `ls(pat="^a")` affiche la liste des objets commençant par "a" ;
+-   `ls.str()` affiche la liste des objets en mémoire avec des détails sur ces objets.
+
+Pour supprimer un objet on peut utiliser la fonction `rm()` :
+
+```{r eval=FALSE}
+ z
+ rm(z)
+ z
+ rm(x,y)
+```
+
+Pour supprimer tous les objets de la session on peut utiliser `rm(list=ls())`.
+
+## Classes et attributs
+
+R comprend plusieurs classes ou structures d'objets dont les vecteurs, les facteurs, les arrays, les matrices, les data frames, les listes, les data tables, les tibbles, les ts...
+
+Pour connaître la classe d'un objet `x`, on utilise la commande `class(x)`. On peut savoir si un objet x est d'une certaine classe à l'aide des commandes `is.vector(x)`, `is.factor(x)`, `is.matrix(x)`, `is.data.frame(x)`... (la réponse est `TRUE` ou `FALSE`).
+
+Chaque objet est caractérisé par son nom, son contenu, mais aussi par des attributs, dont le mode ou le type (nul : `NULL` ; numérique : `1, 2.333, pi, Inf, -Inf, 2.1e23`,... comprenant les entiers et les réels ; caractère : "blabla" ; complexe : `2+0i, 2i`; logique ou booléen : `TRUE, FALSE`) et la longueur. Pour connaître ces deux attributs, on utilise les commandes `mode(x)` ou `typeof(x)` (de préférence), et `length(x)`. Pour connaître les autres attributs : `attributes(x)`.
+
+Le mode ou type d'un objet informe sur la manière dont l'objet est stocké.
+
+## Valeurs manquantes
+
+Elles sont notées `NA` (not available) ou `NaN` (not a number). On peut savoir si un objet est composé de valeurs manquantes à l'aide de `is.na(x)` ou `is.nan(x)`. Ces commandes renvoient un objet de mode logique de même longueur que `x`.
+
+`na.fail(x)` retourne un message d'erreur si l'objet `x` contient au moins une valeur manquante.
+
+**Exercice 5.** Commenter les résultats des commandes suivantes :
+
+```{r eval=FALSE}
+log(-2)
+ NA+1+10
+ a <- NA+2
+ a
+ a == NA
+ is.na(a)
+ typeof(a)
+```
+
+## Quelques types d'objets importants
+
+### Type `NULL`
+
+Cela représente un type et un objet en soi : l'objet vide. Il est de longueur 0.
+
+**Exercice 6.** Exécuter et commenter les commandes suivantes :
+
+```{r  eval=FALSE}
+ a <- NULL
+ a 
+ typeof(a)
+ length(a)
+ b <- null
+ b <- "null"
+ typeof(b)
+NULL <- 4
+```
+
+### Type `numeric` : `integer` et `double`
+
+On distingue deux types d'objets numériques, à savoir les `integer` (entiers) et les `double` (réels). Des détails sont donnés dans la suite du cours sur des deux notions.
+
+**Exercice 7.** Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+ a <- 2
+ mode(a)
+ typeof(a)
+ b <- as.integer(a)
+ mode(b)
+ typeof(b)
+ c <- pi
+ as.integer(c)
+ is.integer(c)
+ is.numeric(c)
+```
+
+### Type `complex`
+
+On peut aussi générer et travailler avec des nombres complexes sur R, à l'aide soit du duo partie réelle/partie imaginaire soit du duo module/argument. L'unité imaginaire est notée `i`.
+
+**Exercice 8.** Exécuter et commenter les commandes suivantes :
+
+```{r  eval=FALSE}
+ a <- complex(1,1,-1)
+ 1-i
+ 1-1i
+ mode(a)
+ typeof(a)
+ Re(a)
+ Im(a)
+ as.integer(2.5+3i)
+```
+
+Quel est l'argument de `a` ? Définir `b=1+i` en utilisant son module et son argument.
+
+```{r eval=FALSE}
+complex(1, argument=pi/4, modulus=sqrt(2))
+Mod(a)
+Arg(a)
+-pi/4
+```
+
+### Type `character`
+
+Les éléments de type `character` sont placés entre guillemets (simples ou doubles)
+
+**Exercice 9.** Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+ a <- "Logiciel R"
+ mode(a)
+ b <- 'Logiciel R'
+ b
+```
+
+### Type `logical`
+
+Très utiles en programmation, les quantités de type logique prennent 2 valeurs : `TRUE` ou `FALSE` qu'on peut abréger respectivement en `T` ou `F`.
+
+**Exercice 10.** Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+ a <- TRUE
+ typeof(a)
+ is.numeric(a)
+ b <- F
+ b
+ FALSE+TRUE+TRUE
+ typeof(FALSE+TRUE)
+```
+
+Attention à l'utilisation des abréviations :
+
+```{r eval=FALSE}
+ F=TRUE
+ F*T
+ rm(F)
+ F*T
+```
+
+**Exercice 11.** À quels opérateurs correspondent les commandes suivantes ?
+
+```{r eval=FALSE}
+ a <- TRUE
+!a
+ (TRUE)&(FALSE)
+ (TRUE)|(FALSE)
+ (TRUE)|(TRUE)
+ xor(TRUE,FALSE)
+ xor(TRUE,TRUE)
+```
+
+## Conversions
+
+**Exercice 12.** À l'aide des fonctions `as.numeric()`, `as.character()`, `as.logical()`, pour les conversions suivantes, décrire le résultat obtenu : - de logique en numérique ; - de logique en caractère ; - de numérique en caractère ; - de numérique en logique ; - de caractère en logique ; - de caractère en numérique.
+
+**Exercice 13.** Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+ as.logical(5.1)
+ as.character(T)
+ as.numeric("2.5")
+```
+
+## Quelques classes d'objets importantes
+
+### Les vecteurs
+
+Dans R, un vecteur est une suite de données de même type. C'est la structure privilégiée du logiciel R. La grande majorité des fonctions sont optimisées pour l'utilisation avec des vecteurs.
+
+#### Création de vecteurs
+
+Exemples de vecteurs numériques :
+
+```{r eval=FALSE}
+ x <- c(1,2,3)
+ x
+ class(x)
+ is.vector(x)
+ typeof(x)
+ 
+ x <- c(v1=1,v2=2,v3=3)
+ x
+ class(x)
+ is.vector(x)
+ typeof(x)
+ 
+ y <- 1:3
+ class(y)
+ typeof(y)
+ z  <- numeric(3)
+```
+
+Afficher l'espace mémoire occupé par `x` et `y` à l'aide de la fonction `object.size()`.
+
+```{r eval=FALSE}
+object.size(x)
+object.size(y)
+# Le type `double` utilise plus de mémoire que le type `integer` (voir _Le logiciel R_, de P. Lafaye de Micheaux, R. Drouilhet, B. Liquet 2014).
+```
+
+**Remarque :** en terme d'affichage, `x` et `y` sont les mêmes, mais les deux vecteurs sont stockés en mémoire de façon différente.
+
+On peut créer facilement des séquences régulières également à l'aide de fonctions comme `seq`, `sequence` et `rep` ou de l'opérateur `:`.
+
+**Exercice 14.** Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+z <- -3:4
+t <- -(3:4)
+pi:7
+rep(0,10)
+rep(c(3,7),4)
+rep(c(3,7),c(7,3))
+seq(0,1,length.out=100)
+seq(0,1,by=0.01)
+seq(0,1,length=1000)
+sequence(5)
+```
+
+**Attention** à l'ordre des opérations pour l'opérateur `:` !
+
+```{r eval=FALSE}
+ 2*4:6; 3:5+1 # on peut remarquer que l'opérateur ":" est prioritaire
+ n <- 10
+ 1:n-1
+ 1:(n-1)
+```
+
+Exemples de vecteurs de caractères :
+
+```{r eval=FALSE}
+ noms <- c("Pierre","Paul","Jacques")
+ mode(noms)
+ rep('A',3)
+ paste('x',1:3,sep='_')
+ 
+ character(10)
+ format(1:10)
+ LETTERS
+ letters
+ month.abb
+ month.name
+```
+
+Exemples de vecteurs logiques :
+
+```{r eval=FALSE}
+v <- c(TRUE,FALSE,TRUE)
+class(v)
+v <- c(T,F,T)
+class(v)
+
+w <- logical(10)
+w
+class(w)
+
+x  <- -3
+test <- x>0
+class(test)
+y  <- -3:5
+test <- y>=2
+class(test)
+```
+
+Les vecteurs peuvent aussi être définis de façon interactive :
+
+```{r eval=FALSE}
+ (new_vect  <- scan(n=4))
+```
+
+**Exercice 15.** Créer les vecteurs suivants : \* le vecteur des entiers de 5 à 23, \* le vecteur de 6 à 20 allant de 2 en 2 \* le vecteur $(0,0.01,0.02,0.03,\ldots,0.99,1)$ (de deux manières différentes) \* le vecteur : (1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5) \* le vecteur : (1 1 1 2 2 2 3 3 3 4 4 4 5 5 5) \* le vecteur : (1 1 2 2 2 3 3 3 3) \* le vecteur : (Individu1 Individu2 ... Individu100) \* le vecteur : ("A" "B" "B" "C" "C" "C" ... "Z" "Z" "Z") (terminant par 26 fois la lettre Z).
+
+On peut générer des vecteurs contenant des données aléatoires à l'aide de la commande `rfun(n,...)`, où `fun` indique la loi de probabilité, `n` le nombre de données générées, `...` les paramètres de la loi de probabilité. Exemples : `rnorm(n,0,1)`, `rexp(n,1)`, `rpois(n,2)`, `rchisq(n,100)`, `rt(n,100)`, `rf(n,100,50)`, `rbinom(n,100,0.5)`, `runif(n,0,1)}`...\\
+
+\emph{Remarque :} On peut remplacer dans ces fonctions la lettre `r` par `d`, `p` ou `q` pour obtenir la densité de probabilité, la fonction de répartition ou la valeur des quantiles.
+
+**Exercice 16.** Aller dans l'aide de ces fonctions. Sur quoi faut-il être particulièrement vigilant.e lorsqu'on utilise ces fonctions ?
+
+#### Opérations sur les vecteurs numériques
+
+Les opérateurs arithmétiques classiques sont donnés par + (addition), - (soustraction), \* (multiplication), / (division), $\ \hat{}$ (puissance), $\%\%$ (congruence), $\%$/$\%$ (division entière).
+
+Les opérateurs de comparaison sont donnés par $<$ (inférieur à), $>$ (supérieur à),$<=$ (inférieur ou égal à), $>=$ (supérieur ou égal à), $==$ (égal à), $!=$ (différent de).
+
+Ces opérateurs agissent sur les vecteurs élément par élément. Pour effectuer une comparaison globale de deux objets, on peut utiliser `identical`.
+
+Pour réaliser du calcul vectoriel "classique", on utilisera l'opérateur `\%*\%` par exemple.
+
+#### Opérations sur les vecteurs logiques
+
+Les opérateurs logiques sont donnés par `!x` (non logique), `x&y` (et logique opérant sur tous les éléments de x et y), `x&&y` (et logique opérant sur le premier élément de x et y), `x|y` (ou logique opérant sur tous les éléments de x et y), `x||y` (ou logique opérant sur le premier élément), `xor(x,y)` (ou exclusif).
+
+On code l'inégalité $0<$x$<1$ par `x>0 & x<1`.
+
+On peut utiliser les opérateurs arithmétiques ou les fonctions numériques sur des vecteurs logiques, les `FALSE` étant transformés en 0, les `TRUE` en 1.
+
+Exemples :
+
+```{r eval=FALSE}
+TRUE-FALSE
+TRUE*TRUE
+TRUE/FALSE
+sum(c(TRUE,TRUE,FALSE,TRUE))
+mean(c(TRUE,TRUE,FALSE,TRUE))
+exp(c(TRUE,FALSE))
+```
+
+#### Sélection/extraction dans un vecteur
+
+Pour accéder à un ou plusieurs éléments d'un vecteur, on se sert des crochets (`[...]`). Il existe principalement deux manières de sélectionner certains éléments d'un vecteur (ou d'en supprimer) : soit en précisant l'indice des éléments à sélectionner ou à supprimer, soit à l'aide d'un vecteur logique.
+
+Exemples :
+
+```{r eval=FALSE}
+ x <- c(1,2.5,3.9,pi,8)
+ x[2]
+ x[c(1,2,3)]
+ x[1:3]
+ x[c(2,2,1,3)]
+ x[c(1:3,2,1)]
+ x[-1]
+ x[-c(1,2)]
+ x[-(1:2)]
+
+ x[c(TRUE,FALSE,TRUE,FALSE,FALSE)]
+
+ x>3
+ x[x>3]
+ 
+y <- c(x,NA)
+y
+y[!is.na(y)]
+na.omit(y)
+y[is.na(y)] <- 0
+y
+```
+
+**Exercice 17.**
+
+1.  Créer le vecteur `v`: `0  1  2  3  4  5 NA  0  1  2  3  4  5 NA  0  1  2  3  4  5 NA`.
+2.  Remplacer les valeurs `NA` par $-1$.
+3.  Sélectionner les valeurs strictement supérieures à $3$.
+4.  Sélectionner les valeurs positives et inférieures ou égales à $4$.
+5.  Sélectionner les valeurs qui sont soit $<2$ soit $\geq 4$
+6.  Enlever les éléments nuls de `v`.
+7.  Remplacer les éléments négatifs par leur opposé.
+8.  Rajouter les valeurs `6,7,8,9` à la fin du vecteur `v`.
+9.  Enlever les $3$ premiers éléments de `v`.
+10. Afficher la position du maximum de `v`.
+11. Modifier le vecteur `v` pour que sa valeur minimale soit augmentée de $1$. Afficher le minimum avant et après pour vérifier.
+
+**Remarque** : nous reviendrons sur cette partie lorsque nous introduirons le package `dplyr`.
+
+#### Quelques fonctions pour les vecteurs numériques :
+
+-   `sum(x)` calcule la somme des éléments de `x`.
+-   `prod(x)` calcule le produit des éléments de `x`.
+-   `diff(x)` calcule la différence entre les éléments consécutifs de `x`.
+-   `max(x)` donne le maximum des éléments de `x`.
+-   `min(x)` donne le minimum des éléments de `x`.
+-   `which.max(x)` donne l'indice du maximum des éléments de `x`
+-   `which.min(x)` donne l'indice du minimum des éléments de `x`.
+-   `range(x)` donne le minimum et le maximum des éléments de `x`.
+-   `mean(x)` calcule la moyenne des éléments de `x`.
+-   `median(x)` calcule la médiane des éléments de `x`.
+-   `var(x), cov(x)` calcule la variance empirique des éléments de `x`.
+-   `var(x,y), cov(x,y)` calcule la covariance empirique entre `x` et `y`.
+-   `corr(x,y)` calcule la corrélation linéaire entre `x` et `y`.
+-   `sd(x)` calcule l'écart type empirique de `x`.
+-   `quantile(x)` calcule le quantile empirique de `x` (sur la base de plusieurs définitions possibles).
+-   `sign(x)` donne le signe de `x`.
+-   `floor(x)` donne la partie entière de `x`.
+-   `ceiling(x)` donne la partie entière dite "supérieure" de `x`.
+-   `round(x,n)` arrondit les éléments de `x` à `n` chiffres après la virgule.
+-   `signif(x,n)` arrondit les éléments de `x` avec `n` chiffres significatifs.
+-   `rev(x)` inverse l'ordre des éléments de `x`.
+-   `sort(x)` ordonne les éléments de `x`.
+-   `rev(sort(x))` ordonne les éléments de `x` dans l'ordre décroissant.
+-   `rank(x)` donne les rangs des éléments de `x`.
+-   `order(x)` donne les coordonnées du plus petit élément de `x`, du deuxième plus petit élément de `x`, etc.
+-   `pmin(x,y), pmax(x,y)}` donne un vecteur dont le ième élément est le minimum ou le maximum entre `x[i]` et `y[i]`.
+-   `cumsum(x), cumprod(x)` donne un vecteur dont le ième élément est la somme ou le produit des éléments `x[1]` à `x[i]`.
+-   `cummin(x), cummax(x)` donne un vecteur dont le ième élément est le minimum ou le maximum des éléments `x[1]` à `x[i]`.
+-   `match(x,y)` donne un vecteur de même longueur que `x` contenant les éléments de `x` qui sont dans `y` (`NA` sinon).
+-   `which(x==2)` donne les indices des éléments de `x` égaux à $2$.
+-   `choose(n,k)` calcule les combinaisons de paramètres `n` et `k`.
+-   `unique(x)` supprime les éléments dupliqués de `x`.
+-   `table(x)` crée un tableau des effectifs des différentes valeurs de `x`.
+-   `sample(x,k)` ré-échantillonne aléatoirement et sans remise `k` éléments dans `x`.
+-   `sample(x,k,REPLACE=TRUE)` ré-échantillonne aléatoirement et avec remise `k` éléments dans `x`.
+
+#### Quelques fonctions pour les vecteurs de caractères :
+
+-   `substr("blabla",4,6)` extrait ou remplace le caractère formé des lettres 4 à 6 de "blabla".
+-   `grep("bla",x)` donne les indices des éléments de `x` contenant "bla".
+-   `grep("[a-c]",x)` donne les indices des éléments de `x` contenant "a", "b" ou "c".
+-   `sub("bla","pa",x)` remplace le premier "bla" de `x` par "pa".
+-   `gsub("bla","pa",x)` remplace tous les "bla" de `x` par "pa".
+-   `tolower("BLABLA")` écrit "blabla" en minuscules.
+-   `toupper("blabla")` écrit "BLABLA" en majuscules.
+
+#### Quelques fonctions pour les vecteurs logiques :
+
+-   `all(x)` teste si tous les éléments de `x` sont `TRUE`.
+-   `any(x)` teste si au moins un des éléments de `x` est `TRUE`.
+
+### Les matrices
+
+Dans R, une matrice est similaire à un vecteur auquel est ajouté un argument `dim` définissant le nombre de lignes et de colonnes. Ses colonnes sont donc de même type.
+
+#### Création de matrices
+
+Exemples :
+
+```{r eval=FALSE}}
+A <- 1:15 ; dim(A) <- c(5,3) ; A
+(B <- matrix(1:15,nrow=5,ncol=3))
+(C <- matrix(1:15,nrow=5,ncol=3,byrow=TRUE))
+(D <- matrix(1,nrow=5,ncol=3))
+a <- 1:12 ; b=month.name ; (E <- cbind(a,b))
+(F <- rbind(a,b))
+(G <- diag(5))
+(H <- diag(1:5))
+(I <- diag(1:3,nrow=3,ncol=5))
+```
+
+Quelle est la classe de `E` et 'F' ? Leur type ?
+
+```{r eval=FALSE}
+class(E)
+typeof(E)
+class(F)
+typeof(F)
+```
+
+Si `X` est une matrice, `dim(X)` retourne la dimension de la matrice `X`, `nrow(X)` le nombre de lignes, `ncol(X)` le nombre de colonnes. Si `X` est un vecteur, `dim(x)` retourne `NULL`.
+
+```{r eval=FALSE}
+dim(A)
+nrow(A)
+ncol(A)
+NROW(A)
+NCOL(A)
+x <- 1:15
+dim(x)
+nrow(x)
+ncol(x)
+NROW(x)
+NCOL(x)
+```
+
+#### Opérateurs et fonctions pour les matrices
+
+Les opérateurs disponibles pour les vecteurs sont également utilisables pour des matrices de même dimension, tout comme la plupart des fonctions mathématiques. Ils agissent élément par élément.
+
+Pour les matrices numériques, on dispose en plus des opérateurs de calcul matriciel classiques et de fonctions propres au calcul matriciel.
+
+**Exercice 18.**
+
+Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+diag(H) # renvoie les coefficients diagonaux de H, sous forme de vecteur
+diag(H) <- 0 ; H # supporte aussi l'assignation. Ici on nulle les coeffs diag
+diag(I)
+diag(F) # diag s'arrete a la dimension minimum si la matrice n'est pas carrée
+A*C # multiplication coefficient a coefficient
+A%*%C # produit matriciel > ne marche pas car dimension non compatibles
+t(A) # transposée
+t(A)%*%C
+(x <- 1:4)
+(y <- 5:8)
+x*y
+x%*%y # produit scalaire
+x%*%t(y) # produit matriciel, car dimensions compatibles
+crossprod(x,y) # produit scalaire
+(J <- solve(diag(1:4))) # solve : resoud l'équation A%*%x = B (B defaut a Identité)
+(K <- solve(matrix(1:4,nrow=2,ncol=2))) # dont sans B, ça inverse la matrice
+solve(matrix(1:6,nrow=2,ncol=3)) # marche pas si pas carrée
+solve(x%*%t(y))
+solve(J,x) # appelé avec x, resoud le système
+e <- eigen(K) # les valeurs et vecteurs propres; eigen values and vectors en anglais
+e$val
+e$vec
+svd(K) # décomposition en valeurs singulières apparemment
+prod(svd(K)$d) 
+```
+
+#### Sélection dans les matrices
+
+La sélection dans les matrices se fait comme pour les vecteurs, à l'aide des crochets `[r,c]` mais il faut à présent spécifier des indices (ou valeurs logiques) pour les lignes (`r`) **et** pour les colonnes (`c`).
+
+**Exercice 19.**
+
+1.  Créer une matrice 5x6 en faisant le produit entre les vecteurs `1:5` et `7:12`. Afficher la dimension de la matrice obtenue.
+
+```{r}
+(N = 1:5%*%t(7:12))
+(M = 7:12%*%t(1:5))
+```
+
+1.  Sélectionner l'élément de la ligne 3 et de la colonne 5.
+
+```{r}
+M[3,5]
+```
+
+1.  Sélectionner la colonne 3.
+
+```{r}
+M[,3]
+```
+
+1.  Sélectionner les colonnes 3,4 et 5 à l'aide de valeurs logiques.
+
+```{r}
+M[,c(3,4,5)]
+```
+
+1.  Retirer la deuxième ligne.
+
+```{r}
+(M = M[-2,])
+```
+
+1.  Afficher le nombre de lignes de la nouvelle matrice.
+
+```{r}
+nrow(M)
+```
+
+1.  Remplacer les valeurs de la ligne 4 par des zéros.
+
+```{r}
+(M[4,] = 0)
+```
+
+1.  Remplacer les valeurs impaires par des `NA`.
+
+```{r}
+M[M%%2==1] = NA
+```
+
+1.  Rajouter une colonne ne contenant que des zéros.
+
+```{r}
+M = cbind(M, array(0,nrow(M)))
+```
+
+1.  Transformer la nouvelle matrice en une matrice de dimension 3x10.
+
+```{r}
+dim(M) <- c(3,10)
+```
+
+#### Fonction `apply`
+
+On peut appliquer des fonctions mathématiques aux lignes d'une matrice, et/ou à ses colonnes à l'aide de la commande `apply()`.
+
+**Exercice 20.**
+
+Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+sum(A[1,])
+apply(A,1,sum)
+apply(A,2,sum)
+```
+
+### Arrays
+
+Les **arrays** dans R sont des tableaux à $k$ dimensions, généralisant les matrices qui sont en fait des arrays avec $k=2$.\\ Beaucoup des commandes disponibles pour les matrices se généralisent naturellement aux arrays.
+
+Exemple :
+
+```{r}
+ (A = array(1:24,dim=c(2,3,4)))
+ dim(A)
+ A[2,2,3]
+ A[,,2]
+ A[1,,]
+```
+
+La transposition se fait par contre avec la fonction `aperm`.
+
+```{r eval=FALSE}
+dim(aperm(A,c(2,3,1)))
+```
+
+### Facteurs
+
+Les **facteurs** sont des objets R adaptés aux données qualitatives. Un facteur représente en général une variable qualitative observée pour $n$ individus : il est alors constitué des valeurs prises par la variable qualitative pour les $n$ individus, et des différentes modalités possibles de cette variable (même celles qui ne sont pas représentées dans les données observées) appelées dans R des **niveaux**.
+
+#### Créer des facteurs
+
+Exemples :
+
+```{r eval=FALSE}
+x <-  factor(1:3) # Crée un facteur de valeurs 1,2,3 et de niveaux 1,2,3.
+x <- 1:3  ; as.factor(x) # idem
+x  <- factor(1:3,levels=1:5) # Crée un facteur de valeurs 1,2,3 et de niveaux 1,2,3,4,5.
+x <- factor(c("A","B","C")) # Crée un facteur de valeurs A,B,C, et de niveaux A,B,C.
+x <- factor(1:3,labels=c("A","B","C")) # idem
+factor(1:4,exclude=3)
+gl(2,3)
+gl(2,3,length=30)
+gl(2,3, labels=c("A","B"))
+(x <- cut(1:20,3))
+```
+
+#### Manipuler et utiliser des facteurs
+
+**Exercice 21.**
+
+Exécuter et commenter les commandes suivantes :
+
+```{r eval=FALSE}
+(age  <- factor(sample(c("]0,20]","]20,40]","]40,60]","]60,100]"),20,TRUE))) # crée un facteur sur un echantillon de 20 tirage parmis les catégories d'age données, avec remise
+ordered(age) # pour traiter les niveaux comme ordonnés
+levels(age) # donne les 4 niveaux
+nlevels(age)
+levels(age)  <- c("<=20","]20,40]","]40,60]","]60,100]") # si on remplace dans les niveaux, ça remplace dans les valeurs
+age
+levels(age)[3:4]  <- rep(">40",2) # fusiooooooooon
+age
+(taille <- floor(rnorm(20,170,10))) # 20 tirage de norm(170,10)
+(moyennes <- tapply(taille,age,mean)) # taille et age son de meme taille, tapply range les taille dans les catégories des ages, et fait la moyenne dans chaque catégorie
+class(moyennes)
+(moyennes <- by(taille,age,mean)) # juste un wrapper pour tapply
+class(moyennes)
+(moyennes <- aggregate(taille,list(age),mean)) # en fait une dataframe
+class(moyennes)
+```
+
+### Dates
+
+Les objets de classe `Date` sont des objets dont les valeurs représentent des dates. La création d'un tel objet se fait en général à partir d'une chaîne de caractères donnant une date à un certain format, par exemple (par défaut), "aaaa-mm-jj" que l'on transforme en `Date`.
+
+Exemples :
+
+```{r eval=FALSE}
+(aujourdhui <- as.Date("2025-09-26"))
+class(aujourdhui)
+format(aujourdhui)
+aujourdhui+1
+(naissance <- as.Date("1999-10-26"))
+aujourdhui-naissance
+difftime(naissance,aujourdhui,units=c("weeks"))
+(aujourdhui <- as.Date("26/09/2025"))
+(aujourdhui <- as.Date("26/09/2025",format="%d/%m/%Y"))
+(aujourdhui <- Sys.Date())
+class(aujourdhui)
+(aujourdhui <- Sys.time())
+class(aujourdhui)
+aujourdhui <- strptime("2025-09-26 00:00:01",format="%Y-%m-%d %H:%M:%S")
+class(aujourdhui)
+seq(as.Date("2025-09-01"),as.Date("2025-09-26"),by="day")
+```
+
+D'autres fonctions utiles pour les dates : `sort`, `strftime`, `weekdays`, `months`, `quarters`... Et surtout : toutes celles du package `lubridate` du tidyverse (que nous verrons bientôt).
+
+### Listes
+
+Les listes sont des objets très utiles en R : ils permettent de réunir dans un seul objet des objets de classes et de longueurs éventuellement différentes.
+
+-   La sélection dans les listes peut se faire à l'aide de double-crochets `[[]]` (le simple crochet renverra une liste constitué du seul élément choisi).
+-   Si les éléments de la liste sont nommés, on peut les sélectionner à partir de leur nom avec `$`.
+
+Exemples :
+
+```{r eval=FALSE}
+ liste <-  list("Florrick",c("Alicia","Peter","Zack","Grace"),2010)
+ class(liste)
+ liste[[2]]
+ class(liste[[2]])
+ length(liste[[2]])
+ liste[2]
+ class(liste[2])
+ length(liste[2])
+ liste[[2]][3]
+ liste[[c(2,3)]]
+ liste <- list(nom="Florrick",prenoms=c("Alicia","Peter","Zack","Grace"),annee=2010)
+ liste$prenoms
+```
+
+**Exercice 22.**
+
+1.  Créer une liste `l` contenant $3$ éléments nommés: le `titre` d'un de vos films préférés, le `genre` de ce film et l'`annee` de sortie du film.
+
+```{r}
+liste1 = list(titre="Wolfwalkers", genre="Animation", annee=2011)
+```
+
+1.  Enlever l'élément `genre`.
+
+```{r}
+liste1$genre = NULL
+```
+
+1.  Rajouter un nouvel élément `duree` contenant la durée du film (en minutes).
+
+```{r}
+liste1$duree = 94
+```
+
+1.  Créer une liste `lliste` contenant `l` et la liste `liste` de l'exemple précédant (`lliste` devrait avoir comme éléments les deux listes). Afficher à partir de celle-ci l'année de sortie de votre film préféré. Créer également une liste `alliste` en concaténant `l` et `liste` pour que les éléments de `alliste` soient des vecteurs et non pas des listes.
+
+```{r}
+lliste = list(liste1, liste)
+lliste[[1]]$annee
+alliste = c(liste, liste1)
+```
+
+1.  Transformer la liste `l` dans un vecteur.
+
+```{r}
+l = unlist(liste1)
+```
+
+### Tableaux de données ou data frames
+
+Les **data frames** sont des objets importants dans R, particulièrement adaptés aux jeux de données usuels. Un data frame de dimension $n\times p$ ($n$ individus, $p$ variables) est une liste de $p$ objets, pas nécessairement de même type mais de même longueur $n$.
+
+La sélection se fait dnoc de la même manière que dans les listes.
+
+Exemples :
+
+```{r eval=FALSE}
+donnees <- data.frame(nom = c("Florrick","Lockhart"),prenom=c("Alicia","Diane"),
+                      annee=c(2010,2017))
+donnees 
+names(donnees)
+summary(donnees)
+donnees[,3]
+donnees$annee
+donnees[[3]]
+donnees[["annee"]]
+lapply(donnees,length)
+sapply(donnees,length)
+apply(donnees,2,length)
+```
+
+Il existe d'autres formats pour les tableaux de données associés à des packages spécifiques, comme par exemple:
+
+-   les **tibbles** (associés au `tidyverse`),
+
+```{r}
+library('tidyverse')
+as_tibble(donnees)
+```
+
+-   ou les **data.tables** (du package au même nom).
+
+```{r}
+library('data.table')
+data.table(donnees)
+```

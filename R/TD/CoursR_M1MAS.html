@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Magalie Fromont et Ioana Gavra">
+
+<title>Master 1 MAS - (Re)prise en main de R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="CoursR_M1MAS_files/libs/clipboard/clipboard.min.js"></script>
+<script src="CoursR_M1MAS_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="CoursR_M1MAS_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="CoursR_M1MAS_files/libs/quarto-html/popper.min.js"></script>
+<script src="CoursR_M1MAS_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="CoursR_M1MAS_files/libs/quarto-html/anchor.min.js"></script>
+<link href="CoursR_M1MAS_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="CoursR_M1MAS_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="CoursR_M1MAS_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="CoursR_M1MAS_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="CoursR_M1MAS_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Master 1 MAS - (Re)prise en main de R</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Magalie Fromont et Ioana Gavra </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="présentation-générale" class="level1">
+<h1>Présentation générale</h1>
+<p>R est un système d’analyse statistique et de traitement des données créé par Ross Ihaka et Robert Gentleman (Université d’Auckland, Nouvelle-Zélande).</p>
+<p>C’est à la fois un logiciel et un langage de programmation interprété basé sur la notion de vecteur, proche du langage S développé par R. Becker, J. Chambers et A. Wilks des Bell laboratories, utilisable sur la plupart des systèmes d’exploitation.</p>
+<p>R est diffusé selon le principe de licence GNU. Il s’agit donc d’un logiciel libre, signifiant qu’il est téléchargeable gratuitement (sur le site officiel du CRAN - Comprehensive R Archive Network- <a href="https://cran.r-project.org" class="uri">https://cran.r-project.org</a>), mais aussi que son code source est accessible, réutilisable ou modifiable en vue d’une diffusion publique. Son développement est à présent géré par la dont les principales tâches consistent à proposer des mises à jour régulières du logiciel et de sa documentation.</p>
+<p>R est un langage de programmation interprété basé sur la notion de vecteur.</p>
+<p>Le socle commun de R, mis à disposition lors du téléchargement, contient un certain nombre de fonctions mathématiques et statistiques de première nécessité (somme, produit, moyenne, variance…) regroupées dans une bibliothèque ou librairie ou paquet (<em>package</em> en anglais) nommée simplement ‘base’.</p>
+<p>Par son caractère libre, R peut être enrichi individuellement <strong>pour chaque nouvelle session de travail</strong> de nombreuses autres librairies développées par une communauté très active d’utilisateurs et d’utilisatrices au gré des avancées statistiques.</p>
+<p>Attention : ces librairies additionnelles doivent être installées d’abord, puis appelées à chaque nouvelle session.</p>
+<p>Quelques références :</p>
+<ul>
+<li>Plusieurs documents sont disponibles sur le site du <a href="https://cran.r-project.org/manuals.html">CRAN</a> ;</li>
+<li><a href="https://cran.r-project.org/doc/contrib/Goulet_introduction_programmation_R.pdf">Introduction à la programmation en R</a>, de V. Goulet ;</li>
+<li>R pour la statistique et la science des données, de P. A. Cornillon et al.&nbsp;Presses Universitaires de Rennes, France ;</li>
+<li>Le logiciel R, de P. Lafaye de Micheaux, R. Drouilhet, B. Liquet (2014), Springer-Verlag France ;</li>
+<li><a href="http://egallic.fr/Enseignement/R/m1_stat_eco_logiciel_R.pdf">Logiciel R et programmation</a>, de E. Gallic ;</li>
+<li><a href="https://perso.univ-rennes2.fr/system/files/users/fromont_m/InitiationR.pdf">Introduction à R</a>, de M. Fromont.</li>
+</ul>
+</section>
+<section id="linterface-rstudio-et-les-sessions-de-travail" class="level1">
+<h1>L’interface RStudio et les sessions de travail</h1>
+<section id="linterface-proposée-par-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="linterface-proposée-par-rstudio">L’interface proposée par RStudio</h2>
+<p>L’interface proposée par RStudio, qui sera utilisée dans ce cours, est divisée en 4 fenêtres :</p>
+<ul>
+<li>En haut à gauche - fenêtre de script : c’est un éditeur de texte permettant de taper ses commandes et programmes dans des scripts ou des projets pouvant être sauvegardés sur son espace personnel ;</li>
+<li>En bas à gauche - fenêtre de console : c’est la partie logiciel dans laquelle les commandes peuvent être exécutées et où apparaissent les résultats ;</li>
+<li>En haut à droite - fenêtre environnement : y sont recensés les données et résultats ainsi que les fonctions gardées en mémoire ;</li>
+<li>En bas à droite - fenêtre gestion des sorties : constituée de plusieurs onglets, elle permet d’accéder au répertoire courant ou répertoire de travail dans l’onglet <strong>Files</strong>, de voir les sorties graphiques dans l’onglet <strong>Plots</strong>, de voir les packages installés et chargés dans l’onglet <strong>Packages</strong> et d’accéder à l’aide en ligne dans l’onglet <strong>Help</strong>.</li>
+</ul>
+<p>À noter que ces fenêtres peuvent être agencées différemment.</p>
+<p>RStudio peut être téléchargé gratuitement à l’adresse: <a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/</a>.</p>
+</section>
+<section id="les-sessions-de-travail" class="level2">
+<h2 class="anchored" data-anchor-id="les-sessions-de-travail">Les sessions de travail</h2>
+<p>Ouvrir RStudio permet d’ouvrir une session de travail R.</p>
+<p>Dans la console, le prompt &gt; s’affiche à la fin du message de démarrage, indiquant que R attend une instruction ou commande.</p>
+<p>Une instruction est exécutée dans la console en appuyant sur la touche ‘Entrée’.</p>
+<p>Si l’instruction est complète, le prompt s’affiche à nouveau.</p>
+<p>Si l’instruction est incomplète, le prompt est remplacé par + : on peut alors soit compléter l’instruction puis exécuter, soit cliquer sur STOP ou appuyer sur Echap.</p>
+<p>Si l’instruction est erronée, un message d’erreur apparaît.</p>
+<p>Les flèches au clavier permettent de rappeler des instructions.</p>
+<p>‘history(n)’ permet de récupérer l’historique des <span class="math inline">\(n\)</span> dernières instructions (on peut aussi retrouver l’historique complète depuis l’onglet <strong>History</strong>).</p>
+<p>Le caractère spécial ‘;’ permet de séparer des instructions sur une même ligne ou d’exécuter une instruction sans en afficher le résultat, <span class="math inline">\(\sharp\)</span> permet de commenter (la ligne qui suit ce caractère n’est pas comprise comme une instruction).</p>
+<hr>
+<p>Le répertoire courant ou répertoire de travail est le dossier à partir duquel le logiciel va chercher les fichiers de scripts et de données. Tout ce qui a été fait au cours d’une session de travail peut être enregistré dans ce répertoire courant (données, historique des fonctions…) : cette possibilité est offerte à l’issue de la session, lorsque l’on quitte R.</p>
+<p>On peut connaître le répertoire courant soit dans l’onglet <strong>Files</strong>, soit avec la commande <code>getwd()</code>, et le changer soit à partir de l’outil <strong>Session</strong> de l’interface, soit avec la commande <code>setwd()</code>.</p>
+<p><strong>Attention</strong> : les répertoires dans lesquels sont enregistrés les scripts et projets sont indépendants du répertoire courant.</p>
+<p>Au cours d’une session, un nouveau script peut être créé et enregistré sous le nom de son choix dans un répertoire de son choix (pas nécessairement le répertoire courant), depuis le Menu <strong>File</strong>.</p>
+<p>Un ancien script peut être récupéré depuis le Menu <strong>File</strong> ou en cliquant sur l’onglet correspondant dans l’éditeur de texte s’il apparaît.</p>
+<p><strong>Exercice 1.</strong> Ouvrir RStudio et regarder quel est le répertoire courant. Changer ce répertoire courant pour un répertoire personnel de son choix (un dossier spécifique dédié au cours de logiciel R en Master 1 pourra être créé au préalable) en testant les trois méthodes possibles : utilisation de l’onglet <strong>Files</strong>, exécution de commande dans la console, exécution de commande à partir d’un script R que l’on aura pris soin de sauvegarder dans un répertoire de son choix.</p>
+<p>Pour clore une session de travail, il suffit de quitter R depuis la console avec la commande <code>q()</code> ou en fermant l’application RStudio de façon classique.</p>
+<p>On peut alors choisir de sauvegarder ou non l’image de la session (objets créés et historique des commandes) dans des fichiers cachés <code>.RData</code> et <code>.Rhistory</code> du répertoire courant.</p>
+<p>Pour charger dans une nouvelle session les objets contenus dans <code>.RData</code> et/ou l’historique contenue dans <code>.Rhistory</code> : depuis la console, on utilisera <code>load(".RData")</code> et <code>loadhistory(".Rhistory")</code> ; depuis l’onglet <strong>Files</strong>, on cliquera sur <code>.RData</code> ou <code>.Rhistory</code>.</p>
+<p>On peut aussi utiliser <code>save.image (".../travail.RData")</code> pour sauvegarder les objets de la session dans un fichier de son choix, puis <code>load (".../travail.RData")</code> pour charger ces objets dans une nouvelle session.</p>
+<p><strong>Attention</strong> : les chemins dans R sont écrits à l’aide d’un slash et non d’un anti-slash !</p>
+</section>
+<section id="à-propos-des-entréessorties" class="level2">
+<h2 class="anchored" data-anchor-id="à-propos-des-entréessorties">À propos des entrées/sorties</h2>
+<p>Pour gérer les entrées/sorties au sein des programmes :</p>
+<ul>
+<li><code>source("mescommandes.txt")</code> permet d’exécuter les commandes contenues dans le fichier “mescommandes.txt” ;</li>
+<li><code>sink("messorties.txt")</code> permet de rediriger les sorties vers le fichier “messorties.txt” jusqu’à l’arrêt de la redirection ordonné par <code>sink()</code>.</li>
+</ul>
+</section>
+<section id="à-propos-de-laide" class="level2">
+<h2 class="anchored" data-anchor-id="à-propos-de-laide">À propos de l’aide</h2>
+<p>Consulter l’aide de R est <strong>indispensable</strong>. Pour ce faire, on peut soit utiliser l’onglet <strong>Help</strong>, soit exécuter une commande spécifique.</p>
+<p><strong>Exercice 2.</strong> Exécuter et commenter les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help.start</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package =</span> <span class="st">"base"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="at">help =</span> <span class="st">"base"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mean)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">help.search</span>(<span class="st">"mean"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>?mean</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>??mean</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="cf">for</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">"for"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On peut également chercher de l’aide en ligne dans :</p>
+<ul>
+<li><p>le moteur de recherche de son choix ou un moteur de recherche spécifique à R (basé sur google) : http://www.rseek.org/ (sur rseek les requêtes sont à formuler en anglais).</p></li>
+<li><p>des cheat sheets (antisèches) : https://www.rstudio.com/resources/cheatsheets/</p></li>
+<li><p>des forums ou groupes d’échanges comme <code>Grrr</code> sur Slack (francophone) ou <code>StackOverflow</code> (anglophone).</p></li>
+</ul>
+</section>
+<section id="à-propos-des-packages" class="level2">
+<h2 class="anchored" data-anchor-id="à-propos-des-packages">À propos des packages</h2>
+<p><code>library()</code> permet de visualiser tous les packages disponibles.</p>
+<p><code>library(MASS)</code> permet d’appeler le package additionnel MASS dans la session de travail.</p>
+<p>Les outils de l’onglet <strong>Packages</strong> permettent également de charger des packages installés (en cochant la case du package installé souhaité) ou d’installer de nouveaux packages.</p>
+</section>
+</section>
+<section id="premiers-pas-dans-r-avec-quelques-calculs-simples" class="level1">
+<h1>Premiers pas dans R avec quelques calculs simples</h1>
+<p><strong>Exercice 3.</strong> Exécuter dans un script et/ou dans la console les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># blabla</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> blabla</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span><span class="sc">+</span><span class="dv">2</span> <span class="co"># ceci est une addition</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>R respecte les priorités opératoires :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">3</span><span class="sc">/</span><span class="dv">5</span><span class="sc">*</span><span class="dv">5</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">+</span><span class="dv">3</span><span class="sc">/</span><span class="dv">5</span>)<span class="sc">*</span><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>R connaît quelques fonctions numériques et constantes mathématiques de base :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pi </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">2</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">factorial</span>(<span class="dv">4</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">0</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(<span class="dv">5</span><span class="sc">*</span>pi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Commenter les deux derniers résultats : que s’attendait-on à obtenir ?</p>
+<p>Exécuter les 4 lignes de code suivantes et commenter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.1+0.2</span><span class="sc">==</span><span class="fl">0.3</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.6+0.1+0.3</span><span class="sc">==</span><span class="fl">0.1+0.7+0.2</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.6+0.1+0.3</span><span class="sc">==</span><span class="fl">0.2+0.7+0.1</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">all.equal</span>(<span class="fl">0.6+0.1+0.3</span>,<span class="fl">0.2+0.7+0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pour visualiser la valeur exacte d’un vecteur numérique dans R, on peut utiliser :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.54f"</span>,<span class="fl">0.1</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.54f"</span>,<span class="fl">0.2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.54f"</span>,<span class="fl">0.3</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.54f"</span>,<span class="fl">0.1+0.2</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.54f"</span>,<span class="fl">0.6+0.1+0.3</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.54f"</span>,<span class="fl">0.1+0.7+0.2</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.54f"</span>,<span class="fl">0.6+0.1+0.3</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.54f"</span>,<span class="fl">0.2+0.7+0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="objets-de-r" class="level1">
+<h1>Objets de R</h1>
+<section id="création-modification-suppression" class="level2">
+<h2 class="anchored" data-anchor-id="création-modification-suppression">Création, modification, suppression</h2>
+<p>Afin de faciliter l’utilisation répétée d’une même quantité, on peut <em>affecter</em> un nom à une valeur ou au résultat d’une instruction à l’aide des symboles flèches <code>&lt;-</code> ou <code>-&gt;</code> ou tout simplement égal <code>=</code>.</p>
+<p>Si aucun objet portant ce nom n’existe, l’affectation le crée. Sinon, elle modifie la valeur de l’objet.</p>
+<p><strong>Exercice 4.</strong> Exécuter et commenter les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> x <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">5</span> <span class="sc">+</span> <span class="fu">sin</span>(<span class="dv">5</span><span class="sc">*</span>pi<span class="sc">/</span><span class="dv">6</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">print</span>(x)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> x</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> y <span class="ot">&lt;-</span> x</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> y</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a> (x <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="dv">3</span>)<span class="sc">+</span><span class="dv">2</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> x</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> x<span class="sc">*</span><span class="dv">3</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> (<span class="at">z =</span> <span class="fu">log</span>(x<span class="dv">-2</span>))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a> x</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a> y <span class="ot">-&gt;</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Remarque sur les noms d’objets :</strong> Pour les noms d’objets, on peut utiliser toutes les lettres minuscules a–z et majuscules A–Z (qui se distinguent dans R), les chiffres 0–9, le point « . » et le caractère « _ ». En fonction de la configuration de l’ordinateur on peut utiliser aussi des lettres accentuées, mais il est fortement déconseillé de le faire.</p>
+<p>R stocke en mémoire tous les objets de la session. On peut visualiser les objets gardés en mémoire avec la fonction <code>objects()</code> ou avec la fonction <code>ls()</code>.</p>
+<p>Autres commandes pour visualiser des objets :</p>
+<ul>
+<li><code>ls(pat="a")</code> affiche la liste des objets contenant le caractère “a” ;</li>
+<li><code>ls(pat="^a")</code> affiche la liste des objets commençant par “a” ;</li>
+<li><code>ls.str()</code> affiche la liste des objets en mémoire avec des détails sur ces objets.</li>
+</ul>
+<p>Pour supprimer un objet on peut utiliser la fonction <code>rm()</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a> z</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">rm</span>(z)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a> z</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">rm</span>(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pour supprimer tous les objets de la session on peut utiliser <code>rm(list=ls())</code>.</p>
+</section>
+<section id="classes-et-attributs" class="level2">
+<h2 class="anchored" data-anchor-id="classes-et-attributs">Classes et attributs</h2>
+<p>R comprend plusieurs classes ou structures d’objets dont les vecteurs, les facteurs, les arrays, les matrices, les data frames, les listes, les data tables, les tibbles, les ts…</p>
+<p>Pour connaître la classe d’un objet <code>x</code>, on utilise la commande <code>class(x)</code>. On peut savoir si un objet x est d’une certaine classe à l’aide des commandes <code>is.vector(x)</code>, <code>is.factor(x)</code>, <code>is.matrix(x)</code>, <code>is.data.frame(x)</code>… (la réponse est <code>TRUE</code> ou <code>FALSE</code>).</p>
+<p>Chaque objet est caractérisé par son nom, son contenu, mais aussi par des attributs, dont le mode ou le type (nul : <code>NULL</code> ; numérique : <code>1, 2.333, pi, Inf, -Inf, 2.1e23</code>,… comprenant les entiers et les réels ; caractère : “blabla” ; complexe : <code>2+0i, 2i</code>; logique ou booléen : <code>TRUE, FALSE</code>) et la longueur. Pour connaître ces deux attributs, on utilise les commandes <code>mode(x)</code> ou <code>typeof(x)</code> (de préférence), et <code>length(x)</code>. Pour connaître les autres attributs : <code>attributes(x)</code>.</p>
+<p>Le mode ou type d’un objet informe sur la manière dont l’objet est stocké.</p>
+</section>
+<section id="valeurs-manquantes" class="level2">
+<h2 class="anchored" data-anchor-id="valeurs-manquantes">Valeurs manquantes</h2>
+<p>Elles sont notées <code>NA</code> (not available) ou <code>NaN</code> (not a number). On peut savoir si un objet est composé de valeurs manquantes à l’aide de <code>is.na(x)</code> ou <code>is.nan(x)</code>. Ces commandes renvoient un objet de mode logique de même longueur que <code>x</code>.</p>
+<p><code>na.fail(x)</code> retourne un message d’erreur si l’objet <code>x</code> contient au moins une valeur manquante.</p>
+<p><strong>Exercice 5.</strong> Commenter les résultats des commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a> <span class="cn">NA</span><span class="sc">+</span><span class="dv">1</span><span class="sc">+</span><span class="dv">10</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a> a <span class="ot">&lt;-</span> <span class="cn">NA</span><span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a> a</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a> a <span class="sc">==</span> <span class="cn">NA</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">is.na</span>(a)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="quelques-types-dobjets-importants" class="level2">
+<h2 class="anchored" data-anchor-id="quelques-types-dobjets-importants">Quelques types d’objets importants</h2>
+<section id="type-null" class="level3">
+<h3 class="anchored" data-anchor-id="type-null">Type <code>NULL</code></h3>
+<p>Cela représente un type et un objet en soi : l’objet vide. Il est de longueur 0.</p>
+<p><strong>Exercice 6.</strong> Exécuter et commenter les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a> a <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a> a </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(a)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">length</span>(a)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a> b <span class="ot">&lt;-</span> null</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a> b <span class="ot">&lt;-</span> <span class="st">"null"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(b)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="cn">NULL</span> <span class="ot">&lt;-</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="type-numeric-integer-et-double" class="level3">
+<h3 class="anchored" data-anchor-id="type-numeric-integer-et-double">Type <code>numeric</code> : <code>integer</code> et <code>double</code></h3>
+<p>On distingue deux types d’objets numériques, à savoir les <code>integer</code> (entiers) et les <code>double</code> (réels).</p>
+<p><strong>Exercice 7.</strong> Exécuter et commenter les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mode</span>(a)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(a)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a> b <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(a)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">mode</span>(b)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(b)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a> c <span class="ot">&lt;-</span> pi</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">as.integer</span>(c)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">is.integer</span>(c)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">is.numeric</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="type-complex" class="level3">
+<h3 class="anchored" data-anchor-id="type-complex">Type <code>complex</code></h3>
+<p>On peut aussi générer et travailler avec des nombres complexes sur R, à l’aide soit du duo partie réelle/partie imaginaire soit du duo module/argument. L’unité imaginaire est notée <code>i</code>.</p>
+<p><strong>Exercice 8.</strong> Exécuter et commenter les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a> a <span class="ot">&lt;-</span> <span class="fu">complex</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span><span class="sc">-</span>i</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a> <span class="dv">1-1</span>i</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">mode</span>(a)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(a)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">Re</span>(a)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">Im</span>(a)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">as.integer</span>(<span class="fl">2.5</span><span class="sc">+</span><span class="dv">3</span>i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Quel est l’argument de <code>a</code> ? Définir <code>b=1+i</code> en utilisant son module et son argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">complex</span>(<span class="dv">1</span>, <span class="at">argument=</span>pi<span class="sc">/</span><span class="dv">4</span>, <span class="at">modulus=</span><span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Mod</span>(a)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Arg</span>(a)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span>pi<span class="sc">/</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="type-character" class="level3">
+<h3 class="anchored" data-anchor-id="type-character">Type <code>character</code></h3>
+<p>Les éléments de type <code>character</code> sont placés entre guillemets (simples ou doubles)</p>
+<p><strong>Exercice 9.</strong> Exécuter et commenter les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a> a <span class="ot">&lt;-</span> <span class="st">"Logiciel R"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mode</span>(a)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a> b <span class="ot">&lt;-</span> <span class="st">'Logiciel R'</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="type-logical" class="level3">
+<h3 class="anchored" data-anchor-id="type-logical">Type <code>logical</code></h3>
+<p>Très utiles en programmation, les quantités de type logique prennent 2 valeurs : <code>TRUE</code> ou <code>FALSE</code> qu’on peut abréger respectivement en <code>T</code> ou <code>F</code>.</p>
+<p><strong>Exercice 10.</strong> Exécuter et commenter les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a> a <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(a)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">is.numeric</span>(a)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a> b <span class="ot">&lt;-</span> F</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a> b</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a> <span class="cn">FALSE</span><span class="sc">+</span><span class="cn">TRUE</span><span class="sc">+</span><span class="cn">TRUE</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(<span class="cn">FALSE</span><span class="sc">+</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Attention à l’utilisation des abréviations :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a> F<span class="ot">=</span><span class="cn">TRUE</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a> F<span class="sc">*</span>T</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">rm</span>(F)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a> F<span class="sc">*</span>T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercice 11.</strong> À quels opérateurs correspondent les commandes suivantes ?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a> a <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>a</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a> (<span class="cn">TRUE</span>)<span class="sc">&amp;</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a> (<span class="cn">TRUE</span>)<span class="sc">|</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a> (<span class="cn">TRUE</span>)<span class="sc">|</span>(<span class="cn">TRUE</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">xor</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">xor</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="conversions" class="level2">
+<h2 class="anchored" data-anchor-id="conversions">Conversions</h2>
+<p><strong>Exercice 12.</strong> À l’aide des fonctions <code>as.numeric()</code>, <code>as.character()</code>, <code>as.logical()</code>, pour les conversions suivantes, décrire le résultat obtenu : - de logique en numérique ; - de logique en caractère ; - de numérique en caractère ; - de numérique en logique ; - de caractère en logique ; - de caractère en numérique.</p>
+<p><strong>Exercice 13.</strong> Exécuter et commenter les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">as.logical</span>(<span class="fl">5.1</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">as.character</span>(T)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">as.numeric</span>(<span class="st">"2.5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="quelques-classes-dobjets-importantes" class="level2">
+<h2 class="anchored" data-anchor-id="quelques-classes-dobjets-importantes">Quelques classes d’objets importantes</h2>
+<section id="les-vecteurs" class="level3">
+<h3 class="anchored" data-anchor-id="les-vecteurs">Les vecteurs</h3>
+<p>Dans R, un vecteur est une suite de données de même type. C’est la structure privilégiée du logiciel R. La grande majorité des fonctions sont optimisées pour l’utilisation avec des vecteurs.</p>
+<section id="création-de-vecteurs" class="level4">
+<h4 class="anchored" data-anchor-id="création-de-vecteurs">Création de vecteurs</h4>
+<p>Exemples de vecteurs numériques :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a> x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a> x</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">class</span>(x)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">is.vector</span>(x)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(x)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a> x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">v1=</span><span class="dv">1</span>,<span class="at">v2=</span><span class="dv">2</span>,<span class="at">v3=</span><span class="dv">3</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a> x</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">class</span>(x)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">is.vector</span>(x)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(x)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a> y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">class</span>(y)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">typeof</span>(y)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a> z  <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Afficher l’espace mémoire occupé par <code>x</code> et <code>y</code> à l’aide de la fonction <code>object.size()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(x)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(y)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Le type `double` utilise plus de mémoire que le type `integer` (voir _Le logiciel R_, de P. Lafaye de Micheaux, R. Drouilhet, B. Liquet 2014).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Remarque :</strong> en terme d’affichage, <code>x</code> et <code>y</code> sont les mêmes, mais les deux vecteurs sont stockés en mémoire de façon différente.</p>
+<p>On peut créer facilement des séquences régulières également à l’aide de fonctions comme <code>seq</code>, <code>sequence</code> et <code>rep</code> ou de l’opérateur <code>:</code>.</p>
+<p><strong>Exercice 14.</strong> Exécuter et commenter les commandes suivantes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="sc">-</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>pi<span class="sc">:</span><span class="dv">7</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">10</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>),<span class="dv">4</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>),<span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">3</span>))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">length.out=</span><span class="dv">100</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">length=</span><span class="dv">1000</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sequence</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Attention</strong> à l’ordre des opérations pour l’opérateur <code>:</code> !</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span><span class="sc">*</span><span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>; <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span><span class="sc">+</span><span class="dv">1</span> <span class="co"># on peut remarquer que l'opérateur ":" est prioritaire</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a> n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span><span class="sc">:</span>n<span class="dv">-1</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span><span class="sc">:</span>(n<span class="dv">-1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Exemples de vecteurs de caractères :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a> noms <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Pierre"</span>,<span class="st">"Paul"</span>,<span class="st">"Jacques"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mode</span>(noms)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">rep</span>(<span class="st">'A'</span>,<span class="dv">3</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">paste</span>(<span class="st">'x'</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">sep=</span><span class="st">'_'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">character</span>(<span class="dv">10</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">format</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a> LETTERS</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a> letters</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a> month.abb</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a> month.name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Exemples de vecteurs logiques :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(v)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(T,F,T)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(v)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">logical</span>(<span class="dv">10</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>w</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(w)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> x<span class="sc">&gt;</span><span class="dv">0</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(test)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>y  <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> y<span class="sc">&gt;=</span><span class="dv">2</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Les vecteurs peuvent aussi être définis de façon interactive :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a> (new_vect  <span class="ot">&lt;-</span> <span class="fu">scan</span>(<span class="at">n=</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercice 15.</strong> Créer les vecteurs suivants : * le vecteur des entiers de 5 à 23, * le vecteur de 6 à 20 allant de 2 en 2 * le vecteur <span class="math inline">\((0,0.01,0.02,0.03,\ldots,0.99,1)\)</span> (de deux manières différentes) * le vecteur : (1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5) * le vecteur : (1 1 1 2 2 2 3 3 3 4 4 4 5 5 5) * le vecteur : (1 1 2 2 2 3 3 3 3) * le vecteur : (Individu1 Individu2 … Individu100) * le vecteur : (“A” “B” “B” “C” “C” “C” … “Z” “Z” “Z”) (terminant par 26 fois la lettre Z).</p>
+<p>On peut générer des vecteurs contenant des données aléatoires à l’aide de la commande <code>rfun(n,...)</code>, où <code>fun</code> indique la loi de probabilité, <code>n</code> le nombre de données générées, <code>...</code> les paramètres de la loi de probabilité. Exemples : <code>rnorm(n,0,1)</code>, <code>rexp(n,1)</code>, <code>rpois(n,2)</code>, <code>rchisq(n,100)</code>, <code>rt(n,100)</code>, <code>rf(n,100,50)</code>, <code>rbinom(n,100,0.5)</code>, <code>runif(n,0,1)}</code>…\</p>
+<p> On peut remplacer dans ces fonctions la lettre <code>r</code> par <code>d</code>, <code>p</code> ou <code>q</code> pour obtenir la densité de probabilité, la fonction de répartition ou la valeur des quantiles.</p>
+<p><strong>Exercice 16.</strong> Aller dans l’aide de ces fonctions. Sur quoi faut-il être particulièrement vigilant.e lorsqu’on utilise ces fonctions ?</p>
+</section>
+<section id="opérations-sur-les-vecteurs-numériques" class="level4">
+<h4 class="anchored" data-anchor-id="opérations-sur-les-vecteurs-numériques">Opérations sur les vecteurs numériques</h4>
+<p>Les opérateurs arithmétiques classiques sont donnés par + (addition), - (soustraction), * (multiplication), / (division), <span class="math inline">\(\ \hat{}\)</span> (puissance), <span class="math inline">\(\%\%\)</span> (congruence), <span class="math inline">\(\%\)</span>/<span class="math inline">\(\%\)</span> (division entière).</p>
+<p>Les opérateurs de comparaison sont donnés par <span class="math inline">\(&lt;\)</span> (inférieur à), <span class="math inline">\(&gt;\)</span> (supérieur à),<span class="math inline">\(&lt;=\)</span> (inférieur ou égal à), <span class="math inline">\(&gt;=\)</span> (supérieur ou égal à), <span class="math inline">\(==\)</span> (égal à), <span class="math inline">\(!=\)</span> (différent de).</p>
+<p>Ces opérateurs agissent sur les vecteurs élément par élément. Pour effectuer une comparaison globale de deux objets, on peut utiliser <code>identical</code>.</p>
+<p>Pour réaliser du calcul vectoriel “classique”, on utilisera l’opérateur <code>\%*\%</code> par exemple.</p>
+</section>
+<section id="opérations-sur-les-vecteurs-logiques" class="level4">
+<h4 class="anchored" data-anchor-id="opérations-sur-les-vecteurs-logiques">Opérations sur les vecteurs logiques</h4>
+<p>Les opérateurs logiques sont donnés par <code>!x</code> (non logique), <code>x&amp;y</code> (et logique opérant sur tous les éléments de x et y), <code>x&amp;&amp;y</code> (et logique opérant sur le premier élément de x et y), <code>x|y</code> (ou logique opérant sur tous les éléments de x et y), <code>x||y</code> (ou logique opérant sur le premier élément), <code>xor(x,y)</code> (ou exclusif).</p>
+<p>On code l’inégalité <span class="math inline">\(0&lt;\)</span>x<span class="math inline">\(&lt;1\)</span> par <code>x&gt;0 &amp; x&lt;1</code>.</p>
+<p>On peut utiliser les opérateurs arithmétiques ou les fonctions numériques sur des vecteurs logiques, les <code>FALSE</code> étant transformés en 0, les <code>TRUE</code> en 1.</p>
+<p>Exemples :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span><span class="sc">-</span><span class="cn">FALSE</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span><span class="sc">*</span><span class="cn">TRUE</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span><span class="sc">/</span><span class="cn">FALSE</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sélectionextraction-dans-un-vecteur" class="level4">
+<h4 class="anchored" data-anchor-id="sélectionextraction-dans-un-vecteur">Sélection/extraction dans un vecteur</h4>
+<p>Pour accéder à un ou plusieurs éléments d’un vecteur, on se sert des crochets (<code>[...]</code>). Il existe principalement deux manières de sélectionner certains éléments d’un vecteur (ou d’en supprimer) : soit en précisant l’indice des éléments à sélectionner ou à supprimer, soit à l’aide d’un vecteur logique.</p>
+<p>Exemples :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a> x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="fl">2.5</span>,<span class="fl">3.9</span>,pi,<span class="dv">8</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a> x[<span class="dv">2</span>]</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a> x[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)]</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a> x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a> x[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>)]</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a> x[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>)]</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a> x[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a> x[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a> x[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)]</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a> x[<span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>)]</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a> x<span class="sc">&gt;</span><span class="dv">3</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a> x[x<span class="sc">&gt;</span><span class="dv">3</span>]</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(x,<span class="cn">NA</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>y</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>y[<span class="sc">!</span><span class="fu">is.na</span>(y)]</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>(y)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>y[<span class="fu">is.na</span>(y)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercice 17.</strong></p>
+<ol type="1">
+<li>Créer le vecteur <code>v</code>: <code>0  1  2  3  4  5 NA  0  1  2  3  4  5 NA  0  1  2  3  4  5 NA</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>, <span class="cn">NA</span>), <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Remplacer les valeurs <code>NA</code> par <span class="math inline">\(-1\)</span>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>v[<span class="fu">is.na</span>(v)] <span class="ot">=</span> <span class="sc">-</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Sélectionner les valeurs strictement supérieures à <span class="math inline">\(3\)</span>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>v[v<span class="sc">&gt;</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 5 4 5 4 5</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Sélectionner les valeurs positives et inférieures ou égales à <span class="math inline">\(4\)</span>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>v[v<span class="sc">&lt;=</span><span class="dv">4</span> <span class="sc">&amp;</span> v <span class="sc">&gt;</span><span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 2 3 4 1 2 3 4 1 2 3 4</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Sélectionner les valeurs qui sont soit <span class="math inline">\(&lt;2\)</span> soit <span class="math inline">\(\geq 4\)</span></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>v[v<span class="sc">&lt;</span><span class="dv">2</span> <span class="sc">|</span> v<span class="sc">&gt;</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0  1  5 -1  0  1  5 -1  0  1  5 -1</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Enlever les éléments nuls de <code>v</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> v[v<span class="sc">!=</span><span class="dv">0</span>]</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5 -1  1  2  3  4  5 -1  1  2  3  4  5 -1</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Remplacer les éléments négatifs par leur opposé.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>v[v<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">=</span> <span class="sc">-</span>v[v<span class="sc">&lt;</span><span class="dv">0</span>]</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 2 3 4 5 1 1 2 3 4 5 1 1 2 3 4 5 1</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Rajouter les valeurs <code>6,7,8,9</code> à la fin du vecteur <code>v</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> <span class="fu">append</span>(v, <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 2 3 4 5 1 1 2 3 4 5 1 1 2 3 4 5 1 6 7 8 9</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Enlever les <span class="math inline">\(3\)</span> premiers éléments de <code>v</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> v[<span class="dv">4</span><span class="sc">:</span><span class="fu">length</span>(v)]</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 4 5 1 1 2 3 4 5 1 1 2 3 4 5 1 6 7 8 9</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Afficher la position du maximum de <code>v</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Modifier le vecteur <code>v</code> pour que sa valeur minimale soit augmentée de <span class="math inline">\(1\)</span>. Afficher le minimum avant et après pour vérifier.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>v[v <span class="sc">==</span> <span class="fu">min</span>(v)] <span class="ot">=</span> <span class="fu">min</span>(v) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 4 5 2 2 2 3 4 5 2 2 2 3 4 5 2 6 7 8 9</code></pre>
+</div>
+</div>
+<p><strong>Remarque</strong> : nous reviendrons sur cette partie lorsque nous introduirons le package <code>dplyr</code>.</p>
+</section>
+<section id="quelques-fonctions-pour-les-vecteurs-numériques" class="level4">
+<h4 class="anchored" data-anchor-id="quelques-fonctions-pour-les-vecteurs-numériques">Quelques fonctions pour les vecteurs numériques :</h4>
+<ul>
+<li><code>sum(x)</code> calcule la somme des éléments de <code>x</code>.</li>
+<li><code>prod(x)</code> calcule le produit des éléments de <code>x</code>.</li>
+<li><code>diff(x)</code> calcule la différence entre les éléments consécutifs de <code>x</code>.</li>
+<li><code>max(x)</code> donne le maximum des éléments de <code>x</code>.</li>
+<li><code>min(x)</code> donne le minimum des éléments de <code>x</code>.</li>
+<li><code>which.max(x)</code> donne l’indice du maximum des éléments de <code>x</code></li>
+<li><code>which.min(x)</code> donne l’indice du minimum des éléments de <code>x</code>.</li>
+<li><code>range(x)</code> donne le minimum et le maximum des éléments de <code>x</code>.</li>
+<li><code>mean(x)</code> calcule la moyenne des éléments de <code>x</code>.</li>
+<li><code>median(x)</code> calcule la médiane des éléments de <code>x</code>.</li>
+<li><code>var(x), cov(x)</code> calcule la variance empirique des éléments de <code>x</code>.</li>
+<li><code>var(x,y), cov(x,y)</code> calcule la covariance empirique entre <code>x</code> et <code>y</code>.</li>
+<li><code>corr(x,y)</code> calcule la corrélation linéaire entre <code>x</code> et <code>y</code>.</li>
+<li><code>sd(x)</code> calcule l’écart type empirique de <code>x</code>.</li>
+<li><code>quantile(x)</code> calcule le quantile empirique de <code>x</code> (sur la base de plusieurs définitions possibles).</li>
+<li><code>sign(x)</code> donne le signe de <code>x</code>.</li>
+<li><code>floor(x)</code> donne la partie entière de <code>x</code>.</li>
+<li><code>ceiling(x)</code> donne la partie entière dite “supérieure” de <code>x</code>.</li>
+<li><code>round(x,n)</code> arrondit les éléments de <code>x</code> à <code>n</code> chiffres après la virgule.</li>
+<li><code>signif(x,n)</code> arrondit les éléments de <code>x</code> avec <code>n</code> chiffres significatifs.</li>
+<li><code>rev(x)</code> inverse l’ordre des éléments de <code>x</code>.</li>
+<li><code>sort(x)</code> ordonne les éléments de <code>x</code>.</li>
+<li><code>rev(sort(x))</code> ordonne les éléments de <code>x</code> dans l’ordre décroissant.</li>
+<li><code>rank(x)</code> donne les rangs des éléments de <code>x</code>.</li>
+<li><code>order(x)</code> donne les coordonnées du plus petit élément de <code>x</code>, du deuxième plus petit élément de <code>x</code>, etc.</li>
+<li><code>pmin(x,y), pmax(x,y)}</code> donne un vecteur dont le ième élément est le minimum ou le maximum entre <code>x[i]</code> et <code>y[i]</code>.</li>
+<li><code>cumsum(x), cumprod(x)</code> donne un vecteur dont le ième élément est la somme ou le produit des éléments <code>x[1]</code> à <code>x[i]</code>.</li>
+<li><code>cummin(x), cummax(x)</code> donne un vecteur dont le ième élément est le minimum ou le maximum des éléments <code>x[1]</code> à <code>x[i]</code>.</li>
+<li><code>match(x,y)</code> donne un vecteur de même longueur que <code>x</code> contenant les éléments de <code>x</code> qui sont dans <code>y</code> (<code>NA</code> sinon).</li>
+<li><code>which(x==2)</code> donne les indices des éléments de <code>x</code> égaux à <span class="math inline">\(2\)</span>.</li>
+<li><code>choose(n,k)</code> calcule les combinaisons de paramètres <code>n</code> et <code>k</code>.</li>
+<li><code>unique(x)</code> supprime les éléments dupliqués de <code>x</code>.</li>
+<li><code>table(x)</code> crée un tableau des effectifs des différentes valeurs de <code>x</code>.</li>
+<li><code>sample(x,k)</code> ré-échantillonne aléatoirement et sans remise <code>k</code> éléments dans <code>x</code>.</li>
+<li><code>sample(x,k,REPLACE=TRUE)</code> ré-échantillonne aléatoirement et avec remise <code>k</code> éléments dans <code>x</code>.</li>
+</ul>
+</section>
+<section id="quelques-fonctions-pour-les-vecteurs-de-caractères" class="level4">
+<h4 class="anchored" data-anchor-id="quelques-fonctions-pour-les-vecteurs-de-caractères">Quelques fonctions pour les vecteurs de caractères :</h4>
+<ul>
+<li><code>substr("blabla",4,6)</code> extrait ou remplace le caractère formé des lettres 4 à 6 de “blabla”.</li>
+<li><code>grep("bla",x)</code> donne les indices des éléments de <code>x</code> contenant “bla”.</li>
+<li><code>grep("[a-c]",x)</code> donne les indices des éléments de <code>x</code> contenant “a”, “b” ou “c”.</li>
+<li><code>sub("bla","pa",x)</code> remplace le premier “bla” de <code>x</code> par “pa”.</li>
+<li><code>gsub("bla","pa",x)</code> remplace tous les “bla” de <code>x</code> par “pa”.</li>
+<li><code>tolower("BLABLA")</code> écrit “blabla” en minuscules.</li>
+<li><code>toupper("blabla")</code> écrit “BLABLA” en majuscules.</li>
+</ul>
+</section>
+<section id="quelques-fonctions-pour-les-vecteurs-logiques" class="level4">
+<h4 class="anchored" data-anchor-id="quelques-fonctions-pour-les-vecteurs-logiques">Quelques fonctions pour les vecteurs logiques :</h4>
+<ul>
+<li><code>all(x)</code> teste si tous les éléments de <code>x</code> sont <code>TRUE</code>.</li>
+<li><code>any(x)</code> teste si au moins un des éléments de <code>x</code> est <code>TRUE</code>.</li>
+</ul>
+</section>
+</section>
+<section id="les-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="les-matrices">Les matrices</h3>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

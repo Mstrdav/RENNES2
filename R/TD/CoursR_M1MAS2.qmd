@@ -1,0 +1,76 @@
+---
+title: "Master 1 MAS - (Re)prise en main de R - Cours 2"
+author: "Magalie Fromont"
+format: html
+editor: visual
+  markdown: 
+    wrap: sentence
+---
+
+# Chargement de jeux de données de R
+
+À des fins pédagogiques et méthodologiques, R et ses packages contiennent de nombreux jeux de données. Pour visualiser la liste des données disponibles dans les packages chargés on peut utiliser la commande `data()`.
+
+Exemple de jeux de données disponible dans la version de R de base :
+
+```{r eval=FALSE}
+data()
+?airquality
+View(airquality) # affiche les données du jeu de données Titanic
+data(airquality) # charge ces mêmes données dans la session de travail
+class(airquality)
+```
+
+Il existe également des jeux de données disponibles au sein de packages particuliers. Dans ce cas, le chargement nécessite de préciser le package :
+
+```{r eval=FALSE}
+data(starwars)
+data(starwars,package="dplyr")
+?starwars
+View(starwars)
+class(starwars)
+```
+
+# Manipulation de jeux de données : premiers pas hors du tidyverse
+
+**Exercice 1.**
+
+1.  Créer un data frame intitulé `star.df` en transformant `starwars`.
+2.  Quelle est la dimension de `star.df` ?
+3.  Combien de variables `star.df` contient-il ? Quel est le nom de ces variables ?
+4.  Afficher l'aide du jeu de données initial. Donner le type de chacune des variables à l'aide de la fonction `summary`. Les types sont-is appropriés (par rapport à la description de chaque variable) ?
+5.  Le jeu de données contient-il des données manquantes ? Afficher toutes les informations possibles sur ces données manquantes. Avec quelle commande peut-on retirer toutes les lignes contenant des données manquantes ?
+6.  Afficher les $5$ premières et dernières lignes de `star.df` en utilisant les fonctions `head` et `tail`.
+7.  Afficher la première et la troisième ligne de `star.df`.
+8.  Afficher les données des $10$ personnages les plus jeunes.
+9.  Afficher la variable correspondant au nom des personnages de $4$ façons différentes directement à partir de `star.df`.
+10. Faire la même chose avec la fonction `attach()` qui rend les colonnes de `star.df` accessibles en tant que variables directement à partir de leur nom.
+
+**Remarque** : Attention à l'utilisation de la commande `attach()`. Les objets sont stockés à différents niveaux de mémoire. Pour afficher le répertoire et les niveaux où est stocké un objet, on peut utiliser `find(name)`, `ls(pos=1)` `ls(pos=2)`... - Copier `star.df` dans un nouveau data frame (que l'on va utiliser temporairement) `star.df2`. - Remplacer dans ce nouveau dataframe les valeurs de la colonne `height` par sa valeur moyenne. Visualiser de nouveau le data frame. - Définir une variable `mass` en lui donnant une valeur quelconque. Attacher ensuite le data frame `star.df2` et afficher le 13ème, le 2ème et le dernier élement de sa colonne `mass` dans cet ordre. - Détacher le data frame `star.df2` en utilisant `detach()` et supprimer la variable `mass`.
+
+11. Détacher `star.df`.
+12. Transformer ses variables qualitatives en facteurs. Regarder à nouveau le résumé des données.
+13. Afficher le genre des Droïdes. Que constate-t-on ?
+14. Créer un vecteur contenant la moyenne des tailles pour les personnages selon leur "espèce" de plusieurs façons différentes : directement, en utilisant les fonctions `tapply`, `by` et `aggregate`.
+15. Créer un facteur `human` de niveaux `yes` et `no` à partir de la variable `species`.
+16. Ajouter ce facteur au data frame `star.df`.
+17. Créer un vecteur contenant la moyenne des tailles pour les personnages humains, puis pour les personnages non humains à l'aide de la fonction `split`.
+18. Créer un vecteur contenant les écarts types associés aux tailles selon l'"espèce".
+19. Résumer les informations obtenues sur la taille (moyenne et écart-type pour chaque "espèce") dans une liste, puis un data frame.
+20. Exporter ce data frame dans un fichier texte (.csv ou .txt) à l'aide de la fonction `write.table`.
+
+# Importation de jeux de données externes
+
+**Exercice 2.**
+
+# Fusion de jeux de données
+
+**Exercice 3.**
+
+# Manipulation de jeux de données : premiers pas dans le tidyverse
+
+Quelques références : - [R for Data Science](https://r4ds.had.co.nz), G. Grolemund, H. Wickham ; - [Introduction à R et au tidyverse](https://juba.github.io/tidyverse/10-dplyr.html), J. Barnier.
+
+**Exercice 4.**
+
+Reprendre le jeu de donées `starwars` du package `dplyr`, au format `tibble`, et reprendre les questions de l'exercice 1 à l'aide des fonctions de `dplyr`.
