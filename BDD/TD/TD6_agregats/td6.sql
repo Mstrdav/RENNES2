@@ -26,7 +26,7 @@ select gName, coalesce(sInc,'classé'), count(*) as 'nombre de pilotes concerné
 from grandprix
     natural join standings
 where gDate like '2014%'
-group by sInc
+group by gName, sInc
 
 -- 5. pour chaque pilote (nom, prénom), le nombre total de grands prix courus dans sa carrière (éventuellement 0)
 select dFirstName, dLastName, count(gpId) as 'nombre de grand prix courus'
