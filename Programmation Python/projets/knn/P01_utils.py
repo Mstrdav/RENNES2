@@ -45,6 +45,21 @@ def lire_donnees(n_individus):
     y_str = y_str.tolist()
     return X, y_str
 
+# --------- ajouté par Colin ---------
+def centrer_reduire(X, mu=None, sigma=None):
+    X = np.array(X)
+    if mu is None:
+        mu = X.mean(axis=0)
+    if sigma is None:
+        sigma = X.std(axis=0)
+    X_cr = (X - mu) / sigma
+    return X_cr, mu, sigma
+
+def reduire_donnees(X):
+    X = np.array(X)
+    sigma = X.std(axis=0)
+    return X / sigma, sigma
+# -----------------------------------
 
 def visualiser_donnees(X, y, X_test=None, nom_fichier=None):
     # -------- ajouté par Colin ---------
@@ -71,4 +86,5 @@ if __name__ == "__main__":
     X_train, y_train = lire_donnees(100)
     X_test, y_test = lire_donnees(10)
     visualiser_donnees(X_train, y_train, X_test, "dataset.pdf")
+
     
