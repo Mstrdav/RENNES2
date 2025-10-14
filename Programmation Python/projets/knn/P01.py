@@ -38,12 +38,16 @@ def k_plus_proches_voisins_liste(X, y, x_test, k=1):
 # Section 3 : le code
 # chargement des données
 train = put.lire_donnees(100)
+train0, mu, sigma = put.centrer_reduire(train[0])
+train = (train0, train[1])
+print('Données centrées et réduites avec mu =', mu, 'et sigma =', sigma)
 test = put.lire_donnees(10)
+test0, mu, sigma = put.centrer_reduire(test[0], mu, sigma)
+test = (test0, test[1])
 put.visualiser_donnees(train[0], train[1], test[0])
 
 # prédiction
 k = 5
-print(test[0])
 y_pred = k_plus_proches_voisins_liste(train[0], train[1], test[0], k)
 print("Prédictions :", y_pred)
 print("Véritables classes :", test[1])
@@ -55,5 +59,6 @@ for x in test[0]:
     dists, indices = tree.query(x, k=k)
     voisins_labels = [train[1][i] for i in indices]
     y_pred_scipy.append(majority(voisins_labels).tolist())
+
 
 print("Prédictions avec scipy :", y_pred_scipy)
