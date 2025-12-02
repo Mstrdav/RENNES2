@@ -1,0 +1,127 @@
+---
+title: "Titre du projet"  
+date: "`r Sys.Date()`"
+output:
+  rmdformats::robobook:
+    highlight: kate
+    number_sections: TRUE
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE) #Activer le cache des chunks pour accélérer les recompilations
+options("install.lock"=FALSE) #Désactiver le verrouillage d’installation des packages
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) ## configure le chemin du dossier automatiquement
+```
+
+**NOM - Prénom**
+
+[**Master 1 MAS - Université de Rennes**](https://eco.univ-rennes.fr/master-mathematiques-appliquees-statistique)
+
+**ou**
+
+[**Master 1 MAS - Université Rennes 2**](https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html)
+
+[Pensez à numéroter vos tables et graphiques, cela vous permet de faire des rappels dans votre texte. Attention également au titre et à la bonne définition des axes. Chaque graphique est commenté, il est parfois préférable de les regrouper au sein d'une même fenêtre pour que le rapport soit plus agréable à lire. N'hésitez pas à faire des sélections de graphiques intéressants plutôt que de les présenter d'une manière mécanique. Il ne faut pas utiliser le code de vos variables dans vos commentaires mais revenir sur leur signification.]{style="color:red;"}
+
+# Introduction
+
+Présenter votre sujet, l'objectif du projet:
+
+-   Contexte et problématique
+
+-   Motivation et intérêt du sujet
+
+-   Questions de recherche ou hypothèses
+
+-   Objectifs et contributions du mémoire
+
+-   Indiquer votre plan
+
+# Cadre méthodologique
+
+-   Choix méthodologiques : présenter le cadre d'une régression linéaire avec méthode d'estimation MCO, votre modèle avec votre équation principale
+
+    $Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \cdots + \varepsilon_i$
+
+-   Justification des choix techniques, des stratégies d’estimation
+
+# **Analyse des données**
+
+## Cadre des données
+
+Présentation du cadre des données : sur quelle période de temps / secteur géographique
+
+Expliquer les individus utilisés
+
+expliquer les variables utilisées, les unités et les sources + Faire un tableau récapitulatif
+
+| Code de la série | Définition      |  Unité   |          Source |
+|:-----------------|-----------------|:--------:|----------------:|
+| Aligné à gauche  | Aligné à gauche | ce texte | Aligné à droite |
+| Aligné à gauche  | Aligné à gauche |   est    | Aligné à droite |
+| Aligné à gauche  | Aligné à gauche |  centré  | Aligné à droite |
+
+## Prétraitement et nettoyage des données
+
+Présenter les traitements effectués sur les données:
+
+-   Sélection d'individus : données manquantes
+
+-   Sélection des variables
+
+## Analyse descriptive univariée des données
+
+Vous devez décrire les données utilisées dans la modélisation, après nettoyage.
+
+-   Tableau de statistiques descriptives = données quantitatives / catégorielles
+
+-   Box plot / histogramme / ... : chaque graphique doit
+
+## Analyse descriptive bivariée des données
+
+Vous devez décrire vos données vis à vis de votre variable à expliquer
+
+-   corrélation vis à vis de Y
+
+-   nuage de point vis à vis de Y
+
+-   Corrélation entre les variables explicatives
+
+# **Analyse et discussion des résultats**
+
+## Modélisation principale
+
+Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés
+
+## Robustesse des résultats
+
+Hypothèses des MCO - nomalités / hétéroscédasticité / ...
+
+## Analyses complémentaires
+
+-   Transformation de variables / effets non linéaires
+
+-   Changement structurel
+
+-   Effets croisés de variables
+
+# **Conclusion générale et perspectives**
+
+Rappel de la problématique et de la méthodologie
+
+Synthèse des résultats principaux
+
+Contributions du mémoire, apports scientifiques et/ou applicatifs
+
+Perspectives d’amélioration ou de recherche future
+
+possible sources d'erreur : mauvaises mesures des données, simultanéité, variables omises
+
+# Bibliographie - Source des données
+
+-   <https://ec.europa.eu/eurostat/fr/web/main/data>
+
+-   <https://statistiques-locales.insee.fr/#c=home>
+
+\`
