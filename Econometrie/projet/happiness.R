@@ -45,3 +45,98 @@ plots = function(corr_matrix, year) {
           
 }
 correlation_plots = mapply(plots, correlation_matrices, names(correlation_matrices), SIMPLIFY = FALSE)
+
+##########
+
+
+work = read.csv("AnnualWorkhours2022.csv")
+summary(work)
+work = work[,-1]
+
+viande= read.csv("ConsoViande2022.csv")
+summary(viande)                 
+viande = viande[,-1]
+
+##############################################################
+
+energy = read.csv("EnergyUse2022.csv") #229
+summary(energy)
+energy = energy[,-1]
+
+lits = read.csv("LitsHopitaux2016.csv") #131
+summary(lits)
+lits = lits[,-1]
+
+military = read.csv("MilitarySpending2021.csv") #153
+summary(military)
+military = military[,-1]
+
+migration = read.csv("Netmigration2020.Csv") #239
+summary(migration)
+migration = migration[,-1]
+
+pcroissance = read.csv("PopGrowth2022.csv") #253
+summary(pcroissance)
+pcroissance=pcroissance[,-1]
+
+pdensity = read.csv("PopulationDensity2021.csv") #239
+summary(pdensity)
+pdensity=pdensity[,-1]
+
+surpoids = read.csv("Surpoids2016.csv") #234
+summary(surpoids)
+surpoids=surpoids[,-1]
+
+
+################################################################
+
+
+# Si on les fusionne tous, il ne nous reste plus que 80 individus
+
+
+Fusion = merge(energy, migration, by = "Country")
+Fusion = merge(Fusion, pcroissance, by = "Country")
+Fusion = merge(Fusion, pdensity, by = "Country")
+Fusion = merge(Fusion, surpoids, by = "Country")
+summary(Fusion) #162
+
+Fusion = merge(Fusion, lits, by = "Country") #92
+
+Fusion = merge(Fusion, military, by = "Country") #135
+
+
+##################################################################
+
+
+happiness = read.csv("Happiness_2024.csv")
+summary(happiness)
+View(happiness)
+happiness = happiness[,-1]
+
+names(happiness) = c("Country", "IndiceBonheur","XPparlogGDPpp", "XPparSocialSupport", "XPparLifeExpectancy"
+                     , "XPparFreedomtomakeLifechoices", "XPparGenerosité", "XPparPerceptionofCorruption", "DystopiaResidual")
+
+Basededon = merge(happiness, Fusion, by = "Country") #118
+summary(Basededon)
+View(Basededon)
+
+
+don = Basededon[,-1]
+summary(don)
+nrow(don)
+View(don)
+?lm
+
+reg = lm(don$IndiceBonheur~., data = don)
+summary(reg)
+
+
+
+
+
+
+
+
+
+
+
