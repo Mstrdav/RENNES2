@@ -14,45 +14,43 @@ options("install.lock"=FALSE) #Désactiver le verrouillage d’installation des 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) ## configure le chemin du dossier automatiquement
 ```
 
-**NOM - Prénom**
+**JAOUEN Denis - GEINDRE Colin**
 
-[**Master 1 MAS - Université de Rennes**](https://eco.univ-rennes.fr/master-mathematiques-appliquees-statistique)
-
-**ou**
-
-[**Master 1 MAS - Université Rennes 2**](https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html)
+[**Master 1 MAS - Université de Rennes**](https://eco.univ-rennes.fr/master-mathematiques-appliquees-statistique) et [**Master 1 MAS - Université Rennes 2**](https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html)
 
 [Pensez à numéroter vos tables et graphiques, cela vous permet de faire des rappels dans votre texte. Attention également au titre et à la bonne définition des axes. Chaque graphique est commenté, il est parfois préférable de les regrouper au sein d'une même fenêtre pour que le rapport soit plus agréable à lire. N'hésitez pas à faire des sélections de graphiques intéressants plutôt que de les présenter d'une manière mécanique. Il ne faut pas utiliser le code de vos variables dans vos commentaires mais revenir sur leur signification.]{style="color:red;"}
 
 # Introduction
 
-Présenter votre sujet, l'objectif du projet:
+Depuis trop longtemps, l'indice de développement d'un pays a été calculé sur des indices économiques (capitalistes) : PIB, croissance, taux d'emploi, etc. Ce choix n'est pas neutre, il sert un système particulier qui ne met pas l'humain ou l'environnement au coeur de ses priorités. Nous voulons avec cette étude poser la première pierre d'une réflexion sur de meilleures méthodollogies d'évaluation du développement, axées sur le bonheur, mais aussi le respect de notre environnement, de la biodiversité, etc.
 
--   Contexte et problématique
+Plusieurs études existent qui traitent du bonheur des populations. Une des plus célèbres est le world happiness report. Nous avons voulu tenter de comprendre comme cet indice de bonheur est corrélé / constraint par différents facteurs socio-économiques. En particulier voir si le PIB et la croissance sont de bons indicateurs, remettre en cause le paradigme si ce n'est pas le cas.
 
--   Motivation et intérêt du sujet
+Hypothèse : le bonheur peut être prédit / calculé à partir de données socio économiques. Lesquelles ? A quel degré ? Y a t il des pays singuliers de part leur comportement sur ces données ? Des différences en fonction des groupes de pays ? OCDE, OPEP, OTAN ?
 
--   Questions de recherche ou hypothèses
+Plan :
 
--   Objectifs et contributions du mémoire
+-   Récupération des données
 
--   Indiquer votre plan
+-   Traitement des données
+
+-   Statistiques descriptives
+
+-   Comparaison de modèles
+
+-   Conclusion statistiques
 
 # Cadre méthodologique
 
--   Choix méthodologiques : présenter le cadre d'une régression linéaire avec méthode d'estimation MCO, votre modèle avec votre équation principale
-
-    $Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \cdots + \varepsilon_i$
-
--   Justification des choix techniques, des stratégies d’estimation
+Le cadre méthodologique général est celui de la régression linéaire, avec une estimation des moindre carré ordinaire. En fonction des données, des corrections éventuelles (white, MCG, etc.) pourront être envisagées. Pour chaque partie, une méthodologie plus précise sera discutée.
 
 # **Analyse des données**
 
 ## Cadre des données
 
-Présentation du cadre des données : sur quelle période de temps / secteur géographique
+Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous étudions les pays du monde entier, en particulier les 147 référencés par le world happiness report. En fonction des données acquises, certains pays peuvent être exclu, d'autres peuvent être utilisés pour d'éventuelles prédictions.
 
-Expliquer les individus utilisés
+Nous traitons des données allant de 1789 à 2024, nous avons choisi de traiter simultanément plusieurs années, de comparer les modèles pour tirer des conclusions les plus larges possibles.
 
 expliquer les variables utilisées, les unités et les sources + Faire un tableau récapitulatif
 
@@ -64,9 +62,11 @@ expliquer les variables utilisées, les unités et les sources + Faire un tablea
 
 ## Prétraitement et nettoyage des données
 
-Présenter les traitements effectués sur les données:
-
 -   Sélection d'individus : données manquantes
+
+    -   moyenne glissante ?
+
+    -   suppression d'individus ?
 
 -   Sélection des variables
 
@@ -119,9 +119,3 @@ Perspectives d’amélioration ou de recherche future
 possible sources d'erreur : mauvaises mesures des données, simultanéité, variables omises
 
 # Bibliographie - Source des données
-
--   <https://ec.europa.eu/eurostat/fr/web/main/data>
-
--   <https://statistiques-locales.insee.fr/#c=home>
-
-\`
