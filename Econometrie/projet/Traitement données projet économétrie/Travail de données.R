@@ -1,5 +1,7 @@
 '''
 SOURCES
+
+
 #############################################################################################
 
 #Trop de données aberrantes
@@ -16,10 +18,12 @@ https://ourworldindata.org/grapher/population-growth-rates?tab=map&overlay=downl
 https://ourworldindata.org/grapher/military-spending-as-a-share-of-gdp-sipri?overlay=download-data #MilitayspendingPerGDP
 https://ourworldindata.org/grapher/per-capita-energy-use?overlay=download-data #KwhPC
 https://ourworldindata.org/grapher/annual-working-hours-vs-gdp-per-capita-pwt #annualworkhours
-#Popdensity
-#Netmigration
-#Overweight
+#Popdensity https://data360.worldbank.org/en/indicator/WB_WDI_EN_POP_DNST
+#Netmigration https://data360.worldbank.org/en/indicator/WB_WDI_SM_POP_NETM
+#Overweight https://data360.worldbank.org/en/indicator/WB_HNP_SH_STA_OWAD_ZS
 '''
+
+
 
 #################################### Importation de données #######################################
 
@@ -64,17 +68,7 @@ energyconsumption_moyenne = na.omit(energyconsumption_moyenne)
 dim(energyconsumption_moyenne)
 
 
-annualworkhours = read.csv("yearlyworkinghourspppc.csv", dec= ".", header = TRUE, sep = ",")
-summary(annualworkhours)
-View(annualworkhours)  #Manque surtout des pays pauvres
-annualworkhours = annualworkhours[which(annualworkhours$Year >= 2013 & annualworkhours$Year <=2023, arr.ind = TRUE),]
-annualworkhours_moyenne = tapply(annualworkhours$Average.working.hours.per.worker, annualworkhours$Code, mean, na.rm=TRUE)
-annualworkhours_moyenne = as.data.frame.table(annualworkhours_moyenne)
-names(annualworkhours_moyenne) = c('Code', "Annual_working_hours")
-summary(annualworkhours_moyenne) # 254   NA's   :130 TROP DE PAYS MANQUANTS
-View(annualworkhours_moyenne)
-annualworkhours_moyenne = na.omit(annualworkhours_moyenne)
-dim(annualworkhours_moyenne) 
+
 
 ############################################################ Données moins reloues
 
@@ -110,20 +104,10 @@ migration$moyennes = rowMeans(migration[,5:12], na.rm=TRUE) #2013 à 2020
 sum(is.na(migration$moyennes)) #On a des moyennes pour 238 pays mais certaines lignes sont louches comme Barbados ou Grenada
 migration_moyenne = migration[,c(1,13)]
 names(migration_moyenne) = c("Code", "Netmigration")
+migration_moyenne=na.omit(migration_moyenne)
 View(migration_moyenne)
-
-
-incomedistributionindex = read.csv("Gini income distribution index.csv", sep = ",", dec = ".", header = TRUE)
-incomedistributionindex = incomedistributionindex[,-c(1,2,5:66)]
-summary(incomedistributionindex)
-View(incomedistributionindex)  #Bcp de donnees manquantes, a voir une fois les moyennes faites
-incomedistributionindex$moyennes = rowMeans(incomedistributionindex[,3:12], na.rm=TRUE) #2013 à 2023
-sum(is.na(incomedistributionindex$moyennes)) #23 lignes vides
-dim(incomedistributionindex) #166 pays -23 non renseignées = 145 pays analysables
-incomedistributionindex_moyenne = incomedistributionindex[,c(1,14)]
-incomedistributionindex_moyenne = na.omit(incomedistributionindex_moyenne)
-names(incomedistributionindex_moyenne) = c("Code", "Income_distribution_index")
-View(incomedistributionindex_moyenne)
+dim(migration_moyenne)
+anyNA(migration_moyenne)
 
 primaryschool = read.csv("Primary school enrollment.csv", sep = ",", dec = ".", header = TRUE)
 primaryschool = primaryschool[,-c(1,2,5:61)]
@@ -177,7 +161,7 @@ View(corruptionindex_moyenne)
 
 
 # incomedistributionindex  corruptionindex  GDP  lifespan  netmigration   overweight  popdensity   annualworkhours   energyconsumption   militarydepense   popgrowth
-variables = list(incomedistributionindex_moyenne,corruptionindex_moyenne,GDP_moyenne,lifespan_moyenne,migration_moyenne,overweight_moyenne,popdensity_moyenne,annualworkhours_moyenne,energyconsumption_moyenne,militarydepense_moyenne,popgrowth_moyenne)
+variables = list(corruptionindex_moyenne,GDP_moyenne,lifespan_moyenne,migration_moyenne,overweight_moyenne,popdensity_moyenne,energyconsumption_moyenne,militarydepense_moyenne,popgrowth_moyenne, primaryschool_moyenne)
 
 library(purrr)
 CombinedTrue = purrr::reduce(.x = variables, merge, by = c('Code'), all = T)
@@ -194,6 +178,7 @@ View(CombinedFalse)
 
 ###########################################################################
 
+popdensity = read.csv("density.csv", sep = ",", dec = ".", header = TRUE)
 countrynames = popdensity[,c(3,4)]
 names(countrynames) = c("Code", "Country.name")
 View(countrynames)
@@ -213,20 +198,24 @@ summary(happiness_moyenne)
 View(happiness_moyenne)
 dim(happiness_moyenne)
 
-
-don = purrr::reduce(.x = list(countrynames, CombinedFalse), merge, by = c('Code'), all = T)
+don = merge(countrynames,CombinedFalse, by = c("Code"))
+  purrr::reduce(.x = list(countrynames, CombinedFalse), merge, by = c('Code'), all = T)
+View(don)
 donnees = purrr::reduce(.x = list(don, happiness_moyenne), merge, by = c('Country.name'), all = T)
 donnees = as.data.frame(donnees)
 summary(donnees)
 donnees = na.omit(donnees)
+View(donnees)
 
 ################################################################################
 
-dim(donnees)
-summary(donnees)
-View(donnees)
-
 write.csv(donnees, "donnees.csv")
+donnees =read.csv("donnees.csv", sep =",", dec=".", header = TRUE)
 
+######################################################################
 
-
+OCDE_countries = c("Australia","Austria","Belgium","Canada","Chile","Colombia","Costa Rica","Czechia","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Israel","Italy","Japan","Korea","Latvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovak Republic","Slovenia","Spain","Sweden","Switzerland","Türkiye","United Kingdom","United States")
+donnees$OCDE = 0
+for (i in 1:nrow(donnees)){ if (donnees$Country.name[i] %in% OCDE_countries) {
+  donnees$OCDE[i] = 1
+}}
