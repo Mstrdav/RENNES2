@@ -53,17 +53,26 @@ Le cadre méthodologique général est celui de la régression linéaire, avec u
 
 ## Cadre des données
 
-Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous étudions les pays du monde entier, en particulier les 147 référencés par le world happiness report. En fonction des données acquises, certains pays peuvent être exclu, d'autres peuvent être utilisés pour d'éventuelles prédictions.
+Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous étudions les pays du monde entier, en particulier les 147 référencés par le world happiness report. Après sélection de nos variables, il nous reste 125 pays à étudier.
 
-Nous traitons des données allant de 1789 à 2024, nous avons choisi de traiter simultanément plusieurs années, de comparer les modèles pour tirer des conclusions les plus larges possibles.
+Ayant des données allant de 1789 à 2024 et ayant beaucoup de données manquantes, nous avons choisi de traiter les moyennes des données disponibles de 2013 à 2023. Certains jeux de données s'achèvent avant 2023, nous avons donc fait leurs moyennes jusqu'à la dernière année recensée. Cette décision a été motivée par notre envie de tirer des conclusions les plus larges possibles.
 
-expliquer les variables utilisées, les unités et les sources + Faire un tableau récapitulatif
-
-| Code de la série | Définition      |  Unité   |          Source |
-|:-----------------|-----------------|:--------:|----------------:|
-| Aligné à gauche  | Aligné à gauche | ce texte | Aligné à droite |
-| Aligné à gauche  | Aligné à gauche |   est    | Aligné à droite |
-| Aligné à gauche  | Aligné à gauche |  centré  | Aligné à droite |
+| Code de la série | Définition | Unité | Source |
+|:---|----|:--:|---:|
+| Country.name | Le nom du pays | Caractères | \- |
+| Code | Le code du pays | Caractères | \- |
+| PoliticalCorruption_Index | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | https://data360.worldbank.org/en/indicator/VDEM_CORE_V2X_CORR |
+| GDP_per_capita | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain | https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD |
+| Lifespan_at_Birth | La moyenne de 2013 à 202O de l'espérance de vie à la naissance | En années | https://data360.worldbank.org/en/indicator/WB_ESG_SP_DYN_LE00_IN |
+| Netmigration | La moyenne de 2013 à 2020 de la migration nette | En nombre de personnes | https://data360.worldbank.org/en/indicator/WB_WDI_SM_POP_NETM |
+| Overweight | La moyenne de 2013 à 2016 de la proportion d'adulte de 18 ans et plus dont l'IMC est supérieur à 25. | En pourcentage | https://data360.worldbank.org/en/indicator/WB_HNP_SH_STA_OWAD_ZS |
+| Population_density | La moyenne de 2013 à 2021 de la densité de population en nombre d'habitant à la mi-année par kilomètres carrés | En personnes | https://data360.worldbank.org/en/indicator/WB_WDI_EN_POP_DNST |
+| KWH_pp_pc | La moyenne de 2013 à 2023 de la consommation en kilowattheure par personne | En kilowattheure | https://ourworldindata.org/grapher/per-capita-energy-use?overlay=download-data |
+| Military_expenditure | La moyenne de 2013 à 2023 du pourcentage du PIB dédié à la dépense militaire | En pourcentage | https://ourworldindata.org/grapher/military-spending-as-a-share-of-gdp-sipri?overlay=download-data |
+| Pop_Growth | La moyenne de 2013 à 2023 de la croissance en pourcentage de la population | En pourcentage | https://ourworldindata.org/grapher/population-growth-rates?tab=map&overlay=download-data |
+| PrimarySchool_enrollment | La moyenne de 2013 à 2022 du nombre d'étudiant inscrits en école primaire divisé par la population du groupe d'age multiplié par 100 | En pourcentage | https://data360.worldbank.org/en/indicator/WB_ESG_SE_PRM_ENRR |
+| OCDE | Une indicatrice avec 1 si le pays est membre de l'OCDE et 0 sinon | Indicatrice | https://www.oecd.org/en/about/members-partners.html |
+| happiness_moyenne | La moyenne de 2013 à 2023 de l'indice du bonheur calculé par le World Happiness Index | Index allant de 0 à 10 | https://www.worldhappiness.report/data-sharing/ |
 
 ## Prétraitement et nettoyage des données
 
