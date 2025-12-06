@@ -209,6 +209,13 @@ View(donnees)
 
 ################################################################################
 
+
+donnees$happiness_moyenne2 =donnees$happiness_moyenne
+donnees = donnees[,-13]
+donnees$happiness_moyenne =donnees$happiness_moyenne2
+donnees = donnees[,-14]
+
+
 write.csv(donnees, "donnees.csv")
 donnees =read.csv("donnees.csv", sep =",", dec=".", header = TRUE)
 
