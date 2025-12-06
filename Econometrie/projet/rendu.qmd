@@ -84,13 +84,19 @@ summary(data)
 head(data)
 ```
 
+```{r}
+#transform OCDE variable into factor
+data$OCDE <- as.factor(data$OCDE)
+data_numeric <- data[, sapply(data, is.numeric)]
+```
+
 Vous devez décrire les données utilisées dans la modélisation, après nettoyage.
 
 -   Tableau de statistiques descriptives = données quantitatives / catégorielles
 
 ```{r}
 library(psych)
-describe(data[,-c(1,2)])
+describe(data_numeric)
 ```
 
 -   Box plot / histogramme / ... : chaque graphique doit être commenté
@@ -119,13 +125,13 @@ ggplot(data, aes(y=happiness_moyenne)) +
 ```{r, fig.height=12, fig.width=12}
 plots <- list()
 
-for (i in 3:ncol(data)) {
-  p <- ggplot(data, aes_string(x=data[[i]])) +
-    geom_histogram(binwidth=diff(range(data[[i]]))/30, fill="green", color="black", alpha=0.7) +
-    labs(x=colnames(data)[i], y="") +
+for (i in 1:ncol(data_numeric)) {
+  p <- ggplot(data_numeric, aes_string(x=data_numeric[[i]])) +
+    geom_histogram(binwidth=diff(range(data_numeric[[i]]))/30, fill="green", color="black", alpha=0.7) +
+    labs(x=colnames(data_numeric)[i], y="") +
     theme_minimal() +
     theme(plot.margin = grid::unit(c(0.5,0.5,0.5,0.5), "cm"))
-  plots[[i-2]] <- p
+  plots[[i]] <- p
 }
 
 library(gridExtra)
@@ -142,8 +148,8 @@ Vous devez décrire vos données vis à vis de votre variable à expliquer
 
 ```{r, fig.height=4, fig.width=6}
 # Corrélations simples et affichage graphique (base R)
-vars <- names(data)[-c(1,2,ncol(data))]
-cors <- sapply(vars, function(v) cor(data$happiness_moyenne, data[[v]]))
+vars <- names(data_numeric)[-ncol(data_numeric)]
+cors <- sapply(vars, function(v) cor(data_numeric$happiness_moyenne, data_numeric[[v]]))
 # trier par valeur (pour barplot horizontal)
 cors_sorted <- sort(cors)
 par(mar = c(5, 8, 4, 2))
@@ -183,7 +189,7 @@ do.call(grid.arrange, c(scatter_plots, ncol = ncol_plot))
 # corrplot
 library(corrplot)
 # analyse sans Country.name et Code, et sans happiness moyenne
-corrplot(cor(data[,-c(1,2,ncol(data))]), method="shade", type = "lower", tl.col="black", tl.srt=45)
+corrplot(cor(data_numeric[,-ncol(data)]), method="shade", type = "lower", tl.col="black", tl.srt=45)
 ```
 
 # **Analyse et discussion des résultats**
@@ -192,10 +198,7 @@ corrplot(cor(data[,-c(1,2,ncol(data))]), method="shade", type = "lower", tl.col=
 
 ```{r}
 # premier modèle : toutes les variables candidates
-reg1 <- lm(happiness_moyenne ~ GDP_per_capita + KWH_pp_pc + PoliticalCorruption_Index +
-             Lifespan_At_Birth + Netmigration + Overweight + Population_density +
-             Military_expenditure + Pop_Growth,
-           data = data)
+reg1 <- lm(happiness_moyenne ~ PoliticalCorruption_Index + KWH_pp_pc + GDP_per_capita + Lifespan_At_Birth + Netmigration + Overweight + Population_density + Military_expenditure + Pop_Growth + OCDE + PrimarySchool_enrollment, data = data)
 
 cat('\n--- Résumé du modèle (reg1) ---\n')
 print(summary(reg1))
