@@ -1,0 +1,373 @@
+---
+title: "TD1_correction"
+format: html
+editor: visual
+---
+
+# TD1 : équation de salaire
+
+Le Prix de la Banque de Suède a été décerné en 2024 à Claudia Goldin, une économiste américaine, récompensée pour ses travaux sur l’évolution de la place des femmes sur le marché de l’emploi notamment aux Etats-Unis.
+
+L’objectif de votre étude est de vérifier s’il existe une discrimination de salaire entre les hommes et les femmes au sein d’une entreprise. Pour cela vous disposez de données fournies par le service des ressources humaines de l’entreprise. Voici la liste des indicateurs disponibles sur les 81 employés de l’entreprise :
+
+-   OBS: numéro de l’observation
+
+-   AGE: âge de l’employé au moment de l’enquête
+
+-   ANNEES: nombre d’années d’ancienneté dans l’entreprise
+
+-   DEG: Diplôme (1=licence, 2=master 1, 3=master 2, 4= thèse)
+
+-   SEXE: F=Femme et H= Homme
+
+-   MAST0: Possession d’un master à l’embauche
+
+-   AGE0: âge de l’employé au moment de l’embauche
+
+-   SAL: Salaire annuel en euros
+
+Vous disposez de ces différents indicateurs pour expliquer le salaire des employés.
+
+## Partie 1 : Analyse descriptive
+
+Une étude sur des données commence toujours par une première phase de compréhension de vos données et de description des données. Pour cela vous allez réaliser des statistiques descriptives en utilisant R.
+
+**Il est important de passer du temps à commenter les résultats et graphiques que vous obtiendrez !**
+
+#### Intialisation des packages nécessaires au TD
+
+```{r}
+#première utilisation
+#install.packages("hrbrthemes")
+#install.packages("viridis")
+#install.packages("GGally")
+#install.packages("pastecs")
+
+#une fois installé sur la machine
+# library(hrbrthemes)# pour mes couleurs et thèmes de graphiques
+library(viridis)# pour mes couleurs et thèmes de graphiques
+library(GGally) # pour la matrice de corrélation
+library(pastecs) #des tableaux de stat descriptives plus completslibrary(ggplot2)
+library(ggplot2) #les graphiques
+library(readxl)
+
+```
+
+#### 1- Télécharger le fichier de données dans Rstudio ?
+
+```{r}
+##votre data.frame doit s'appeler TD1_data / copier ici le code qui vous a permis de le télécharger
+
+TD1_data <- read_excel("TD1-data.xls")
+
+```
+
+#### 2- Quelles sont les variables qualitatives et les variables quantitatives ?
+
+Les variables qualitatives sont : GENRE, MAST0Les variables quantitatives sont : AGE, AGE0, ANNEES, SAL
+
+Attention la variable OBS est juste un identifiant ce n'est pas une variable intéressante pour notre analyse.
+
+#### 3- Le type des données identifié par Rstudio est-il correcte ?
+
+```{r}
+##exemple:
+#mode(TD1_data$Nomvariable)
+
+mode(TD1_data$SAL)
+mode(TD1_data$AGE)
+mode(TD1_data$AGE0)
+mode(TD1_data$MAST0)
+mode(TD1_data$ANNEES)
+mode(TD1_data$GENRE)
+
+```
+
+Commentaire sur le type de chacune des variables: il est normal que R identifie les variables qualitatives comme des numériques si elle comporte des chiffres, il faudra ensuite les transformer en facteur si on veut avoir un type qualitatif sur ces variables
+
+#### 4- Analyse univariée = analyse de chaque indicateur
+
+Pour faire des jolies graphiques et découvrir des nouveaux styles, je vous encourage à aller voir le site suivant: <https://r-graph-gallery.com/>
+
+##### 4-1 Générer un tableau de statistiques descriptives– commenter
+
+```{r}
+#Pour les variables quantitatives: vous devez utiliser la fonction "summary" 
+##exemple: summary(data_td1$nom_variable)
+summary(TD1_data$AGE)
+summary(TD1_data$AGE0)
+summary(TD1_data$ANNEES)
+summary(TD1_data$SAL)
+
+#ou 
+
+summary(TD1_data[,c("AGE","AGE0","ANNEES","SAL")])
+
+```
+
+Commentaires: en moyenne dans l'entreprise le salaire est d'environ 35000 euros par an, il correspond aussi à la médiane. Il existe une dispersion assez importante puisque le minimum est à 24313 euros et le maximum est de 48208 euros. Nous pourrions aussi regarder la variance qui est assez importante avec une fonction plus complète.
+
+Vous pouvez faire des commentaires équivalent sur les autres variables ...
+
+```{r}
+#utilisation d'une fonction de stat descriptives avec le package pastecs
+help(stat.desc)
+stat.desc(TD1_data[,c("AGE","AGE0","ANNEES","SAL")])
+```
+
+```{r}
+#pour les variables qualitatives: on transforme les variables en facteur
+#cas de la variable MAST0
+TD1_data$MAST0_f <- as.factor(TD1_data$MAST0)
+#vérification des catégories
+levels(TD1_data$MAST0_f)
+# compter le nombre d'individus de chacune des catégories
+MAST0_number <- table(TD1_data$MAST0_f)
+MAST0_number
+# la proportion de chacune des catégories
+prop.table(MAST0_number)
+
+
+#faire la même chose pour la variable GENRE et commenter
+```
+
+commentaires:
+
+-   Dans notre échantillon, il y a 72,83 % d'individus qui ont un master à l'embauche
+
+-   ...
+
+-   dans cette entreprise, il y a un équilibre entre la proportion d'homme 54,32 % et la proportion de femme 45,67 %
+
+##### 4-2 Générer un tableau de statistiques descriptives en fonction du genre et commenter
+
+```{r}
+# exemple tapply(data$x, data$group, summary)
+# pour le salaire
+tapply(TD1_data$SAL, TD1_data$GENRE, summary)
+
+# refaire la même chose pour l'age à l'embauche et l'ancienneté et commenter
+tapply(TD1_data$AGE0, TD1_data$GENRE, summary)
+tapply(TD1_data$ANNEES, TD1_data$GENRE, summary)
+
+```
+
+Commentaires:
+
+-   Il y a une différence de plus d'environ 6500 euros en moyenne dans l'entreprise entre le salaire des hommes et celui des femmes. Le salaire le plus élevé de l'entreprise est perçu par un homme alors que le plus faible concerne une femme.
+
+-   Il y a peu de différence en moyenne sur l'age à l'embauche entre les hommes et les femmes.
+
+-   Les hommes ont une ancienneté beaucoup plus importante que les femmes dans cette entreprise en moyenne, ce qui laisse penser que les hommes restent plus longtemps dans cette entreprise que les femmes.
+
+##### 4-3 Faire un histogramme et une boite à moustache pour l'age à l'embauche, le salaire et l'ancienneté - commenter
+
+**Histogrammes**
+
+```{r}
+#pour les histogrammes
+# Basic histogram
+ggplot(TD1_data, aes(x=AGE0)) + geom_histogram()
+# Changer la largeur
+ggplot(TD1_data, aes(x=AGE0)) +  geom_histogram(binwidth=3)
+# Changer la couleur
+ggplot(TD1_data, aes(x=AGE0)) +  geom_histogram(color="black", fill="white")
+# ajouter des titres 
+ggplot(TD1_data, aes(x=AGE0)) +  geom_histogram(fill="blue") + ggtitle("graphique 1: Histogramme de l'âge") + xlab("age") + ylab("nombre")
+
+```
+
+Commentaire: la dispersion de la variable AGE ressemble à une loi normale, il ne semble pas y avoir d'individus atypiques (de valeurs extremes)
+
+```{r}
+# faire un histogramme pour le salaire et les années d'ancienneté
+ggplot(TD1_data, aes(x=SAL)) +  geom_histogram(fill="blue") + ggtitle("Histogramme de salaire") + xlab("salaire") + ylab("nombre")
+```
+
+Commentaire: il y a une certain asymétrie dans la distribution de cette variable avec des salaires élevés
+
+```{r}
+# faire un histogramme pour les années d'ancienneté}
+ggplot(TD1_data, aes(x=ANNEES)) +  geom_histogram(fill="blue") + ggtitle("Histogramme de l'ancienneté") + xlab("Année") + ylab("nombre")
+
+```
+
+Commentaire: l'entreprise semble avoir un nombre identique de personnes avec moins et plus d'ancienneté.
+
+**Boites à moustache**
+
+```{r}
+#pour les boites à moustaches
+ggplot( TD1_data, aes( y=AGE0)) +
+    geom_boxplot() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("graphique 2: Boxplot de l'âge à l'embauche ") +
+    xlab("")
+```
+
+Commentaire: il n'y a pas d'individu atypique et la boite à moustache n'est pas particulièrement écrasée d'un coté ou de l'autre. La dispersion de l'age à l'embauche semble être symétrique et normale.
+
+```{r}
+#Boite à moustache du SALAIRE
+#SALAIRE
+ggplot( TD1_data, aes( y=SAL)) +
+    geom_boxplot() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Boxplot du salaire ") +
+    xlab("")
+
+```
+
+Commentaire: il n'y a pas d'individu atypique et la boite à moustache n'est pas particulièrement écrasée d'un coté ou de l'autre. La dispersion du salaire semble être symétrique et normale.
+
+```{r}
+#ancienneté
+ggplot( TD1_data, aes( y=ANNEES)) +
+    geom_boxplot() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Boxplot du salaire par genre") +
+    xlab("")
+```
+
+Commentaire: il y a autant d'individu avec une ancienneté inférieure à environ 14 ans que au dessus. Il y a donc des jeunes salariés de l'entreprises et des salariés qui sont là depuis plus longtemps. 1/4 des salariés sont dans l'entrepise depuis 14 à 16 ans.
+
+#### 5- Analyse bivariée
+
+##### 5-1 Faire une boite à moustache du salaire en fonction du genre et du diplôme (MAST0) – commenter
+
+```{r}
+#pour changer le style des boites à moustaches = voir sur R graph Gallery boxplot
+
+# proposition salaire en fonction du genre
+ggplot( TD1_data, aes(x=GENRE, y=SAL, fill=GENRE)) +
+    geom_boxplot() +
+    scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    geom_jitter(color="black", size=0.4, alpha=0.9) +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Boxplot du salaire par genre") +
+    xlab("")
+
+
+```
+
+commentaire:
+
+il y a une différence importante de salaire entre les hommes et les femmes dans l'entrepris
+
+**Refaire une boite à moustache du salaire en fonction du diplome MAST0** - attention il faut utiliser la variable MAST0_f pour préciser que ce n'est pas une variable quantitative mais des catégories et commenter
+
+```{r}
+ggplot( TD1_data, aes(x=MAST0_f, y=SAL, fill=MAST0_f)) + geom_boxplot()  + scale_fill_viridis(discrete = TRUE, alpha=0.6) + geom_jitter(color="black", size=0.4, alpha=0.9) + theme( legend.position="none", plot.title = element_text(size=11) ) + ggtitle("Boxplot du salaire par diplome") + xlab("")
+
+```
+
+commentaire : le salaire des personnes ayant un master est plus dispersé, les salaires semblent être un peu plus élevés pour les individus ayant un master mais il y a aussi des individus sans master avec un salaire élevé.
+
+##### 5-2 Faire des représentations de nuage de point de notre variable d’intérêt le salaire en fonction des variables explicatives càd de l’âge du salarié, de l’âge au moment de l’embauche et du nombre d’années d’ancienneté dans l’entreprise - commenter
+
+```{r}
+# basic nuage de point (scatterplot)
+ggplot(TD1_data, aes(x=AGE, y=SAL)) + 
+    geom_point()
+
+# Avec une estimation de la relation linéaire
+ggplot(TD1_data, aes(x=AGE, y=SAL)) +
+  geom_point() +
+  geom_smooth(method=lm , color="red", se=FALSE)
+
+#avec un intervalle de confiance en plus
+ggplot(TD1_data, aes(x=AGE, y=SAL)) +
+  geom_point() +
+  geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) 
+
+```
+
+commentaire: on observe bien une relation linéaire entre l'age de l'individu et son salaire. Cette relation linéaire semble être postive supposant que le salaire augmente avec l'âge.
+
+Faire un même graphique pour le salaire en fonction de l'age au moment de l'embauche et le salaire en fonction du nombre d'année d'anciennete. Commenter les graphiques.
+
+```{r}
+#faire un même graphique et commenter pour le salaire en fonction de l'age au moment de l'embauche 
+# Avec une estimation de la relation linéaire
+ggplot(TD1_data, aes(x=AGE0, y=SAL)) +
+  geom_point() +
+  geom_smooth(method=lm , color="red", se=FALSE)
+```
+
+commentaire: on observe bien une relation linéaire entre l'age au moment de l'embauche de l'individu et son salaire. Cette relation linéaire semble être postive supposant que le salaire augmente avec l'âge.
+
+```{r}
+#faire un même graphique et commenter pour le salaire en fonction du nombre d'année d'anciennete au moment de l'embauche 
+# Avec une estimation de la relation linéaire
+ggplot(TD1_data, aes(x=ANNEES, y=SAL)) +
+  geom_point() +
+  geom_smooth(method=lm , color="red", se=FALSE) 
+```
+
+commentaire: on observe bien une relation linéaire entre l'ancienneté de l'individu dans l'entreprise et son salaire. Cette relation linéaire semble être positive supposant que le salaire augmente avec l'ancienneté dans l'entreprise
+
+Dans les 3 cas, nous avons le sentiment qu'une droite est le plus approprié pour approcher la relation entre le salaire et chacune de ses variables. Un modèle linéaire sera donc le plus adéquat pour estimer la relation du salaire avec ces variables.
+
+##### 5-3 Calculer le coefficient de corrélation linéaire (de Pearson) entre la variable d'intérêt salaire et les variables quantitatives
+
+```{r}
+#le coefficient de corrélation linéaire ne peut être calculé que sur des variables quantitatives !
+
+#il faut réduire la taille du dataframe seulement aux variables quantitatives
+TD1_data_cor=TD1_data[,c("AGE","AGE0","ANNEES","SAL")]
+# matrice des coefficients de corrélation - voir formule
+cor(TD1_data_cor) 
+ 
+# visualisation plus sympahtique de la matrice de corrélation
+ggcorr(TD1_data_cor, method = c("everything", "pearson")) 
+
+```
+
+Commentaire: le salaire est corrélé trés fortement et positivement à l'ancienneté et à l'age de l'individu. Il existe aussi une corrélation psoitive avec l'age à l'embauche mais un peu moins forte
+
+##### 5-4 Dans une modélisation linéaire par la méthode des MCO, il ne faut pas que les variables explicatives soient trop fortement corrélées entre elles. Vérifiez la corrélation des variables explicatives quantitatives. Commenter.
+
+```{r}
+#le coefficient de corrélation linéaire ne peut être calculé que sur des variables quantitatives
+#il faut réduire la taille du dataframe seulement aux variables explicatives qui nous intéressent
+TD1_data_cor_X=TD1_data[,c("AGE","AGE0","ANNEES")]
+# matrice des coefficients de corrélation - voir formule
+cor(TD1_data_cor_X) 
+ 
+# visualisation plus sympahtique de la matrice de corrélation
+ggcorr(TD1_data_cor_X, method = c("everything", "pearson")) 
+
+```
+
+Commentaire:
+
+-   l'age au moment de l'étude et l'age à l'embauche sont fortement corrélés ainsi que l'age et l'ancienneté. Quand on y réfléchit, l'age au moment de l'étude correspond à la somme de l'age à l'embauche et de l'ancienneté. Il va donc falloir faire un peu de nettoyage dans ses variables car elles apportent la même information. Il est préférable de retenir l'age à l'embauche et l'ancienneté pour comprendre leur effet sur le salaire car l'effet de l'age au moment de l'enquete est moins intéressant en terme d'interprétation.
+
+-   Cela permettra aussi d'avoir moins de corrélation entre les facteurs explicatifs du salaire.
+
+#### 6- Résumer de ce que vous pouvez retenir de votre analyse descriptive pour démarrer une modélisation du salaire
+
+-   Il y a des différence dans les variables notamment salaire entre les hommes et les femmes,
+-   le salaire semble dépendre un peu du diplome du master mais la différence n'est peut être pas importante
+-   il existe une relation linéaire positive entre le salaire et l'âge au moment de l'enquete (pente sur le nuage de point = coefficent de corrélation = 0.799)
+-   il existe une relation linéaire positive entre le salaire et l'âge au moment de l'enquete (pente sur le nuage de point = coefficent de corrélation= 0.235)
+-   il existe une relation linéaire positive entre le salaire et l'ancienneté (pente sur le nuage de point = coefficent de corrélation= 0.834)
+-   il y a une forte corrélation entre l'age au moment de l'étude, l'age à l'embauche et l'ancienneté. Nous allons décider de supprimer l'age au moment de l'étude dans notre analyse pour éviter des problèmes de corrélation entre variables explicatives et de redondance d'information.
+
+#### **Complément: Explorer des packages pour rendre vos résultats plus agréables à lire !!!**
+
+<https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html>
+
+<https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf>

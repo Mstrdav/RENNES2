@@ -1,17 +1,22 @@
 ---
-title: "Titre du projet"  
-date: "`r Sys.Date()`"
-output:
-  rmdformats::robobook:
-    highlight: kate
-    number_sections: TRUE
-    df_print: paged
+title: "Il est où le bonheur ?"  
+format:
+  html:
+    other-links:
+      - text: NASA Open Data
+        href: https://data.nasa.gov/
+    code-links:
+      - text: Data Import Code
+        icon: file-code
+        href: data-import.py
+    # css: style.css
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache = TRUE) #Activer le cache des chunks pour accélérer les recompilations
 options("install.lock"=FALSE) #Désactiver le verrouillage d’installation des packages
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) ## configure le chemin du dossier automatiquement
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 ```
 
 **JAOUEN Denis - GEINDRE Colin**
@@ -72,11 +77,62 @@ expliquer les variables utilisées, les unités et les sources + Faire un tablea
 
 ## Analyse descriptive univariée des données
 
+```{r}
+# import des données
+data = read.csv(file = 'donnees.csv')[,-1]
+summary(data)
+head(data)
+```
+
 Vous devez décrire les données utilisées dans la modélisation, après nettoyage.
 
 -   Tableau de statistiques descriptives = données quantitatives / catégorielles
 
--   Box plot / histogramme / ... : chaque graphique doit
+```{r}
+library(psych)
+describe(data[,-c(1,2)])
+```
+
+-   Box plot / histogramme / ... : chaque graphique doit être commenté
+
+```{r}
+library(ggplot2)
+# histogramme de la variable cible
+ggplot(data, aes(x=happiness_moyenne)) +
+  geom_histogram(binwidth=0.25, fill="blue", color="black", alpha=0.7) +
+  labs(title="Histogramme du score de bonheur", x="Score de bonheur", y="Fréquence") +
+  theme_minimal()
+```
+
+```{r}
+# boxplot de la variable cible
+ggplot(data, aes(y=happiness_moyenne)) +
+  geom_boxplot(fill="orange", color="black", alpha=0.7) +
+  labs(title="Boxplot du score de bonheur", y="Score de bonheur") +
+  theme_minimal()
+```
+
+### Analyse de chaque variable explicative
+
+-   Distribution / boxplot / histogramme, pour chaque variable, arrangé en grille pour visualiser tout d'un coup.
+
+```{r, fig.height=12, fig.width=12}
+plots <- list()
+
+for (i in 3:ncol(data)) {
+  p <- ggplot(data, aes_string(x=data[[i]])) +
+    geom_histogram(binwidth=diff(range(data[[i]]))/30, fill="green", color="black", alpha=0.7) +
+    labs(x=colnames(data)[i], y="") +
+    theme_minimal() +
+    theme(plot.margin = grid::unit(c(0.5,0.5,0.5,0.5), "cm"))
+  plots[[i-2]] <- p
+}
+
+library(gridExtra)
+# nombre de colonnes voulu
+ncol_plot <- 2
+do.call(grid.arrange, c(plots, ncol = ncol_plot))
+```
 
 ## Analyse descriptive bivariée des données
 
@@ -84,13 +140,90 @@ Vous devez décrire vos données vis à vis de votre variable à expliquer
 
 -   corrélation vis à vis de Y
 
+```{r, fig.height=4, fig.width=6}
+# Corrélations simples et affichage graphique (base R)
+vars <- names(data)[-c(1,2,ncol(data))]
+cors <- sapply(vars, function(v) cor(data$happiness_moyenne, data[[v]]))
+# trier par valeur (pour barplot horizontal)
+cors_sorted <- sort(cors)
+par(mar = c(5, 8, 4, 2))
+barplot(cors_sorted, horiz = TRUE, las = 1,
+  # gradient color from cor
+  col = viridis::viridis(length(cors_sorted), alpha = 0.8)[rank(cors_sorted)],
+  xlab = "Corrélation avec happiness_moyenne",
+  main = "Corrélations des variables explicatives")
+abline(v = 0, lty = 2, col = "grey40")
+par(mar = c(5, 4, 4, 2) + 0.1)
+```
+
 -   nuage de point vis à vis de Y
 
+```{r, fig.height=12, fig.width=12}
+scatter_plots <- list()
+
+for (i in 3:ncol(data[,-ncol(data)])) {
+  p <- ggplot(data, aes_string(x=data[[i]], y="happiness_moyenne")) +
+    geom_point() +
+    geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
+    labs(x=colnames(data)[i], y="Hapiness") +
+    theme_minimal()
+  scatter_plots[[i-2]] <- p
+}
+
+library(gridExtra)
+# nombre de colonnes voulu
+ncol_plot <- 3
+do.call(grid.arrange, c(scatter_plots, ncol = ncol_plot))
+
+```
+
 -   Corrélation entre les variables explicatives
+
+```{r}
+# corrplot
+library(corrplot)
+# analyse sans Country.name et Code, et sans happiness moyenne
+corrplot(cor(data[,-c(1,2,ncol(data))]), method="shade", type = "lower", tl.col="black", tl.srt=45)
+```
 
 # **Analyse et discussion des résultats**
 
 ## Modélisation principale
+
+```{r}
+# premier modèle : toutes les variables candidates
+reg1 <- lm(happiness_moyenne ~ GDP_per_capita + KWH_pp_pc + PoliticalCorruption_Index +
+             Lifespan_At_Birth + Netmigration + Overweight + Population_density +
+             Military_expenditure + Pop_Growth,
+           data = data)
+
+cat('\n--- Résumé du modèle (reg1) ---\n')
+print(summary(reg1))
+```
+
+```{r}
+# VIF pour contrôler la multicolinéarité (si package car installé)
+if (requireNamespace('car', quietly = TRUE)) {
+  library(car)
+  cat('\nVIF:\n')
+  print(vif(reg1))
+} else cat('\nInstaller le package car pour calculer le VIF : install.packages("car")\n')
+
+# Test d'hétéroscédasticité (Breusch-Pagan) et coefficients robustes HC1
+if (requireNamespace('lmtest', quietly = TRUE) && requireNamespace('sandwich', quietly = TRUE)) {
+  library(lmtest); library(sandwich)
+  cat('\nBreusch-Pagan test :\n')
+  print(bptest(reg1))
+
+  cat('\nCoefficients avec erreurs robustes (HC1) :\n')
+  print(lmtest::coeftest(reg1, vcov. = sandwich::vcovHC(reg1, type = 'HC1')))
+} else cat('\nInstaller lmtest et sandwich pour tests et erreurs robustes\n')
+
+# Diagnostics graphiques rapides
+par(mfrow = c(2,2))
+plot(reg1)
+par(mfrow = c(1,1))
+```
 
 Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés
 
