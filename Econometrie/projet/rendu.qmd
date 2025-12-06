@@ -1,11 +1,15 @@
 ---
-title: "Titre du projet"  
-date: "`r Sys.Date()`"
-output:
-  rmdformats::robobook:
-    highlight: kate
-    number_sections: TRUE
-    df_print: paged
+title: "Il est où le bonheur ?"  
+format:
+  html:
+    other-links:
+      - text: NASA Open Data
+        href: https://data.nasa.gov/
+    code-links:
+      - text: Data Import Code
+        icon: file-code
+        href: data-import.py
+    # css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -72,11 +76,66 @@ expliquer les variables utilisées, les unités et les sources + Faire un tablea
 
 ## Analyse descriptive univariée des données
 
+```{r}
+# import des données
+data = read.csv(file = 'Econometrie/projet/donnees.csv')[,-1]
+summary(data)
+head(data)
+```
+
 Vous devez décrire les données utilisées dans la modélisation, après nettoyage.
+
+```{r}
+# corrplot
+library(corrplot)
+# analyse sans Country.name et Code
+corrplot(cor(data[,-c(1,2)]), method="shade", type = "lower", tl.col="black", tl.srt=45)
+```
 
 -   Tableau de statistiques descriptives = données quantitatives / catégorielles
 
--   Box plot / histogramme / ... : chaque graphique doit
+```{r}
+library(psych)
+describe(data[,-c(1,2)])
+```
+
+-   Box plot / histogramme / ... : chaque graphique doit être commenté
+
+```{r}
+library(ggplot2)
+# histogramme de la variable cible
+ggplot(data, aes(x=happiness_moyenne)) +
+  geom_histogram(binwidth=0.25, fill="blue", color="black", alpha=0.7) +
+  labs(title="Histogramme du score de bonheur", x="Score de bonheur", y="Fréquence") +
+  theme_minimal()
+```
+
+```{r}
+# boxplot de la variable cible
+ggplot(data, aes(y=happiness_moyenne)) +
+  geom_boxplot(fill="orange", color="black", alpha=0.7) +
+  labs(title="Boxplot du score de bonheur", y="Score de bonheur") +
+  theme_minimal()
+```
+
+### Analyse de chaque variable explicative
+
+-   Distribution / boxplot / histogramme, pour chaque variable, arrangé en grille pour visualiser tout d'un coup.
+
+```{r}
+plots <- list()
+
+for (i in 3:ncol(data)) {
+  p <- ggplot(data, aes_string(x=data[[i]])) +
+    geom_histogram(binwidth=diff(range(data[[i]]))/30, fill="green", color="black", alpha=0.7) +
+    labs(title=paste("Histogramme de", colnames(data)[i]), x=colnames(data)[i], y="Fréquence") +
+    theme_minimal()
+  plots[[i-2]] <- p
+}
+
+library(gridExtra)
+do.call("grid.arrange", c(plots, ncol=3))
+```
 
 ## Analyse descriptive bivariée des données
 
