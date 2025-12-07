@@ -217,8 +217,9 @@ donnees = donnees[,-14]
 
 
 write.csv(donnees, "donnees.csv")
-donnees =read.csv("donnees.csv", sep =",", dec=".", header = TRUE)
+donnees = read.csv("donnees.csv", sep =",", dec=".", header = TRUE)
 
+dim(donnees)
 ######################################################################
 
 OCDE_countries = c("Australia","Austria","Belgium","Canada","Chile","Colombia","Costa Rica","Czechia","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Israel","Italy","Japan","Korea","Latvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovak Republic","Slovenia","Spain","Sweden","Switzerland","Türkiye","United Kingdom","United States")
@@ -226,3 +227,31 @@ donnees$OCDE = 0
 for (i in 1:nrow(donnees)){ if (donnees$Country.name[i] %in% OCDE_countries) {
   donnees$OCDE[i] = 1
 }}
+
+
+########################################################################
+#RENAME
+View(donnees)
+donnees = donnees[,-1]
+names(donnees) = c("Name", "Code", "Political_Corruption","GDP_per_Capita","Lifespan","Net_Migration","Overweight_Adults","Population_Density","KWH_pp_pc","Military_Expenses","Population_Growth","Primary_School_Enrollment","OCDE","Happiness")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
