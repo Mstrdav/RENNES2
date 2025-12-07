@@ -28,8 +28,6 @@ library(ggplot2)
 
 [**Master 1 MAS - Université de Rennes**](https://eco.univ-rennes.fr/master-mathematiques-appliquees-statistique) et [**Master 1 MAS - Université Rennes 2**](https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html)
 
-[Pensez à numéroter vos tables et graphiques, cela vous permet de faire des rappels dans votre texte. Attention également au titre et à la bonne définition des axes. Chaque graphique est commenté, il est parfois préférable de les regrouper au sein d'une même fenêtre pour que le rapport soit plus agréable à lire. N'hésitez pas à faire des sélections de graphiques intéressants plutôt que de les présenter d'une manière mécanique. Il ne faut pas utiliser le code de vos variables dans vos commentaires mais revenir sur leur signification.]{style="color:red;"}
-
 # Introduction
 
 Depuis trop longtemps, l'indice de développement d'un pays a été calculé sur des indices économiques (capitalistes) : PIB, croissance, taux d'emploi, etc. Ce choix n'est pas neutre, il sert un système particulier qui ne met pas l'humain ou l'environnement au coeur de ses priorités. Nous voulons avec cette étude poser la première pierre d'une réflexion sur de meilleures méthodollogies d'évaluation du développement, axées sur le bonheur, mais aussi le respect de notre environnement, de la biodiversité, etc.
@@ -196,7 +194,7 @@ abline(v = 0, lty = 2, col = "grey40")
 par(mar = c(5, 4, 4, 2) + 0.1)
 ```
 
-On remarque ici les variables les plus et les moins corrélées. L'espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l'indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement. \
+On remarque ici les variables les plus et les moins corrélées. L'espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l'indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement.\
 Les autres variables ne semblent pas être corrélées drastiquement à l'indice de bonheur.
 
 ```{r, fig.height=12, fig.width=12}
