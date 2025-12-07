@@ -1,5 +1,5 @@
 ---
-title: "Il est où le bonheur ?"  
+title: "La source du bonheur" 
 format:
   html:
     other-links:
@@ -15,8 +15,13 @@ format:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache = TRUE) #Activer le cache des chunks pour accélérer les recompilations
 options("install.lock"=FALSE) #Désactiver le verrouillage d’installation des packages
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) ## configure le chemin du dossier automatiquement
 knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+library(pastecs)
+library(stargazer)
+library(pastecs)
+library(psych)
+library(ggplot2)
+
 ```
 
 **JAOUEN Denis - GEINDRE Colin**
@@ -31,9 +36,9 @@ Depuis trop longtemps, l'indice de développement d'un pays a été calculé sur
 
 Plusieurs études existent qui traitent du bonheur des populations. Une des plus célèbres est le world happiness report. Nous avons voulu tenter de comprendre comme cet indice de bonheur est corrélé / constraint par différents facteurs socio-économiques. En particulier voir si le PIB et la croissance sont de bons indicateurs, remettre en cause le paradigme si ce n'est pas le cas.
 
-Hypothèse : le bonheur peut être prédit / calculé à partir de données socio économiques. Lesquelles ? A quel degré ? Y a t il des pays singuliers de part leur comportement sur ces données ? Des différences en fonction des groupes de pays ? OCDE, OPEP, OTAN ?
+Hypothèse : Le bonheur peut-il être prédit ou calculé, au moins en partie avec des données socio économiques ? Si oui, Lesquelles et à quel degré ? Y a-t-il des pays singuliers de part leur comportement sur ces données ? Peut-on tirer des différences en fonction des groupes de pays tels que l'OCDE, l'OPEP ou l'OTAN ?
 
-Plan :
+### Plan :
 
 -   Récupération des données
 
@@ -47,7 +52,7 @@ Plan :
 
 # Cadre méthodologique
 
-Le cadre méthodologique général est celui de la régression linéaire, avec une estimation des moindre carré ordinaire. En fonction des données, des corrections éventuelles (white, MCG, etc.) pourront être envisagées. Pour chaque partie, une méthodologie plus précise sera discutée.
+Le cadre méthodologique général est celui de la régression linéaire, avec une estimation des moindres carrés ordinaires. En fonction des données, des corrections éventuelles (white, MCG, etc.) pourront être envisagées. Pour chaque partie, une méthodologie plus précise sera discutée.
 
 # **Analyse des données**
 
@@ -55,81 +60,75 @@ Le cadre méthodologique général est celui de la régression linéaire, avec u
 
 Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous étudions les pays du monde entier, en particulier les 147 référencés par le world happiness report. Après sélection de nos variables, il nous reste 125 pays à étudier.
 
-Ayant des données allant de 1789 à 2024 et ayant beaucoup de données manquantes, nous avons choisi de traiter les moyennes des données disponibles de 2013 à 2023. Certains jeux de données s'achèvent avant 2023, nous avons donc fait leurs moyennes jusqu'à la dernière année recensée. Cette décision a été motivée par notre envie de tirer des conclusions les plus larges possibles.
+Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, nous avons choisi de traiter les moyennes des données disponibles de 2013 à 2023. Certains jeux de données s'achèvent avant 2023, nous avons donc fait leurs moyennes jusqu'à la dernière année recensée. Cette décision a été motivée par notre envie de tirer des conclusions les plus larges possibles.
 
 | Code de la série | Définition | Unité | Source |
-|:---|----|:--:|---:|
-| Country.name | Le nom du pays | Caractères | \- |
+|:-----------------|------------------|:----------------:|-----------------:|
 | Code | Le code du pays | Caractères | \- |
-| PoliticalCorruption_Index | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | https://data360.worldbank.org/en/indicator/VDEM_CORE_V2X_CORR |
-| GDP_per_capita | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain | https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD |
-| Lifespan_at_Birth | La moyenne de 2013 à 202O de l'espérance de vie à la naissance | En années | https://data360.worldbank.org/en/indicator/WB_ESG_SP_DYN_LE00_IN |
-| Netmigration | La moyenne de 2013 à 2020 de la migration nette | En nombre de personnes | https://data360.worldbank.org/en/indicator/WB_WDI_SM_POP_NETM |
-| Overweight | La moyenne de 2013 à 2016 de la proportion d'adulte de 18 ans et plus dont l'IMC est supérieur à 25. | En pourcentage | https://data360.worldbank.org/en/indicator/WB_HNP_SH_STA_OWAD_ZS |
-| Population_density | La moyenne de 2013 à 2021 de la densité de population en nombre d'habitant à la mi-année par kilomètres carrés | En personnes | https://data360.worldbank.org/en/indicator/WB_WDI_EN_POP_DNST |
-| KWH_pp_pc | La moyenne de 2013 à 2023 de la consommation en kilowattheure par personne | En kilowattheure | https://ourworldindata.org/grapher/per-capita-energy-use?overlay=download-data |
-| Military_expenditure | La moyenne de 2013 à 2023 du pourcentage du PIB dédié à la dépense militaire | En pourcentage | https://ourworldindata.org/grapher/military-spending-as-a-share-of-gdp-sipri?overlay=download-data |
-| Pop_Growth | La moyenne de 2013 à 2023 de la croissance en pourcentage de la population | En pourcentage | https://ourworldindata.org/grapher/population-growth-rates?tab=map&overlay=download-data |
-| PrimarySchool_enrollment | La moyenne de 2013 à 2022 du nombre d'étudiant inscrits en école primaire divisé par la population du groupe d'age multiplié par 100 | En pourcentage | https://data360.worldbank.org/en/indicator/WB_ESG_SE_PRM_ENRR |
+| Political_Corruption | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | https://data360.worldbank.org/en/indicator/VDEM_CORE_V2X_CORR |
+| GDP_per_capita | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain par habitant | https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD |
+| Lifespan | La moyenne de 2013 à 202O de l'espérance de vie à la naissance | En années | https://data360.worldbank.org/en/indicator/WB_ESG_SP_DYN_LE00_IN |
+| Net_Migration | La moyenne de 2013 à 2020 de la migration nette | En nombre de personnes | https://data360.worldbank.org/en/indicator/WB_WDI_SM_POP_NETM |
+| Overweight_Adults | La moyenne de 2013 à 2016 de la proportion d'adulte de 18 ans et plus dont l'IMC est supérieur à 25. | En pourcentage | https://data360.worldbank.org/en/indicator/WB_HNP_SH_STA_OWAD_ZS |
+| Population_density | La moyenne de 2013 à 2021 de la densité de population en nombre d'habitant à la mi-année par kilomètres carrés | En habitant par kilomètre carré | https://data360.worldbank.org/en/indicator/WB_WDI_EN_POP_DNST |
+| KWH_pp_pc | La moyenne de 2013 à 2023 de la consommation en kilowattheure par personne | En kilowattheure par personne | https://ourworldindata.org/grapher/per-capita-energy-use?overlay=download-data |
+| Military_Expenses | La moyenne de 2013 à 2023 du pourcentage du PIB dédié à la dépense militaire | En pourcentage du PIB | https://ourworldindata.org/grapher/military-spending-as-a-share-of-gdp-sipri?overlay=download-data |
+| Population_Growth | La moyenne de 2013 à 2023 de la croissance en pourcentage de la population | En pourcentage | https://ourworldindata.org/grapher/population-growth-rates?tab=map&overlay=download-data |
+| Primary_School_Enrollment | La moyenne de 2013 à 2022 du nombre d'étudiant inscrits en école primaire divisé par la population du groupe d'age multiplié par 100 | En pourcentage | https://data360.worldbank.org/en/indicator/WB_ESG_SE_PRM_ENRR |
 | OCDE | Une indicatrice avec 1 si le pays est membre de l'OCDE et 0 sinon | Indicatrice | https://www.oecd.org/en/about/members-partners.html |
-| happiness_moyenne | La moyenne de 2013 à 2023 de l'indice du bonheur calculé par le World Happiness Index | Index allant de 0 à 10 | https://www.worldhappiness.report/data-sharing/ |
+| Happiness | La moyenne de 2013 à 2023 de l'indice du bonheur calculé par le World Happiness Index | Index allant de 0 à 10 | https://www.worldhappiness.report/data-sharing/ |
 
 ## Prétraitement et nettoyage des données
 
--   Sélection d'individus : données manquantes
+Pour éviter un maximum de données manquantes, nous avons effectuer des moyennes depuis 2013 et jusqu'à un maximum de 2023 sur toutes les données étudiées. Cela nous permet aussi d'atténuer les tendances qui ont pu se passer dans des temps plus courts sur cette décennie.
 
-    -   moyenne glissante ?
-
-    -   suppression d'individus ?
-
--   Sélection des variables
+Nous avons sélectionné les jeux de données que nous avons trouvé nous paraissant les plus intéressant. Certains ont du être écartés du jeu de donnée final dû à un manque de donnée. En effet plusieurs pays n'étaient pas recensés dans les données et notre système de moyenne ne pouvait les ramener dans le jeu de donnée.
 
 ## Analyse descriptive univariée des données
 
 ```{r}
 # import des données
-data = read.csv(file = 'donnees.csv')[,-1]
-summary(data)
+data = read.csv(file = 'donnees.csv', row.names = 2)[,-1]
 head(data)
-```
-
-```{r}
 #transform OCDE variable into factor
 data$OCDE <- as.factor(data$OCDE)
+```
+
+```{r}
+# Etude des statistiques descriptives
 data_numeric <- data[, sapply(data, is.numeric)]
+stargazer(data_numeric, median = TRUE, type = "text", title="Statistiques descriptives ", digits=2)
 ```
 
-Vous devez décrire les données utilisées dans la modélisation, après nettoyage.
+On voit tout de suite, par comparaison de la moyenne et de la médiane de chaque variable certaines tendances : le PIB par habitant contient des individus qui tirent la moyenne vers le haut, idem pour la migration, le KWH par habitant et la densité de population.
 
--   Tableau de statistiques descriptives = données quantitatives / catégorielles
+En étudiant les minimums, maximums, étendues et écarts-type de ces quatre variables, on remarque qu'il ne s'agit probablement que de quelques individus dont les valeurs très fortes déforment les moyennes. Par exemple, la densité de population a une étendue de 7812, une médiane de 80 et un écart -type de seulement 65. On s'attend à observer dans ces variables des petits groupes d'individus aux valeurs très élevées.
+
+Un effet inverse et de moindre importance peut aussi être constaté quand au surpoids des adultes. On voit que la moyenne est légèrement tirée vers le bas.
+
+Les dépenses militaires ayant une moyenne légèrement plus élevée que la médiane et un écart-type faible malgré un maximum assez élevé, on s'attend à observer très peu d'individus avec des valeurs très élevées mais une concentration importante des individus autour de la médiane.
+
+Le reste des variables ont l'air d'être peu dispersées. On peut s'atttendre à y voir une répartition normale des valeurs.
 
 ```{r}
-library(psych)
-describe(data_numeric)
-```
-
--   Box plot / histogramme / ... : chaque graphique doit être commenté
-
-```{r}
-library(ggplot2)
 # histogramme de la variable cible
-ggplot(data, aes(x=happiness_moyenne)) +
+ggplot(data, aes(x=Happiness)) +
   geom_histogram(binwidth=0.25, fill="blue", color="black", alpha=0.7) +
   labs(title="Histogramme du score de bonheur", x="Score de bonheur", y="Fréquence") +
   theme_minimal()
-```
 
-```{r}
 # boxplot de la variable cible
-ggplot(data, aes(y=happiness_moyenne)) +
+ggplot(data, aes(y=Happiness)) +
   geom_boxplot(fill="orange", color="black", alpha=0.7) +
   labs(title="Boxplot du score de bonheur", y="Score de bonheur") +
   theme_minimal()
 ```
 
-### Analyse de chaque variable explicative
+A première vue, l'histogramme nous indique que l'indice du bonheur semble difficilement suivre une loi normale. On repère cela à une certaine symétrie et une concentration d'indivus autour du centre, particulièrement deux pics : l'un proche de 4,5 et le second de 6.
 
--   Distribution / boxplot / histogramme, pour chaque variable, arrangé en grille pour visualiser tout d'un coup.
+Le boxplot du bonheur présente une répartition très équilibrée de notre variable explicative. On n'y repère pas de tendances particulières si ce n'est que les deux quarts les moins heureux sont légèrement plus grands.
+
+### Analyse de chaque variable explicative
 
 ```{r, fig.height=12, fig.width=12}
 plots <- list()
@@ -142,23 +141,49 @@ for (i in 1:ncol(data_numeric)) {
     theme(plot.margin = grid::unit(c(0.5,0.5,0.5,0.5), "cm"))
   plots[[i]] <- p
 }
-
+plots = plots[-11]
 library(gridExtra)
 # nombre de colonnes voulu
 ncol_plot <- 2
-do.call(grid.arrange, c(plots, ncol = ncol_plot))
+#do.call(grid.arrange, c(plots, ncol = ncol_plot))
 ```
 
+```{r}
+do.call(grid.arrange, c(plots[c(4,8,9,10)], ncol = 2))
+```
+
+Au vu de la symétrie de leurs histogrammes on peut considérer que la croissance de la population, l'inscription à l'école primaire, les dépenses militaires et la migration peuvent suivre des lois normales.
+
+```{r}
+do.call(grid.arrange, c(plots[c(2,6,7)], ncol = 2))
+```
+
+La consommation d'énergie, la densité de population et le PIB par habitant semblent suivre des lois inverses.
+
+```{r}
+do.call(grid.arrange, c(plots[c(1,3,5)], ncol = 2))
+```
+
+La corruption politique, le surpoids et l'espérance de vie ne semblent pas suivre des lois classiques.
+
+On remarque immédiatement les individus les plus aberrants qui referont surface dans les graphiques suivants et dont nous parlerons plus tard:
+
+-   On repère dans l'histogramme de l'inscription à l'école primaire un individu atypique proche de 0, il s'agit de la Somalie avec moins de 9% d'inscrits.
+
+-   De la même manière dans l'histogramme de la densité de population, on repère Singapour avec une densité titanesque de près de 8000 habitants au km2.
+
+-   Dans l'histogramme de la migration, le Pakistan apparait tout à gauche avec plus d'1,5 million de migration nettte négative et les Etats-Unis tout à droite avec plus d'1,2 million de migration nette positive.
+
+-   Le Luxembourg est l'individu tout à droite de l'histogramme du PIB.
+
+-   Et le Qatar est l'individu tout à droite dans l'histogramme de la consommation énergétique.
+
 ## Analyse descriptive bivariée des données
-
-Vous devez décrire vos données vis à vis de votre variable à expliquer
-
--   corrélation vis à vis de Y
 
 ```{r, fig.height=4, fig.width=6}
 # Corrélations simples et affichage graphique (base R)
 vars <- names(data_numeric)[-ncol(data_numeric)]
-cors <- sapply(vars, function(v) cor(data_numeric$happiness_moyenne, data_numeric[[v]]))
+cors <- sapply(vars, function(v) cor(data_numeric$Happiness, data_numeric[[v]]))
 # trier par valeur (pour barplot horizontal)
 cors_sorted <- sort(cors)
 par(mar = c(5, 8, 4, 2))
@@ -171,18 +196,20 @@ abline(v = 0, lty = 2, col = "grey40")
 par(mar = c(5, 4, 4, 2) + 0.1)
 ```
 
--   nuage de point vis à vis de Y
+On remarque ici les variables les plus et les moins corrélées. L'espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l'indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement. \
+Les autres variables ne semblent pas être corrélées drastiquement à l'indice de bonheur.
 
 ```{r, fig.height=12, fig.width=12}
+# Tracé des graphes de points et de la linéarité
 scatter_plots <- list()
 
-for (i in 3:ncol(data[,-ncol(data)])) {
-  p <- ggplot(data, aes_string(x=data[[i]], y="happiness_moyenne")) +
+for (i in 2:11) {
+  p <- ggplot(data, aes_string(x=data[[i]], y="Happiness")) +
     geom_point() +
     geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
-    labs(x=colnames(data)[i], y="Hapiness") +
+    labs(x=colnames(data)[i], y="Happiness") +
     theme_minimal()
-  scatter_plots[[i-2]] <- p
+  scatter_plots[[i-1]] <- p
 }
 
 library(gridExtra)
@@ -192,14 +219,33 @@ do.call(grid.arrange, c(scatter_plots, ncol = ncol_plot))
 
 ```
 
--   Corrélation entre les variables explicatives
+A nouveau, on retrouve les individus aberrants repérés plus tôt qui déforment complètement les graphiques sur l'inscription à l'école primaire, la densité de population et la migration nette. Il serait bon de voir la répartition de ces graphes sans ces individus.
+
+Dans le graphe du surpoids par l'indice de bonheur, on repère comme dans l'histogramme du surpoids deux pics de surreprésentation.
+
+La entre l'indice de bonheur et le PIB/hab semble logarithmique avec une concentation forte des individus vers les valeurs les plus faibles. De même pour le graphe de la consommation énergétique.
+
+On doute de la linéarité entre l'indice de bonheuir et la corruption politique car le nuage de point est très dispersé. De même pour la croissance de la population et les dépenses militaires.
+
+Finalement, on remarque une certaine linéarité positive entre l'indice de bonheur et l'espérance de vie à la naissance, les points semblent bien décrire une droite.
 
 ```{r}
-# corrplot
+# Corrélation entre les variables explicatives
 library(corrplot)
-# analyse sans Country.name et Code, et sans happiness moyenne
-corrplot(cor(data_numeric[,-ncol(data)]), method="shade", type = "lower", tl.col="black", tl.srt=45)
+corrplot(cor(data_numeric[,-ncol(data_numeric)]), method="shade", type = "lower", tl.col="black", tl.srt=45)
 ```
+
+On voit que certaines variables sont corrélées, source de problème pour notre régression à venir. En voici les plus importantes :
+
+-   La corruption politique est corrélée négativement avec le PIB/hab, l'espérance de vie, le surpoids et la consommation énergétique.
+
+-   Le PIB/hab est corrélée positivement avec l'espérance de vie, le surpoids et la consommation énergétique.
+
+-   L'espérance de vie est corrélée positivement avec le surpoids et la consommation énergétique.
+
+-   Le surpoids est corrélée positivement avec la consommation énergétique.
+
+On a donc quatre variables qui semblent corrélées entre elles.
 
 # **Analyse et discussion des résultats**
 
@@ -207,11 +253,13 @@ corrplot(cor(data_numeric[,-ncol(data)]), method="shade", type = "lower", tl.col
 
 ```{r}
 # premier modèle : toutes les variables candidates
-reg1 <- lm(happiness_moyenne ~ PoliticalCorruption_Index + KWH_pp_pc + GDP_per_capita + Lifespan_At_Birth + Netmigration + Overweight + Population_density + Military_expenditure + Pop_Growth + OCDE + PrimarySchool_enrollment, data = data)
+reg1 <- lm(Happiness ~ Political_Corruption + KWH_pp_pc + GDP_per_Capita + Lifespan + Net_Migration + Overweight_Adults + Population_Density + Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment, data = data)
 
 cat('\n--- Résumé du modèle (reg1) ---\n')
 print(summary(reg1))
 ```
+
+De prime abord, on repère d'après le test de Fisher, on modèle explicatif avec plus e 80% de la variance de l'indice du bonheur expliquée par le modèle. Nos variables significatives, par ordre de significativité, sont l'espérance de vue, le surpoids, le PIB par habitant, la dépense militaire, la participation à l'OCDE et l'inscription à l'école primaire.
 
 ```{r}
 # VIF pour contrôler la multicolinéarité (si package car installé)
