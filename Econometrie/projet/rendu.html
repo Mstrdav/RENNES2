@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -61,14 +61,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="rendu_files/libs/clipboard/clipboard.min.js"></script>
 <script src="rendu_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="rendu_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="rendu_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="rendu_files/libs/quarto-html/popper.min.js"></script>
 <script src="rendu_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="rendu_files/libs/quarto-html/anchor.min.js"></script>
 <link href="rendu_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="rendu_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="rendu_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="rendu_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="rendu_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="rendu_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="rendu_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -77,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://data.nasa.gov/"><i class="bi bi-link-45deg"></i>NASA Open Data</a></li></ul></div><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="data-import.py"><i class="bi bi-file-code"></i>Data Import Code</a></li></ul></div></div>
+<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://colin.geind.re/"><i class="bi bi-link-45deg"></i>Colin</a></li><li><a href="https://dataforgood.fr/"><i class="bi bi-link-45deg"></i>Denis</a></li></ul></div></div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -232,9 +233,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="analyse-descriptive-univariée-des-données" class="level2">
 <h2 class="anchored" data-anchor-id="analyse-descriptive-univariée-des-données">Analyse descriptive univariée des données</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import des données</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">'donnees.csv'</span>, <span class="at">row.names =</span> <span class="dv">2</span>)[,<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import des données</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">'donnees.csv'</span>, <span class="at">row.names =</span> <span class="dv">2</span>)[,<span class="sc">-</span><span class="dv">1</span>] <span class="co"># pour enlever la colonne "numero"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Code Political_Corruption GDP_per_Capita Lifespan Net_Migration
 Afghanistan  AFG            0.8265455       500.1369 62.87425      -480.750
@@ -258,13 +259,13 @@ Angola              3.4019091                 109.24481    0   3.87225
 Argentina           0.6716364                 112.28443    0   6.23800
 Armenia             0.1907273                  98.80431    0   4.81220</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#transform OCDE variable into factor</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>OCDE <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data<span class="sc">$</span>OCDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#transform OCDE variable into factor</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>OCDE <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data<span class="sc">$</span>OCDE)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Etude des statistiques descriptives</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Etude des statistiques descriptives</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data_numeric <span class="ot">&lt;-</span> data[, <span class="fu">sapply</span>(data, is.numeric)]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(data_numeric, <span class="at">median =</span> <span class="cn">TRUE</span>, <span class="at">type =</span> <span class="st">"text"</span>, <span class="at">title=</span><span class="st">"Statistiques descriptives "</span>, <span class="at">digits=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(data_numeric, <span class="at">median =</span> <span class="cn">TRUE</span>, <span class="at">type =</span> <span class="st">"text"</span>, <span class="at">title=</span><span class="st">"Statistiques descriptives "</span>, <span class="at">digits=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Statistiques descriptives
@@ -291,11 +292,10 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <p>Les dépenses militaires ayant une moyenne légèrement plus élevée que la médiane et un écart-type faible malgré un maximum assez élevé, on s’attend à observer très peu d’individus avec des valeurs très élevées mais une concentration importante des individus autour de la médiane.</p>
 <p>Le reste des variables ont l’air d’être peu dispersées. On peut s’atttendre à y voir une répartition normale des valeurs.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># histogramme de la variable cible</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># histogramme de la variable cible</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x=</span>Happiness)) <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">0.25</span>, <span class="at">fill=</span><span class="st">"blue"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Histogramme du score de bonheur"</span>, <span class="at">x=</span><span class="st">"Score de bonheur"</span>, <span class="at">y=</span><span class="st">"Fréquence"</span>) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Histogramme du score de bonheur"</span>, <span class="at">x=</span><span class="st">"Score de bonheur"</span>, <span class="at">y=</span><span class="st">"Fréquence"</span>)   <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -303,11 +303,11 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot de la variable cible</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot de la variable cible</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">y=</span>Happiness)) <span class="sc">+</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">"orange"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Boxplot du score de bonheur"</span>, <span class="at">y=</span><span class="st">"Score de bonheur"</span>) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -321,7 +321,7 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <section id="analyse-de-chaque-variable-explicative" class="level3">
 <h3 class="anchored" data-anchor-id="analyse-de-chaque-variable-explicative">Analyse de chaque variable explicative</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(data_numeric)) {</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data_numeric, <span class="fu">aes_string</span>(<span class="at">x=</span>data_numeric[[i]])) <span class="sc">+</span></span>
@@ -335,10 +335,10 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># nombre de colonnes voulu</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>ncol_plot <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#do.call(grid.arrange, c(plots, ncol = ncol_plot))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#do.call(grid.arrange, c(plots, ncol = ncol_plot))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">c</span>(plots[<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)], <span class="at">ncol =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">c</span>(plots[<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)], <span class="at">ncol =</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -349,7 +349,7 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 </div>
 <p>Au vu de la symétrie de leurs histogrammes on peut considérer que la croissance de la population, l’inscription à l’école primaire, les dépenses militaires et la migration peuvent suivre des lois normales.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">c</span>(plots[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">7</span>)], <span class="at">ncol =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">c</span>(plots[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">7</span>)], <span class="at">ncol =</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -360,7 +360,7 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 </div>
 <p>La consommation d’énergie, la densité de population et le PIB par habitant semblent suivre des lois inverses.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">c</span>(plots[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)], <span class="at">ncol =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">c</span>(plots[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)], <span class="at">ncol =</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -375,7 +375,7 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <li><p>On repère dans l’histogramme de l’inscription à l’école primaire un individu atypique proche de 0, il s’agit de la Somalie avec moins de 9% d’inscrits.</p></li>
 <li><p>De la même manière dans l’histogramme de la densité de population, on repère Singapour avec une densité titanesque de près de 8000 habitants au km2.</p></li>
 <li><p>Dans l’histogramme de la migration, le Pakistan apparait tout à gauche avec plus d’1,5 million de migration nettte négative et les Etats-Unis tout à droite avec plus d’1,2 million de migration nette positive.</p></li>
-<li><p>Le Luxembourg est l’individu tout à droite de l’histogramme du PIB.</p></li>
+<li><p>Le Luxembourg est l’individu tout à droite de l’histogramme du PIB par habitant.</p></li>
 <li><p>Et le Qatar est l’individu tout à droite dans l’histogramme de la consommation énergétique.</p></li>
 </ul>
 </section>
@@ -383,7 +383,7 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <section id="analyse-descriptive-bivariée-des-données" class="level2">
 <h2 class="anchored" data-anchor-id="analyse-descriptive-bivariée-des-données">Analyse descriptive bivariée des données</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Corrélations simples et affichage graphique (base R)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Corrélations simples et affichage graphique (base R)</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">names</span>(data_numeric)[<span class="sc">-</span><span class="fu">ncol</span>(data_numeric)]</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cors <span class="ot">&lt;-</span> <span class="fu">sapply</span>(vars, <span class="cf">function</span>(v) <span class="fu">cor</span>(data_numeric<span class="sc">$</span>Happiness, data_numeric[[v]]))</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># trier par valeur (pour barplot horizontal)</span></span>
@@ -394,7 +394,7 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="fu">length</span>(cors_sorted), <span class="at">alpha =</span> <span class="fl">0.8</span>)[<span class="fu">rank</span>(cors_sorted)],</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Corrélation avec happiness_moyenne"</span>,</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Corrélations des variables explicatives"</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"grey40"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"grey40"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -402,12 +402,12 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>On remarque ici les variables les plus et les moins corrélées. L’espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l’indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement.<br>
 Les autres variables ne semblent pas être corrélées drastiquement à l’indice de bonheur.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tracé des graphes de points et de la linéarité</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tracé des graphes de points et de la linéarité</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>scatter_plots <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">11</span>) {</span>
@@ -422,7 +422,7 @@ Les autres variables ne semblent pas être corrélées drastiquement à l’indi
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># nombre de colonnes voulu</span></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>ncol_plot <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">c</span>(scatter_plots, <span class="at">ncol =</span> ncol_plot))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">c</span>(scatter_plots, <span class="at">ncol =</span> ncol_plot))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -434,12 +434,12 @@ Les autres variables ne semblent pas être corrélées drastiquement à l’indi
 <p>A nouveau, on retrouve les individus aberrants repérés plus tôt qui déforment complètement les graphiques sur l’inscription à l’école primaire, la densité de population et la migration nette. Il serait bon de voir la répartition de ces graphes sans ces individus.</p>
 <p>Dans le graphe du surpoids par l’indice de bonheur, on repère comme dans l’histogramme du surpoids deux pics de surreprésentation.</p>
 <p>La entre l’indice de bonheur et le PIB/hab semble logarithmique avec une concentation forte des individus vers les valeurs les plus faibles. De même pour le graphe de la consommation énergétique.</p>
-<p>On doute de la linéarité entre l’indice de bonheuir et la corruption politique car le nuage de point est très dispersé. De même pour la croissance de la population et les dépenses militaires.</p>
+<p>On doute de la linéarité entre l’indice de bonheur et la corruption politique car le nuage de point est très dispersé. De même pour la croissance de la population et les dépenses militaires.</p>
 <p>Finalement, on remarque une certaine linéarité positive entre l’indice de bonheur et l’espérance de vie à la naissance, les points semblent bien décrire une droite.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Corrélation entre les variables explicatives</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Corrélation entre les variables explicatives</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(data_numeric[,<span class="sc">-</span><span class="fu">ncol</span>(data_numeric)]), <span class="at">method=</span><span class="st">"shade"</span>, <span class="at">type =</span> <span class="st">"lower"</span>, <span class="at">tl.col=</span><span class="st">"black"</span>, <span class="at">tl.srt=</span><span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(data_numeric[,<span class="sc">-</span><span class="fu">ncol</span>(data_numeric)]), <span class="at">method=</span><span class="st">"shade"</span>, <span class="at">type =</span> <span class="st">"lower"</span>, <span class="at">tl.col=</span><span class="st">"black"</span>, <span class="at">tl.srt=</span><span class="dv">45</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -463,15 +463,15 @@ Les autres variables ne semblent pas être corrélées drastiquement à l’indi
 <section id="modélisation-principale" class="level2">
 <h2 class="anchored" data-anchor-id="modélisation-principale">Modélisation principale</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># premier modèle : toutes les variables candidates</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># premier modèle : toutes les variables candidates</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Happiness <span class="sc">~</span> Political_Corruption <span class="sc">+</span> KWH_pp_pc <span class="sc">+</span> GDP_per_Capita <span class="sc">+</span> Lifespan <span class="sc">+</span> Net_Migration <span class="sc">+</span> Overweight_Adults <span class="sc">+</span> Population_Density <span class="sc">+</span> Military_Expenses <span class="sc">+</span> Population_Growth <span class="sc">+</span> OCDE <span class="sc">+</span> Primary_School_Enrollment, <span class="at">data =</span> data)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n</span><span class="st">--- Résumé du modèle (reg1) ---</span><span class="sc">\n</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n</span><span class="st">--- Résumé du modèle (reg1) ---</span><span class="sc">\n</span><span class="st">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 --- Résumé du modèle (reg1) ---</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(reg1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(reg1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -506,18 +506,13 @@ Multiple R-squared:  0.8115,    Adjusted R-squared:  0.7932
 F-statistic: 44.23 on 11 and 113 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>De prime abord, on repère d’après le test de Fisher, on modèle explicatif avec plus e 80% de la variance de l’indice du bonheur expliquée par le modèle. Nos variables significatives, par ordre de significativité, sont l’espérance de vue, le surpoids, le PIB par habitant, la dépense militaire, la participation à l’OCDE et l’inscription à l’école primaire.</p>
+<p>De prime abord, on constate d’après le test de Fisher, que notre modèle explique plus de 80% de la variance de l’indice duebonheur. Nos variables significatives, par ordre de significativité, sont l’espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l’OCDE et l’inscription à l’école primaire.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># VIF pour contrôler la multicolinéarité (si package car installé)</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="st">'car'</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(car)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n</span><span class="st">VIF:</span><span class="sc">\n</span><span class="st">'</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">vif</span>(reg1))</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n</span><span class="st">Installer le package car pour calculer le VIF : install.packages("car")</span><span class="sc">\n</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># VIF pour contrôler la multicolinéarité</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">vif</span>(reg1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-VIF:
-     Political_Corruption                 KWH_pp_pc            GDP_per_Capita 
+<pre><code>     Political_Corruption                 KWH_pp_pc            GDP_per_Capita 
                  2.884465                  4.033701                  4.241519 
                  Lifespan             Net_Migration         Overweight_Adults 
                  4.215612                  1.203244                  2.909962 
@@ -526,27 +521,28 @@ VIF:
                      OCDE Primary_School_Enrollment 
                  2.588654                  1.049333 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test d'hétéroscédasticité (Breusch-Pagan) et coefficients robustes HC1</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">requireNamespace</span>(<span class="st">'lmtest'</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>) <span class="sc">&amp;&amp;</span> <span class="fu">requireNamespace</span>(<span class="st">'sandwich'</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(lmtest); <span class="fu">library</span>(sandwich)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n</span><span class="st">Breusch-Pagan test :</span><span class="sc">\n</span><span class="st">'</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">bptest</span>(reg1))</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n</span><span class="st">Coefficients avec erreurs robustes (HC1) :</span><span class="sc">\n</span><span class="st">'</span>)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(lmtest<span class="sc">::</span><span class="fu">coeftest</span>(reg1, <span class="at">vcov. =</span> sandwich<span class="sc">::</span><span class="fu">vcovHC</span>(reg1, <span class="at">type =</span> <span class="st">'HC1'</span>)))</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n</span><span class="st">Installer lmtest et sandwich pour tests et erreurs robustes</span><span class="sc">\n</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test d'hétéroscédasticité (Breusch-Pagan) et coefficients robustes HC1</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest); <span class="fu">library</span>(sandwich)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Breusch-Pagan test :'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Breusch-Pagan test :"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">bptest</span>(reg1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Breusch-Pagan test :
-
     studentized Breusch-Pagan test
 
 data:  reg1
-BP = 7.3524, df = 11, p-value = 0.7699
-
-
-Coefficients avec erreurs robustes (HC1) :
-
+BP = 7.3524, df = 11, p-value = 0.7699</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Coefficients avec erreurs robustes (HC1) :'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Coefficients avec erreurs robustes (HC1) :"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lmtest<span class="sc">::</span><span class="fu">coeftest</span>(reg1, <span class="at">vcov. =</span> sandwich<span class="sc">::</span><span class="fu">vcovHC</span>(reg1, <span class="at">type =</span> <span class="st">'HC1'</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
 t test of coefficients:
 
                              Estimate  Std. Error t value  Pr(&gt;|t|)    
@@ -565,9 +561,9 @@ Primary_School_Enrollment -6.8018e-03  2.7886e-03 -2.4392 0.0162767 *
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostics graphiques rapides</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostics graphiques rapides</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reg1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -575,8 +571,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>On en est là !</p>
 <p>Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés</p>
 </section>
 <section id="robustesse-des-résultats" class="level2">
@@ -657,13 +654,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

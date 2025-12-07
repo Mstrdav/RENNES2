@@ -3,12 +3,10 @@ title: "La source du bonheur"
 format:
   html:
     other-links:
-      - text: NASA Open Data
-        href: https://data.nasa.gov/
-    code-links:
-      - text: Data Import Code
-        icon: file-code
-        href: data-import.py
+      - text: Colin
+        href: https://colin.geind.re/
+      - text: Denis
+        href: https://dataforgood.fr/
     # css: style.css
 ---
 
@@ -18,10 +16,8 @@ options("install.lock"=FALSE) #Désactiver le verrouillage d’installation des 
 knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 library(pastecs)
 library(stargazer)
-library(pastecs)
 library(psych)
 library(ggplot2)
-
 ```
 
 **JAOUEN Denis - GEINDRE Colin**
@@ -86,7 +82,7 @@ Nous avons sélectionné les jeux de données que nous avons trouvé nous parais
 
 ```{r}
 # import des données
-data = read.csv(file = 'donnees.csv', row.names = 2)[,-1]
+data = read.csv(file = 'donnees.csv', row.names = 2)[,-1] # pour enlever la colonne "numero"
 head(data)
 #transform OCDE variable into factor
 data$OCDE <- as.factor(data$OCDE)
@@ -112,8 +108,7 @@ Le reste des variables ont l'air d'être peu dispersées. On peut s'atttendre à
 # histogramme de la variable cible
 ggplot(data, aes(x=Happiness)) +
   geom_histogram(binwidth=0.25, fill="blue", color="black", alpha=0.7) +
-  labs(title="Histogramme du score de bonheur", x="Score de bonheur", y="Fréquence") +
-  theme_minimal()
+  labs(title="Histogramme du score de bonheur", x="Score de bonheur", y="Fréquence")   + theme_minimal()
 
 # boxplot de la variable cible
 ggplot(data, aes(y=Happiness)) +
@@ -172,7 +167,7 @@ On remarque immédiatement les individus les plus aberrants qui referont surface
 
 -   Dans l'histogramme de la migration, le Pakistan apparait tout à gauche avec plus d'1,5 million de migration nettte négative et les Etats-Unis tout à droite avec plus d'1,2 million de migration nette positive.
 
--   Le Luxembourg est l'individu tout à droite de l'histogramme du PIB.
+-   Le Luxembourg est l'individu tout à droite de l'histogramme du PIB par habitant.
 
 -   Et le Qatar est l'individu tout à droite dans l'histogramme de la consommation énergétique.
 
@@ -223,7 +218,7 @@ Dans le graphe du surpoids par l'indice de bonheur, on repère comme dans l'hist
 
 La entre l'indice de bonheur et le PIB/hab semble logarithmique avec une concentation forte des individus vers les valeurs les plus faibles. De même pour le graphe de la consommation énergétique.
 
-On doute de la linéarité entre l'indice de bonheuir et la corruption politique car le nuage de point est très dispersé. De même pour la croissance de la population et les dépenses militaires.
+On doute de la linéarité entre l'indice de bonheur et la corruption politique car le nuage de point est très dispersé. De même pour la croissance de la population et les dépenses militaires.
 
 Finalement, on remarque une certaine linéarité positive entre l'indice de bonheur et l'espérance de vie à la naissance, les points semblent bien décrire une droite.
 
@@ -257,31 +252,29 @@ cat('\n--- Résumé du modèle (reg1) ---\n')
 print(summary(reg1))
 ```
 
-De prime abord, on repère d'après le test de Fisher, on modèle explicatif avec plus e 80% de la variance de l'indice du bonheur expliquée par le modèle. Nos variables significatives, par ordre de significativité, sont l'espérance de vue, le surpoids, le PIB par habitant, la dépense militaire, la participation à l'OCDE et l'inscription à l'école primaire.
+De prime abord, on constate d'après le test de Fisher, que notre modèle explique plus de 80% de la variance de l'indice duebonheur. Nos variables significatives, par ordre de significativité, sont l'espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l'OCDE et l'inscription à l'école primaire.
 
 ```{r}
-# VIF pour contrôler la multicolinéarité (si package car installé)
-if (requireNamespace('car', quietly = TRUE)) {
-  library(car)
-  cat('\nVIF:\n')
-  print(vif(reg1))
-} else cat('\nInstaller le package car pour calculer le VIF : install.packages("car")\n')
+# VIF pour contrôler la multicolinéarité
+library(car)
+print(vif(reg1))
 
 # Test d'hétéroscédasticité (Breusch-Pagan) et coefficients robustes HC1
-if (requireNamespace('lmtest', quietly = TRUE) && requireNamespace('sandwich', quietly = TRUE)) {
-  library(lmtest); library(sandwich)
-  cat('\nBreusch-Pagan test :\n')
-  print(bptest(reg1))
 
-  cat('\nCoefficients avec erreurs robustes (HC1) :\n')
-  print(lmtest::coeftest(reg1, vcov. = sandwich::vcovHC(reg1, type = 'HC1')))
-} else cat('\nInstaller lmtest et sandwich pour tests et erreurs robustes\n')
+library(lmtest); library(sandwich)
+print('Breusch-Pagan test :')
+print(bptest(reg1))
 
+print('Coefficients avec erreurs robustes (HC1) :')
+print(lmtest::coeftest(reg1, vcov. = sandwich::vcovHC(reg1, type = 'HC1')))
+  
 # Diagnostics graphiques rapides
 par(mfrow = c(2,2))
 plot(reg1)
 par(mfrow = c(1,1))
 ```
+
+On en est là !
 
 Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés
 
