@@ -1,0 +1,73 @@
+body {
+    background: #ffebee;
+    color: #012622;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+.figure {
+    padding: 14px;
+}
+
+.figure-img {
+    border-radius: 12px;
+    box-shadow: 6px 6px 8px #71517b;
+}
+
+h1, h2, h3 {
+    color: #71517B;
+}
+
+a {
+    color: #EE4266;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.figure-img:hover {
+    animation: glitter 1s infinite;
+    transform-origin: center;
+}
+
+.cell:hover {
+    animation: shakeZoom .7s infinite;
+    overflow: hidden;
+}
+
+@keyframes glitter {
+    0% {
+        box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    25% {
+        box-shadow: 0 0 20px #FF69B4, 0 0 30px #FF69B4, 0 0 40px #FF69B4, 0 0 50px #FF69B4;
+        transform: rotateX(15deg) rotateY(58deg);
+    }
+    50% {
+        box-shadow: 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 50px #00FFFF, 0 0 60px #00FFFF;
+        transform: rotateX(-70deg) rotateY(-15deg);
+    }
+    75% {
+        box-shadow: 0 0 20px #ADFF2F, 0 0 30px #ADFF2F, 0 0 40px #ADFF2F, 0 0 50px #ADFF2F;
+        transform: rotateX(10deg) rotateY(-30deg);
+    }
+    100% {
+        box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+}
+
+@keyframes shakeZoom {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translate(-2px, 2px) scale(1.625);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translate(2px, -2px) scale(1.75);
+    }
+}
