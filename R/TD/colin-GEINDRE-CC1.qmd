@@ -1,0 +1,259 @@
+---
+title: "Licence MIASHS 3 - Logiciel statistique R  - Contrôle continu 1 : 21 novembre  2025"
+author: "Magalie Fromont & Colin Geindre"
+format: html
+editor: source
+---
+
+# Informations et consignes
+
+::: callout-important
+**Durée de l'épreuve :** 1h30 + tiers-temps
+:::
+
+::: callout-important
+**Accès internet et IA :**
+
+L'accès internet n'est autorisé **que** pour :
+
+-   le téléchargement du sujet et des documents de son choix sur Cursus en début d'épreuve,
+-   le dépôt de la copie en fin d'épreuve.
+
+L'utilisation d'outils d'intelligence artificielle est notamment interdite durant toute l'épreuve.
+:::
+
+::: callout-important
+**Autres consignes :**
+
+-   Renommer le fichier du sujet en respectant le motif `prenom-NOM.qmd` ;
+-   Modifier l'entête de ce fichier en renseignant le champ `author` convenablement ;
+-   À la fin de l'épreuve, déposer ce fichier `.qmd` dans Cursus, **et lui seul**.
+:::
+
+# Déchets plastiques dans le monde en 2023
+
+Nous nous intéressons dans ce sujet au jeu de données `Plastic_Waste_2023.csv` sur la production de déchets plastiques dans le monde, proposé dans une compétition en science des données Kaggle de 2023, que l'on complètera avec un autre jeu de données `GDP.csv` issu de la banque mondiale, contenant les PIB (`GDP_USD`) et PIB par habitant (`GDP_per_capita_USD`) de chaque pays (en dollars) des années 2000 à 2021.
+
+Le jeu de données `Plastic_Waste_2023.csv` contient les variables suivantes pour $165$ pays :
+
+-   `Total_Plastic_Waste_MT` donnant une estimation de la production de déchets plastiques (en millions de tonnes),
+-   `Main_Source` précisant les sources principales de déchets plastiques,
+-   `Recycling_Rate` donnant une estimation du taux de recyclage des déchets,
+-   `Per_Capita_Waste_KG` donnant une estimation de la production de déchets plastiques par habitant (en kg),
+-   `Coastal_Waste_Risk` donnant un niveau de risque lié aux déchets côtiers.
+
+## Première partie sans les fonctions de `dplyr`
+
+1.  Faire une première lecture du fichier `Plastic_Waste_2023.csv` à l'aide de la fonction `readLines`. 
+
+Importer ce jeu de données dans un data frame intitulé `waste` à l'aide de l'une des trois fonctions `read.table`, `read.csv` ou `read.csv2` avec le moins d'options possible.
+
+```{r}
+waste <- read.table("Plastic_Waste_2023.csv", header = T, sep = ",")
+waste2 <- read.csv("Plastic_Waste_2023.csv")
+waste3 <- read.csv2("Plastic_Waste_2023.csv", sep = ",", dec = ".")
+
+View(waste)
+summary(waste)
+
+sapply(X = waste, class)
+waste$Main_Sources <- as.factor(waste$Main_Sources)
+waste$Coastal_Waste_Risk <- as.factor(waste$Coastal_Waste_Risk)
+```
+
+Vérifier que ce jeu de données a été bien importé en utilisant la fonction `View` puis la fonction `summary`.
+
+Afficher la classe de toutes les variables contenues dans `waste` à l'aide de l'une des fonctions `lapply` ou `sapply`, et de la fonction `class`, puis transformer dans ce data frame les variables `Main_Sources` et `Coastal_Waste_Risk` en facteurs. 
+
+2. Afficher la première et la dernière ligne de `waste` **simultanément en une seule commande**, puis deux lignes de `waste` prises au hasard toujours **simultanément en une seule commande**.
+
+```{r}
+library("tidyverse")
+library("dplyr")
+waste[c(1, nrow(waste)), ]
+waste[-2:-(nrow(waste)-1),]
+waste[sample(1:nrow(waste), 2), ]
+```
+
+3.  Afficher la variable `Recycling_Rate` de `waste` **de 4 manières différentes**.
+
+
+```{r}
+waste$Recycling_Rate
+waste["Recycling_Rate"]
+waste[[4]]
+
+# deplyr
+select(waste, Recycling_Rate)
+```
+
+4.  Calculer le nombre de données manquantes `nNA` de `waste` ; puis construire un vecteur logique `wasteNA` de valeur `TRUE` si `waste` contient des données manquantes, `FALSE` de deux manières différentes : directement par un test sur `nNA` puis à l'aide de la fonction `anyNA`. 
+
+```{r}
+nNA <- sum(is.na(waste))
+wasteNA1 <- nNA > 0
+wasteNA2 <- anyNA(waste)
+```
+
+5. Créer un vecteur `indexIndus` contenant les indices des données de `waste` pour lesquelles la variable `Main_Sources` prend l'une des modalités contenant le mot **Industrial** , puis afficher les noms des pays correspondants.
+
+```{r}
+help("grep")
+indexIndus <- grep("Industrial", waste$Main_Source)
+waste$Country[indexIndus]
+```
+
+6. Afficher le rang de tous les pays en termes de production totale de déchets plastiques (`Total_Plastic_Waste_MT`), et ajouter ce rang au data frame `waste`.
+
+
+```{r}
+help("rank")
+rank(waste$Total_Plastic_Waste_MT)
+waste$Total_Plastic_Waste_MT_Rank <- rank(waste$Total_Plastic_Waste_MT)
+```
+
+7. Afficher les noms des pays dans le top 10 en termes de de production totale de déchets plastiques (`Total_Plastic_Waste_MT`)
+
+```{r}
+slice_min(waste, Total_Plastic_Waste_MT_Rank, n = 10) |> select(Country, Total_Plastic_Waste_MT_Rank)
+```
+
+
+8. Extraire les données des pays ayant une masse de déchets totale inférieure au premier quartile ou supérieure au troisième quartile à l'aide la fonction `quantile`.
+
+```{r}
+quantile(waste$Total_Plastic_Waste_MT)
+waste["Total_Plastic_Waste_MT" > 1.33 | "Total_Plastic_Waste_MT_Rank" < 0.12]
+```
+
+9. Afficher les niveaux puis le nombre de niveaux du facteur `Coastal_Waste_Risk`.
+
+Regrouper les niveaux `High` et `Very_High` du facteur `Coastal_Waste_Risk` dans un seul niveau intitulé `High+`, et tous les autres niveaux en un seul facteur intitulé `Medium-`.
+
+```{r}
+levels(waste$Coastal_Waste_Risk)
+length(levels(waste$Coastal_Waste_Risk))
+waste$Coastal_Waste_Risk <- factor(waste$Coastal_Waste_Risk, levels = c("Very_High", "High", "Medium", "Low"),labels = c("High+", "High+", "Medium-", "Medium-"))
+```
+
+10. Calculer la médiane de la quantité totale de déchets plastiques selon les niveaux du facteur `Coastal_Waste_Risk` **de quatre manières différentes** à l'aide des fonctions `tapply`, `by`, `aggregate`, puis `split`.
+
+```{r}
+tapply(waste$Total_Plastic_Waste_MT, waste$Coastal_Waste_Risk, median)
+by(waste$Total_Plastic_Waste_MT, waste$Coastal_Waste_Risk, median)
+aggregate(Total_Plastic_Waste_MT ~ Coastal_Waste_Risk, data = waste, FUN = median)
+s <- split(waste$Total_Plastic_Waste_MT, waste$Coastal_Waste_Risk)
+sapply(s, median)
+
+# dplyr, j'y reviendrai si j'ai le temps
+# group_by(waste, Coastal_Waste_Risk) |> select(Total_Plastic_Waste_MT) |> map(median)
+```
+
+
+## Deuxième partie avec les fonctions de `dplyr`
+
+
+1. Faire une première lecture du fichier `GDP.csv` à l'aide de la fonction `readLines`. 
+
+Importer ce jeu de données à l'aide de la fonction `read.table`, puis à l'aide de la fonction `fread`. Comparer les temps d'exécution des deux importations.
+
+
+```{r}
+readLines("GDP.csv")
+GDP_readtable <- read.table(file = "GDP.csv", header = T, sep = ";")
+library(data.table)
+gdp <- fread("GDP.csv", header = TRUE, sep = ";")
+```
+
+Stocker le résultat de l'importation faite avec `fread` dans un objet intitulé `gdp`. Vérifier que le jeu de données a été bien importé en utilisant la fonction `View` puis la fonction `summary`.
+
+Quelle est la classe de l'objet `gdp` ? Quelles sont les différences entre `gdp` et le résultat de l'importation faite avec `read.table` ?
+
+2. Afficher la classe de toutes les variables contenues dans `gdp` à l'aide de la fonction `map`. Les classes des variables sont-elles appropriées ?  
+
+```{r}
+# la version lue par read.table n'a que 2508 observations, quand la version de fread en a 5852. Dans le fichier csv, il y a bien 5853 lignes
+View(gdp); summary(gdp)
+class(GDP_readtable)
+class(gdp) # data.table data.frame
+map(gdp, class)
+```
+
+3. Repérer l'emplacement des données manquantes de `gdp` et  remplacer ces données manquantes par la valeur minimale de la variable correspondante.  
+
+
+```{r}
+gdp <- apply(gdp, MARGIN = 2, FUN = function(x) {
+  replace(x,is.na(x),min(x,na.rm = TRUE))
+})
+anyNA(gdp) # FALSE
+```
+
+4. Afficher deux lignes prises au hasard de `gdp`
+
+```{r}
+gdp[sample(1:nrow(waste), 2), ]
+```
+
+5. Afficher la variable `Country.Code` de `gdp` **de 4 manières différentes**.
+
+```{r}
+gdp <- data.frame(gdp) # parce qu'il était devenu une matrice ??
+gdp$Country.Code
+gdp[[2]]
+gdp["Country.Code"]
+select(gdp, Country.Code)
+```
+
+6. Créer un objet de classe tibble intitulé `gdp21` ne contenant que les données de l'année 2021 de `gdp` sans la variable `year` devenue inutile.
+
+Renommer la variable `Country.Name` en `Country` dans `gdp21`, puis fusionner  `waste` et `gdp21` dans un objet intitulé `data_all`.
+
+```{r}
+gdp21 <- gdp |> filter(year == 2021) |> select(-year) |> as_tibble()
+class(gdp21)
+
+gdp21 <- rename(gdp21, Country = Country.Name)
+data_all <- waste |> left_join(gdp21)
+```
+
+
+7. Créer, à l'aide de la variable `GDP_per_capita_USD` de `data_all` et de la fonction `cut_interval` un facteur intitulé `gdp_cap_fact` à quatre niveaux correspondant à la discrétisation de `GDP_per_capita_USD` en 4 classes régulières. 
+
+Ajouter ce facteur à `gdp21`.
+
+
+```{r}
+data_all$GDP_per_capita_USD <- as.numeric(data_all$GDP_per_capita_USD)
+data_all$gdp_cap_fact <- as.factor(cut_interval(data_all$GDP_per_capita_USD, 4))
+```
+
+8. Créer exactement le même facteur avec la fonction `cut`. Que remarque-t-on ?
+
+```{r}
+data_all$gdp_cap_fact_cut <- as.factor(cut(data_all$GDP_per_capita_USD, quantile(data_all$GDP_per_capita_USD, na.rm = T)))
+# quantile ne fait pas les mêmes, et cut n'inclue pas par défaut le minimum de l'intervalle
+```
+
+9. Calculer la quantité totale moyenne de déchets plastiques pour les pays correspondant à chacun des niveaux du facteur `gdp_cap_fact` à l'aide des fonctions `group_by` et `summarise`, puis à l'aide de `group_split`. Comparer les temps d'éxécution de ces commandes.
+
+```{r}
+t <- Sys.time()
+data_all |> group_by(gdp_cap_fact) |> summarise(mean(Total_Plastic_Waste_MT))
+Sys.time() - t # ~0.25s
+```
+
+```{r}
+t <- Sys.time()
+datasplit <- data_all |> group_split(gdp_cap_fact)
+# etc j'ai plus le temps
+Sys.time() - t
+```
+
+10. Afficher les pays situés dans le top 10 des pays les plus "riches" en termes de PIB global (variable `GDP_USD`). Comparer ce top 10 à celui des pays les plus "polluants" en plastique, obtenu à la question 6 de la première partie.
+
+```{r}
+data_all$GDP_USD <- as.numeric(data_all$GDP_USD)
+data_all |> slice_max(GDP_USD, n = 10) # ce ne sont pas les memes
+```
+
