@@ -28,11 +28,27 @@ La rédaction de ce document s'appuie sur l'utilisation d'IA générative, ainsi
 
 # Introduction
 
-Depuis trop longtemps, l'indice de développement d'un pays a été calculé sur des indices économiques (capitalistes) : PIB, croissance, taux d'emploi, etc. Ce choix n'est pas neutre, il sert un système particulier qui ne met pas l'humain ou l'environnement au coeur de ses priorités. Nous voulons avec cette étude poser la première pierre d'une réflexion sur de meilleures méthodollogies d'évaluation du développement, axées sur le bonheur, mais aussi le respect de notre environnement, de la biodiversité, etc.
+Sommes-nous heureux ? L'étions-nous plus auparavant ? Quels modèles de société sont les plus heureux ? Et surtout, quelle est la recette du bonheur ? Questions difficiles, mais qui revettent un importance capitale pour chacun d'entre nous, mais aussi dans la recherche économique et sociale actuelle.
 
-Plusieurs études existent qui traitent du bonheur des populations. Une des plus célèbres est le world happiness report. Nous avons voulu tenter de comprendre comme cet indice de bonheur est corrélé / constraint par différents facteurs socio-économiques. En particulier voir si le PIB et la croissance sont de bons indicateurs, remettre en cause le paradigme si ce n'est pas le cas.
+Le terme de "Bonheur National Brut" (ou en anglais "Gross National Happiness") est apparu pour la première fois au Bhutan, à la fin des années 1970. Jigme Singye Wangchuck, alors roi du pays, déclare "Gross National Happiness is more import than Gross Domestic Product", une phrase qui a influencé le développement de pays, engageant les politiques nationales et locales autours d'une approche holistique de la notion de progrès, moins centrée sur les marqueurs socio-économiques classiques.
 
-Hypothèse : Le bonheur peut-il être prédit ou calculé, au moins en partie avec des données socio économiques ? Si oui, Lesquelles et à quel degré ? Y a-t-il des pays singuliers de part leur comportement sur ces données ? Peut-on tirer des différences en fonction des groupes de pays tels que l'OCDE, l'OPEP ou l'OTAN ?
+Le GNHI, indice de bonheur national développé par le Bhutan, est maintenant utilisé dans de nombreux pays autours du monde. Il est construit sur un ensembles de marqueurs répartis dans 9 pôles considérés comme égaux.
+
+En effet, depuis trop longtemps, l'indice de développement d'un pays a été calculé sur des indices économiques : PIB, croissance, taux d'emploi, etc. Ce choix n'est pas neutre, il sert un système particulier qui ne met pas l'humain ou l'environnement au coeur de ses priorités. Cependant, de plus en plus de sociologues et d'économistes préconisent d'ajouter à ces mesures des marqueurs de bien-être sociétal. Mais comment mesurer le bonheur ? Existe-t-il des bases de données sérieuses et fiables permettant de répondre à nos questions ?
+
+Si le [GNHI](https://ophi.org.uk/gross-national-happiness) permet un classement selon un index de bonheur, il est déjà construit sur un postulat, celui que le bonheur est expliqué par un ensemble de facteurs socio économiques définis. Si on veut démontrer ce postulat, on ne peut pas prendre le GNHI comme index de bonheur. Nous avons préféré étudier les résultats du World Happiness Report - de [Gallup](https://www.gallup.com/analytics/318875/global-research.aspx), étude annuelle construite sur un questionnaire utilisant des échelles de Cantril (la principale étant "Imaginez une échelle à 10 échelons, l'échelon 0 étant la pire vie que vous pourriez imaginer, le 10 la meilleure. Sur quel échelon êtes-vous actuellement ?"). D'autres études utilisent des échelles similaires, les échelles de Likert. On citera notamment l'Integrated Values Surveys, qui est celle avec la plus longue échelle de temps, mais que nous avons rejeté car le nombre de pays est plus restreint, et la formulation des questions a changé plusieurs fois. Les postulats sont alors plus simples, et on se mettra simplement d'accord sur le fait que :
+
+-   La distance mentale entre les différentes réponses au questionnaire est stable, c'est à dire que nous pouvons faire des mathématiques dessus (calculer des moyennes, etc.). On assume une échelle **cardinale** et pas simplement **ordinale**.
+
+-   Le bonheur est autodéterminé de manière précise. Nous assumons que l'erreur d'auto évaluation de son bonheur personel est une variable aléatoire qui suit une distribution normale. Ainsi, il n'y a pas de biais qui, par exemple, pousserait les personnes malheureuses à s'estimer plus heureuses qu'elles ne le sont.
+
+Ces hypothèses sont cohérentes avec la littérature scientifique, mais restent fortement débattues. En particulier, l'utilisation d'échelle cardinale plutôt qu'ordinale ne change que très peu les résultats des régression, comme l'ont démontré plusieurs économiste (Ferris, 2002). Celle-ci est de plus intuitive, et grandement facilitante pour nos calculs. Par contre, il existe un effet plafond/plancher : il est plus difficile de passer de 9 à 10 que de 5 à 6 ; l'échelle n'est probablement pas cardinale dans les extrèmes. Nous faisons là une approximation consciente. La deuxième hypothèse, elle, est corroborée par la loi des grand nombre (les données de Gallup sont les plus fournies au monde), et par les différentes études sur les marqueurs de bonheur (taux de suicide, expressions faciales), qui tendent à démontrer que les sujets ne mentent pas sur leur bonheur. Mais certaines cultures valorisent (latino-américaines) ou dévalorisent (Japon, Corée) socialement de se dire heureux, ce qui peut tirer les résultats vers le haut ou vers le bas. De plus, le tapis roulant hédonique, ou l'adaptation à ses conditions, ainsi que la désirabilité sociale qui pousse les répondants à paraître normaux aux yeux des enquêteurs, peuvent créer une homogénisation des résultats.
+
+Pour contrer ces biais, on introduit parfois des effets fixes "pays", comme les membres de l'OCDE, les pays Latino-américains, etc.
+
+Un dernier problème que nous voulons aborder est celui de la barrière de la langue. Est-ce que tout le monde à la même perception du "bonheur", ou est-ce que les mots, le langage utilisé pour définir cette notion change au point que la langue influence les réponses ? Mais de nombreuses études ont montré que l'ont arrivait relativement bien a apprécier le bonheur des autres, quelque soit notre pays d'origine et celui de l'autre, impliquant que le bonheur revêt un e définition globale relativement comprise partout (voir Sandvil, 1993 et Diner & Lucas, 1999).
+
+Nous nous attendons à voir une corrélation entre l'indice de bonheur du WHR, et différents indicateurs socio-économiques. De plus, nous nous attendons a voir les biais culturels sus-cités.
 
 ### Plan :
 
@@ -59,7 +75,7 @@ Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous étudions
 Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, nous avons choisi de traiter les moyennes des données disponibles de 2013 à 2023. Certains jeux de données s'achèvent avant 2023, nous avons donc fait leurs moyennes jusqu'à la dernière année recensée. Cette décision a été motivée par notre envie de tirer des conclusions les plus larges possibles.
 
 | Code de la série | Définition | Unité | Source |
-|:---|----|:--:|---:|
+|:-----------------|------------------|:----------------:|-----------------:|
 | Code | Le code du pays | Caractères | \- |
 | Political_Corruption | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | [World Bank](https://data360.worldbank.org/en/indicator/) |
 | GDP_per_capita | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain par habitant | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD) |
