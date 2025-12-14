@@ -1,0 +1,302 @@
+---
+title: "Master 1 MAS - Logiciel statistique R - Contrôle continu 2 : 12 décembre  2025"
+author: "Magalie Fromont"
+format: html
+editor: source
+---
+
+# Informations et consignes
+
+::: callout-important
+**Durée de l'épreuve :** 1h30 + tiers-temps éventuel
+:::
+
+::: callout-important
+**Accès internet et IA :**
+
+L'accès internet n'est autorisé **que** pour :
+
+-   le téléchargement du sujet et des documents de son choix sur Cursus en début d'épreuve,
+-   le dépôt de la copie en fin d'épreuve.
+
+**L'utilisation d'outils d'intelligence artificielle est notamment interdite durant toute l'épreuve.**
+:::
+
+::: callout-important
+**Autres consignes :**
+
+-   Renommer le fichier du sujet en respectant le motif `prenom-NOM.qmd` ;
+-   Modifier l'entête de ce fichier en renseignant le champ `author` convenablement ;
+-   À la fin de l'épreuve, déposer ce fichier `.qmd` dans Cursus, **et lui seul**.
+:::
+
+# La faute à Élise Lucet ?
+
+Suite à la diffusion du documentaire de l'équipe de Cash Investigation `Bernard Arnault, ombre et lumière d'un empire` la semaine dernière sur France TV, nous nous intéressons dans ce sujet au jeu de données `RichestTop200.csv`. Ce jeu de données portant sur le top $200$ des personnes les plus riches du monde établi par Forbes, est proposé sur le site de science des données Kaggle en 2024. On étudiera également un autre jeu de données `RedditAntiwork_ext.csv` issu du site web communautaire Reddit, contenant un extrait des données sur les posts de la discussion `r/antiwork(Antiwork: Unemployment for all, not just the rich!)`.
+
+Le jeu de données `RichestTop200.csv` contient les variables suivantes pour $200$ milliardaires :
+
+-   `Rank` donnant le rang des milliardaires dans le classement établi par Forbes,
+-   `Name` précisant le nom de ces milliardaires (avec famille éventuellement),
+-   `Age` précisant l'âge de ces milliardaires,
+-   `Country` donnant le pays de leur résidence principale,
+-   `Networth` donnant une estimation de la valeur de leur patrimoine net,
+-   `Industry` précisant le secteur dont les milliardaires tirent principalement leur fortune.
+
+Le jeu de données `RedditAntiwork_ext.csv` contient les variables suivantes pour $5000$ posts :
+
+-   `score` précisant le score des posts,
+-   `comms_num` donnant les nombres de commentaires,
+-   `body` donnant le corps des posts,
+-   `timestamp` précisant la date des posts.
+
+1.  Importer dans un data frame intitulé `rich` le jeu de données `RichestTop200.csv` disponible dans Cursus, en utilisant la fonction `read_delim` (du package `readr` ou `tidyverse`) avec les options **nécessaires exclusivement**. Vérifier que le jeu de données a été bien importé en utilisant la fonction `View`. Quelle est la classe de `rich` ?
+
+```{r}
+rich <- read.csv(file = "RichestTop200.csv")
+```
+
+2.  **En utilisant le package `dplyr`**, afficher les deux premières lignes de `rich` de deux manières différentes :
+
+-   avec un vecteur numérique,
+-   puis avec un vecteur logique faisant un test sur la variable `Rank` par exemple.
+
+```{r}
+library("dplyr")
+
+# rich |> slice_head(n = 2)
+rich |> slice(1:2)
+rich |> filter(Rank < 3)
+```
+
+3.  Transformer les variables `Country` et `Industry` de `rich` en facteurs de deux manières différentes :
+
+-   en utilisant la fonction `as.factor` avec les fonctions du package `dplyr`,
+-   en modifiant l'importation d'origine.
+
+```{r}
+rich <- rich |> mutate(
+  Country = as.factor(Country),
+  Industry = as.factor(Industry)
+)
+
+rich <- read.csv(
+  file = "RichestTop200.csv",
+  colClasses = c(Country = "factor", Industry = "factor")
+)
+```
+
+4.  Que remarque-t-on sur les niveaux du facteur `Country` ? Corriger le problème en regroupant les deux niveaux concernés de deux manières différentes :
+
+-   avec la fonction `levels` de `base`,
+-   avec la fonction `mutate` de `dplyr` et la fonction `fct_collapse` du package `forcats` (ou `tidyverse`).
+
+```{r}
+# il y a " Brazil" et "Brazil"
+levels(rich$Country)[levels(rich$Country) == " Brazil"] <- "Brazil"
+
+library("tidyverse")
+?fct_collapse
+rich <- rich |> mutate(
+  Country = fct_collapse(Country, Brazil = c(" Brazil", "Brazil"))
+)
+```
+
+5.  **En utilisant le package `dplyr`**, afficher une table des effectifs par niveau de `Country`.
+
+Indication : on pourra utiliser la fonction `count`.
+
+Afficher le nom du pays dont le nombre de milliardaires dans ce classement est le moins élevé.
+
+```{r}
+rich |> count(Country, sort = T)
+rich |> count(Country, sort = T) |> filter(n == 1) # car il y en a plusieurs (sinon slice_tail(1))
+```
+
+6.  **En utilisant le package `dplyr`**, afficher le nombre de milliardaires de ce classement résidant en France, ainsi que le nom de ces milliardaires.
+
+Indication : on pourra utiliser la fonction `count`.
+
+```{r}
+rich |> filter(Country == "France") |> select(Name)
+
+rich |> filter(Country == "France") |> select(Name) |> count(name = "Nombre de milliardaires français")
+```
+
+7.  Mettre la variable `Networth` au format numérique en :
+
+-   retirant les symboles $\$$ et `B` de chaque élément de cette variable,
+-   transformant le vecteur de caractères ainsi obtenu en vecteur numérique,
+-   multipliant le vecteur numérique obtenu par $10^9$.
+
+Indication : on pourra utiliser les fonctions `mutate` (package `dplyr`) et `str_remove`(package `stringr`) par exemple.
+
+```{r}
+rich <- rich |> mutate(
+  Networth = str_remove(Networth, pattern = "\\$"),
+  Networth = str_remove(Networth, pattern = "B"),
+  Networth = as.numeric(Networth) * 10^9
+)
+```
+
+8.  **Avec le package `dplyr`**, calculer les médianes des valeurs de patrimoine (variable `Networth`) des milliardaires par pays.
+
+```{r}
+rich |> group_by(Country) |> summarise(MedianePatrimoine = median(Networth))
+# attention, c'est la mediane des milliardaires
+```
+
+9.  **Avec le package `dplyr`**, afficher les valeurs de patrimoine des $5$ milliardaires les plus jeunes du classement, puis ceux des $5$ plus âgés.
+
+Indication : on pourra utiliser les fonctions `arrange` et `slice`.
+
+```{r}
+rich |> arrange(Age) |> slice_head(n = 5) |> select(Networth, Age)
+rich |> arrange(Age) |> slice_tail(n = 5) |> select(Networth, Age)
+```
+
+10. **Avec le package `dplyr`**, afficher le nom de la personne la plus riche de chaque pays.
+
+Indication : on pourra utiliser les fonctions `group_by`, `arrange` et `slice` ou `slice.max`.
+
+```{r}
+rich |> arrange(desc(Networth)) |> slice_head(n=1, by = Country)
+rich |> slice_max(Networth, by = Country, with_ties = F) # sinon le couple suisse fait doublon
+```
+
+11. **Avec le package `ggplot2`**, tracer le nuage de points de la valeur de patrimoine (variable `Networth`) **mesurée en milliards** en fonction de l'âge, en utilisant le symbole '+' de couleur rose pour ces points, et en donnant un titre à ce graphe.
+
+```{r}
+library("ggplot2")
+ggplot(data = rich, aes(x = Age, y = Networth / 10^9)) +
+  geom_point(shape = 3, color = "pink", ) +
+  ggtitle("patrimoine selon age")
+```
+
+12. **Avec le package `dplyr`**, ajouter au tableau de données `rich` un facteur `China` à deux niveaux : `Yes` et `No`, précisant si les milliardaires résident en Chine ou non. Replacer ce facteur juste après la variable `Country` dans le tableau de données.
+
+```{r}
+rich <- rich |> mutate(
+  China = Country == "China" 
+)
+```
+
+13. **Avec le package `ggplot2`**, tracer le nuage de points de la valeur de patrimoine (variable `Networth`) **mesurée en milliards** en fonction de l'âge, en utilisant pour les points une couleur différente selon les modalités du facteur `China`.
+
+```{r}
+ggplot(data = rich, aes(x = Age, y = Networth / 10^9, color = China)) +
+  geom_point(shape = 3) +
+  ggtitle("patrimoine selon age, Chine à part")
+```
+
+14. Importer le jeu de données `RedditAntiwork_ext.csv` dans un data frame intitulé `antiwork` à l'aide de la fonction `read.csv` **sans option superflue**. Vérifier que le jeu de données a été bien importé en utilisant la fonction `View`. Convertir le data frame obtenu en `tibble`.
+
+```{r}
+antiwork <- read.csv("RedditAntiwork_M1_ext.csv", sep = "\t")
+View(antiwork) # ça fonctionne
+antiwork <- tibble(antiwork)
+```
+
+Tenter d'importer le même jeu de données `RedditAntiwork_ext.csv` à l'aide de la fonction `read_delim`. Que constate-t-on (on pourra visualiser le tibble avec `View`) ? Quelle est la source du problème ? Que pourrait-on faire pour le résoudre ?
+
+```{r}
+antiwork <- read.delim("RedditAntiwork_M1_ext.csv") # marche du feu de dieu
+View(antiwork)
+
+# Tout fonctionne, même le delim
+```
+
+15. Transformer la variable `timestamp` en date à l'aide de la fonction `as.POSIXct`.
+
+```{r}
+antiwork <- antiwork |> mutate(
+  timestamp = as.POSIXct(timestamp)
+)
+```
+
+Pouvait-on faire cette transformation en modifiant l'importation d'origine ?
+
+```{r}
+# oui j'imagine, avec colClasses
+antitest <- read.delim("RedditAntiwork_M1_ext.csv", colClasses = c(timestamp = "POSIXct")) # ça fonctionne
+rm(antitest)
+```
+
+16. **À l'aide du package `dplyr`**, réordonner les lignes du tableau de données `antiwork` par ordre décroissant de dates/heures.
+
+Indication : on pourra utiliser la fonction `arrange`.
+
+```{r}
+antiwork <- antiwork |> arrange(desc(timestamp))
+```
+
+17. Créer une fonction prenant un vecteur de mots en entrée et qui affiche les posts de `antiwork` contenant au moins l'un de ces mots. Appliquer cette fonction au vecteur `c("Gates","Musk")`, puis au vecteur `Name` du data frame `rich`. Quels sont les milliardaires cités dans la discussion Reddit étudiée ?
+
+Indication : on pourra utiliser une boucle `for` et la fonction `grep`.
+
+```{r}
+filter_names_reddit = function(names) {
+  for (name in names) {
+    posts_with_name <- antiwork$body[grep(name, antiwork$body, ignore.case = TRUE)]
+    if (length(posts_with_name) > 0) {
+      cat("Posts containing", name, ":\n")
+      print(posts_with_name)
+      cat("\n")
+    }
+  }
+}
+
+filter_names_reddit(c("Gates", "Musk"))
+filter_names_reddit(rich$Name)
+```
+
+18. Créer une fonction qui prend un tableau de données `data_tab` et une fonction `FUN` s'appliquant à des vecteurs de caractères en entrée, qui sélectionne les variables vecteurs de caractères de `data_tab`, qui applique la fonction `FUN` à chacune de ces variables, et qui renvoie les résultats sous forme de tableau. Utiliser cette fonction pour compter le nombre de lettres contenues dans les vecteurs de caractères d'`antiwork`.
+
+Indication : on pourra utiliser les fonctions `select_if`, `is.character`, `map` et `nchar`.
+
+```{r}
+f <- function(data_tab, FUN) {
+  char_vars <- select_if(data_tab, is.character)
+  results <- map(char_vars, FUN)
+  return(results)
+}
+
+nbchar <- f(antiwork, nchar)
+```
+
+**Question bonus** :
+
+Écrire une fonction `graphe` qui prend en entrée un vecteur ou un facteur `x` et qui trace **avec le package ``ggplot2``** :
+— un diagramme en bâtons de `x` si `x` est un vecteur d’entiers ;
+— un histogramme renormalisé et un diagramme en boîte de `x` si `x` est un vecteur numérique;
+— un diagramme circulaire de `x` si `x` est un facteur.
+
+```{r}
+graphe <- function(x) {
+  if (is.factor(x)) {
+    ggplot(mapping = aes(x = x)) +
+      geom_bar() +
+      coord_polar()
+  } else if (is.integer(x)) {
+    ggplot(mapping = aes(x = x)) +
+      geom_bar()
+  } else if (is.numeric(x)) {
+    ggplot(mapping = aes(x = (x - mean(x))/sd(x))) +
+      geom_histogram(stat = ) +
+      geom_boxplot()
+  }
+}
+```
+
+
+Appliquer la fonction `graphe` créée à la question précédente aux variables de `rich` pour vérifier.
+
+```{r}
+graphe(rich$Rank)
+graphe(rich$Name)
+graphe(rich$Age)
+graphe(rich$Country)
+graphe(rich$Networth)
+graphe(rich$Industry)
+```
+

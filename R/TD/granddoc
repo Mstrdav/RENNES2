@@ -1,0 +1,4205 @@
+---
+title: "Master 1 MAS - Grand document pour ctrl + F pendant l'exam"
+author: "Magalie Fromont et Ioana Gavra"
+format: html
+editor: visual
+execute:
+  eval: false
+---
+
+# Présentation générale
+
+R est un système d'analyse statistique et de traitement des données créé par Ross Ihaka et Robert Gentleman (Université d'Auckland, Nouvelle-Zélande).
+
+C'est à la fois un logiciel et un langage de programmation interprété basé sur la notion de vecteur, proche du langage S développé par R. Becker, J. Chambers et A. Wilks des Bell laboratories, utilisable sur la plupart des systèmes d'exploitation.
+
+R est diffusé selon le principe de licence GNU. Il s'agit donc d'un logiciel libre, signifiant qu'il est téléchargeable gratuitement (sur le site officiel du CRAN - Comprehensive R Archive Network- <https://cran.r-project.org>, mais aussi que son code source est accessible, réutilisable ou modifiable en vue d'une diffusion publique. Son développement est à présent géré par la *R Development Core Team* dont les principales tâches consistent à proposer des mises à jour régulières du logiciel et de sa documentation.
+
+R est un langage de programmation interprété basé sur la notion de vecteur.
+
+Le socle commun de R, mis à disposition lors du téléchargement, contient un certain nombre de fonctions mathématiques et statistiques de première nécessité (somme, produit, moyenne, variance...) regroupées dans une bibliothèque ou librairie ou paquet (*package* en anglais) nommée simplement 'base'.
+
+Par son caractère libre, R peut être enrichi individuellement **pour chaque nouvelle session de travail** de nombreuses autres librairies développées par une communauté très active d'utilisateurs et d'utilisatrices au gré des avancées statistiques.
+
+**Attention** : ces librairies additionnelles doivent être installées d'abord, puis appelées à chaque nouvelle session.
+
+
+Quelques références :
+-   Plusieurs documents sont disponibles sur le site du [CRAN](https://cran.r-project.org/manuals.html) ;
+-   [Introduction à la programmation en R](https://cran.r-project.org/doc/contrib/Goulet_introduction_programmation_R.pdf), de V. Goulet ;
+-   R pour la statistique et la science des données, de P. A. Cornillon et al. Presses Universitaires de Rennes, France ;
+-   Le logiciel R, de P. Lafaye de Micheaux, R. Drouilhet, B. Liquet (2014), Springer-Verlag France ;
+-   [Logiciel R et programmation](http://egallic.fr/Enseignement/R/m1_stat_eco_logiciel_R.pdf), de E. Gallic ;
+-   [Introduction à R](https://perso.univ-rennes2.fr/system/files/users/fromont_m/InitiationR.pdf), de M. Fromont.
+
+# L'interface RStudio et les sessions de travail
+
+## L'interface proposée par RStudio
+
+L'interface proposée par RStudio, qui sera utilisée dans ce cours, est divisée en 4 fenêtres :
+-   En haut à gauche - fenêtre de script : c'est un éditeur de texte permettant de taper ses commandes et programmes dans des scripts ou des projets pouvant être sauvegardés sur son espace personnel ;
+-   En bas à gauche - fenêtre de console : c'est la partie logiciel dans laquelle les commandes peuvent être exécutées et où apparaissent les résultats ;
+-   En haut à droite - fenêtre environnement : y sont recensés les données et résultats ainsi que les fonctions gardées en mémoire ;
+-   En bas à droite - fenêtre gestion des sorties : constituée de plusieurs onglets, elle permet d'accéder au répertoire courant ou répertoire de travail dans l'onglet **Files**, de voir les sorties graphiques dans l'onglet **Plots**, de voir les packages installés et chargés dans l'onglet **Packages** et d'accéder à l'aide en ligne dans l'onglet **Help**.
+
+À noter que ces fenêtres peuvent être agencées différemment.
+
+RStudio peut être téléchargé gratuitement à l'adresse: <https://www.rstudio.com/>.
+
+## Les sessions de travail
+
+Ouvrir RStudio permet d'ouvrir une session de travail R.
+
+Dans la console, le prompt `>` s'affiche à la fin du message de démarrage, indiquant que R attend une instruction ou commande.
+
+Une instruction est exécutée dans la console en appuyant sur la touche 'Entrée'.
+
+Si l'instruction est complète, le prompt s'affiche à nouveau.
+
+Si l'instruction est incomplète, le prompt est remplacé par `+` : on peut alors soit compléter l'instruction puis exécuter, soit cliquer sur `STOP` ou appuyer sur `Echap`.
+
+Si l'instruction est erronée, un message d'erreur apparaît.
+
+Les flèches au clavier permettent de rappeler des instructions.
+
+`history(n)` permet de récupérer l'historique des $n$ dernières instructions (on peut aussi retrouver l'historique complète depuis l'onglet **History**).
+
+Le caractère spécial `;` permet de séparer des instructions sur une même ligne ou d'exécuter une instruction sans en afficher le résultat, `#` permet de commenter (la ligne qui suit ce caractère n'est pas comprise comme une instruction).
+
+\medskip
+
+Le répertoire courant ou répertoire de travail est le dossier à partir duquel le logiciel va chercher les fichiers de scripts et de données. Tout ce qui a été fait au cours d'une session de travail peut être enregistré dans ce répertoire courant (données, historique des fonctions...) : cette possibilité est offerte à l'issue de la session, lorsque l'on quitte R.
+
+On peut connaître le répertoire courant soit dans l'onglet **Files**, soit avec la commande `getwd()`, et le changer soit à partir de l'outil **Session** de l'interface, soit avec la commande `setwd()`.
+
+**Attention** : les répertoires dans lesquels sont enregistrés les scripts et projets sont indépendants du répertoire courant.
+
+\medskip
+
+Au cours d'une session, un nouveau script peut être créé et enregistré sous le nom de son choix dans un répertoire de son choix (pas nécessairement le répertoire courant), depuis le Menu **File**.
+
+Un ancien script peut être récupéré depuis le Menu **File** ou en cliquant sur l'onglet correspondant dans l'éditeur de texte s'il apparaît.
+
+\medskip
+
+**Exercice 1.** Ouvrir RStudio et regarder quel est le répertoire courant. Changer ce répertoire courant pour un répertoire personnel de son choix (un dossier spécifique dédié au cours de logiciel R en Master 1 pourra être créé au préalable) en testant les trois méthodes possibles : utilisation de l'onglet **Files**, exécution de commande dans la console, exécution de commande à partir d'un script R que l'on aura pris soin de sauvegarder dans un répertoire de son choix.
+
+\medskip
+
+Pour clore une session de travail, il suffit de quitter R depuis la console avec la commande `q()` ou en fermant l'application RStudio de façon classique.
+
+On peut alors choisir de sauvegarder ou non l'image de la session (objets créés et historique des commandes) dans des fichiers cachés `.RData` et `.Rhistory` du répertoire courant.
+
+Pour charger dans une nouvelle session les objets contenus dans `.RData` et/ou l'historique contenue dans `.Rhistory` : depuis la console, on utilisera `load(".RData")` et `loadhistory(".Rhistory")` ; depuis l'onglet **Files**, on cliquera sur `.RData` ou `.Rhistory`.
+
+On peut aussi utiliser `save.image (".../travail.RData")` pour sauvegarder les objets de la session dans un fichier de son choix, puis `load (".../travail.RData")` pour charger ces objets dans une nouvelle session.
+
+\medskip
+
+**Attention** : les chemins dans R sont écrits à l'aide d'un slash et non d'un anti-slash !
+
+## À propos des entrées/sorties
+
+Pour gérer les entrées/sorties au sein des programmes :
+
+-   `source("mescommandes.txt")` permet d'exécuter les commandes contenues dans le fichier "mescommandes.txt" ;
+-   `sink("messorties.txt")` permet de rediriger les sorties vers le fichier "messorties.txt" jusqu'à l'arrêt de la redirection ordonné par `sink()`.
+
+## À propos de l'aide
+
+Consulter l'aide de R est **indispensable**. Pour ce faire, on peut soit utiliser l'onglet **Help**, soit exécuter une commande spécifique.
+
+**Exercice 2.** Exécuter et commenter les commandes suivantes :
+
+```{r }
+help.start()
+
+help(package = "base") # affiche l'aide du package base dans l'onglet Help
+library(help = "base") # idem mais dans la fenêtre de script
+
+help(mean) # affiche l'aide de la fonction dans l'onglet Help
+help.search("mean") # affiche les aides incluant la fonction mean
+?mean # idem à help(mean)
+??mean # idem à help.search(mean)
+help(for) # for doit être écrit entre guillemets
+help("for") # affiche l'aide sur les boucles for
+```
+
+On peut également chercher de l'aide en ligne dans :
+
+-   le moteur de recherche de son choix ou un moteur de recherche spécifique à R (basé sur google) : <http://www.rseek.org/> (sur rseek les requêtes sont à formuler en anglais).
+
+-   des cheat sheets (antisèches) : <https://www.rstudio.com/resources/cheatsheets/>
+
+-   des forums ou groupes d'échanges comme `Grrr` sur Slack (francophone) ou `StackOverflow` (anglophone).
+
+## À propos des packages
+
+`library()` permet de visualiser tous les packages disponibles.
+
+`library(MASS)` permet d'appeler le package additionnel MASS dans la session de travail.
+
+Les outils de l'onglet **Packages** permettent également de charger des packages installés (en cochant la case du package installé souhaité) ou d'installer de nouveaux packages.
+
+# Premiers pas dans R avec quelques calculs simples
+
+**Exercice 3.** Exécuter dans un script et/ou dans la console les commandes suivantes :
+
+```{r }
+ 2+2 # le résultat est un vecteur numérique de taille 1 contenant la valeur 4
+ # blabla # le caractère # est le caractère des commentaires
+ blabla # un texte ou une chaîne de caractère doit être mise entre guillents
+ 2+2 # ceci est une addition
+```
+
+R respecte les priorités opératoires :
+
+```{r }
+1+3/5*5
+(1+3/5)*5
+```
+
+R connaît quelques fonctions numériques et constantes mathématiques de base :
+
+```{r }
+pi 
+exp(2)
+log(10)
+factorial(4)
+log(0) # la limite infinie  est connue de R
+sin(5*pi) # on n'obtient pas le résultat attendu qui est 0 !
+```
+
+Commenter les deux derniers résultats : que s'attendait-on à obtenir ?
+
+**Commentaire :** on fera attention aux imprécisions numériques dues au stockage des nombres décimaux ! R ne garde pas en mémoire de façon tout à fait exacte certains nombres décimaux, ainsi que les nombres dont la valeur absolue est grande. Ces imprécisions numériques sont dues à la représentation en virgules flottantes utilisée par R (voir `help(double)`).
+
+\medskip
+
+Exécuter les 4 lignes de code suivantes et commenter.
+
+```{r }
+ 0.1+0.2==0.3
+ 0.6+0.1+0.3==0.1+0.7+0.2
+ 0.6+0.1+0.3==0.2+0.7+0.1
+ all.equal(0.6+0.1+0.3,0.2+0.7+0.1)
+# Là encore on voit des erreurs apparaître en raison des imprécisions numériques sur les nombres décimaux... Erreurs qui se compensent parfois comme on va le voir dans la suite. L’opérateur ==, ainsi que les fonctions identical et unique sont affectés par les imprécisions, car ils font des comparaisons exactes, contrairement aux fonctions all.equal, table et factor par exemple qui ne se préoccupent pas de différences inférieures à une certaine tolérance.
+```
+
+Pour visualiser la valeur exacte d'un vecteur numérique dans R, on peut utiliser :
+
+```{r }
+sprintf("%.54f",0.1)
+sprintf("%.55f",0.1)
+sprintf("%.54f",0.2)
+sprintf("%.100f",0.2)
+sprintf("%.54f",0.3)
+sprintf("%.54f",0.1+0.2)
+sprintf("%.54f",0.6+0.1+0.3)
+sprintf("%.54f",0.1+0.7+0.2)
+sprintf("%.54f",0.6+0.1+0.3)
+sprintf("%.54f",0.2+0.7+0.1)
+```
+
+**Remarque** : l'imprécision numérique sur les nombres décimaux implique que R n'arrive pas à garder en mémoire des nombres très petits en valeur absolue, qui sont stockés en zéros. D'autres problèmes sont rencontrés avec les nombres très grands en valeur aboslue.
+
+# Objets de R
+
+## Création, modification, suppression
+
+Afin de faciliter l'utilisation répétée d'une même quantité, on peut *affecter* un nom à une valeur ou au résultat d'une instruction à l'aide des symboles flèches `<-` ou `->` ou tout simplement égal `=`.
+
+Si aucun objet portant ce nom n'existe, l'affectation le crée. Sinon, elle modifie la valeur de l'objet.
+
+**Exercice 4.** Exécuter et commenter les commandes suivantes :
+
+```{r }
+ x <- 3*5 + sin(5*pi/6) # crée un objet, ici un vecteur numérique de longueur 1, nommé x, qui contient la valeur du résultat de l'opération mathématique
+ print(x) # affiche la valeur de l'objet x
+ x # affiche la valeur de l'objet x
+ y <- x # crée un nouvel objet y dnt le contenu sera le même que celui de x
+ y # affiche y
+ (x <- exp(3)+2) # remplace le contenu de l'objet x par le résultat de l'opération mathématique en l'affichant
+ x # affiche le nouvel objet x
+ x*3 # affiche  le résultat de x*3 mais sans le stocker dans un objet
+ (z = log(x-2)) # crée l'objet z en affichant son contenu
+ x # affiche l'objet x qui n'a pas été modifié
+ y -> x # remplace le contenu de x par le contenu de y
+```
+
+**Remarque sur les noms d'objets :** Pour les noms d'objets, on peut utiliser toutes les lettres minuscules a--z et majuscules A--Z (qui se distinguent dans R), les chiffres 0--9, le point « . » et le caractère « \_ ». En fonction de la configuration de l'ordinateur on peut utiliser aussi des lettres accentuées, mais il est fortement déconseillé de le faire.
+
+R stocke en mémoire tous les objets de la session. On peut visualiser les objets gardés en mémoire avec la fonction `objects()` ou avec la fonction `ls()`.
+
+Autres commandes pour visualiser des objets :
+
+-   `ls(pat="a")` affiche la liste des objets contenant le caractère "a" ;
+-   `ls(pat="^a")` affiche la liste des objets commençant par "a" ;
+-   `ls.str()` affiche la liste des objets en mémoire avec des détails sur ces objets.
+
+Pour supprimer un objet on peut utiliser la fonction `rm()` :
+
+```{r }
+ z # affiche le contenu de l'objet z
+ rm(z) # efface l'objet z
+ z # l'objet z est inconnu 
+ rm(x,y) # efface les deux objets x et y
+```
+
+Pour supprimer tous les objets de la session on peut utiliser `rm(list=ls())`.
+
+## Classes et attributs
+
+R comprend plusieurs classes ou structures d'objets dont les vecteurs, les facteurs, les arrays, les matrices, les data frames, les listes, les data tables, les tibbles, les ts...
+
+Pour connaître la classe d'un objet `x`, on utilise la commande `class(x)`. On peut savoir si un objet x est d'une certaine classe à l'aide des commandes `is.vector(x)`, `is.factor(x)`, `is.matrix(x)`, `is.data.frame(x)`... (la réponse est `TRUE` ou `FALSE`).
+
+Chaque objet est caractérisé par son nom, son contenu, mais aussi par des attributs, dont le mode ou le type (nul : `NULL` ; numérique : `1, 2.333, pi, Inf, -Inf, 2.1e23`,... comprenant les entiers et les réels ; caractère : "blabla" ; complexe : `2+0i, 2i`; logique ou booléen : `TRUE, FALSE`) et la longueur. Pour connaître ces deux attributs, on utilise les commandes `mode(x)` ou `typeof(x)` (de préférence), et `length(x)`. Pour connaître les autres attributs : `attributes(x)`.
+
+Le mode ou type d'un objet informe sur la manière dont l'objet est stocké.
+
+## Valeurs manquantes
+
+Elles sont notées `NA` (not available) ou `NaN` (not a number). On peut savoir si un objet est composé de valeurs manquantes à l'aide de `is.na(x)` ou `is.nan(x)`. Ces commandes renvoient un objet de mode logique de même longueur que `x`.
+
+`na.fail(x)` retourne un message d'erreur si l'objet `x` contient au moins une valeur manquante.
+
+**Exercice 5.** Commenter les résultats des commandes suivantes :
+
+```{r }
+log(-2) # not a number : la fonction ln n'est définie que sur ]0,+ infini[
+ NA+1+10 # si on ajoute quoi que ce soit à une donnée manquante, on renvoie une donnée manquante
+ (a <- NA+2) #  une opération sur une NA donne une NA
+ a == NA # un test d'égalité classique (==) sur une donnée manquante donne une donnée manquante
+ is.na(a) # l'objet a contient bien une donnée manquante
+ typeof(a) # ici l'objet a est stocké comme un numérique (réel ou double) comme résultat d'une opération numérique
+```
+
+## Quelques types d'objets importants
+
+### Type `NULL`
+
+Cela représente un type et un objet en soi : l'objet vide. Il est de longueur 0.
+
+**Exercice 6.** Exécuter et commenter les commandes suivantes :
+
+```{r }
+ a <- NULL
+ a 
+ typeof(a)
+ length(a)
+ b <- null # Attention, R distingue les minuscules des majuscules
+ b <- "null" 
+ typeof(b) # b n'est pas un objet NULL mais un vecteur de caractère contenant le texte "null"
+NULL <- 4 # NULL est un objet particulier de R qu'on ne peut pas modifier
+```
+
+### Type `numeric` : `integer` et `double`
+
+On distingue deux types d'objets numériques, à savoir les `integer` (entiers) et les `double` (réels). Des détails sont donnés dans la suite du cours sur des deux notions.
+
+**Exercice 7.** Exécuter et commenter les commandes suivantes :
+
+```{r }
+ a <- 2
+ mode(a) # la fonction mode n'existe que par souci de compatibilité avec S -> vocation à disparaître ?
+ typeof(a) # donne le mode ou type de a, ici un numérique réel (double). Voir help(double) pour plus d'informations
+ b <- as.integer(a) # crée un objet b contenant la conversion en numérique entier  de a
+ mode(b)
+ typeof(b)
+ c <- pi
+ as.integer(c) # affiche la conversion de c en entier, mais attention : ne convertit pas c ! Pour le convertir il faudrait le réaffecter autrement dit exécuter c <- as.integer(c) 
+ is.integer(c) # teste si c est un entier
+ is.numeric(c) # teste si c est un numérique
+```
+
+### Type `complex`
+
+On peut aussi générer et travailler avec des nombres complexes sur R, à l'aide soit du duo partie réelle/partie imaginaire soit du duo module/argument. L'unité imaginaire est notée `i`.
+
+**Exercice 8.** Exécuter et commenter les commandes suivantes :
+
+```{r  }
+ a <- complex(1,1,-1) # crée un vecteur complexe nommé a contenant le nombre complexe 1+i : aller dans l'aide de la fonction complex
+ 1-i # comprend i comme  un objet R nommé i
+ 1-1i # comprend 1i comme le nombre complexe i
+ mode(a)
+ typeof(a)
+ Re(a) # donne la partie réelle du vecteur complexe a
+ Im(a) # donne la partie imaginaire du vecteur complexe a
+ as.integer(2.5+3i) # affiche la conversion de la partie réelle du vecteur complexe en entier
+```
+
+Quel est l'argument de `a` ? Définir `b=1+i` en utilisant son module et son argument.
+
+```{r }
+Mod(a)
+Arg(a)
+-pi/4
+b <- complex(1, argument=pi/4, modulus=sqrt(2))
+b
+```
+
+### Type `character`
+
+Les éléments de type `character` sont placés entre guillemets (simples ou doubles)
+
+**Exercice 9.** Exécuter et commenter les commandes suivantes :
+
+```{r }
+ a <- "Logiciel R" # crée un vecteur de caractères de longueur 1, contenant le texte ou la chaîne de caractères "Logiciel R"
+ a
+ typeof(a)
+ b <- 'Logiciel R' # idem
+ b
+ typeof(b)
+```
+
+### Type `logical`
+
+Très utiles en programmation, les quantités de type logique prennent 2 valeurs : `TRUE` ou `FALSE` qu'on peut abréger respectivement en `T` ou `F`.
+
+**Exercice 10.** Exécuter et commenter les commandes suivantes :
+
+```{r }
+ a <- TRUE # crée un vecteur logique de longueur 1, contenant le booléen TRUE
+ typeof(a)
+ is.numeric(a)
+ b <- F # l'abrévation F est (souvent, mais attention !) comprise comme FALSE
+ b
+ FALSE+TRUE+TRUE # les opérateurs numériques peuvent être appliqués à des vecteurs logiques : les TRUE sont transformés au préalable en 1, les FALSE en 0,  comme pour les fonctions indicatrices en mathématiques
+ typeof(FALSE+TRUE+TRUE)
+```
+
+Attention à l'utilisation des abréviations :
+
+```{r }
+ F=TRUE 
+ F*T # on  voit que F est un objet créé à la ligne précédente (prenant la  valeur TRUE) et non le vecteur logique FALSE
+ rm(F) # on efface l'ojet F
+ F*T # Et là F est  bien compris comme le vecteur logique FALSE
+```
+
+**Conclusion : mieux vaut ne jamais utiliser les abrévations F et T pour FALSE et TRUE !**
+
+**Exercice 11.** À quels opérateurs correspondent les commandes suivantes ?
+
+```{r }
+a <- TRUE
+!a  # ! : contradiction du vecteur logique a ou "non  logique"
+(TRUE)&(FALSE) # & : et logique
+(TRUE)|(FALSE) 
+(TRUE)|(TRUE) # | : ou logique
+x <-2
+(x<=3)|(x>1)
+xor(TRUE,FALSE) 
+xor(TRUE,TRUE) # xor : ou logique exclusif
+xor((x<=3),(x>1))
+```
+
+## Conversions
+
+**Exercice 12.** À l'aide des fonctions `as.numeric()`, `as.character()`, `as.logical()`, pour les conversions suivantes, décrire le résultat obtenu : - de logique en numérique ; - de logique en caractère ; - de numérique en caractère ; - de numérique en logique ; - de caractère en logique ; - de caractère en numérique.
+
+**Exercice 13.** Exécuter et commenter les commandes suivantes :
+
+```{r }
+as.logical(0)
+as.logical(1)
+as.logical(5.1) # les 0 snot transformés en FALSE, les nombres différents de 0 en TRUE
+as.character(T) # prend le vecteur logique T = TRUE et le transforme en chaîne de caractère
+as.numeric("2.5") # prend la chaîne de caractères "2.5" el la transforme en vecteur numérique 
+as.numeric("2,5") #  2,5 n'est pas compris pour la transformation en vecteur numérique : la décimale est le . t non , dans R
+```
+
+## Quelques classes d'objets importantes
+
+### Les vecteurs
+
+Dans R, un vecteur est une suite de données de même type. C'est la structure privilégiée du logiciel R. La grande majorité des fonctions sont optimisées pour l'utilisation avec des vecteurs.
+
+#### Création de vecteurs
+
+Exemples de vecteurs numériques :
+
+```{r }
+x <- c(1,2,3) # la fonction  c est la fonction de concaténation. Ici on concatène les vecteurs numériques de longueur 1, contenant 1, 2 et 3.
+x
+class(x)
+is.vector(x)
+typeof(x) # x est un vecteur numérique de type réel
+ 
+x <- c(v1=1,v2=2,v3=3)  # on peut nommer les élements du vecteur x
+x
+class(x)
+is.vector(x)
+typeof(x)
+
+y <- 1:3 # crée le vecteur numérique contenant la suite des entiers de 1 à 3
+class(y)  
+typeof(y) # y est un vecteur numérique de type entier : il n'est pas stocké en mémoire de la  même façon que x
+
+z  <- numeric(3) # crée un vecteur numérique de longueur 3 ne contenant que des 0
+class(z)
+typeof(z)
+```
+
+Afficher l'espace mémoire occupé par `x` et `y` à l'aide de la fonction `object.size()`.
+
+```{r }
+object.size(x)
+object.size(y)
+# Le type `double` utilise plus de mémoire que le type `integer` (voir _Le logiciel R_, de P. Lafaye de Micheaux, R. Drouilhet, B. Liquet 2014).
+```
+
+**Remarque :** en terme d'affichage, `x` et `y` sont les mêmes, mais les deux vecteurs sont stockés en mémoire de façon différente.
+
+On peut créer facilement des séquences régulières également à l'aide de fonctions comme `seq`, `sequence` et `rep` ou de l'opérateur `:`.
+
+**Exercice 14.** Exécuter et commenter les commandes suivantes :
+
+```{r }
+(z <- -3:4) # crée un vecteur contenant la suite d'entiers de -3 à 4
+(t <- -(3:4)) # attention aux parenthèses (erreurs fréquentes) !
+pi:7 # crée un vecteur contenant la suite pi, pi+1, pi+2... jusqu'à 7 
+rep(0,10) # crée un vecteur contenant 10 fois 0
+rep(c(3,7),4) # crée un vecteur contenant le vecteur (3,7) répété 4 fois
+rep(c(3,7),c(7,3)) # crée un vecteur contenant le vecteur 3 répété 7 fois, puis le vecteur 7 répété 3 fois
+seq(0,1,length.out=100) # crée un vecteur contenant une suite de pas régulier de réels partant de 0 jusqu'à 1 et de longueur 100
+seq(0,1,by=0.01) # crée un vecteur contenant une suite de pas 0.01 de réels partant de 0 jusqu'à 1
+length(seq(0,1,length=1000)) # idem à seq(0,1,length.out=1000)
+sequence(5) # crée un vecteur contenant la suite d'entiers de 1 à 5
+```
+
+**Attention** à l'ordre ou la priorité des opérations pour l'opérateur `:` !
+
+```{r }
+ 2*4:6; 3:5+1 # on peut remarquer que l'opérateur ":" est prioritaire
+ n <- 10
+ 1:n-1 # ":" est prioritaire
+ 1:(n-1) # les parenthèses sont prioritaires sur ":"
+```
+
+Exemples de vecteurs de caractères :
+
+```{r }
+ noms <- c("Pierre","Paul","Jacques") # crée un vecteur de caractères contenant les prénoms "Pierre","Paul","Jacques"
+ typeof(noms)
+ rep('A',3)  # crée un vecteur de caractères contenant la chaîne de caractères "A" répétée 3 fois
+ paste('x',1:3,sep='_') # crée un vecteur de caractères contenant "x_1","x_2","x_3" ; sep sert à définir le séparateur (il peut être vide)
+ 
+ character(10) # crée un vecteur de caractères contenant 10 fois ""
+ format(1:10) # crée un vecteur de caractères contenant les chaînes de caractères désignant les entiers de 1 à 10. Attention  ce n'est pas un vecteur numérique
+ LETTERS # crée un vecteur de 26 caractères contenant  toutes les lettres de l'alphabet en majuscules
+ letters # crée un vecteur de 26 caractères contenant  toutes les lettres de l'alphabet en minuscules
+ month.abb # crée un vecteur de 12 chaînes de caractères contenant  toutes les mois de l'année en abrégé
+ month.name # crée un vecteur de 12 chaînes de caractères contenant  toutes les mois de l'année (complets)
+```
+
+Exemples de vecteurs logiques :
+
+```{r }
+v <- c(TRUE,FALSE,TRUE) # crée le  vecteur logique contenant les booléens TRUE, FALSE, TRUE
+class(v)
+v <- c(T,F,T) # idem
+class(v)
+
+w <- logical(10) # crée le  vecteur logique 10 FALSE
+w
+class(w)
+
+x  <- -3
+test <- x>0 # crée le  vecteur logique résultant du test x>0
+class(test)
+y  <- -3:5
+test <- y>=2 # crée le  vecteur logique résultant du test y>=2 fait élément par élement de y
+class(test)
+```
+
+Les vecteurs peuvent aussi être définis de façon interactive :
+
+```{r }
+ (new_vect  <- scan(n=4)) # il s'agit ici de taper les éléments du vecteur les uns après les autres en valdiant chacun d'entre eux avec la touche entrée
+```
+
+**Exercice 15.** Créer les vecteurs suivants : 
+- le vecteur des entiers de 5 à 23, 
+- le vecteur de 6 à 20 allant de 2 en 2, 
+- le vecteur (0 0.01 0.02 0.03 ... 0.99 1) (de deux manières différentes),
+- le vecteur : (1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5),
+- le vecteur : (1 1 1 2 2 2 3 3 3 4 4 4 5 5 5),
+- le vecteur : (1 1 2 2 2 3 3 3 3),
+- le vecteur : (Individu1 Individu2 ... Individu100),
+- le vecteur : ("A" "B" "B" "C" "C" "C" ... "Z" "Z" "Z") (terminant par 26 fois la lettre Z).
+
+```{r }
+5:23
+seq(6,20,by=2) # ou 3:10*2
+seq(0,1,by=0.01)
+seq(0,1,length.out = 101)
+rep(1:5,3)
+rep(1:5,each=3)
+rep(1:3,times=2:4)
+paste0('Individu',1:100)
+rep(LETTERS,1:26)
+```
+
+On peut générer des vecteurs contenant des données aléatoires à l'aide de la commande `rfun(n,...)`, où `fun` indique la loi de probabilité, `n` le nombre de données générées, `...` les paramètres de la loi de probabilité. Exemples : `rnorm(n,0,1)`, `rexp(n,1)`, `rpois(n,2)`, `rchisq(n,100)`, `rt(n,100)`, `rf(n,100,50)`, `rbinom(n,100,0.5)`, `runif(n,0,1)}`...\\
+
+\emph{Remarque :} On peut remplacer dans ces fonctions la lettre `r` par `d`, `p` ou `q` pour obtenir la densité de probabilité, la fonction de répartition ou la valeur des quantiles.
+
+**Exercice 16.** Aller dans l'aide de ces fonctions. Sur quoi faut-il être particulièrement vigilant.e lorsqu'on utilise ces fonctions ?
+
+**Il faut faire attention à l'ordre et la définition des paramètres des lois ! Comme par exemple pour la loi normale (espérance, écart type) et la loi expontielle (espérance = inverse du paramètre de la loi).**
+
+#### Opérations sur les vecteurs numériques
+
+Les opérateurs arithmétiques classiques sont donnés par `+` (addition), `-` (soustraction), `*` (multiplication), `/` (division), `^` (puissance), `%%` (congruence), `%/%` (division entière).
+
+Les opérateurs de comparaison sont donnés par `<` (inférieur à), `>` (supérieur à), `<=` (inférieur ou égal à), `>=` (supérieur ou égal à), `==` (égal à), `!=` (différent de).
+
+Tous ces opérateurs agissent sur les vecteurs élément par élément. Pour effectuer une comparaison globale de deux objets, on peut utiliser `identical`.
+
+Pour réaliser du calcul vectoriel "classique", on utilisera l'opérateur `%*%` par exemple.
+
+#### Opérations sur les vecteurs logiques
+
+Les opérateurs logiques sont donnés par `!x` (non logique), `x&y` (et logique opérant sur tous les éléments de x et y), `x&&y` (et logique opérant sur le premier élément de x et y), `x|y` (ou logique opérant sur tous les éléments de x et y), `x||y` (ou logique opérant sur le premier élément), `xor(x,y)` (ou exclusif).
+
+On code l'inégalité $0<$x$<1$ par `x>0 & x<1`.
+
+Comme on l'a vu, les opérateurs arithmétiques peuvent être appliqués à des vecteurs logiques, les `FALSE` étant transformés en 0, les `TRUE` en 1.
+
+Exemples :
+
+```{r }
+TRUE-FALSE
+TRUE*TRUE
+TRUE/FALSE
+```
+
+#### Sélection/extraction dans un vecteur
+
+Pour accéder à un ou plusieurs éléments d'un vecteur, on se sert des crochets (`[...]`). Il existe principalement deux manières de sélectionner certains éléments d'un vecteur (ou d'en supprimer) : soit en précisant l'indice des éléments à sélectionner ou à supprimer à l'aide d'un vecteur numérique, soit à l'aide d'un vecteur logique.
+
+Exemples :
+
+```{r }
+ x <- c(1,2.5,3.9,pi,8)
+ x[2] # sélectionne l'élément d'indice 2 du vecteur x
+ x[c(1,2,3)] # sélectionne les éléments d'indices 1,2,3 du vecteur x
+ x[1:3] # idem
+ x[c(2,2,1,3)] # sélectionne les éléments d'indices 2, 2 à nouveau, puis 1 et 3 du vecteur x
+ x[c(1:3,2,1)] # sélectionne les éléments d'indices 1 à 3, puis 2 à nouveau, puis 1 à nouveau
+ x[-1] # sélectionne tous les éléments du vecteur x sauf celui d'indice 2
+ x[-c(1,2)] # sélectionne tous les éléments du vecteur x sauf ceux d'indices  1 et 2
+ x[-(1:2)] # idem
+
+ x[c(TRUE,FALSE,TRUE,FALSE,FALSE)] # sélectionne tous les éléments du vecteur x qui ont les mêmes indices que les élements TRUE du vecteur logique
+
+ x>3 # crée le vecteur logique de même longueur que  x, résultant du test x>3 élément par élément
+ x[x>3] #   sélectionne donc les éléments >3 de x
+ 
+y <- c(x,NA)
+y
+y[!is.na(y)] # sélectionne les données non manquantes de y
+na.omit(y) # idem 
+y[is.na(y)] <- 0 # remplace les données manquantes par des 0 dans y
+y
+```
+
+**Exercice 17.**
+
+1.  Créer le vecteur `v`: `0  1  2  3  4  5 NA  0  1  2  3  4  5 NA  0  1  2  3  4  5 NA`.
+2.  Remplacer les valeurs `NA` par $-1$.
+3.  Sélectionner les valeurs strictement supérieures à $3$.
+4.  Sélectionner les valeurs positives et inférieures ou égales à $4$.
+5.  Sélectionner les valeurs qui sont soit $<2$ soit $\geq 4$
+6.  Enlever les éléments nuls de `v`.
+7.  Remplacer les éléments négatifs par leur opposé.
+8.  Rajouter les valeurs `6,7,8,9` à la fin du vecteur `v`.
+9.  Enlever les $3$ premiers éléments de `v`.
+10. Afficher la position du minimum de `v`.
+11. Modifier le vecteur `v` pour que sa valeur minimale soit augmentée de $1$. Afficher le minimum avant et après pour vérifier.
+
+```{r }
+v <- rep(c(0:5,NA),3)
+v[is.na(v)] <- -1
+v[v>3]
+v[v<=4 & v>0]
+v[v<2 | v>=4]
+v <- v[v!=0]
+v[v<0] <- -v[v<0]
+v <- c(v,6:9)
+v <- v[-(1:3)]
+which.min(v)
+min(v)
+v[v==min(v)] <-v[v==min(v)]+1
+min(v)
+```
+
+**Remarque** : nous reviendrons sur cette partie lorsque nous introduirons le package `dplyr`.
+
+#### Quelques fonctions pour les vecteurs numériques :
+
+-   `sum(x)` calcule la somme des éléments de `x`.
+-   `prod(x)` calcule le produit des éléments de `x`.
+-   `diff(x)` calcule la différence entre les éléments consécutifs de `x`.
+-   `max(x)` donne le maximum des éléments de `x`.
+-   `min(x)` donne le minimum des éléments de `x`.
+-   `which.max(x)` donne l'indice du maximum des éléments de `x`
+-   `which.min(x)` donne l'indice du minimum des éléments de `x`.
+-   `range(x)` donne le minimum et le maximum des éléments de `x`.
+-   `mean(x)` calcule la moyenne des éléments de `x`.
+-   `median(x)` calcule la médiane des éléments de `x`.
+-   `var(x), cov(x)` calcule la variance empirique des éléments de `x`.
+-   `var(x,y), cov(x,y)` calcule la covariance empirique entre `x` et `y`.
+-   `corr(x,y)` calcule la corrélation linéaire entre `x` et `y`.
+-   `sd(x)` calcule l'écart type empirique de `x`.
+-   `quantile(x)` calcule le quantile empirique de `x` (sur la base de plusieurs définitions possibles).
+-   `sign(x)` donne le signe de `x`.
+-   `floor(x)` donne la partie entière de `x`.
+-   `ceiling(x)` donne la partie entière dite "supérieure" de `x`.
+-   `round(x,n)` arrondit les éléments de `x` à `n` chiffres après la virgule.
+-   `signif(x,n)` arrondit les éléments de `x` avec `n` chiffres significatifs.
+-   `rev(x)` inverse l'ordre des éléments de `x`.
+-   `sort(x)` ordonne les éléments de `x`.
+-   `rev(sort(x))` ordonne les éléments de `x` dans l'ordre décroissant.
+-   `rank(x)` donne les rangs des éléments de `x`.
+-   `order(x)` donne les coordonnées du plus petit élément de `x`, du deuxième plus petit élément de `x`, etc.
+-   `pmin(x,y), pmax(x,y)}` donne un vecteur dont le ième élément est le minimum ou le maximum entre `x[i]` et `y[i]`.
+-   `cumsum(x), cumprod(x)` donne un vecteur dont le ième élément est la somme ou le produit des éléments `x[1]` à `x[i]`.
+-   `cummin(x), cummax(x)` donne un vecteur dont le ième élément est le minimum ou le maximum des éléments `x[1]` à `x[i]`.
+-   `match(x,y)` donne un vecteur de même longueur que `x` contenant les éléments de `x` qui sont dans `y` (`NA` sinon).
+-   `which(x==2)` donne les indices des éléments de `x` égaux à $2$.
+-   `choose(n,k)` calcule les combinaisons de paramètres `n` et `k`.
+-   `unique(x)` supprime les éléments dupliqués de `x`.
+-   `table(x)` crée un tableau des effectifs des différentes valeurs de `x`.
+-   `sample(x,k)` ré-échantillonne aléatoirement et sans remise `k` éléments dans `x`.
+-   `sample(x,k,REPLACE=TRUE)` ré-échantillonne aléatoirement et avec remise `k` éléments dans `x`.
+
+#### Quelques fonctions pour les vecteurs de caractères :
+
+-   `substr("blabla",4,6)` extrait ou remplace le caractère formé des lettres 4 à 6 de "blabla".
+-   `grep("bla",x)` donne les indices des éléments de `x` contenant "bla".
+-   `grep("[a-c]",x)` donne les indices des éléments de `x` contenant "a", "b" ou "c".
+-   `sub("bla","pa",x)` remplace le premier "bla" de `x` par "pa".
+-   `gsub("bla","pa",x)` remplace tous les "bla" de `x` par "pa".
+-   `tolower("BLABLA")` écrit "blabla" en minuscules.
+-   `toupper("blabla")` écrit "BLABLA" en majuscules.
+
+#### Quelques fonctions pour les vecteurs logiques :
+
+Comme pour les opérateurs arithmétiques, les fonctions numériques peuvent être appliquée à des vecteurs logiques, les `FALSE` étant transformés en 0, les `TRUE` en 1.
+
+Exemples :
+
+```{r }
+sum(c(TRUE,TRUE,FALSE,TRUE))
+mean(c(TRUE,TRUE,FALSE,TRUE))
+exp(c(TRUE,FALSE))
+```
+
+Autres fonctions :
+
+-   `all(x)` teste si tous les éléments de `x` sont `TRUE`.
+-   `any(x)` teste si au moins un des éléments de `x` est `TRUE`.
+
+### Les matrices
+
+Dans R, une matrice est similaire à un vecteur auquel est ajouté un argument `dim` définissant le nombre de lignes et de colonnes. Ses colonnes sont donc de même type.
+
+#### Création de matrices
+
+Exemples :
+
+```{r }}
+A <- 1:15 ; dim(A) <- c(5,3) ; A # crée une matrice 5x3 en modifiant l'attribut dim du vecteur A
+(B <- matrix(1:15,nrow=5,ncol=3)) # crée une matrice 5x3 en la remplissant des éléments du vecteur 1:15, colonne par colonne
+(C <- matrix(1:15,nrow=5,ncol=3,byrow=TRUE)) # crée une matrice 5x3 en la remplissant des éléments du vecteur 1:15, ligne par ligne
+(D <- matrix(1,nrow=5,ncol=3)) # crée une matrice 5x3 remplie de 1
+a <- 1:12 ; b=month.name ; (E <- cbind(a,b)) # crée une matrice 12x2 à l'aide de 2 vecteurs colonnes de longueur 12 
+(F <- rbind(a,b)) # crée une matrice 2x12 à l'aide de 2 vecteurs lignes  de longueur 12
+(G <- diag(5)) # crée la matrice identité de dimension 5x5
+(H <- diag(1:5)) # crée une matrice diagonale dont la diagonale est le vecteur 1:5
+(I <- diag(1:3,nrow=3,ncol=5)) # crée une matrice de dimension 3x5 ne contenant que des 0 sauf  sur la diagonale de la première sous-matrice carrée qui prend les valeurs  1, 2, 3
+```
+
+Quelle est la classe de `E` et `F` ? Leur type ?
+
+```{r }
+class(E)
+typeof(E)
+class(F)
+typeof(F)
+# E et F sont des matrices de caractères
+```
+
+Si `X` est une matrice, `dim(X)` retourne la dimension de la matrice `X`, `nrow(X)` le nombre de lignes, `ncol(X)` le nombre de colonnes. Si `X` est un vecteur, `dim(x)` retourne `NULL`.
+
+```{r }
+dim(A) # A est une matrice 5x3 (5 lignes, 3 colonnes)
+nrow(A) # donne le nombre de lignes de la matrice A
+ncol(A) # donne le nombre de colonnes de la matrice A
+NROW(A) # donne le nombre de lignes de la matrice A
+NCOL(A) # donne le nombre de colonnes de la matrice A
+x <- 1:15
+dim(x) # dim ne s'applique pas aux vecteurs
+nrow(x) # nrow non plus
+ncol(x) # ncol non plus
+NROW(x) # mais NROW oui considérant x comme un vecteur colonne
+NCOL(x) # NCOL s'applique aussi à x, le considérant comme un vecteur colonne
+```
+
+#### Opérateurs et fonctions pour les matrices
+
+Les opérateurs disponibles pour les vecteurs sont également utilisables pour des matrices de même dimension, tout comme la plupart des fonctions mathématiques. Ils agissent élément par élément.
+
+Pour les matrices numériques, on dispose en plus des opérateurs de calcul matriciel classiques et de fonctions propres au calcul matriciel.
+
+**Exercice 18.**
+
+Exécuter et commenter les commandes suivantes :
+
+```{r }
+diag(H) # extrait la diagonale de H
+diag(H) <- 0 ; H # remplace les éléments diagonaux de H par des 0
+diag(I) # extrait la première diagonale de I
+diag(F) # extrait la première diagonale de F
+A*C # fait le produit des matrices A et C élément par élément (ATTENTION !)
+A%*%C # tente de faire le produit matriciel des matrices A et C, mais problème de dimensions inadéquates
+t(A) # calcule la transposée de A
+t(A)%*%C # calcule le produit matriciel de la transposée de A par C
+(x <- 1:4) # crée le vecteur colonne (1 2 3 4)
+(y <- 5:8) # crée le vecteur colonne (5 6 7 8)
+x*y # calcule le produit  des vecteurs x et y élément par élément (ATTENTION !)
+x%*%y # calcule le produit matriciel de la transposée de x par y, autrement dit le produit scalaire de x par y, malgré les problèmes de dimensions inadéquates
+x%*%t(y) # idem mais sans problème de dimensions cette fois
+crossprod(x,y) # idem : produit scalaire
+(J <- solve(diag(1:4))) # calcule l'inverse de la matrice diag(1:4)
+(K <- solve(matrix(1:4,nrow=2,ncol=2))) # calcule l'inverse de la matrice matrix(1:4,nrow=2,ncol=2)
+solve(matrix(1:6,nrow=2,ncol=3)) # seules les matrices carrées  sont inversibles
+solve(x%*%t(y)) # x%*%t(y) n'est pas inversible, son déterminant est nul
+solve(J,x) # résout l'équation JX=x 
+e <- eigen(K) # diagonalise la matrice K
+e$val # donne les valeurs propres de la matrice K
+e$vec # donne les vecteurs propres de la matrice K
+svd(K) # donne la décomposition de la matrice K
+prod(svd(K)$d) # donne le déterminant de la matrice K
+```
+
+#### Sélection dans les matrices
+
+La sélection dans les matrices se fait comme pour les vecteurs, à l'aide des crochets `[r,c]` mais il faut à présent spécifier des indices (ou valeurs logiques) pour les lignes (`r`) **et** pour les colonnes (`c`).
+
+**Exercice 19.**
+
+1.  Créer une matrice 6x5 en faisant le produit entre les vecteurs `1:5` et `7:12`. Afficher la dimension de la matrice obtenue.
+2.  Sélectionner l'élément de la ligne 3 et de la colonne 5.
+3.  Sélectionner la colonne 3.
+4.  Sélectionner les colonnes 3 et 4 à l'aide de valeurs logiques.
+5.  Retirer la deuxième ligne.
+6.  Afficher le nombre de lignes de la nouvelle matrice.
+7.  Remplacer les valeurs de la ligne 4 par des zéros.
+8.  Remplacer les valeurs impaires par des `NA`.
+9.  Rajouter une colonne ne contenant que des zéros.
+10. Transformer la nouvelle matrice en une matrice de dimension 3x10.
+
+```{r }
+(A <- 7:12%*%t(1:5))
+dim(A)
+A[3,5]
+A[,3]
+A[matrix(rep(c(FALSE,TRUE,FALSE),c(12,12,6)),nrow=6,ncol=5)]
+A <- A[-2,]
+nrow(A)
+A[4,] <- 0 
+A[A%%2==1] <- NA
+A <- cbind(A,0)
+dim(A) <- c(3,10)
+A
+```
+
+#### Fonction `apply`
+
+On peut appliquer des fonctions mathématiques aux lignes d'une matrice, et/ou à ses colonnes à l'aide de la commande `apply()`.
+
+**Exercice 20.**
+
+Exécuter et commenter les commandes suivantes :
+
+```{r }
+sum(A[1,]) # calcule la somme des éléments de la première ligne de A
+apply(A,1,sum) # crée un vecteur contenant les sommes des éléments de chaque ligne de A
+apply(A,2,sum) # crée un vecteur contenant les sommes des éléments de chaque colonne de A
+```
+
+### Arrays
+
+Les **arrays** dans R sont des tableaux à $k$ dimensions, généralisant les matrices qui sont en fait des arrays avec $k=2$.
+
+Beaucoup des commandes disponibles pour les matrices se généralisent naturellement aux arrays.
+
+Exemple :
+
+```{r}
+ (A = array(1:24,dim=c(2,3,4))) # crée un tableau de dimension 2x3x4, composé de 4 matrices 2x3
+ dim(A)
+ A[2,2,3] # sélectionne l'élément situé à la position (2,2,3)
+ A[,,2] # sélectionne le 4e élément de la dernière dimension
+ A[1,,] # sélectionne le 1er élément de la première dimension
+```
+
+La généralisation de la transposition se fait par contre avec la fonction `aperm`.
+
+```{r }
+dim(aperm(A,c(2,3,1)))
+```
+
+### Facteurs
+
+Les **facteurs** sont des objets R adaptés aux données qualitatives. Un facteur représente en général une variable qualitative observée pour $n$ individus : il est alors constitué des valeurs prises par la variable qualitative pour les $n$ individus, et des différentes modalités possibles de cette variable (même celles qui ne sont pas représentées dans les données observées) appelées dans R des **niveaux**.
+
+#### Créer des facteurs
+
+Exemples :
+
+```{r }
+x <-  factor(1:3) # Crée un facteur de valeurs 1,2,3 et de niveaux 1,2,3.
+x <- 1:3  ; as.factor(x) # idem
+x  <- factor(1:3,levels=1:5) # Crée un facteur de valeurs 1,2,3 et de niveaux 1,2,3,4,5.
+x <- factor(c("A","B","C")) # Crée un facteur de valeurs A,B,C, et de niveaux A,B,C.
+x <- factor(1:3,labels=c("A","B","C")) # idem
+factor(1:4,exclude=3) # crée un facteur de valeurs 1,2,NA,4 de niveaux 1,2,4.
+gl(2,3) # crée un facteur de valeurs 1,1,1,2,2,2 et de niveaux 1,2
+gl(2,3,length=30) # crée un facteur de valeurs 1,1,1,2,2,2 répétées jusqu'à la longueur 30, de niveaux 1,2
+gl(2,3, labels=c("A","B")) # Créer un facteur de valeurs "A","A","A","B","B","B" de niveaux "A","B".
+(x <- cut(1:20,3)) # créer un facteur à 3 niveaux à partir du vecteur numérique 1:20 (découpe en classes).
+```
+
+#### Manipuler et utiliser des facteurs
+
+**Exercice 21.**
+
+Exécuter et commenter les commandes suivantes :
+
+```{r }
+(age  <- factor(sample(c("]0,20]","]20,40]","]40,60]","]60,100]"),20,TRUE))) # crée un facteur contenant 20 élements pris au hasard dans les classes définies par des chaînes de caractères
+ordered(age) # crée un facteur dont les niveaux seront ordonnés
+levels(age) # affiche les niveaux du facteur age
+nlevels(age) # affiche le nombre de niveaux du facteur age
+levels(age)  <- c("<=20","]20,40]","]40,60]","]60,100]") # renomme les niveaux du facteur age
+age
+levels(age)[3:4]  <- rep(">40",2) # fusionne les  3e et 4e niveaux en un seul niveau nommé ">40"
+age
+(taille <- floor(rnorm(20,170,10)))
+(moyennes <- tapply(taille,age,mean)) # crée un array contenant les moyennes de la taille par niveau du facteur age
+class(moyennes) 
+(moyennes <- by(taille,age,mean)) # crée un objet de classe by contenant les moyennes de la taille par niveau du facteur age
+class(moyennes)
+(moyennes <- aggregate(taille,list(age),mean)) # crée data frame contenant les moyennes de la taille par niveau du facteur age
+class(moyennes)
+```
+
+### Dates
+
+Les objets de classe `Date` sont des objets dont les valeurs représentent des dates. La création d'un tel objet se fait en général à partir d'une chaîne de caractères donnant une date à un certain format, par exemple (par défaut), "aaaa-mm-jj" que l'on transforme en `Date`.
+
+Exemples :
+
+```{r }
+(aujourdhui <- as.Date("2025-09-26")) # crée un objet de classe Date contenant la date du 26/09/2025 à partir d'une  chaîne  de caractères au format YYYY-mm-dd (année-mois-jour)
+class(aujourdhui)
+format(aujourdhui) # donne le format de cette Date
+aujourdhui+1 # donne la Date correspondant au lendemain de la Date  aujourdhui
+(naissance <- as.Date("1999-10-26"))
+aujourdhui-naissance # calcule le nombre de jours séparant aujourdhui et naissance
+difftime(naissance,aujourdhui,units=c("weeks")) # calcule le nombre de semaines séparant aujourdhui et naissance
+(aujourdhui <- as.Date("26/09/2025")) # ATTENTION, pour une chaîne de caractères au format différent du format par défaut YYYY-mm-dd, il faut préciser le format
+(aujourdhui <- as.Date("26/09/2025",format="%d/%m/%Y"))
+(aujourdhui <- Sys.Date()) # crée un objet de classe Date contenant la date du jour
+class(aujourdhui)
+(aujourdhui <- Sys.time()) # crée un objet de classe POSIXct,POSIXt contenant la date et l'heure du système
+class(aujourdhui)
+aujourdhui <- strptime("2025-09-26 00:00:01",format="%Y-%m-%d %H:%M:%S") # crée un objet de classe POSIXct,POSIXt contenant la date et l'heure indiquée
+class(aujourdhui)
+seq(as.Date("2025-09-01"),as.Date("2025-09-26"),by="day") # crée un objet de classe Date contenant une suite de dates dont le pas est le jour
+```
+
+D'autres fonctions utiles pour les dates : `sort`, `strftime`, `weekdays`, `months`, `quarters`... Et surtout : toutes celles du package `lubridate` du tidyverse (que nous verrons bientôt).
+
+### Listes
+
+Les listes sont des objets très utiles en R : ils permettent de réunir dans un seul objet des objets de classes et de longueurs éventuellement différentes.
+
+-   La sélection dans les listes peut se faire à l'aide de double-crochets `[[]]` (le simple crochet renverra une liste constitué du seul élément choisi).
+-   Si les éléments de la liste sont nommés, on peut les sélectionner à partir de leur nom avec `$`.
+
+Exemples :
+
+```{r }
+ liste <-  list("Florrick",c("Alicia","Peter","Zack","Grace"),2010)
+ liste
+ class(liste)
+ liste[[2]] # sélectionne le deuxième élément de la liste en conservant sa classe d'origine
+ class(liste[[2]])
+ length(liste[[2]])
+ liste[2] # sélectionne le deuxième élément de la liste mais en  mettant ses éléments dans une liste
+ class(liste[2])
+ length(liste[2])
+ liste[[2]][3] # sélectionne le 3e élément du 2e élément de la liste
+ liste[[c(2,3)]] #idem
+ liste <- list(nom="Florrick",prenoms=c("Alicia","Peter","Zack","Grace"),annee=2010) # crée la même liste mais avec des  éléments nommés "noms", "prenoms", "annee"
+ liste$prenoms # sélectionne l'élément nommé "prenoms" de la liste
+ liste[["prenoms"]] # idem
+```
+
+**Exercice 22.**
+
+1.  Créer une liste `l` contenant $3$ éléments nommés: le `titre` d'un de vos films préférés, le `genre` de ce film et l'`annee` de sortie du film.
+2.  Enlever l'élément `genre`.
+3.  Rajouter un nouvel élément `duree` contenant la durée du film (en minutes).
+4.  Créer une liste `lliste` contenant `l` et la liste `liste` de l'exemple précédent (`lliste` devrait avoir comme éléments les deux listes). Afficher à partir de celle-ci l'année de sortie de votre film préféré. Créer également une liste `alliste` en concaténant `l` et `liste` pour que les éléments de `alliste` soient des vecteurs et non pas des listes.
+5.  Transformer la liste `l` en un vecteur.
+
+```{r }
+l <- list(titre='Babylon',genre='Drame',annee=2022)
+l$genre <- NULL
+l$duree <- 189
+lliste <- list(l,liste)
+lliste[[1]]$annee
+alliste <- append(l,liste)
+alliste
+l <- unlist(l)
+```
+
+### Tableaux de données ou data frames
+
+Les **data frames** sont des objets importants dans R, particulièrement adaptés aux jeux de données usuels. Un data frame de dimension $n\times p$ ($n$ individus, $p$ variables) est une liste de $p$ objets, pas nécessairement de même type mais de même longueur $n$.
+
+La sélection se fait donc de la même manière que dans les listes.
+
+Exemples :
+
+```{r }
+donnees <- data.frame(nom=c("Florrick","Lockhart"),prenom=c("Alicia","Diane"),annee=c(2010,2017))
+donnees 
+names(donnees) # donne les noms des éléments du data frame donnees
+summary(donnees) # donne un aperçu statistique des éléments de donnees
+donnees[,3] # sélectionne du troisième élément ou de la troisième colonne de donnees, à savoir annee
+donnees$annee # idem
+donnees[[3]] # idem
+donnees[["annee"]] # idem
+lapply(donnees,length) # donne une liste contenant les longueurs de chaque élément (colonne) de donnees 
+sapply(donnees,length) # donne un vecteur contenant les longueurs de chaque élément (colonne) de donnees
+apply(donnees,2,length) # idem
+```
+
+Il existe d'autres formats pour les tableaux de données associés à des packages spécifiques, comme par exemple:
+
+-   les **tibbles** (associés au `tidyverse`),
+
+```{r}
+library('tidyverse')
+as_tibble(donnees)
+```
+
+-   ou les **data.tables** (du package au même nom).
+
+```{r}
+library('data.table')
+data.table(donnees)
+```
+
+
+# Chargement de jeux de données de R
+
+À des fins pédagogiques et méthodologiques, R et ses packages contiennent de nombreux jeux de données. Pour visualiser la liste des données disponibles dans les packages chargés on peut utiliser la commande `data()`.
+
+Exemple de jeux de données disponible dans la version de R de base :
+
+```{r}
+data()
+?airquality
+View(airquality) # affiche les données du jeu de données Titanic
+data(airquality) # charge ces mêmes données dans la session de travail
+class(airquality)
+```
+
+Il existe également des jeux de données disponibles au sein de packages particuliers. Dans ce cas, le chargement nécessite de préciser le package :
+
+```{r}
+data(starwars)
+data(starwars,package="dplyr")
+?starwars
+View(starwars)
+class(starwars)
+```
+
+# Manipulation de jeux de données : premiers pas hors du tidyverse
+
+## Exercice 1
+
+1.  Créer un data frame intitulé `star.df` en transformant `starwars`.
+
+```{r}
+star.df <- data.frame(starwars)
+class(star.df)
+View(star.df)
+```
+
+2.  Quelle est la dimension de `star.df` ?
+
+```{r}
+dim(star.df)
+```
+
+3.  Combien de variables `star.df` contient-il ? Quel est le nom de ces variables ?
+
+```{r}
+ncol(star.df) 
+#ou 
+NCOL(star.df)
+
+names(star.df)
+```
+
+4.  Afficher l'aide du jeu de données initial. Donner la classe et le type de chacune des variables à l'aide de la fonction `summary` par exemple. Les classes et types sont-ils appropriés (par rapport à la description de chaque variable) ?
+
+```{r}
+summary(star.df)
+
+lapply(star.df,class)
+lapply(star.df,mode)
+```
+
+Les variables `hair_color`, `skin_color`, `eye_color`, `sex`, `gender`, `homeworld`, `species` sont des variables qualitatives : ce sont ici des vecteurs de caractères au lieu de facteurs (la classe appropriée). Nous les transformerons en facteurs plus tard...
+
+5.  Le jeu de données contient-il des données manquantes ? Afficher toutes les informations possibles sur ces données manquantes. Avec quelle commande peut-on retirer toutes les lignes contenant des données manquantes ?
+
+```{r}
+anyNA(star.df)
+
+sum(is.na(star.df))
+
+which(is.na(star.df),arr.ind=TRUE)
+
+# On peut retirer les lignes contenant des données manquantes avec la fonction na.omit().
+```
+
+**Remarque** : le jeu de données contient d'autres données manquantes sous forme de `character(0)` mais on ne va pas s'en occuper dans cet exercice.
+
+6.  Afficher les $5$ premières et dernières lignes de `star.df` en utilisant les fonctions `head` et `tail`.
+
+```{r}
+head(star.df,5)
+tail(star.df,5)
+
+rbind(head(star.df,5),tail(star.df,5))
+```
+
+7.  Afficher la première et la troisième ligne de `star.df`.
+
+```{r}
+star.df[c(1,3),]
+```
+
+8.  Afficher les données des $10$ personnages les plus jeunes.
+
+```{r}
+(dixplusjeunes <- star.df[order(star.df$birth_year)[1:10],])
+
+dixplusjeunes$birth_year
+```
+
+9.  Afficher la variable correspondant au nom des personnages de $4$ façons différentes directement à partir de `star.df`.
+
+```{r}
+star.df$name
+star.df[["name"]]
+star.df[[1]]
+star.df[,1]
+```
+
+10. Afficher à nouveau la variable correspondant au nom des personnages, mais en utilisant la fonction `attach()` qui rend les colonnes de `star.df` accessibles en tant que variables directement à partir de leur nom.
+
+```{r}
+name
+attach(star.df)
+name
+```
+
+**Remarque** : Attention à l'utilisation de la commande `attach()`. Les objets sont stockés à différents niveaux de mémoire. Pour afficher le répertoire et le niveau où est stocké un objet, on peut utiliser `find("name")`, `ls(pos=1)` `ls(pos=2)`...
+
+```{r}
+find("name")
+ls()
+ls(pos=1)
+ls(pos=2)
+ls(pos=3)
+```
+
+Les variables attachées sont stockées en mémoire au niveau 2 alors que le data frame et les autres objets de la sesson le sont au niveau 2.
+
+11. Remplacer les valeurs de `height` par la valeur moyenne de la variable `height`. Visualiser l'objet `height` puis le data frame. Que remarque-t-on ?
+
+```{r}
+height
+height <- mean(height,na.rm=TRUE)
+height
+star.df$height
+```
+
+La modification de `height` ne se fait que localement au niveau 2, et non dans le data.frame.
+
+12. Détacher le data frame `star.df` en utilisant la fonction `detach()`.
+
+```{r}
+detach(star.df)
+name
+ls(pos=1)
+ls(pos=2)
+```
+
+13. Créer un vecteur numérique `mass` en lui affectant une valeur réelle arbitraire.
+
+```{r}
+mass <- 100
+```
+
+14. Attacher à nouveau le data frame `star.df`.
+
+```{r}
+attach(star.df)
+```
+
+15. Afficher l'objet `mass` puis `star.df$mass`. Que constate-t-on ?
+
+```{r}
+mass
+star.df$mass
+```
+
+La variable `mass` issue de `star.df` (stockée au niveau 2) est masquée par notre objet `mass` créé précédemment (stocké au niveau 1).
+
+16. Détacher le data frame `star.df` et supprimer l'objet `mass`.
+
+```{r}
+detach(star.df)
+ls(pos=2)
+```
+
+17. Transformer les variables qualitatives de `star.df` en facteurs. Regarder à nouveau le résumé des données.
+
+```{r}
+(num_col  <- as.numeric(which(lapply(star.df,class)=="character"))[-1]) # names n'est pas une variable qualitative : il s'agit des noms des individus
+
+star.df[,num_col] <- lapply(star.df[,num_col],as.factor)
+
+# ou sinon directement :
+# star.df[,c(4:6,8:11)] <- lapply(star.df[,c(4:6,8:11)],as.factor)
+
+lapply(star.df,class)
+summary(star.df)
+
+# ou encore "à la main", variable par variable... :
+
+# star.df$hair_color <- as.factor(star.df$hair_color)
+# star.df$skin_color <- as.factor(star.df$skin_color)
+# star.df$eye_color <- as.factor(star.df$eye_color)
+# star.df$sex <- as.factor(star.df$sex)
+# star.df$gender <- as.factor(star.df$gender)
+# star.df$homeworld <- as.factor(star.df$homeworld)
+# star.df$species<- as.factor(star.df$species)
+```
+
+18. Créer un facteur `ageclass` correspondant à des classes d'âges de son choix à partir de la variable `birth_year` et de la fonction `cut`.
+
+```{r}
+summary(star.df$birth_year)
+range(star.df$birth_year,na.rm=TRUE)
+
+?cut
+
+cut(star.df$birth_year,4)
+
+# on peut créer des classes plus pertinentes, basées sur les quartiles :
+ageclass <- cut(star.df$birth_year,breaks=c(min(star.df$birth_year,na.rm=TRUE),quantile(star.df$birth_year,probs=c(0.25,0.5,0.75),type=1,na.rm=TRUE),max(star.df$birth_year,na.rm=TRUE)))
+```
+
+19. Afficher le nombre de personnages dont l'âge se situe dans la première classe d'âge créée, de plusieurs façons différentes.
+
+```{r}
+summary(ageclass)
+
+table(ageclass)
+table(ageclass)[1]
+
+sum(ageclass=="(8,33]",na.rm=TRUE)
+```
+
+20. Afficher le genre des Droïdes. Que constate-t-on ?
+
+```{r}
+star.df$gender[star.df$species=="Droid"]
+table(star.df$gender[star.df$species=="Droid"])
+# Il y a plus de droïdes masculins que féminins
+```
+
+21. Créer un vecteur contenant la moyenne des tailles pour les personnages selon leur "espèce" de plusieurs façons différentes : directement, en utilisant les fonctions `tapply`, `by` et `aggregate`.
+
+```{r}
+summary(star.df$species)
+(heightmeans <- c(mean(star.df$height[star.df$species=="Aleena"],na.rm=TRUE),mean(star.df$height[star.df$species=="Besalisk"],na.rm=TRUE))) #... On n'a pas vraiment de le faire "à la main"...
+
+(heightmeans <- as.numeric(tapply(star.df$height,star.df$species,mean,na.rm=TRUE)))
+
+(heightmeans <- as.numeric(by(star.df$height,star.df$species,mean,na.rm=TRUE)))
+
+(heightmeans <- aggregate(height~species,data=star.df,mean,na.rm=TRUE)$height)
+```
+
+22. Créer un vecteur contenant l'écart type des tailles pour les personnages selon leur "espèce".
+
+```{r}
+(heightsd <- aggregate(height~species,data=star.df,sd,na.rm=TRUE)$height)
+```
+
+**Remarque** : l'écart type n'a pu être calculé quand l'espèce ne contient pas au minimum deux individus (l'estimateur de la variance est l'estimateur sans biais donc renormalisé par (n-1)...).
+
+23. Résumer les informations obtenues sur la taille (moyenne et écart-type pour chaque "espèce") dans une liste, puis un data frame.
+
+```{r}
+list(mean=heightmeans,sd=heightsd)
+taille <- data.frame(mean=heightmeans,sd=heightsd)
+```
+
+**Remarque** : un data frame est aussi une liste !
+
+24. Exporter ce data frame dans un fichier texte (.csv ou .txt) à l'aide de la fonction `write.table`.
+
+```{r}
+write.table(taille,"InfosTailleStarwars.txt",sep=",",dec=".")
+```
+
+25. Calculer la moyenne des tailles pour les personnages selon leur "espèce" et leur genre (de façon croisée) en utilisant les fonctions `tapply`, `by` et `aggregate`.
+
+```{r}
+tapply(star.df$height,list(star.df$species,star.df$gender),mean,na.rm=TRUE)
+
+by(star.df$height,list(star.df$species,star.df$gender),mean,na.rm=TRUE)
+
+aggregate(star.df$height,list(star.df$species,star.df$gender),mean,na.rm=TRUE)
+#ou
+aggregate(height~species+gender,data=star.df,mean,na.rm=TRUE)
+```
+
+26. Créer un facteur `human` de niveaux `yes` et `no` à partir de la variable `species`, de plusieurs façons différentes (en utilisant un vecteur logique, puis en utilisant la fonction `levels`).
+
+```{r}
+human <- factor(star.df$species=="Human")
+levels(human)
+levels(human) <- c("no","yes")
+summary(human)
+
+# ou
+human <- factor(star.df$species=="Human",labels=c("no","yes"))
+summary(human)
+```
+
+27. Ajouter ce facteur au data frame `star.df`.
+
+```{r}
+star.df <- cbind(star.df,human)
+```
+
+28. Créer un vecteur contenant l'âge moyen des personnages humains et celui des personnages non humains à l'aide de la fonction `split`.
+
+```{r}
+data_split <- split(star.df,human)
+data_split
+c(mean(data_split$yes$birth_year,na.rm=TRUE),mean(data_split$no$birth_year,na.rm=TRUE))
+
+# vérification :
+aggregate(birth_year~human,mean,data=star.df,na.rm=TRUE)
+```
+
+# Importation de jeux de données externes
+
+Le chargement de jeux de données externes peut être effectué au moyen de plusieurs fonctions. Quelques exemples :
+
+-   la fonction `read.table` pour les fichiers de données ASCII au format `.dat`, `.txt` ou `.csv`. Pour les fichiers `.csv`, il existe également `read.csv` et `read.csv2`, qui sont des variantes de `read.table` avec d'autres paramètres par défaut.
+
+-   la fonction `scan` qui représente une version plus flexible de `read.table` (utile pour les fichiers problématiques)
+
+-   la fonction `load` pour les fichiers `RData`.
+
+-   des fonctions incluses dans des packages spécifiques, comme la fonction `fread` du package `data.table` conçue pour lire rapidement de gros fichiers.
+
+## Exercice 2
+
+1. a)  Accéder à l'aide de la fonction `read.table`. À quoi correspondent les options `file`, `header`, `sep`, `dec`, `row.names`, `col.names`, `na.strings`, `colClasses`, `skip` ?
+
+```{r}
+?read.table
+```
+
+b)  Accéder à l'aide de la fonction `scan`. À quoi correspond l'option `what` ?
+
+```{r}
+?scan
+```
+
+
+2.  Importer le jeu de données `Names.csv` disponible sur Cursus dans un data frame nommé `Names`. Aide : on pourra utiliser la fonction `readLines` pour déterminer la structure du fichier (séparateur, ligne réservée aux noms de colonnes, etc.)
+
+```{r}
+# on regarde quel est le répertoire de travail...
+getwd()
+
+readLines("Names.csv")
+names <- read.table("Names.csv",sep=',', header = TRUE)
+View(names)
+```
+
+a)  Que constate-t-on dans les données importées ?
+
+Beaucoup d'erreurs... Essentiellement dues aux données manquqntes.
+
+b)  Déterminer la classe et le type de chacune des variables à l'aide de `class`, `mode`, `str` et `summary`.
+
+```{r}
+lapply(names,class)
+lapply(names,mode)
+str(names)
+summary(names)
+```
+
+c)  Si besoin, modifier l'importation afin que les variables soient d'une classe appropriée.
+
+```{r}
+names <- read.table("Names.csv",sep=',', header = TRUE, 
+                    na.strings = '\\N')
+summary(names)
+
+names <- read.table("Names.csv",sep=',', header = TRUE, 
+                    na.strings = '\\N',
+                    stringsAsFactors = TRUE)
+summary(names)
+
+names <- read.table("Names.csv",sep=',', header = TRUE,
+                    na.strings = '\\N',
+                    colClasses =c(rep('character',2),rep('integer',2),'factor'))
+summary(names)
+```
+
+d)  Compter le nombre de données manquantes dans `Names` à l'aide de la fonction `is.na`.
+
+```{r}
+anyNA(names)
+sum(is.na(names))
+```
+
+e)  Extraire le sous data frame de `Names` ne contenant pas de données manquantes à l'aide de `which` ou `na.omit`.
+
+```{r}
+which(is.na(names),arr.ind=TRUE)
+num_row <- which(is.na(names),arr.ind=TRUE)[,1]
+names[-num_row,]
+
+# ou beaucoup plus simplement...
+na.omit(names)
+```
+
+3.  Importer le jeu de données disponible depuis l'URL <http://tecfa.unige.ch/guides/R/data/edutechwiki-fr-gw-oct-6-2014.csv> avec les commandes suivantes :
+
+```{r }
+Dwiki <- read.csv("http://tecfa.unige.ch/guides/R/data/edutechwiki-fr-gw-oct-6-2014.csv", header = TRUE, sep= ",")
+View(Dwiki)
+```
+
+4.  On s'intéresse au jeu de données contenu dans le fichier `title_basics.tsv` disponible sur Cursus, dont la description peut être trouvée sur <https://www.imdb.com/interfaces/>.
+
+a)  Importer le jeu de données `title_basics.tsv` dans un data frame nommé `Basics`.
+
+```{r}
+t <- Sys.time()
+Basics  <-  read.table('title_basics.tsv', header = TRUE,
+                       na.strings = '\\N', sep='\t',
+                       colClasses = c('character','factor','character','character','factor','integer','integer','integer','character'),
+                       quote = "",fill = TRUE)
+Sys.time()-t
+class(Basics) # Basics est un data frame
+```
+
+b)  Charger le package `data.table` et faire la même chose en utilisant la fonction `fread`. Comparer la durée des deux opérations. Afficher la classe de l'objet obtenu.
+
+```{r}
+library('data.table')
+t <- Sys.time()
+Basics  <-  fread("title_basics.tsv",
+                        header = TRUE,
+                        sep = "\t",
+                        quote = "",
+                        na.strings = '\\N')
+Sys.time()-t
+class(Basics) # Basics est une data table
+```
+
+c)  Sauvegarder `Basics` au format `.RData`. Comparer la taille des deux fichiers.
+
+```{r}
+save(Basics,file='title_basics.RData') # permet de sauvegarder l'objet R Basics
+```
+
+d)  Supprimer l'objet `Basics` de l'environnement de travail (avec `rm`).
+
+```{r}
+rm(Basics)
+```
+
+e)  Re-charger `Basics` depuis le fichier `.RData`.
+
+```{r}
+load('title_basics.RData')
+# Remarque : le nom de l'objet ne dépend pas du nom du fichier !
+class(Basics) 
+```
+
+# Fusion de jeux de données
+
+Les données d'intérêt peuvent parfois être contenues dans plusieurs jeux de données séparés.
+
+## Exercice 3
+
+1.  Importer dans un data frame nommé `Top2020` le jeu de données du fichier `Top10-2020.txt` contenant le top des 10 films les mieux notés par les spectateurs sur le site AlloCine.
+
+```{r}
+readLines("Top10-2020.txt")
+```
+
+On remarque qu'on a une apostrophe dans le titre Schindler's List : il faudra spécifier (dnas l'option `quote`) qu'il ne s'agit pas d'un guillemet encadrant habituellement les chaînes de caractères.
+
+```{r}
+Top2020 <-read.table("Top10-2020.txt",
+                     sep = ";",
+                     header = TRUE,
+                     dec = ",",
+                     quote = "")
+summary(Top2020)
+```
+
+2.  Vérifier que toutes les variables ont une classe et un type appropriés, sinon modifier le data frame (ou l'importation).
+
+```{r}
+str(Top2020)
+```
+
+3.  Calculer la moyenne des notes accordées par la presse, puis par les spectateurs.
+
+```{r}
+cat("moyenne presse : ", mean(Top2020$presse))
+cat("moyenne spectateurs : ", mean(Top2020$spectateurs))
+```
+
+4.  À l'aide de `order`, trier les films dans le data frame en fonction de leur position dans le top.
+
+```{r}
+Top2020 <- Top2020[order(Top2020$position),]
+Top2020
+```
+
+5.  Importer dans un data frame `Top2018` le jeu de données `Top10-2018.txt`. On s'intéresse à l'évolution du top 10 de 2018 à 2020. À l'aide de la fonction `merge`, fusionner les deux jeux de données afin de réunir les informations dans un seul tableau. Utiliser l'option `suffixes` pour indiquer pour chaque colonne l'année correspondante.
+
+```{r}
+readLines("Top10-2018.txt")
+```
+
+```{r}
+Top2018 <- read.table("Top10-2018.txt",
+                      sep = ";",
+                      header = TRUE,
+                      dec = ",",
+                      stringsAsFactors = FALSE,
+                      quote="")
+str(Top2018)
+```
+
+```{r}
+TopCommun <- merge(Top2018,Top2020,by='title', # on indique la colonne commune 
+                   suffixes = c("2018","2020")) 
+summary(TopCommun)
+```
+
+6.  Que se passe-t-il si les individus diffèrent entre les 2 jeux de données ? 
+
+**On remarque que les films n'apparaissant pas dans les deux data frames sont enlevés.**
+
+Combien de films sont dans les deux top 10 réunis ?
+
+```{r}
+nrow(TopCommun)
+```
+
+Si on veut garder tous les films dans le jeu de données agrégé :
+
+```{r}
+TopComplet <- merge(Top2018,Top2020,by='title',
+                    suffixes = c("2018","2020"),
+                    all = TRUE)
+nrow(TopComplet)
+```
+
+7.  Parmi les films apparaissant dans les deux top 10, afficher ceux ayant changé de position d'une année à l'autre.
+
+```{r}
+TopCommun$title[TopCommun$position2018!=TopCommun$position2020]
+```
+
+8.  La moyenne des notes accordées par la presse est-elle plus élevée en 2020 ou en 2018 ?
+
+```{r}
+mean(Top2020$presse)>=mean(Top2018$presse)
+```
+
+On peut l'afficher plus précisément :
+
+```{r}
+ifelse(mean(Top2020$presse)>=mean(Top2018$presse),  
+       'La moyenne des notes accordées par la presse est plus élevée en 2020',
+       'La moyenne des notes accordées par la presse est plus élevée en 2018')
+```
+
+9.  À l'aide de la fonction `write.table`, exporter le data frame ne contenant que les films en commun dans un fichier `Top2018-2020.txt`, puis à l'aide de la fonction `save` dans un fichier `.RData`.
+
+```{r}
+write.table(TopCommun,"Top2018-2020.txt",sep=";",dec=",",quote=FALSE)
+
+readLines("Top2018-2020.txt")
+
+save(TopCommun,file="Top2018-2020.RData")
+```
+
+10. Ajouter ensuite dans le même fichier `Top2018-2020.txt` la ligne correspondant à `Pulp Fiction` du `Top2020`.
+
+```{r}
+write.table(Top2020[Top2020$title=='Pulp Fiction',],"Top2018-2020.txt",append=TRUE,col.names=FALSE,sep=";",dec=",",quote=FALSE)
+
+readLines("Top2018-2020.txt")
+```
+
+# Repérer des données manquantes
+
+Repérer des données manquantes peut parfois s'avérer plus ardu que prévu : c'est pourquoi il est important de réaliser une inspection des données une fois celles-ci importées.
+
+Le jeu de données `Realisateurs.csv` contient le nombre de nominations aux Oscars par catégorie pour les films de 8 réalisateurs.
+
+1.  Importer le jeu de données `Realisateurs.csv`. Indication : on peut utiliser la fonction `readLines` et l'option `skip` de la fonction `read.table`.
+
+```{r}
+readLines('Realisateurs.csv')
+
+# Les 6 premières lignes du fichier snot à supprimer dans la lecture
+
+data <- read.table('Realisateurs.csv', header = TRUE,sep = ',',skip = 6) 
+summary(data)
+```
+2.  Contient-il des données manquantes ?
+
+```{r}
+anyNA(data)
+#ou 
+sum(is.na(data))
+```
+
+3.  Regarder le résumé pour chaque variable. Que remarque-t-on?
+
+```{r}
+summary(data)
+```
+
+On remarque que pour les variable Esthétisme et Meilleur second rôle, le minimum est négatif.
+
+4.  Importer de nouveau le jeu de données en spécifiant les valeurs à considérer comme données manquantes `NA`.
+
+```{r}
+data <- read.table('Realisateurs.csv',header=TRUE,sep = ',',skip = 6, na.strings = "-1") 
+
+summary(data)
+```
+
+5.  Modifier le data frame (ou l'importation) pour que les éléments de la première colonne soient utilisés comme noms de lignes.
+
+```{r}
+# À partir du data frame déjà importé :
+row.names(data) <- data$X # on change les noms des lignes 
+data$X <- NULL # on supprime la première colonne
+data
+
+# En modifiant l'importation :
+data <- read.table('Realisateurs.csv', header = TRUE,sep = ',',skip = 6, na.strings = -1,row.names = 1) # on indique que la première colonne correspond aux noms de lignes 
+data
+```
+
+6.  Afficher les noms des réalisateurs ayant le plus de nominations dans la catégorie Meilleur réalisateur.
+
+```{r}
+row.names(data)[data$Réalisateur==max(data$Réalisateur)]
+# ou
+row.names(data)[which.max(data$Réalisateur)]  # Attention, which.max n renvoie qu'un seul indice quand plusieurs éléments atteignent le maximum
+```
+
+7.  Remplacer les données manquantes par la moyenne de la variable en question.
+
+```{r}
+(index_NA <- which(is.na(data),arr.ind=TRUE))
+(col_NA <- index_NA[,2])
+(moyennes <- apply(data[,col_NA],MARGIN = 2,mean,na.rm=TRUE))
+data[index_NA[1,]]<- moyennes[1]
+data[index_NA[2,]]<- moyennes[2]
+
+data
+
+# sinon, on peut utiliser apply avec une fonction qu'on construit soi-même :
+data <- apply(data, MARGIN = 2, # la fonction va être appliquée sur la deuxième dimension i.e. les colonnes
+              FUN = function(x){
+                replace(x,is.na(x),mean(x,na.rm = TRUE))
+                }
+              )
+
+data
+```
+
+8.  Remplacer les données manquantes par la partie entière de la moyenne des valeurs sur la ligne correspondante.
+
+```{r}
+data <- apply(data, MARGIN = 1,
+              FUN = function(x){
+                replace(x,is.na(x),floor(mean(x,na.rm = TRUE)))
+                }
+              )
+
+class(data)
+data # le data.frame a été transformé en matrice transposée
+
+data <- data.frame(t(data))
+data
+```
+
+# Manipulation de jeux de données : premiers pas dans le tidyverse
+
+Quelques références : 
+- [R for Data Science](https://r4ds.had.co.nz), G. Grolemund, H. Wickham ; 
+- [Introduction à R et au tidyverse](https://juba.github.io/tidyverse/10-dplyr.html), J. Barnier.
+
+
+## Exercice 4
+
+Reprendre le jeu de données `starwars` du package `dplyr`, au format `tibble` d'origine, reprendre les questions de l'exercice 1 pouvant être résolues à l'aide des fonctions de `dplyr` et les résoudre avec ces fonctions.
+
+** Remarque :** 
+
+```{r}
+data(starwars,package="dplyr")
+class(starwars)
+```
+
+`starwars` est au  format `tibble`,  extension des tableaux de données utilisé dans le `tidyverse`.
+
+1.  Quelle est la dimension de `starwars` ?
+
+Le package `dplyr` permet l'utilisation d'un `pipe` (tuyau en anglais) codé `%>%`. Un `pipe` dit "natif" codé `|>` a, depuis, été introduit dans le package `base`.
+
+Une première utilisation de ce pipe :
+
+```{r}
+star.df |>
+  class()
+
+starwars |>
+  class()
+```
+
+Pour déterminer la dimension de `starwars`, on peut donc exécuter :
+
+```{r}
+starwars |> 
+  dim() 
+```
+
+2.  Combien de variables `starwars` contient-il ? Quel est le nom de ces variables ?
+
+```{r}
+starwars |>
+  ncol() 
+#ou 
+starwars |>
+  NCOL()
+
+starwars |>
+  names()
+```
+
+3.  Afficher l'aide de `starwars`. Donner la classe et le type de chacune des variables à l'aide de la fonction `summary` par exemple. Les classes et types sont-ils appropriés (par rapport à la description de chaque variable) ?
+
+```{r}
+starwars |>
+  help()
+
+starwars |>
+  summary()
+
+starwars |>
+  lapply(class)
+
+starwars |>
+  lapply(mode)
+```
+
+4.  Le jeu de données contient-il des données manquantes ? Afficher toutes les informations possibles sur ces données manquantes. 
+
+```{r}
+starwars |>
+  anyNA()
+
+starwars |>
+  is.na() |>
+  sum()
+
+starwars |>
+  is.na() |>
+  which(arr.ind=TRUE)
+```
+
+**Remarque** : le jeu de données contient d'autres données manquantes sous forme de `character(0)` mais on ne va pas s'en occuper dans cet exercice.
+
+5.  Afficher les $5$ premières et dernières lignes de `starwars` en utilisant les fonctions `head` et `tail`.
+
+```{r}
+(h <- starwars |>
+  head(5))
+
+(t <- starwars |>
+  tail(5))
+
+h |> 
+  rbind(t)
+```
+
+6.  Afficher la première et la troisième ligne de `starwars`.
+
+```{r}
+slice(starwars,c(1,3))
+# ou 
+starwars |>
+  slice(c(1,3))
+```
+
+7.  Afficher les données des $10$ personnages les plus jeunes.
+
+```{r}
+(dixplusjeunes <-
+   starwars |>
+   arrange(birth_year) |>
+   slice(1:10))
+
+#  plus directement :
+(dixplusjeunes <-
+   starwars |>
+   slice_min(birth_year,n=10))
+
+```
+
+8.  Afficher la variable correspondant au nom des personnages de $4$ manières différentes.
+
+```{r}
+starwars |>
+  select(name)
+# ou
+starwars |>
+  select(1)
+# ou au format vecteur
+starwars |> 
+  pluck(1)
+# ou
+starwars |> 
+  pluck("name")
+```
+
+9. Transformer les variables qualitatives de `starwars` en facteurs. Regarder à nouveau le résumé des données.
+
+```{r}
+# On utilise ici la fonction across dont la structure est :
+# across (colonnes,fonction) ou
+# across (colonnes,fonction,renommage)
+
+starwars <- 
+  starwars |>
+  mutate(
+    across(where(is.character) & -name, as.factor)
+    )
+  
+starwars |>
+  map(class)
+```
+
+10. Créer un facteur `ageclass` correspondant à des classes d'âges de son choix à partir de la variable `birth_year` et de la fonction `cut`.
+
+```{r}
+ageclass <-
+  starwars |>
+  pluck("birth_year") |>
+  cut(4)
+
+ageclass
+
+# ou avec les fonctions cut_interval et cut_width de ggplot2 :
+ageclass <-
+  starwars |>
+  pluck("birth_year") |>
+  cut_interval(4)
+
+ageclass
+# Les classes définissant les niveaux du facteur sont mieux délimitées
+```
+
+11. Afficher le nombre de personnages dont l'âge se situe dans la première classe d'âge créée, de plusieurs façons différentes.
+
+```{r}
+starwars <-
+  starwars |> 
+  bind_cols(ageclass=ageclass)
+# ou
+starwars <-
+  starwars |> 
+  mutate(ageclass=ageclass)
+# puis
+starwars |>
+  group_by(ageclass) |>
+  summarize(length(ageclass))
+```
+
+12. Afficher le genre des Droïdes. Que constate-t-on ?
+
+```{r}
+starwars |>
+  filter(species=="Droid") |>
+  select(gender)
+```
+
+13. Créer un vecteur contenant la moyenne des tailles pour les personnages selon leur "espèce".
+
+```{r}
+m <- 
+  starwars |>
+  group_by(species) |>
+  summarize(mean(height,na.rm=TRUE))
+
+m
+```
+
+14. Créer un vecteur contenant l'écart type des tailles pour les personnages selon leur "espèce".
+
+```{r}
+sd <- 
+  starwars |>
+  group_by(species) |>
+  summarize(sd(height,na.rm=TRUE))
+
+sd
+```
+
+**Remarque** : l'écart type n'a pu être calculé quand l'espèce ne contient pas au minimum deux individus (l'estimateur de la variance est l'estimateur sans biais donc renormalisé par (n-1)...).
+
+15. Résumer les informations obtenues sur la taille (moyenne et écart-type pour chaque "espèce").
+
+```{r}
+starwars |>
+  group_by(species) |>
+  summarize(m=mean(height,na.rm=TRUE),sd=sd(height,na.rm=TRUE))
+```
+
+16. Calculer la moyenne des tailles pour les personnages selon leur "espèce" et leur genre (de façon croisée).
+
+```{r}
+starwars |>
+  group_by(species,gender) |>
+  summarize(m=mean(height,na.rm=TRUE))
+```
+
+17. Créer un facteur `human` de niveaux `yes` et `no` à partir de la variable `species`.
+
+```{r}
+starwars <- starwars |>
+  mutate(human=fct_collapse(species,yes="Human",no=setdiff(levels(species),"Human")))
+
+starwars |>
+       View()
+```
+
+27. Ajouter ce facteur au data frame `star.df`.
+
+Le code précédent a déjà ajouté la colonne.
+
+28. Créer un vecteur contenant l'âge moyen des personnages humains et celui des personnages non humains à l'aide de la fonction `group_split` (au lieu de `split`).
+
+```{r}
+starwars_split <- starwars |>
+  group_split(human,)
+
+(birthyear_no <- starwars_split[[1]] |>
+  pluck("birth_year") |>
+  mean(na.rm=TRUE))
+
+(birthyear_yes <- starwars_split[[2]] |>
+  pluck("birth_year") |>
+  mean(na.rm=TRUE))
+  
+# Pour vérifier :
+
+starwars |> 
+  group_by(human) |>
+  summarize(mean(birth_year,na.rm=TRUE))
+```
+
+
+1. Importer le jeu de données `bear_attacks.csv` disponible dans Cursus, dans un data frame intitulé `bears`. Vérifier que le jeu de données a été bien importé en aﬃchant :
+— les dimensions de `bears`,
+— un résumé statistique de `bears`.
+```{r}
+bears <- read.csv("bear_attacks.csv",dec=".")
+dim(bears)
+summary(bears)
+```
+
+2. Aﬃcher les deux premières lignes de `bears` de 2 manières différentes.
+```{r}
+head(bears,2)
+bears[1:2,]
+# ou avec le package tidyverse ou dplyr :
+library(tidyverse)
+bears |> slice(1:2)
+```
+
+
+3. Aﬃcher les deux dernières colonnes de `bears` de 2 manières différentes.
+```{r}
+nc <- ncol(bears)
+bears[ , (nc-1):nc]
+bears[ , c("Latitude", "Longitude")]
+# ou
+library(tidyverse)
+bears |> select(Latitude,Longitude)
+```
+
+4. Aﬃcher la classe de toutes les variables contenues dans `bears`, puis transformer dans ce data frame
+les variables `gender`, `Month`, `Type`, `Type.of.bear`, `Hunter`, `Grizzly`, `Hikers`, `Only.one.killed` en facteurs.
+```{r}
+sapply(bears,class)
+# ou avec tidyverse :
+bears |> map(class)
+
+bears$gender <- as.factor(bears$gender)
+bears$Month <- as.factor(bears$Month)
+bears$Type <- as.factor(bears$Type)
+bears$Type.of.bear <- as.factor(bears$Type.of.bear)
+bears$Hunter <- as.factor(bears$Hunter)
+bears$Grizzly <- as.factor(bears$Grizzly)
+bears$Hikers <- as.factor(bears$Hikers)
+bears$Only.one.killed <- as.factor(bears$Only.one.killed)
+
+# ou avec tidyverse :
+bears <- bears |> mutate_at(c('gender', 'Month' , 'Type' , 'Type.of.bear', 'Hunter' , 'Grizzly' , 'Hikers' , 'Only.one.killed'), as.factor)
+bears |> map(class)
+```
+5. Transformer la variable `Date` en date.
+```{r}
+bears$Date <- as.Date(bears$Date,format="%d/%m/%Y")
+```
+
+6. Calculer le nombre de données manquantes dans les variables `age`, `Latitude` et `Longitude`.
+```{r}
+sum(is.na(bears$age))
+sum(is.na(bears$Latitude))
+sum(is.na(bears$Longitude))
+```
+
+7. Aﬃcher les indices des données correspondant à des victimes dont l’âge est inférieur à 5 ans, puis
+aﬃcher les noms de ces victimes.
+
+```{r}
+index <- which(bears$age<=5)
+index
+bears$Name[index]
+```
+
+8. Aﬃcher les niveaux du facteur `Month`, ainsi qu’une table des eﬀectifs de `Month`.
+```{r}
+levels(bears$Month)
+effectifs <- table(bears$Month)
+effectifs
+```
+
+9. Vérifier dans la table précédente que les deux mois où les victimes ont été les plus nombreuses sont
+les mois de juillet et août. Extraire les données des attaques ayant eu lieu durant ces deux mois-ci.
+```{r}
+# Facultatif (pour vérifier) :
+levels(bears$Month)[order(effectifs)[11:12]]
+
+juilletaout <- bears[bears$Month=="Jul"|bears$Month=="Aug" , ]
+
+# ou avec tidyverse :
+juilletaout <- bears |> filter(Month=="Jul"|Month=="Aug")
+```
+
+10. Parmi les attaques de ces deux mois, calculer combien de victimes étaient chasseuses, et combien
+étaient randonneuses (on pourra utiliser la fonction `sum()`).
+```{r}
+sum(juilletaout$Hunter==1)
+sum(juilletaout$Hikers==1)
+```
+
+11. Aﬃcher les indices de toutes les lignes de `bears` dont la latitude et la longitude sont les mêmes que
+celles de la première attaque du jeu de données. Aﬃcher le nombre de victimes de cette attaque.
+```{r}
+ index <- which(bears$Latitude==bears$Latitude[1]&bears$Longitude==bears$Longitude[1])
+index
+length(index)
+```
+
+12. Aﬃcher la variable `Only.one.killed` correspondant à cette attaque et vérifier qu’elle est cohérente
+avec le nombre de victimes aﬃché précédemment.
+```{r}
+bears$Only.one.killed[index]
+```
+
+13. Aﬃcher les niveaux du facteur `gender`. Regrouper les niveaux "female" et "female " (avec un
+espace) dans un seul niveau intitulé "female" et les niveaux "male" et "male " (avec un espace) dans
+un seul niveau intitulé "male".
+```{r}
+levels(bears$gender)
+levels(bears$gender)[2:3] <- "female"
+levels(bears$gender)[3:4] <- "male"
+levels(bears$gender)
+```
+
+14. Calculer l’âge moyen des victimes selon les niveaux du facteur `gender` de deux manières diﬀérentes.
+```{r}
+tapply(bears$age,bears$gender,mean)
+by(bears$age,bears$gender,mean)
+aggregate(bears$age,list(bears$gender),mean)
+
+bears |> group_by(gender) |> summarize(mean(age))
+```
+
+15. Créer une matrice intitulée `coordonnees` contenant en lignes les valeurs des variables quantitatives
+`Latitude` et `Longitude` dont on aura retiré les données manquantes (on pourra utiliser la fonction
+`na.omit()`).
+```{r}
+coordonnees <- matrix(c(na.omit(bears$Latitude),na.omit(bears$Longitude)),nrow=2,byrow=TRUE)
+```
+
+16. Calculer le maximum des variables quantitatives `Latitude` et `Longitude` à l’aide de la matrice
+`coordonnees` construite à la question précédente et de la fonction `apply()`.
+```{r}
+apply(coordonnees,1,max)
+```
+
+17. Créer de deux façons diﬀérentes un vecteur numérique intitulé `Breaks` contenant les valeurs 0, 10,
+20,. . ., 100.
+```{r}
+Breaks <- seq(0,100,by=10)
+```
+
+18. Créer, à l’aide de la variable `age`, de la fonction `cut()` et du vecteur `Breaks` construit à la question
+précédente, un facteur intitulé `age_class` à dix niveaux : [0; 10], ]10; 20], ]20; 30], . . . , ]90; 100].
+```{r}
+age_class <- cut(bears$age, breaks = Breaks, right = TRUE, include.lowest = TRUE)
+```
+
+19. Ajouter le facteur `age_class` au data frame `bears`, et exporter ce nouveau jeu de données dans un
+fichier de format `.csv`.
+```{r}
+bears <- 
+  cbind(bears,age_class)
+
+write.table(bears,"bears.csv")
+```
+
+20. Calculer le nombre de victimes d’ours polaires pour chaque niveau du facteur `age_class` (on pourra
+utiliser les fonctions `tapply()` et `sum()`)
+```{r}
+tapply(bears$Type.of.bear == "Polar Bear" , bears$gender , sum)
+```
+
+21. Questions bonus : Y a-t-il plus de victimes de genre féminin que de victimes de genre masculin
+recensées dans ce jeu de données? De quels biais statistiques faut-il se méfier devant la réponse donnée
+à cette question ?
+```{r}
+table(bears$gender)
+```
+
+# CC1 2022
+
+## Première partie : calendrier de l’avent
+1. Créer un vecteur de caractères jour contenant les éléments J-24, J-23, . . . , J-1 à l’aide de la fonction paste.
+```{r}
+jour <- paste("J",seq(24,1,by=-1),sep = "-")
+jour
+```
+
+2. Créer un vecteur numérique x contenant les entiers de 8 à 12 compris. Créer un vecteur numérique poids contenant 24 éléments pris au hasard (avec remise) dans les éléments du vecteur x.
+```{r}
+x <- 8:12
+poids <- sample(x,24, replace = TRUE)
+poids
+```
+
+3. Créer un vecteur numérique y contenant les entiers 40, 50, 60, 70 à l’aide de la fonction seq. Créer unvecteur numérique pourcentage.cacao contenant le premier élément de y répété 5 fois, le deuxième élément de y répété 8 fois, le troisième élément de y répété 7 fois, le quatrième élément de y répété 4
+fois, à l’aide de la fonction rep.
+```{r}
+y <- c(seq(40,70,by=10))
+pourcentage.cacao <- rep(y,c(5,8,7,4))
+pourcentage.cacao
+```
+
+4. Créer un vecteur numérique z contenant 48 éléments pris au hasard (avec remise) dans {0, 1}. Créer un vecteur numérique lait contenant les 24 premières valeurs de z et un vecteur numérique forme contenant les 24 dernières valeurs de z.
+```{r}
+z <- sample(c(0,1),48,replace=TRUE)
+z
+lait <- z[1:24]
+lait
+forme <- z[25:length(z)]
+forme
+```
+
+5. Transformer le vecteur numérique lait en facteur à deux niveaux non et oui correspondant respectivement aux valeurs 0 et 1, puis le vecteur numérique forme en facteur à deux niveaux ovale et rectangle correspondant respectivement aux valeurs 0 et 1.
+```{r}
+lait1 <- factor(lait,labels = c("non","oui"))
+lait1
+lait <- as.factor(lait)
+levels(lait) <- c("non","oui")
+lait
+```
+
+6. Créer le vecteur de dates avent contenant tous les jours du 1er décembre 2021 au 24 décembre 2021.
+```{r}
+avent <- seq(as.Date("2021/12/01"),as.Date("2021/12/24"),by = "day")
+avent
+```
+
+7. Créer un data.frame calendrier qui contient les objets jour, avent, poids, pourcentage.cacao, lait, et forme. Exporter calendrier dans un fichier au format .txt, avec un point-virgule comme séparateur et une virgule comme décimale.
+```{r}
+calendrier <- data.frame(jour,avent,poids,pourcentage.cacao,lait,forme)
+View(calendrier)
+write.table(calendrier,file = "./CC/Calendrier.txt",sep = ";", dec = ",")
+```
+
+##Deuxième partie : notation de chocolats
+Nous étudions ici l’extrait d’un jeu de données proposé dans une compétition en science des données Kaggle (https://www.kaggle.com/soroushghaderi/chocolate-bar-2020), consacrée à l’analyse de notations de différents types de chocolat par des expert.es.
+Le jeu de données contient pour 2224 barres de chocolat noir les variables suivantes :
+    — country : variable qualitative indiquant le pays de fabrication ;
+    — review.date : l’année de l’évaluation ;
+    — bean.origin : variable qualitative indiquant le pays d’origine des fèves de cacao ;
+    — cocoa.percent : le pourcentage de cacao ;
+    — rating : la note moyenne donnée par les expert.es ;
+    — ingredients : le nombre d’ingrédients ;
+    — cocoa.butter : variable qualitative indiquant la présence de beurre de cacao (have.cbutter) ou non (have.not.cbutter) dans la composition ;
+    — vanilla : variable qualitative indiquant la présence de vanille (have.vanilla) ou non (have.not.vanilla) dans la composition ;
+    — lecithin : variable qualitative indiquant la présence de lécithine (have.lecithin) ou non (have.not.lecithin) dans la composition ;
+    — salt : variable qualitative indiquant la présence de sel (have.salt) ou non (have.not.salt) dans la composition ;
+    — sugar : variable qualitative indiquant la présence de sucre (have.sugar) ou non (have.not.sugar) dans la composition ;
+    — sweetener : variable qualitative indiquant la présence d’édulcorant (have.sweetener) ou non (have.not.sweetener) dans la composition ;
+    — first.taste : mots décrivant le premier goût ressenti
+    — second.taste : mots décrivant le deuxième goût ressenti par les expert.es.
+    
+1. Importer le jeu de données disponible dans Cursus sous le nom chocolate_extract.csv, dans un data frame que l’on intitulera choc. Afficher un résumé statistique de choc, puis vérifier si choc contient des données manquantes.
+```{r}
+choc <- read.csv("chocolate_extract.csv",header=TRUE,sep = ",", dec=".")
+#View(choc)
+summary(choc)
+choc[is.na(choc)]
+anyNA(choc)
+```
+
+2. Afficher les 3 premières et 3 dernières lignes de choc de deux manières différentes.
+```{r}
+head(choc,3)
+choc[1:3,]
+tail(choc,3)
+choc[(nrow(choc)-2):(nrow(choc)),]
+
+```
+
+3. Afficher la classe de toutes les variables contenues dans choc, puis transformer les 8 variables qualitatives (c.f. descriptif des variables ci-dessus) en facteurs.
+
+```{r}
+lapply(choc,class)
+choc$country <- factor(choc$country)
+choc$bean.origin <- factor(choc$bean.origin)
+choc$cocoa.butter <- factor(choc$cocoa.butter)
+choc$vanilla <- factor(choc$vanilla)
+choc$lecithin <- factor(choc$lecithin)
+choc$salt <- factor(choc$salt)
+choc$sugar <- factor(choc$sugar)
+choc$sweetener <- factor(choc$sweetener)
+```
+
+4. Transformer le vecteur numérique review.date en vecteur de date.
+```{r}
+choc$review.date <- as.Date(as.character(choc$review.date),format = "%Y")
+```
+
+5. Extraire les données correspondant à la France ou la Belgique comme pays de fabrication.
+```{r}
+ind <- choc$country=="France"|choc$country=="Belgique"
+choc[ind,]
+```
+
+6. Extraire les données correspondant à un pourcentage de cacao compris entre 50% et 60%.
+```{r}
+choc[(choc$cocoa.percent>=50&choc$cocoa.percent<=60),]
+```
+
+7. Afficher le pays d’origine des fèves de cacao correspondant à la note (rating) la plus élevée.
+```{r}
+choc$bean.origin[which.max(choc$rating)]
+```
+
+8. Calculer la moyenne de la variable rating en fonction des niveaux du facteur sugar, en utilisant l’une des fonctions tapply, by ou aggregate.
+
+```{r}
+tapply(choc$rating,choc$sugar,mean)
+```
+
+Question bonus : Répondre à la même question, mais cette fois en utilisant la fonction split.
+```{r}
+h_sugar <- split(choc,choc$sugar)
+mean(h_sugar$have.not.sugar$rating)
+mean(h_sugar$have.sugar$rating)
+```
+9. Choisir une variable qualitative dans le jeu de données et représenter cette variable avec le graphe approprié de son choix.
+```{r}
+pie(table(choc$vanilla))
+```
+
+10. Choisir une variable quantitative continue dans le jeu de données et représenter cette variable avec le graphe approprié de son choix.
+```{r}
+boxplot(choc$rating)
+```
+
+11. Choisir une variable quantitative discrète dans le jeu de données et représenter cette variable avec le graphe approprié de son choix.
+```{r}
+plot(table(choc$ingredients))
+```
+
+12. Créer, à l’aide de la fonction cut, un facteur intitulé rating.fact à quatre niveaux :
+  — Outstanding correspondant à une note (rating) appartenant à [4, 5] ;
+  — Recommended correspondant à une note (rating) appartenant à [3, 4[ ;
+  — Disappointing correspondant à une note (rating) appartenant à [2, 3[ ;
+  — Unpleasant correspondant à une note (rating) appartenant à [1, 2[.
+```{r}
+rating.fact <- cut(choc$rating,breaks = 1:5, right = FALSE,include.lowest = TRUE)
+levels(rating.fact) <- c("Unpleasant", "Disappointing", "Recommended", "Outstanding")
+levels(rating.fact)
+```
+
+13. Ajouter le facteur rating.fact au data.frame choc, puis tracer les diagrammes en boîte (boxplot) des pourcentages de sucre pour tous les niveaux du facteur rating.fact
+```{r}
+choc <- cbind(choc,rating.fact)
+View(choc)
+```
+
+# Manipuler les données avec `dplyr` {#sec-dplyr}
+
+{{< include _setup.qmd >}}
+
+`dplyr` est une extension facilitant le traitement et la manipulation de données contenues dans une ou plusieurs tables. Elle propose une syntaxe claire et cohérente, sous formes de verbes, pour la plupart des opérations de ce type.
+
+`dplyr` part du principe que les données sont organisées selon le modèle des *tidy data* (voir @sec-tidydata). Les fonctions de l'extension peuvent s'appliquer à des tableaux de type `data.frame` ou `tibble`, et elles retournent systématiquement un `tibble` (voir @sec-tibbles).
+
+Le code présent dans ce document nécessite d'avoir installé la version 1.0 de `dplyr` (ou plus récente).
+
+## Préparation
+
+`dplyr` fait partie du coeur du *tidyverse*, elle est donc chargée automatiquement avec :
+
+```{r message=FALSE, warning=FALSE, cache = FALSE}
+library(tidyverse)
+```
+
+On peut également la charger individuellement.
+
+```{r}
+library(dplyr)
+```
+
+Dans ce qui suit on va utiliser le jeu de données `nycflights13`, contenu dans l'extension du même nom (qu'il faut donc avoir installé). Celui-ci correspond aux données de tous les vols au départ d'un des trois aéroports de New-York en 2013. Il a la particularité d'être réparti en trois tables :
+
+- `flights` contient des informations sur les vols : date, départ, destination, horaires, retard...
+- `airports` contient des informations sur les aéroports
+- `airlines` contient des données sur les compagnies aériennes
+
+On va charger les trois tables du jeu de données :
+
+```{r cache = FALSE}
+library(nycflights13)
+## Chargement des trois tables
+data(flights)
+data(airports)
+data(airlines)
+```
+
+Trois objets correspondant aux trois tables ont dû apparaître dans votre environnement.
+
+
+## Les verbes de `dplyr`
+
+La manipulation de données avec `dplyr` se fait en utilisant un nombre réduit de verbes, qui correspondent chacun à une action différente appliquée à un tableau de données.
+
+### `slice`
+
+Le verbe `slice` sélectionne des lignes du tableau selon leur position. On lui passe un chiffre ou un vecteur de chiffres.
+
+Si on souhaite sélectionner la 345e ligne du tableau `airports` :
+
+```{r}
+slice(airports, 345)
+```
+
+Si on veut sélectionner les 5 premières lignes :
+
+```{r}
+slice(airports, 1:5)
+```
+
+`slice` propose plusieurs variantes utiles, dont `slice_head` et `slice_tail`, qui permettent de sélectionner les premières ou les dernières lignes du tableau (on peut spécifier le nombre de lignes souhaitées avec `n`, ou la proportion avec `prop`).
+
+```{r}
+slice_tail(airports, n = 3)
+```
+
+```{r}
+slice_head(airlines, prop = 0.2)
+```
+
+Autres variantes utiles, `slice_min` et `slice_max` permettent de sélectionner les lignes avec les valeurs les plus grandes ou les plus petite d'une variable donnée. Ainsi, la commande suivante sélectionne le vol ayant le retard au départ le plus faible.
+
+```{r}
+slice_min(flights, dep_delay)
+```
+
+On peut aussi spécifier le nombre de lignes souhaitées, par exemple la commande suivante retourne les 5 aéroports avec l'altitude la plus élevée (en cas de valeurs ex-aequo, il se peut que le nombre de lignes retournées soit plus élevé que celui demandé).
+
+```{r}
+slice_max(airports, alt, n = 5)
+```
+
+### `filter` {#sec-filter}
+
+`filter` sélectionne des lignes d'une table selon une condition. On lui passe en paramètre un test, et seules les lignes pour lesquelles ce test renvoie `TRUE` (vrai) sont conservées. Pour plus d'informations sur les tests et leur syntaxe, voir @sec-tests.
+
+Par exemple, si on veut sélectionner les vols du mois de janvier, on peut filtrer sur la variable `month` de la manière suivante :
+
+```{r}
+filter(flights, month == 1)
+```
+
+Si on veut uniquement les vols avec un retard au départ (variable `dep_delay`) compris entre 10 et 15 minutes :
+
+```{r}
+filter(flights, dep_delay >= 10 & dep_delay <= 15)
+```
+
+Si on passe plusieurs arguments à `filter`, celui-ci rajoute automatiquement une condition *et* entre les conditions. La commande précédente peut donc être écrite de la manière suivante, avec le même résultat :
+
+```{r eval = FALSE}
+filter(flights, dep_delay >= 10, dep_delay <= 15)
+```
+
+On peut également placer des fonctions dans les tests, qui nous permettent par exemple de sélectionner les vols ayant une distance supérieure à la distance médiane :
+
+```{r}
+filter(flights, distance > median(distance))
+```
+
+
+### `select` et `rename` {#sec-select-rename}
+
+`select` permet de sélectionner des colonnes d'un tableau de données. Ainsi, si on veut extraire les colonnes `lat` et `lon` du tableau airports :
+
+```{r}
+select(airports, lat, lon)
+```
+Si on fait précéder le nom d'un `-`, la colonne est éliminée plutôt que sélectionnée :
+
+```{r}
+select(airports, -lat, -lon)
+```
+
+`select` comprend toute une série de fonctions facilitant la sélection de colonnes multiples. Par exemple, `starts_with`, `ends_width`, `contains` ou `matches` permettent d'exprimer des conditions sur les noms de variables.
+
+```{r}
+select(flights, starts_with("dep_"))
+```
+
+La syntaxe `colonne1:colonne2` permet de sélectionner toutes les colonnes situées entre `colonne1` et `colonne2` incluses^[À noter que cette opération est un peu plus "fragile" que les autres, car si l'ordre des colonnes change elle peut renvoyer un résultat différent.].
+
+```{r}
+select(flights, year:day)
+```
+
+`select` propose de nombreuses autres possibilités de sélection qui sont décrites dans [la documentation de l'extension `tidyselect`](https://tidyselect.r-lib.org/reference/language.html).
+
+Une variante de `select` est `rename`^[Il est également possible de renommer des colonnes directement avec `select`, avec la même syntaxe que pour `rename`.], qui permet de renommer des colonnes. On l'utilise en lui passant des paramètres de la forme `nouveau_nom = ancien_nom`. Ainsi, si on veut renommer les colonnes `lon` et `lat` de `airports` en `longitude` et `latitude` :
+
+```{r}
+rename(airports, longitude = lon, latitude = lat)
+```
+
+Si les noms de colonnes comportent des espaces ou des caractères spéciaux, on peut les entourer de guillemets (`"`) ou de quotes inverses (`` ` ``) :
+
+```{r}
+tmp <- rename(
+    flights,
+    "retard départ" = dep_delay,
+    "retard arrivée" = arr_delay
+)
+select(tmp, `retard départ`, `retard arrivée`)
+```
+
+
+
+### `arrange`
+
+`arrange` réordonne les lignes d'un tableau selon une ou plusieurs colonnes.
+
+Ainsi, si on veut trier le tableau `flights` selon le retard au départ croissant :
+
+```{r}
+arrange(flights, dep_delay)
+```
+
+On peut trier selon plusieurs colonnes. Par exemple selon le mois, puis selon le retard au départ :
+
+```{r}
+arrange(flights, month, dep_delay)
+```
+
+Si on veut trier selon une colonne par ordre décroissant, on lui applique la fonction `desc()` :
+
+```{r}
+arrange(flights, desc(dep_delay))
+```
+
+Combiné avec `slice`, `arrange` permet par exemple de sélectionner les trois vols ayant eu le plus de retard :
+
+```{r}
+tmp <- arrange(flights, desc(dep_delay))
+slice(tmp, 1:3)
+```
+
+
+### `mutate`
+
+`mutate` permet de créer de nouvelles colonnes dans le tableau de données, en général à partir de variables existantes.
+
+Par exemple, la table `flights` contient la durée du vol en minutes.. Si on veut créer une nouvelle variable `duree_h` avec cette durée en heures, on peut faire :
+
+```{r}
+flights <- mutate(flights, duree_h = air_time / 60)
+
+select(flights, air_time, duree_h)
+```
+
+On peut créer plusieurs nouvelles colonnes en une seule commande, et les expressions successives peuvent prendre en compte les résultats des calculs précédents. L'exemple suivant convertit d'abord la durée en heures dans une variable `duree_h` et la distance en kilomètres dans une variable `distance_km`, puis utilise ces nouvelles colonnes pour calculer la vitesse en km/h.
+
+```{r}
+flights <- mutate(
+    flights,
+    duree_h = air_time / 60,
+    distance_km = distance / 0.62137,
+    vitesse = distance_km / duree_h
+)
+
+select(flights, air_time, duree_h, distance, distance_km, vitesse)
+```
+
+À noter que `mutate` est évidemment parfaitement compatible avec les fonctions vues @sec-vectorfactor sur les recodages : `fct_recode`, `ifelse`, `case_when`...
+
+L'avantage d'utiliser `mutate` est double. D'abord il permet d'éviter d'avoir à saisir le nom du tableau de données dans les conditions d'un `ifelse` ou d'un `case_when` :
+
+```{r, eval=FALSE}
+flights <- mutate(
+    flights,
+    type_retard = case_when(
+        dep_delay > 0 & arr_delay > 0 ~ "Retard départ et arrivée",
+        dep_delay > 0 & arr_delay <= 0 ~ "Retard départ",
+        dep_delay <= 0 & arr_delay > 0 ~ "Retard arrivée",
+        TRUE ~ "Aucun retard"
+    )
+)
+```
+
+Ensuite, il permet aussi d'intégrer ces recodages dans un *pipeline* de traitement de données, concept présenté dans la section suivante.
+
+
+## Enchaîner les opérations avec le *pipe* {#sec-pipe}
+
+Quand on manipule un tableau de données, il est très fréquent d'enchaîner plusieurs opérations. On va par exemple extraire une sous-population avec `filter`, sélectionner des colonnes avec `select` puis trier selon une variable avec `arrange`, etc.
+
+Quand on veut enchaîner des opérations, on peut le faire de différentes manières. La première est d'effectuer toutes les opérations en une fois en les "emboîtant" :
+
+```{r eval=FALSE}
+arrange(select(filter(flights, dest == "LAX"), dep_delay, arr_delay), dep_delay)
+```
+
+Cette notation a plusieurs inconvénients :
+
+- elle est peu lisible
+- les opérations apparaissent dans l'ordre inverse de leur réalisation. Ici on effectue d'abord le `filter`, puis le `select`, puis le `arrange`, alors qu'à la lecture du code c'est le `arrange` qui apparaît en premier.
+- Il est difficile de voir quel paramètre se rapporte à quelle fonction
+
+Une autre manière de faire est d'effectuer les opérations les unes après les autres, en stockant les résultats intermédiaires dans un objet temporaire :
+
+```{r eval=FALSE}
+tmp <- filter(flights, dest == "LAX")
+tmp <- select(tmp, dep_delay, arr_delay)
+arrange(tmp, dep_delay)
+```
+
+C'est nettement plus lisible, l'ordre des opérations est le bon, et les paramètres sont bien rattachés à leur fonction. Par contre, ça reste un peu "verbeux", et on crée un objet temporaire `tmp` dont on n'a pas réellement besoin.
+
+
+Pour simplifier et améliorer encore la lisibilité du code, on va utiliser un nouvel opérateur, baptisé *pipe*^[Le *pipe* a été  introduit à l'origine par l'extension `magrittr`, et repris par `dplyr`]. Le *pipe* se note `%>%`, et son fonctionnement est le suivant : si j'exécute `expr %>% f`, alors le résultat de l'expression `expr`, à gauche du *pipe*, sera passé comme premier argument à la fonction `f`, à droite du *pipe*, ce qui revient à exécuter `f(expr)`.
+
+Ainsi les deux expressions suivantes sont rigoureusement équivalentes :
+
+```{r eval=FALSE}
+filter(flights, dest == "LAX")
+```
+```{r eval=FALSE}
+flights %>% filter(dest == "LAX")
+```
+
+Ce qui est particulièrement intéressant, c'est qu'on va pouvoir enchaîner les *pipes*. Plutôt que d'écrire :
+
+```{r eval=FALSE}
+select(filter(flights, dest == "LAX"), dep_delay, arr_delay)
+```
+
+On va pouvoir faire :
+
+```{r eval=FALSE}
+flights %>% filter(dest == "LAX") %>% select(dep_delay, arr_delay)
+```
+
+À chaque fois, le résultat de ce qui se trouve à gauche du *pipe* est passé comme premier argument à ce qui se trouve à droite : on part de l'objet `flights`, qu'on passe comme premier argument à la fonction `filter`, puis on passe le résultat de ce `filter` comme premier argument du `select`.
+
+Le résultat final est le même avec les deux syntaxes, mais avec le *pipe* l'ordre des opérations correspond à l'ordre naturel de leur exécution, et on n'a pas eu besoin de créer d'objet intermédiaire.
+
+Si la liste des fonctions enchaînées est longue, on peut les répartir sur plusieurs lignes à condition que l'opérateur `%>%` soit en fin de ligne :
+
+```{r, eval=FALSE}
+flights %>%
+  filter(dest == "LAX") %>%
+  select(dep_delay, arr_delay) %>%
+  arrange(dep_delay)
+```
+
+::: {.callout-note}
+On appelle une suite d'instructions de ce type un *pipeline*.
+:::
+
+Évidemment, il est naturel de vouloir récupérer le résultat final d'un *pipeline* pour le stocker dans un objet. On peut stocker le résultat du *pipeline* ci-dessus dans un nouveau tableau `delay_la` de la manière suivante :
+
+```{r}
+delay_la <- flights %>%
+  filter(dest == "LAX") %>%
+  select(dep_delay, arr_delay) %>%
+  arrange(dep_delay)
+```
+
+Dans ce cas, `delay_la` contiendra le tableau final, obtenu après application des trois instructions `filter`, `select` et `arrange`.
+
+Cette notation n'est pas forcément très intuitive au départ : il faut bien comprendre que c'est le résultat final, une fois application de toutes les opérations du *pipeline*, qui est renvoyé et stocké dans l'objet en début de ligne.
+
+Une manière de le comprendre peut être de voir que la notation suivante :
+
+```{r}
+delay_la <- flights %>%
+  filter(dest == "LAX") %>%
+  select(dep_delay, arr_delay)
+```
+
+est équivalente à :
+
+```{r}
+delay_la <- (flights %>% filter(dest == "LAX") %>% select(dep_delay, arr_delay))
+```
+
+::: {.callout-note}
+L'utilisation du *pipe* n'est pas obligatoire, mais elle rend les scripts plus lisibles et plus rapides à saisir. On l'utilisera donc dans ce qui suit.
+:::
+
+
+::: {.callout-warning}
+Depuis la version 4.1, R propose un *pipe* "natif", qui fonctionne partout, même si on n'utilise pas les extensions du *tidyverse*. Celui-ci est noté `|>`.
+
+Il s'utilise de la même manière que `%>%` :
+
+`flights |> filter(dest == "LAX")`
+
+Ce *pipe* natif est à la fois un peu plus rapide et un peu moins souple. Par exemple, il est possible avec `%>%` d'appeler une fonction sans mettre de parenthèses :
+
+`df %>% View`
+
+Ce n'est pas possible d'omettre les parenthèses avec `|>`, on doit obligatoirement faire :
+
+`df |> View()`
+
+Dans la suite de ce document on privilégiera (pour l'instant) le *pipe* du *tidyverse* `%>%`, pour des raisons de compatibilité avec des versions de R moins récentes.
+:::
+
+
+## Opérations groupées
+
+### `group_by`
+
+Un élément très important de `dplyr` est la fonction `group_by`. Elle permet de définir des groupes de lignes à partir des valeurs d'une ou plusieurs colonnes. Par exemple, on peut grouper les vols selon leur mois :
+
+```{r}
+flights %>% group_by(month)
+```
+
+Par défaut ceci ne fait rien de visible, à part l'apparition d'une mention `Groups` dans l'affichage du résultat. Mais à partir du moment où des groupes ont été définis, les verbes comme `slice`, `mutate` ou `summarise` vont en tenir compte lors de leurs opérations.
+
+Par exemple, si on applique `slice` à un tableau préalablement groupé, il va sélectionner les lignes aux positions indiquées *pour chaque groupe*. Ainsi la commande suivante affiche le premier vol de chaque mois, selon leur ordre d'apparition dans le tableau :
+
+```{r}
+flights %>% group_by(month) %>% slice(1)
+```
+
+Plus utile, en utilisant une variante comme `slice_min` ou `slice_max`, on peut sélectionner les lignes ayant les valeurs les plus grandes ou les plus petites *pour chaque groupe*. Par exemple la commande suivant sélectionne, pour chaque mois de l'année, le vol ayant eu le retard le plus important.
+
+```{r}
+flights %>% group_by(month) %>% slice_max(dep_delay)
+```
+
+Idem pour `mutate` : les opérations appliquées lors du calcul des valeurs des nouvelles colonnes sont appliquées groupe de lignes par groupe de lignes. Dans l'exemple suivant, on ajoute une nouvelle colonne qui contient le retard moyen *pour chaque compagnie aérienne*. Cette valeur est donc différente d'une compagnie à une autre, mais identique pour tous les vols d'une même compagnie :
+
+```{r}
+flights %>%
+  group_by(carrier) %>%
+  mutate(mean_delay_carrier = mean(dep_delay, na.rm = TRUE)) %>%
+  select(dep_delay, mean_delay_carrier)
+```
+
+Ceci peut permettre, par exemple, de déterminer si un retard donné est supérieur ou inférieur au retard médian de la compagnie :
+
+```{r}
+flights %>%
+  group_by(carrier) %>%
+  mutate(
+      median_delay = median(dep_delay, na.rm = TRUE),
+      delay_carrier = ifelse(
+          dep_delay > median_delay,
+          "Supérieur",
+          "Inférieur ou égal"
+      )
+  ) %>%
+  select(dep_delay, median_delay, delay_carrier)
+```
+
+`group_by` peut aussi être utile avec `filter`, par exemple pour sélectionner *pour chaque mois* les vols avec un retard au départ plus élevé que le retard moyen ce mois-ci.
+
+```{r}
+flights %>%
+  group_by(month) %>%
+  filter(dep_delay >= mean(dep_delay, na.rm = TRUE))
+```
+
+
+::: {.callout-warning}
+**Attention :** la clause `group_by` marche pour les verbes déjà vus précédemment, *sauf* pour `arrange`, qui par défaut trie la table sans tenir compte des groupes. Pour obtenir un tri par groupe, il faut lui ajouter l'argument `.by_group = TRUE`.
+:::
+
+On peut voir la différence en comparant les deux résultats suivants :
+
+```{r}
+flights %>%
+  group_by(month) %>%
+  arrange(desc(dep_delay))
+```
+
+
+```{r}
+flights %>%
+  group_by(month) %>%
+  arrange(desc(dep_delay), .by_group = TRUE)
+```
+
+
+
+### `summarise` et `count`
+
+`summarise` permet d'agréger les lignes du tableau en effectuant une opération "résumée" sur une ou plusieurs colonnes. Par exemple, si on souhaite connaître les retards moyens au départ et à l'arrivée pour l'ensemble des vols du tableau `flights` :
+
+```{r}
+flights %>%
+  summarise(
+      retard_dep = mean(dep_delay, na.rm = TRUE),
+      retard_arr = mean(arr_delay, na.rm = TRUE)
+  )
+```
+
+Cette fonction est en général utilisée avec `group_by`, puisqu'elle permet du coup d'agréger et résumer les lignes du tableau groupe par groupe. Si on souhaite calculer le délai maximum, le délai minimum et le délai moyen au départ pour chaque mois, on pourra faire :
+
+```{r}
+flights %>%
+  group_by(month) %>%
+  summarise(
+      max_delay = max(dep_delay, na.rm = TRUE),
+      min_delay = min(dep_delay, na.rm = TRUE),
+      mean_delay = mean(dep_delay, na.rm = TRUE)
+  )
+```
+
+`summarise` dispose d'un opérateur spécial, `n()`, qui retourne le nombre de lignes du groupe. Ainsi si on veut le nombre de vols par destination, on peut utiliser :
+
+```{r}
+flights %>%
+  group_by(dest) %>%
+  summarise(nb = n())
+```
+
+`n()` peut aussi être utilisée avec `filter` et `mutate`.
+
+À noter que quand on veut compter le nombre de lignes par groupe, il est plus simple d'utiliser directement la fonction `count`. Ainsi le code suivant est identique au précédent :
+
+```{r}
+flights %>%
+  count(dest)
+```
+
+
+
+### Grouper selon plusieurs variables
+
+On peut grouper selon plusieurs variables à la fois, il suffit de les indiquer dans la clause du `group_by`. Le *pipeline* suivant calcule le retard moyen au départ pour chaque mois et pour chaque destination, et trie le résultat par retard décroissant :
+
+```{r}
+flights %>%
+  group_by(month, dest) %>%
+  summarise(retard_moyen = mean(dep_delay, na.rm = TRUE)) %>%
+  arrange(desc(retard_moyen))
+```
+
+On peut également utiliser `count` sur plusieurs variables. Les commandes suivantes comptent le nombre de vols pour chaque couple aéroport de départ / aéroport d'arrivée, et trie le résultat par nombre de vols décroissant. Ici la colonne qui contient le nombre de vols, créée par `count`, s'appelle `n` par défaut :
+
+```{r}
+flights %>%
+  count(origin, dest) %>%
+  arrange(desc(n))
+```
+
+On peut utiliser plusieurs opérations de groupage dans le même *pipeline*. Ainsi, si on souhaite déterminer le couple aéroport de départ / aéroport d'arrivée ayant le retard moyen au départ le plus élevé pour chaque mois de l'année, on devra procéder en deux étapes :
+
+- d'abord grouper selon mois, aéroports d'origine et d'arrivée pour calculer le retard moyen
+- puis grouper uniquement selon le mois pour sélectionner le mois avec le retard moyen maximal.
+
+Au final, on obtient le code suivant :
+
+```{r}
+flights %>%
+  group_by(month, origin, dest) %>%
+  summarise(retard_moyen = mean(dep_delay, na.rm = TRUE)) %>%
+  group_by(month) %>%
+  slice_max(retard_moyen)
+```
+
+
+### Dégroupage
+
+Lorsqu'on effectue un `group_by` suivi d'un `summarise`, le tableau résultat est automatiquement dégroupé *de la dernière variable de regroupement*. Ainsi le tableau généré par le code suivant est seulement groupé par `month` et `origin` :
+
+```{r}
+flights %>%
+  group_by(month, origin, dest) %>%
+  summarise(retard_moyen = mean(dep_delay, na.rm = TRUE))
+```
+
+`dplyr` nous le signale d'ailleurs via un message d'avertissement : `summarise() has grouped output by 'month', 'origin'`.
+
+Ce dégroupage progressif peut permettre "d'enchaîner" les opérations groupées. Dans l'exemple suivant on calcule le retard moyen au départ par destination et on conserve les trois retards les plus importants *pour chaque mois*.
+
+```{r}
+flights %>%
+  group_by(month, dest) %>%
+  summarise(retard_moyen = mean(dep_delay, na.rm = TRUE)) %>%
+  slice_max(retard_moyen, n = 3)
+```
+
+On peut à tout moment "dégrouper" un tableau à l'aide de `ungroup`. C'est nécessaire, dans l'exemple précédent, si on veut seulement récupérer les trois retards les plus importants pour l'ensemble des couples mois / destination.
+
+```{r}
+flights %>%
+  group_by(month, dest) %>%
+  summarise(retard_moyen = mean(dep_delay, na.rm = TRUE)) %>%
+  ungroup() %>%
+  slice_max(retard_moyen, n = 3)
+```
+
+On peut aussi spécifier précisément le comportement de dégroupage de `summarise` en lui fournissant un argument supplémentaire `.groups` qui peut prendre notamment les valeurs suivantes :
+
+- `"drop_last"` : dégroupe seulement de la dernière variable de groupage 
+- `"drop"` : dégroupe totalement le tableau résultat (équivaut à l'application d'un `ungroup`)
+- `"keep"` : conserve toutes les variables de groupage
+
+Ce concept de dégroupage successif peut être un peu déroutant de prime abord. Il est donc utile de faire attention aux avertissements affichés par ces opérations, et il ne faut pas hésiter à ajouter un `ungroup` en fin de pipeline si on sait qu'on ne souhaite pas utiliser les groupes encore existants par la suite.
+
+À noter que la fonction `count`, de son côté, renvoie un tableau non groupé.
+
+```{r}
+flights %>%
+  count(month, dest)
+```
+
+
+
+## Autres fonctions utiles
+
+`dplyr` contient beaucoup d'autres fonctions utiles pour la manipulation de données.
+
+### `slice_sample`
+
+Ce verbe permet de sélectionner aléatoirement un nombre de lignes (avec l'argument `n`) ou une fraction des lignes (avec l'argument `prop`) d'un tableau.
+
+Ainsi si on veut choisir 5 lignes au hasard dans le tableau `airports` :
+
+```{r}
+airports %>% slice_sample(n = 5)
+```
+
+Si on veut tirer au hasard 10% des lignes de `flights` :
+
+```{r}
+flights %>% slice_sample(prop = 0.1)
+```
+
+Ces fonctions sont utiles notamment pour faire de "l'échantillonnage" en tirant au hasard un certain nombre d'observations du tableau.
+
+
+### `lead` et `lag`
+
+`lead` et `lag` permettent de décaler les observations d'une variable d'un cran vers l'arrière (pour `lead`) ou vers l'avant (pour `lag`).
+
+```{r}
+lead(1:5)
+lag(1:5)
+```
+
+Ceci peut être utile pour des données de type "séries temporelles". Par exemple, on peut facilement calculer l'écart entre le retard au départ de chaque vol et celui du vol précédent :
+
+```{r}
+flights %>%
+  mutate(
+      dep_delay_prev = lag(dep_delay),
+      dep_delay_diff = dep_delay - dep_delay_prev
+  ) %>%
+  select(dep_delay_prev, dep_delay, dep_delay_diff)
+```
+
+
+
+### `distinct` et `n_distinct`
+
+`distinct` filtre les lignes du tableau pour ne conserver que les lignes distinctes, en supprimant toutes les lignes en double.
+
+```{r}
+flights %>%
+  select(day, month) %>%
+  distinct()
+```
+
+On peut lui spécifier une liste de variables : dans ce cas, pour toutes les observations ayant des valeurs identiques pour les variables en question, `distinct` ne conservera que la première d'entre elles.
+
+```{r}
+flights %>%
+  distinct(month, day)
+```
+
+L'option `.keep_all` permet, dans l'opération précédente, de conserver l'ensemble des colonnes du tableau :
+
+```{r}
+flights %>%
+  distinct(month, day, .keep_all = TRUE)
+```
+
+La fonction `n_distinct`, elle, renvoie le nombre de valeurs distinctes d'un vecteur. On peut notamment l'utiliser dans un `summarise`.
+
+Dans l'exemple qui suit on calcule, pour les trois aéroports de départ de la table `flights` le nombre de valeurs distinctes de l'aéroport d'arrivée :
+
+```{r}
+flights %>%
+  group_by(origin) %>%
+  summarise(n_dest = n_distinct(dest))
+```
+
+
+
+### `relocate`
+
+`relocate` peut être utilisé pour réordonner les colonnes d'une table. Par défaut, si on lui passe un ou plusieurs noms de colonnes, `relocate` les place en début de tableau.
+
+```{r}
+airports %>% relocate(lat, lon)
+```
+
+Les arguments supplémentaires `.before` et `.after` permettent de préciser à quel endroit déplacer la ou les colonnes indiquées.
+
+```{r}
+airports %>% relocate(starts_with('tz'), .after = name)
+```
+
+
+## Tables multiples
+
+Le jeu de données `nycflights13` est un exemple de données réparties en plusieurs tables. Ici on en a trois : les informations sur les vols dans `flights`, celles sur les aéroports dans `airports` et celles sur les compagnies aériennes dans `airlines`.
+
+`dplyr` propose différentes fonctions permettant de travailler avec des données structurées de cette manière.
+
+### Concaténation : `bind_rows` et `bind_cols`
+
+Les fonctions `bind_rows` et `bind_cols` permettent d'ajouter des lignes (respectivement des colonnes) à une table à partir d'une ou plusieurs autres tables.
+
+L'exemple suivant (certes très artificiel) montre l'utilisation de `bind_rows`. On commence par créer trois tableaux `t1`, `t2` et `t3` :
+
+```{r}
+t1 <- airports %>%
+  select(faa, name, lat, lon) %>%
+  slice(1:2)
+t1
+```
+```{r}
+t2 <- airports %>%
+  select(faa, name, lat, lon) %>%
+  slice(5:6)
+
+t2
+```
+```{r}
+t3 <- airports %>%
+  select(faa, name) %>%
+  slice(100:101)
+t3
+```
+
+On concaténe ensuite les trois tables avec `bind_rows` :
+
+```{r}
+bind_rows(t1, t2, t3)
+```
+
+On remarquera que si des colonnes sont manquantes pour certaines tables, comme les colonnes `lat` et `lon` de `t3`, des `NA` sont automatiquement insérées.
+
+Il peut être utile, quand on concatène des lignes, de garder une trace du tableau d'origine de chacune des lignes dans le tableau final. C'est possible grâce à l'argument `.id` de `bind_rows`. On passe à cet argument le nom d'une colonne qui contiendra l'indicateur d'origine des lignes :
+
+```{r}
+bind_rows(t1, t2, t3, .id = "source")
+```
+
+Par défaut la colonne `.id` ne contient qu'un nombre, différent pour chaque tableau. On peut lui spécifier des valeurs plus explicites en "nommant" les tables dans `bind_rows` de la manière suivante :
+
+```{r}
+bind_rows(table1 = t1, table2 = t2, table3 = t3, .id = "source")
+```
+
+`bind_cols` permet de concaténer des colonnes et fonctionne de manière similaire :
+
+```{r}
+t1 <- flights %>% slice(1:5) %>% select(dep_delay, dep_time)
+t2 <- flights %>% slice(1:5) %>% select(origin, dest)
+t3 <- flights %>% slice(1:5) %>% select(arr_delay, arr_time)
+bind_cols(t1, t2, t3)
+```
+
+À noter que `bind_cols` associe les lignes uniquement *par position*. Les lignes des différents tableaux associés doivent donc correspondre (et leur nombre doit être identique). Pour associer des tables *par valeur*, on doit utiliser des jointures.
+
+### Jointures
+
+#### Clés implicites
+
+Très souvent, les données relatives à une analyse sont réparties dans plusieurs tables différentes. Dans notre exemple, on peut voir que la table `flights` contient le code de la compagnie aérienne du vol dans la variable `carrier` :
+
+```{r}
+flights %>% select(carrier)
+```
+
+Et que par ailleurs la table `airlines` contient une information supplémentaire relative à ces compagnies, à savoir le nom complet.
+
+```{r}
+airlines
+```
+
+Il est donc naturel de vouloir associer les deux, ici pour ajouter les noms complets des compagnies à la table `flights`. Pour cela on va effectuer une *jointure* : les lignes d'une table seront associées à une autre en se basant non pas sur leur position, mais sur les valeurs d'une ou plusieurs colonnes. Ces colonnes sont appelées des *clés*.
+
+Pour faire une jointure de ce type, on va utiliser la fonction `left_join` :
+
+```{r eval = FALSE}
+left_join(flights, airlines)
+```
+
+Pour faciliter la lecture, on va afficher seulement certaines colonnes du résultat :
+
+```{r}
+left_join(flights, airlines) %>%
+  select(month, day, carrier, name)
+```
+
+On voit que la table résultat est bien la fusion des deux tables d'origine selon les valeurs des deux colonnes clés `carrier`. On est parti de la table `flights`, et pour chaque ligne de celle-ci on a ajouté les colonnes de `airlines` pour lesquelles la valeur de `carrier` est la même. On a donc bien une nouvelle colonne `name` dans notre table résultat, avec le nom complet de la compagnie aérienne.
+
+::: {.callout-note}
+À noter qu'on peut tout à fait utiliser le *pipe* avec les fonctions de jointure :
+
+`flights %>% left_join(airlines)`.
+:::
+
+Nous sommes ici dans le cas le plus simple concernant les clés de jointure : les deux clés sont uniques et portent le même nom dans les deux tables. Par défaut, si on ne lui spécifie pas explicitement les clés, `dplyr` fusionne en utilisant l'ensemble des colonnes communes aux deux tables. On peut d'ailleurs voir dans cet exemple qu'un message a été affiché précisant que la jointure s'est bien faite sur la variable `carrier`.
+
+
+#### Clés explicites
+
+La table `airports`, contient des informations supplémentaires sur les aéroports : nom complet, altitude, position géographique, etc. Chaque aéroport est identifié par un code contenu dans la colonne `faa`.
+
+Si on regarde la table `flights`, on voit que le code d'identification des aéroports apparaît à deux endroits différents : pour l'aéroport de départ dans la colonne `origin`, et pour celui d'arrivée dans la colonne `dest`. On a donc deux clés de jointure possibles, et qui portent un nom différent de la clé de `airports`.
+
+On va commencer par fusionner les données concernant l'aéroport de départ. Pour simplifier l'affichage des résultats, on va se contenter d'un sous-ensemble des deux tables :
+
+```{r}
+flights_ex <- flights %>% select(month, day, origin, dest)
+airports_ex <- airports %>% select(faa, alt, name)
+```
+
+Si on se contente d'un `left_join` comme à l'étape précédente, on obtient un message d'erreur car aucune colonne commune ne peut être identifiée comme clé de jointure :
+
+```{r error=TRUE}
+flights_ex %>% left_join(airports_ex)
+```
+
+On doit donc spécifier explicitement les clés avec l'argument `by` de `left_join`. Ici la clé est nommée `origin` dans la première table, et `faa` dans la seconde. La syntaxe est donc la suivante :
+
+```{r}
+flights_ex %>% 
+  left_join(airports_ex, by = c("origin" = "faa"))
+```
+
+On constate que les deux nouvelles colonnes `name` et `alt` contiennent bien les données correspondant à l'aéroport de départ.
+
+On va stocker le résultat de cette jointure dans la table `flights_ex` :
+
+```{r}
+flights_ex <- flights_ex %>%
+  left_join(airports_ex, by = c("origin" = "faa"))
+```
+
+Supposons qu'on souhaite maintenant fusionner à nouveau les informations de la table `airports`, mais cette fois pour les aéroports d'arrivée de notre nouvelle table `flights_ex`. Les deux clés sont donc désormais `dest` dans la première table, et `faa` dans la deuxième. La syntaxe est donc la suivante :
+
+```{r}
+flights_ex %>%
+  left_join(airports_ex, by = c("dest" = "faa"))
+```
+
+Cela fonctionne, les informations de l'aéroport d'arrivée ont bien été ajoutées, mais on constate que les colonnes ont été renommées. En effet, ici les deux tables fusionnées contenaient toutes les deux des colonnes `name` et `alt`. Comme on ne peut pas avoir deux colonnes avec le même nom dans un tableau, `dplyr` a renommé les colonnes de la première table en `name.x` et `alt.x`, et celles de la deuxième en `name.y` et `alt.y`.
+
+C'est pratique, mais pas forcément très parlant. On pourrait renommer manuellement les colonnes avec `rename` avant de faire la jointure pour avoir des intitulés plus explicites, mais on peut aussi utiliser l'argument `suffix` de `left_join`, qui permet d'indiquer les suffixes à ajouter aux colonnes.
+
+```{r}
+flights_ex %>%
+  left_join(
+    airports_ex,
+    by = c("dest" = "faa"),
+    suffix = c("_depart", "_arrivee")
+  )
+```
+
+On obtient ainsi directement des noms de colonnes nettement plus clairs.
+
+
+### Types de jointures
+
+Jusqu'à présent nous avons utilisé la fonction `left_join`, mais il existe plusieurs types de jointures.
+
+Partons de deux tables d'exemple, `personnes` et `voitures` :
+
+```{r}
+personnes <- tibble(
+    nom = c("Sylvie", "Sylvie", "Monique", "Gunter", "Rayan", "Rayan"),
+    voiture = c("Twingo", "Ferrari", "Scenic", "Lada", "Twingo", "Clio")
+)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+kable(personnes)
+```
+
+
+```{r}
+voitures <- tibble(
+    voiture = c("Twingo", "Ferrari", "Clio", "Lada", "208"),
+    vitesse = c("140", "280", "160", "85", "160")
+)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+kable(voitures)
+```
+
+
+#### left_join
+
+Si on fait un `left_join` de `voitures` sur `personnes` :
+
+```{r, echo=TRUE, eval=FALSE}
+personnes %>% left_join(voitures)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+kable(personnes %>% left_join(voitures))
+```
+
+On voit que chaque ligne de `personnes` est bien présente, et qu'on lui a ajouté une ligne de `voitures` correspondante si elle existe. Dans le cas du `Scenic`, il n'y a avait pas de ligne dans `voitures`, donc `vitesse` a été mise à `NA`. Dans le cas de `208`, présente dans `voitures` mais pas dans `personnes`, la ligne n'apparaît pas.
+
+Si on fait un `left_join` cette fois de `personnes` sur `voitures`, c'est l'inverse :
+
+```{r, echo=TRUE, eval=FALSE}
+voitures %>% left_join(personnes)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+kable(voitures %>% left_join(personnes))
+```
+
+La ligne `208` est là, mais `nom` est à `NA`. Par contre `Monique` est absente. Et on remarquera que la ligne `Twingo`, présente deux fois dans `personnes`, a été dupliquée pour être associée aux deux lignes de données de `Sylvie` et `Rayan`.
+
+En résumé, quand on fait un `left_join(x, y)`, toutes les lignes de `x` sont présentes, et dupliquées si nécessaire quand elles apparaissent plusieurs fois dans `y`. Les lignes de `y` non présentes dans `x` disparaissent. Les lignes de `x` non présentes dans `y` se voient attribuer des `NA` pour les nouvelles colonnes.
+
+Intuitivement, on pourrait considérer que `left_join(x, y)` signifie "ramener l'information de la table `y` sur la table `x`".
+
+En général, `left_join` sera le type de jointures le plus fréquemment utilisé.
+
+#### right_join
+
+La jointure `right_join` est l'exacte symétrique de `left_join`, c'est-à dire que `right_join(x, y)` est équivalent à `left_join(y, x)` :
+
+```{r, echo=TRUE, eval=FALSE}
+personnes %>% right_join(voitures)
+```
+
+
+```{r, echo=FALSE, eval=TRUE}
+kable(personnes %>% right_join(voitures))
+```
+
+
+#### inner_join
+
+Dans le cas de `inner_join(x, y)`, seules les lignes présentes à la fois dans `x` et `y` sont conservées (et si nécessaire dupliquées) dans la table résultat :
+
+```{r, echo=TRUE, eval=FALSE}
+personnes %>% inner_join(voitures)
+```
+
+
+```{r, echo=FALSE, eval=TRUE}
+kable(personnes %>% inner_join(voitures))
+```
+
+Ici la ligne `208` est absente, ainsi que la ligne `Monique`, qui dans le cas d'un `left_join` avait été conservée et s'était vue attribuer une `vitesse` à `NA`.
+
+#### full_join
+
+Dans le cas de `full_join(x, y)`, toutes les lignes de `x` et toutes les lignes de `y` sont conservées (avec des `NA` ajoutés si nécessaire) même si elles sont absentes de l'autre table :
+
+```{r, echo=TRUE, eval=FALSE}
+personnes %>% full_join(voitures)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+kable(personnes %>% full_join(voitures))
+```
+
+
+#### semi_join et anti_join
+
+`semi_join` et `anti_join` sont des jointures *filtrantes*, c'est-à-dire qu'elles sélectionnent les lignes de `x` sans ajouter les colonnes de `y`.
+
+Ainsi, `semi_join` ne conservera que les lignes de `x` pour lesquelles une ligne de `y` existe également, et supprimera les autres. Dans notre exemple, la ligne `Monique` est donc supprimée :
+
+```{r, echo=TRUE, eval=FALSE}
+personnes %>% semi_join(voitures)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+kable(personnes %>% semi_join(voitures))
+```
+
+
+Un `anti_join` fait l'inverse, il ne conserve que les lignes de `x` absentes de `y`. Dans notre exemple, on ne garde donc que la ligne `Monique` :
+
+```{r, echo=TRUE, eval=FALSE}
+personnes %>% anti_join(voitures)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+kable(personnes %>% anti_join(voitures))
+```
+
+
+## Ressources
+
+Toutes les ressources ci-dessous sont en anglais...
+
+Le livre *R for data science*, librement accessible en ligne, contient plusieurs chapitres très complets sur la manipulation des données, notamment :
+
+- [Data transformation](http://r4ds.had.co.nz/transform.html) pour les manipulations
+- [Relational data](http://r4ds.had.co.nz/relational-data.html) pour les tables multiples
+
+Le [site de l'extension](http://dplyr.tidyverse.org/) comprend une [liste des fonctions](http://dplyr.tidyverse.org/reference/index.html) et les pages d'aide associées, mais aussi une [introduction](http://dplyr.tidyverse.org/articles/dplyr.html) au package et plusieurs articles dont un spécifiquement sur les [jointures](http://dplyr.tidyverse.org/articles/two-table.html).
+
+Enfin, une "antisèche" très synthétique est également accessible depuis RStudio, en allant dans le menu *Help* puis *Cheatsheets* et *Data Transformation with dplyr*.
+
+
+## Exercices
+
+
+On commence par charger les extensions et les données nécessaires.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(nycflights13)
+data(flights)
+data(airports)
+data(airlines)
+```
+
+
+
+### Les verbes de base de `dplyr`
+
+**Exercice 1.1**
+
+Sélectionner la dixième ligne du tableau des aéroports (`airports`).
+
+```{r echo=FALSE, ref.label='dp11'}
+```
+
+::: {.solution-exo}
+```{r dp11, eval=FALSE}
+slice(airports, 10)
+```
+:::
+
+Sélectionner les 5 premières lignes de la table `airlines`.
+
+```{r echo=FALSE, ref.label='dp11b'}
+```
+
+::: {.solution-exo}
+```{r dp11b, eval=FALSE}
+slice_head(airlines, n = 5)
+```
+:::
+
+Sélectionner l'aéroport avec l'altitude la plus basse.
+
+```{r echo=FALSE, ref.label='dp11c'}
+```
+
+::: {.solution-exo}
+```{r dp11c, eval=FALSE}
+slice_min(airports, alt)
+```
+:::
+
+
+
+**Exercice 1.2**
+
+Sélectionnez les vols du mois de juillet (variable `month`).
+
+```{r echo = FALSE, ref.label='dp12'}
+```
+
+::: {.solution-exo}
+```{r dp12, eval=FALSE}
+filter(flights, month == 7)
+```
+:::
+
+
+
+Sélectionnez les vols avec un retard à l'arrivée (variable `arr_delay`) compris entre 5 et 15 minutes.
+
+```{r echo = FALSE, ref.label='dp12b'}
+```
+
+::: {.solution-exo}
+```{r dp12b, eval=FALSE}
+filter(flights, arr_delay >= 5 & arr_delay <= 15)
+```
+:::
+
+
+
+Sélectionnez les vols des compagnies Delta, United et American (codes `DL`, `UA` et `AA` de la variable `carrier`).
+
+```{r echo=FALSE, ref.label='dp12c'}
+```
+
+::: {.solution-exo}
+```{r dp12c, eval=FALSE}
+filter(flights, carrier %in% c("DL", "UA", "AA"))
+```
+:::
+
+
+
+
+**Exercice 1.3**
+
+Triez la table `flights` par retard au départ décroissant.
+
+```{r echo = FALSE, ref.label='dp13'}
+```
+
+::: {.solution-exo}
+```{r dp13, eval=FALSE}
+arrange(flights, desc(dep_delay))
+```
+:::
+
+
+
+**Exercice 1.4**
+
+Sélectionnez les colonnes `name`, `lat` et `lon` de la table `airports`
+
+```{r, echo = FALSE, ref.label='dp14'}
+```
+
+::: {.solution-exo}
+```{r dp14, eval=FALSE}
+select(airports, name, lat, lon)
+```
+:::
+
+
+
+Sélectionnez toutes les colonnes de la table `airports` sauf les colonnes `tz` et `tzone`
+
+```{r, echo = FALSE, ref.label='dp14b'}
+```
+
+::: {.solution-exo}
+```{r dp14b, eval=FALSE}
+select(airports, -tz, -tzone)
+```
+:::
+
+
+Sélectionnez toutes les colonnes de la table `flights` dont les noms se terminent par "delay".
+
+```{r, echo = FALSE, ref.label='dp14c'}
+```
+
+::: {.solution-exo}
+```{r dp14c, eval=FALSE}
+select(flights, ends_with("delay"))
+```
+:::
+
+
+
+Dans la table `airports`, renommez la colonne `alt` en `altitude` et la colonne `tzone` en `fuseau_horaire`.
+
+```{r, echo = FALSE, ref.label='dp14d'}
+```
+
+::: {.solution-exo}
+```{r dp14d, eval=FALSE}
+rename(airports, altitude = alt, fuseau_horaire = tzone)
+```
+:::
+
+
+
+**Exercice 1.5**
+
+Dans la table `airports`, la colonne `alt` contient l'altitude de l'aéroport en pieds. Créer une nouvelle variable `alt_m` contenant l'altitude en mètres (on convertit des pieds en mètres en les divisant par 3.2808). Sélectionner dans la table obtenue uniquement les deux colonnes `alt` et `alt_m`.
+
+```{r echo=FALSE, ref.label='dp15'}
+```
+
+::: {.solution-exo}
+```{r dp15, eval=FALSE}
+tmp <- mutate(airports, alt_m = alt / 3.2808)
+select(tmp, alt, alt_m)
+```
+:::
+
+
+
+### Enchaîner des opérations
+
+**Exercice 2.1**
+
+Réécrire le code de l'exercice précédent en utilisant le *pipe* `%>%`.
+
+```{r echo=FALSE, eval=FALSE, ref.label='dp21'}
+```
+
+::: {.solution-exo}
+```{r dp21, eval=FALSE}
+airports %>%
+  mutate(alt_m = alt / 3.2808) %>%
+  select(alt, alt_m)
+```
+:::
+
+
+**Exercice 2.2**
+
+En utilisant le *pipe*, sélectionnez les vols à destination de San Francico (code `SFO` de la variable `dest`) et triez-les selon le retard au départ décroissant (variable `dep_delay`).
+
+```{r echo=FALSE, ref.label='dp22'}
+```
+
+::: {.solution-exo}
+```{r dp22, eval=FALSE}
+flights %>%
+  filter(dest == "SFO") %>%
+  arrange(desc(dep_delay))
+```
+:::
+
+
+
+**Exercice 2.3**
+
+Sélectionnez les vols des mois de septembre et octobre, conservez les colonnes `dest` et `dep_delay`, créez une nouvelle variable `retard_h` contenant le retard au départ en heures, et conservez uniquement les 5 lignes avec les plus grandes valeurs de `retard_h`.
+
+```{r echo=FALSE, ref.label='dp23'}
+```
+
+::: {.solution-exo}
+```{r dp23, eval=FALSE}
+flights %>%
+  filter(month %in% c(9, 10)) %>%
+  select(dest, dep_delay) %>%
+  mutate(retard_h = dep_delay / 60) %>%
+  slice_max(retard_h, n = 5)
+```
+:::
+
+
+
+### `group_by` et `summarise`
+
+
+**Exercice 3.1**
+
+Affichez le nombre de vols par mois.
+
+```{r echo = FALSE, ref.label='dp31'}
+```
+
+::: {.solution-exo}
+```{r dp31, eval=FALSE}
+flights %>%
+  count(month)
+```
+:::
+
+
+
+Triez la table résultat selon le nombre de vols croissant.
+
+```{r echo = FALSE, ref.label='dp31b'}
+```
+
+::: {.solution-exo}
+```{r dp31b, eval=FALSE}
+flights %>%
+  count(month) %>%
+  arrange(n)
+```
+:::
+
+
+**Exercice 3.2**
+
+Calculer la distance moyenne des vols selon l'aéroport de départ (variable `origin`).
+
+```{r echo=FALSE, ref.label='dp32'}
+```
+
+::: {.solution-exo}
+```{r dp32, eval=FALSE}
+flights %>%
+  group_by(origin) %>%
+  summarise(distance_moyenne = mean(distance))
+```
+:::
+
+
+
+**Exercice 3.3**
+
+Calculer le nombre de vols à destination de Los Angeles (code `LAX`) pour chaque mois de l'année.
+
+```{r echo = FALSE, ref.label='dp33'}
+```
+
+::: {.solution-exo}
+```{r dp33, eval=FALSE}
+flights %>%
+  filter(dest == "LAX") %>%
+  count(month)
+```
+:::
+
+
+
+**Exercice 3.4**
+
+Calculer le nombre de vols selon le mois et la destination.
+
+```{r echo = FALSE, ref.label='dp34'}
+```
+
+::: {.solution-exo}
+```{r dp34, eval=FALSE}
+flights %>%
+  count(month, dest)
+```
+:::
+
+
+Ne conserver, pour chaque mois, que la destination avec le nombre maximal de vols.
+
+```{r echo = FALSE, ref.label='dp34b'}
+```
+
+::: {.solution-exo}
+```{r dp34b, eval=FALSE}
+flights %>%
+  count(month, dest) %>%
+  group_by(month) %>%
+  slice_max(n)
+```
+:::
+
+
+
+**Exercice 3.5**
+
+Calculer le nombre de vols selon le mois. Ajouter une colonne comportant le pourcentage de vols annuels réalisés par mois.
+
+```{r echo = FALSE, ref.label='dp35'}
+```
+
+::: {.solution-exo}
+```{r dp35, eval=FALSE}
+flights %>%
+  count(month) %>%
+  mutate(pourcentage = n / sum(n) * 100)
+```
+:::
+
+
+**Exercice 3.6**
+
+Calculer, pour chaque aéroport de départ et de destination, la durée moyenne des vols (variable air_time). Pour chaque aéroport de départ, ne conserver que la destination avec la durée moyenne la plus longue.
+
+```{r echo = FALSE, ref.label='dp36'}
+```
+
+::: {.solution-exo}
+```{r dp36, eval=FALSE}
+flights %>%
+  group_by(origin, dest) %>%
+  summarise(duree_moyenne = mean(air_time, na.rm = TRUE)) %>%
+  # Le group_by suivant n'est pas obligatoire
+  group_by(origin) %>%
+  slice_max(duree_moyenne)
+```
+:::
+
+
+
+
+### Jointures
+
+
+**Exercice 4.1**
+
+Faire la jointure de la table `airlines` sur la table `flights` à l'aide de `left_join`.
+
+```{r echo = FALSE, message=FALSE, ref.label='dp41'}
+```
+
+::: {.solution-exo}
+```{r dp41, eval=FALSE}
+flights %>%
+  left_join(airlines)
+```
+:::
+
+
+
+**Exercice 4.2**
+
+À partir de la table résultat de l'exercice précédent, calculer le retard moyen au départ pour chaque compagnie, et trier selon ce retard décroissant.
+
+```{r echo = FALSE, message=FALSE, ref.label='dp42'}
+```
+
+::: {.solution-exo}
+```{r dp42, eval=FALSE}
+flights %>%
+  left_join(airlines) %>%
+  group_by(name) %>%
+  summarise(retard_moyen = mean(dep_delay, na.rm = TRUE)) %>%
+  arrange(desc(retard_moyen))
+```
+:::
+
+
+
+**Exercice 4.3**
+
+Faire la jointure de la table `airports` sur la table `flights` en utilisant comme clé le code de l'aéroport de destination.
+
+```{r echo = FALSE, ref.label='dp43'}
+```
+
+::: {.solution-exo}
+```{r dp43, eval=FALSE}
+flights %>%
+  left_join(airports, by = c("dest" = "faa"))
+```
+:::
+
+
+
+À partir de cette table, afficher pour chaque mois le nom de l'aéroport de destination ayant eu le plus petit nombre de vol.
+
+```{r echo = FALSE, ref.label='dp43b'}
+```
+
+::: {.solution-exo}
+```{r dp43b, eval=FALSE}
+flights %>%
+  left_join(airports, by = c("dest" = "faa")) %>%
+  count(month, name) %>%
+  group_by(month) %>%
+  slice_min(n)
+```
+:::
+
+
+
+**Exercice 4.4**
+
+Créer une table indiquant, pour chaque vol, uniquement le nom de l'aéroport de départ et celui de l'aéroport d'arrivée.
+
+```{r echo=FALSE, ref.label='dp44'}
+```
+
+::: {.solution-exo}
+```{r dp44, eval=FALSE}
+flights %>%
+  left_join(airports, by = c("dest" = "faa")) %>%
+  rename(dest_name = name) %>%
+  left_join(airports, by = c("origin" = "faa")) %>%
+  rename(orig_name = name) %>%
+  select(orig_name, dest_name)
+```
+:::
+
+
+
+### Bonus
+
+**Exercice 5.1**
+
+Calculer le nombre de vols selon l'aéroport de destination, et fusionnez la table `airports` sur le résultat avec `left_join`. Stocker le résultat final dans un objet nommé `flights_dest`.
+
+```{r echo = FALSE, ref.label='dp51'}
+```
+
+::: {.solution-exo}
+```{r dp51, eval=FALSE}
+flights_dest <- flights %>%
+  count(dest) %>%
+  left_join(airports, by = c("dest"="faa"))
+```
+:::
+
+
+Créez une carte interactive des résultats avec le package `leaflet` et le code suivant :
+
+```{r}
+#| message: false
+#| warning: true
+#| eval: false
+
+library(leaflet)
+leaflet(data = flights_dest) %>%
+  addTiles %>%
+  addCircles(lng = ~lon, lat = ~lat, radius = ~n * 10, popup = ~name)
+```
+
+```{r}
+#| message: false
+#| warning: true
+#| echo: false
+
+if (knitr::is_html_output(excludes=c("epub", "epub2"))) {
+  library(leaflet)
+  leaflet(data = flights_dest) %>%
+    addTiles %>%
+    addCircles(lng = ~lon, lat = ~lat, radius = ~n * 10, popup = ~name)
+}
+```
+
+---
+title: "Untitled"
+format: html
+editor: visual
+---
+
+# Graphe et visualisation avec R
+
+Le logiciel R offre de puissantes facilités graphiques permettant de produire des graphiques statistiques de grande qualité. Son principal atout réside dans les larges possibilités de personnalisation.
+
+On peut avoir un aperçu de la palette des possibilités à l'aide de la commande `demo(graphics)`. Pour une perspective plus complète, on peut consulter par exemple: <https://www.r-graph-gallery.com/>.
+
+## Représentations graphiques simples avec R de `base`
+
+### Tracé de points et de fonctions
+
+Il existe deux types de commandes graphiques pour tracer des points : la commande graphique primaire (traçant un premier graphe) `plot`, et la commande graphique secondaire (ajoutant un élement à un graphe déjà tracé) `points`.
+
+De même, pour les graphes de fonctions en lignes continues : les commandes graphiques primaires (traçant un premier graphe) `plot` et `curve` notamment, et la commande graphique secondaire (ajoutant un élement à un graphe déjà tracé) `lines`.
+
+Pour personnaliser les graphes, on a à disposition une très large palette d'options de personnalisation, à mettre en argument des commandes graphiques primaires et secondaires. La liste de ces options peut être affichées dans l'aide de la fonction `par` en tapant `?par` ou `help(par)`. La prsonnalisation peut se faire aussi par le biais de commandes graphiques secondaires.
+
+#### Exercice 1
+
+1. À l'aide de la fonction `plot`, tracer $50$ points du graphe de la fonction sinus entre $-\pi$ et $\pi$.
+
+```{r}
+x <- seq(-pi,pi,length=50)
+y <- sin(x)
+plot(x,y)
+
+?par # permet d'avoir la liste des arguments de personnalisation
+
+plot(x,y,pch='+') # pour changer le symbole des points
+```
+
+2. Tracer le graphe de la fonction sinus entre $-\pi$ et $\pi$ en ligne continue directement, puis avec une ligne reliant les points $50$ points précédents (argument `type` de la fonction `plot`) .
+
+```{r}
+plot(sin,-pi,pi)
+
+plot(x,y,type='l') # ou
+plot(x,y,type='b') # 'b' pour 'both' : trace les points et la ligne continue qui les relie
+
+# pour mieux visualiser :
+x2 <- seq(-pi,pi,length=20)
+y2 <- sin(x2)
+plot(x2,y2,type='o',cex=0.5) # cex permet de gérer la taille des symboles pour les points
+# ou
+plot(x2,y2,type='o',cex=0.5)
+```
+
+3. Ajouter le titre suivant : `Graphe de la fonction sinus` (argument `main` dans la commande primaire ou commande secondaire `title`).
+
+```{r}
+# Ajout d'un titre avec une commande secondaire :
+plot(x,y,type='l')
+title('Graphe de la fonction sinus')
+# ou en personnalisant le graphe de départ directement :
+plot(x,y,type='l',main='Graphe de la fonction sinus')
+```
+
+4. Tracer le graphe de la fonction sinus entre $-\pi$ et $\pi$ en ligne continue à l'aide de la fonction `curve`.
+
+```{r}
+curve(sin,-pi,pi,main='Graphe de la fonction sinus')
+# ou
+curve(sin(x),-pi,pi,main='Graphe de la fonction sinus') # utile quand on veut tracer le graphe d'une fonction que l'on définit soi-même comme x-> x^3-x^2 par exemple
+# on peut aussi préciser le nombre de points où la fonction va être évaluée (sinon la valeur par défaut est 101)
+curve(sin(x),-pi,pi,n=10,main='Graphe de la fonction sinus')
+```
+
+### Tracé de deux fonctions
+
+#### Exercice 2
+
+1. Sur le même graphique, tracer le graphe de la fonction cosinus entre $-\pi$ et $\pi$ (fonction `lines` ou `points`).
+
+```{r}
+# On initialise le graphe avec le tracé du graphe de la fonction sinus :
+plot(x,y,type='l',main = "Graphe de sinus et cosinus") # Titre commun aux deux courbes
+# Puis on ajoute le graphe de la fonction cosinus avec une commande secondaire :
+lines(x,cos(x))
+```
+
+2. Pour différencier les deux fonctions, tracer la fonction cosinus en rouge (argument `col`) et celle de sinus en pointillés (argument `lty`).
+
+```{r}
+plot(x,sin(x),type= 'l',lty=3,main = 'Graphe de sinus et cosinus')
+lines(x,cos(x), col = 'red') # ou
+lines(x,cos(x), col = 'darkred')
+```
+
+3. Ajouter une légende en haut à gauche pour différencier les deux courbes (fonction `legend`).
+
+```{r}
+plot(x,sin(x),type= 'l',lty=3,main = 'Graphe de sinus et cosinus')
+lines(x,cos(x), col = 'darkred')
+# Voir help(legend), il y a beaucoup d'options possibles!
+legend(x=-pi , y=1, # Coordonnées de placement, alternative : "topleft"/"bottom"/"top"/"bottomright"...
+       legend = c("Sinus", "Cosinus"), # Texte de la légende
+       lty = c('dotted', 'solid'),  # L'ordre des types de lignes, doit correspondre à l'argument legend
+       col = c("black", "darkred")) # Couleurs des lignes ou points, attention à l'ordre !
+```
+
+### Graphique en 3 dimensions
+
+Les fonctions classiques de représentation 3D sur des grilles de points sont les fonctions :
+
+- `persp` pour la représentation des surfaces avec effets de perspective
+- `contour`  pour la représentation des lignes de niveau
+- `image` pour la représentation des lignes de niveau avec effets de couleur.
+
+#### Exercice 3
+
+On s'intéresse à la représentation de la fonction suivante ("chapeau mexicain") :
+\[
+ f : (x,y) \mapsto z = \frac{10 \sin(\sqrt{x^2+y^2})}{\sqrt{x^2+y^2}} 
+\]
+
+On programme la fonction $f$ à l'aide du code :
+
+```{r}
+f <- function(x,y){
+  a <- sqrt(x^2+y^2)
+  return(10*sin(a)/a)
+}
+```
+
+1. Créer deux vecteurs `x` et `y` de $200$ valeurs chacun, comprises entre $-10$ et $10$.
+
+```{r}
+x <- y <- seq(-10, 10, length = 200)
+```
+
+2.  Calculer les valeurs de la fonction en chaque couple de points de la grille (fonction `outer`) définie à la question précédente.
+
+```{r}
+z <- f(x,y) # Attention avec cette commande length(z)=200 et non pas 200 * 200 !
+# La bonne commande :
+z <- outer(X = x, Y = y, FUN = f)
+dim(z)
+```
+
+3. Tracer le graphe de la fonction $f$ à l'aide de la fonction `persp`.
+
+```{r}
+persp(x, y, z, xlab = "Abscisse", ylab = "Ordonnée", zlab = "Côté", border = NA,  col = rainbow(n = 200), main ="Fonction 'Chapeau Mexicain'", d=3)
+```
+
+4. Faire pivoter cette figure à l'aide des arguments `theta` et `phi`.
+
+```{r}
+persp(x, y, z, xlab = "Abscisse", ylab = "Ordonnée", zlab = "Côté", border = NA,  col = rainbow(n = 200), main ="Fonction 'Chapeau Mexicain'", d=3, phi = 20, theta = 45)
+```
+
+5. Représenter la même fonction à l'aide des fonctions `contour` et `image`.
+
+```{r}
+contour(x, y, z, 
+        xlab = "x", ylab = "y",  main = "Lignes de niveau",
+        levels = c(-2, 0, 4, 8),  # Niveaux à tracer
+        labels = c("Fond", "Ligne du 0", "Pente", "Sommet"), labcex = 1 )
+```
+
+```{r}
+contour(x, y, z,
+        nlevels = 10, # nombre de niveaux a representer
+        col = rainbow(10),  #couleurs de niveaux
+        main ="Courbes de niveau", lwd=2)
+```
+
+```{r}
+image(x, y, z, 
+      xlab = "x", ylab = "y",  main = "Heat map", col = heat.colors(5), # Peu de couleurs, aspect grossier
+      breaks = c(-2.2, -2, 0, 4, 8, 10)) 
+```
+
+```{r}
+image(x, y, z, 
+      xlab = "x", ylab = "y",  main = "Heat map", col = heat.colors(30)) # Beaucoup de couleurs, aspect lisse
+```
+
+Représentation avec `filled.contour` :
+
+```{r}
+ filled.contour(x, y, z, nlevels =10, col=heat.colors(13), main="Courbes de niveau- Heat map")
+```
+
+À noter qu'il existe aussi un package appelé `rgl` permettant de faire des représentations 3D dans un mode interactif (c'est-à-dire permettant de faire des rotations graphiques à l'aide de la souris ou d'utiliser des effets d'éclairage).
+
+
+Pour faire des représentations 3D dans un mode interactif on peut utiliser (le résultat de cette commande ne peut pas être visualisé dans le rapport html) : 
+
+```{r}
+library(rgl)
+rgl.surface(x,y,z)
+```
+
+## Représentations graphiques avec le package `ggplot2`
+
+`ggplot2` est une librairie associée à `tidyverse` utilisée pour la visualisation de données. Une de ses spécificités est que les graphiques sont construits à partir d'un tableau de données.
+
+```{r}
+# On peut la charger en utilisant
+library('tidyverse') 
+# ou simplement  (si on n'a pas besoin des autres extensions du tidyverse)
+library('ggplot2') 
+```
+
+La fonction de base de `ggplot2`, utilisée pour initialiser les graphiques, est `ggplot`. Le tableau de données est passé comme argument à cette fonction.
+
+Exemple (si `MyData` est un tableau de données) :
+
+```{r}
+ggplot(MyData)
+```
+
+Ensuite on rajoute des éléments de représentation graphique (des `geom`) avec l'opérateur `+` et on spécifie les variables à représenter à l'aide de la fonction `aes()`.
+
+Exemple de syntaxe :
+
+```{r}
+ggplot(MyData) +
+  geom_point(aes(x=MyVar1,y=MyVar2))
+```
+
+#### Exercice 4. : données `UScereal`
+
+Charger le jeu de données `UScereal` (disponible dans le package `MASS`) et décrire brièvement le jeu de données avec :
+
+```{r}
+library(MASS)
+data(UScereal)
+?UScereal
+summary(UScereal)
+```
+
+1. Tracer un histogramme (`geom_histogram`), un diagramme en boîte (`geom_boxplot`), puis un diagramme cumulatif (`stat_ecdf(geom = "step")`) de la quantité de sucre (en g).
+
+```{r}
+UScereal |>
+  ggplot(aes(x=sugars)) +
+  geom_histogram(bins=6) +
+  ggtitle("Histogramme de la quantité de sucre (en g)")
+
+UScereal |>
+  ggplot() +
+  geom_boxplot(aes(y=sugars)) +
+  ggtitle("Diagramme en boîte de la quantité de sucre (en g)")
+
+UScereal |>
+  ggplot(aes(x=sugars)) +
+  stat_ecdf(geom = "step") +
+  ggtitle("Diagramme cumulatif de la quantité de sucre (en g)")
+```
+
+
+2. Faire un diagramme en tuyaux d'orgue (`geom_bar`), un diagramme en bande (`geom_bar`, argument `fill`), puis un diagramme circulaire (`geom_bar()+coord_polar()`) des producteurs (`mfr`).
+
+```{r}
+UScereal <- UScereal |> 
+  mutate(mfr=factor(mfr)) 
+
+summary(UScereal)
+
+UScereal |> ggplot() +
+  geom_bar(aes(x=mfr)) +
+  labs(x="Producteur",y="Effectif")
+
+UScereal |> ggplot() +
+  geom_bar(aes(x="",fill=mfr)) +
+  labs(x="Producteur",y="Effectif")
+
+UScereal |> ggplot() +
+  geom_bar(aes(x="",fill=mfr)) +
+  labs(x="Producteur",y="Effectif") +
+  coord_polar("y")
+
+UScereal |> ggplot() +
+  geom_bar(aes(x="",fill=mfr),color="white") +
+  labs(x="Producteur",y="Effectif") +
+  coord_polar("y") +
+  theme_void()
+```
+
+3.  Représenter le nuage de points (fonction `geom_point` de la quantité de potassium en fonction de la quantité de fibres. Commenter le graphique obtenu.
+
+```{r}
+ggplot(UScereal) +
+  geom_point(aes(x=fibre,y=potassium))
+```
+
+4.  Ajouter la droite d'équation $y = 49.5 + 28.3x$ sur le graphique en magenta (`geom_abline`). Diminuer l'épaisseur du trait (argument `size`). Stocker le graphique dans un objet `MyPlot`.
+
+```{r}
+MyPlot <- ggplot(UScereal) +
+  geom_point(aes(x=fibre, y=potassium)) +
+  geom_abline(slope = 28.3, intercept = 49, size=0.8, color='magenta')
+
+MyPlot
+```
+
+5.  Représenter sur le graphique du nuage de points la droite des moindres carrés ordinaires en utilisant `geom_smooth(method='lm')`.
+
+```{r}
+MCO <- ggplot(UScereal, aes(x=fibre, y=potassium)) +
+  geom_point(aes(x=fibre, y=potassium)) +
+  geom_smooth(method = 'lm', size=0.8, color='magenta')
+
+MCO
+```
+
+6.  Calculer le centre de gravité du nuage de points, le représenter par une croix en bleu foncé sur le graphique `MyPlot` (fonction `geom_point`, argument `shape`) et écrire "G", toujours en bleu foncé, juste au-dessous via la fonction `geom_text`.
+
+```{r}
+G <- c(mean(UScereal$fibre),mean(UScereal$potassium))
+
+MyPlot +
+  geom_point(x=G[1],y=G[2],color='darkblue',shape=4) +
+  geom_text(x=G[1],y=G[2],label='G',color='darkblue',vjust=1.5)
+```
+
+Faire le même graphe avec le texte au-dessus du centre de gravité.
+
+```{r}
+G <- c(mean(UScereal$fibre),mean(UScereal$potassium))
+MyPlot +
+  geom_point(x=G[1],y=G[2],color='darkblue',shape=4) +
+  geom_text(x=G[1],y=G[2],label='G',color='darkblue',vjust=-0.5)
+```
+
+7. Calculer la médiane `med` de la variable `fat`. Représenter le nuage de points de la quantité de calories en fonction de la quantité de protéines. Utiliser deux couleurs pour les points : une pour ceux correspondant aux produits ayant une quantité de gras inférieure à la médiane et une pour les autres (argument `color=fat<=med`).
+
+```{r}
+med <- median(UScereal$fat)
+ggplot(UScereal) +
+  geom_point(aes(protein,calories,color=fat<=med))
+```
+
+8.  Modifier le graphique précédent pour que la taille des points varie en fonction de la quantité de sucre dans chaque produit (argument `size`).
+
+```{r}
+med <- median(UScereal$fat)
+ggplot(UScereal) +
+  geom_point(aes(protein,calories,color=fat<=med,size=sugars))
+```
+
+9.  Représenter les diagrammes en boîte (`geom_boxplot`) du nombre de calories en fonction du niveau de l'étagère de présentation. À l'aide de la fonction `labs`, mettre `Etagere` comme étiquette pour l'axe correspondant.
+
+```{r}
+UScereal <- UScereal |>
+  mutate(shelf=factor(shelf))
+
+summary(UScereal)
+class(UScereal$shelf)
+
+ggplot(UScereal) +
+  geom_boxplot(aes(y=calories,x=shelf)) +
+  labs(x="Etagere")
+```
+
+10. Remplacer les diagrammes en boîte par des diagrammes en violon (`geom_violin`).
+
+```{r}
+ggplot(UScereal) +
+  geom_violin(aes(y=fat,x=shelf)) +
+  labs(x="Etagere")
+```
+
+11. Rajouter en vert et avec une opacité de $0.4$ les points sur le graphique précédent à l'aide de `geom_point` et ensuite de `geom_jitter`.
+
+```{r}
+ggplot(UScereal) +
+  geom_violin(aes(y=fat,x=shelf)) +
+  labs(x="Etagere") +
+  geom_point(aes(x=shelf,y=fat),alpha=0.4,color='darkgreen')
+
+ggplot(UScereal) +
+  geom_violin(aes(y=fat,x=shelf)) +
+  labs(x="Etagere") +
+  geom_jitter(aes(x=shelf,y=fat),alpha=0.4,color='darkgreen')
+```
+
+#### Exercice 5 : données `babynames`
+
+1.  Charger le tableau de données `babynames` du package du même nom. Sauvegarder dans un tibble `popular_names` les $9$ prénoms les plus utilisés pour les filles aux États-Unis en $2000$.
+
+```{r}
+library(babynames)
+
+popular_names <- babynames |> 
+  filter(year==2000 & sex == 'F') |>
+  arrange(desc(prop)) |>
+  head(9)
+
+summary(popular_names)
+```
+
+2.  Répresenter dans la même fenêtre graphique l'évolution de la popularité des prénoms de filles (i.e. la variable `prop`) pour chaque prénom trouvé dans `popular_names` à l'aide de `geom_area` (pour le type de graphique) et `facet_wrap` (pour avoir plusieurs graphiques dans la même fenêtre). En utilisant le mappage `fill`, mettre une couleur différente pour le graphique associé à chaque prénom.
+
+```{r}
+mydata <- babynames |> 
+  filter(name %in% popular_names$name & sex=='F')
+
+mydata |> 
+  ggplot(aes(x=year,y=prop,fill=name)) +
+  geom_area() +
+  facet_wrap(~ name)
+```
+
+3.  Sauvegarder le graphique précédent dans un fichier .pdf puis .png.
+
+Indication : pour sauvegarder un graphique on peut utiliser la structure suivante.
+
+```{r}
+pdf("NomFichier.pdf") # ouvrir la fenêtre graphique   
+# tracer le graphique
+dev.off() # fermer la fenêtre graphique
+```
+
+```{r}
+pdf("PopNames.pdf")
+mydata |> 
+  ggplot(aes(x=year,y=prop,fill=name))+
+  geom_area() +
+  facet_wrap(~name)
+dev.off() 
+```
