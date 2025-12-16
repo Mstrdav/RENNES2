@@ -8,6 +8,12 @@ format:
       - text: Denis
         href: https://dataforgood.fr/
     css: style.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    collapsed: true
+    smooth_scroll: true
+    theme: united
 ---
 
 ```{r setup, include=FALSE}
@@ -49,18 +55,6 @@ Pour contrer ces biais, on introduit parfois des effets fixes "pays", comme les 
 Un dernier problème que nous voulons aborder est celui de la barrière de la langue. Est-ce que tout le monde à la même perception du "bonheur", ou est-ce que les mots, le langage utilisé pour définir cette notion change au point que la langue influence les réponses ? Mais de nombreuses études ont montré que l'ont arrivait relativement bien a apprécier le bonheur des autres, quelque soit notre pays d'origine et celui de l'autre, impliquant que le bonheur revêt un e définition globale relativement comprise partout (voir Sandvil, 1993 et Diner & Lucas, 1999).
 
 Nous nous attendons à voir une corrélation entre l'indice de bonheur du WHR, et différents indicateurs socio-économiques. De plus, nous nous attendons a voir les biais culturels sus-cités.
-
-### Plan :
-
--   Récupération des données
-
--   Traitement des données
-
--   Statistiques descriptives
-
--   Comparaison de modèles
-
--   Conclusion statistiques
 
 # Cadre méthodologique
 

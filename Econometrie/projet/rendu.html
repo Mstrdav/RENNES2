@@ -34,7 +34,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="rendu_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="rendu_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="rendu_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="rendu_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="rendu_files/libs/bootstrap/bootstrap-fc17208dbcccf0e287f7e85e7f225126.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 <link rel="stylesheet" href="style.css">
@@ -44,7 +44,33 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://colin.geind.re/"><i class="bi bi-link-45deg"></i>Colin</a></li><li><a href="https://dataforgood.fr/"><i class="bi bi-link-45deg"></i>Denis</a></li></ul></div></div>
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#cadre-méthodologique" id="toc-cadre-méthodologique" class="nav-link" data-scroll-target="#cadre-méthodologique">Cadre méthodologique</a></li>
+  <li><a href="#analyse-des-données" id="toc-analyse-des-données" class="nav-link" data-scroll-target="#analyse-des-données"><strong>Analyse des données</strong></a>
+  <ul class="collapse">
+  <li><a href="#cadre-des-données" id="toc-cadre-des-données" class="nav-link" data-scroll-target="#cadre-des-données">Cadre des données</a></li>
+  <li><a href="#prétraitement-et-nettoyage-des-données" id="toc-prétraitement-et-nettoyage-des-données" class="nav-link" data-scroll-target="#prétraitement-et-nettoyage-des-données">Prétraitement et nettoyage des données</a></li>
+  <li><a href="#analyse-descriptive-univariée-des-données" id="toc-analyse-descriptive-univariée-des-données" class="nav-link" data-scroll-target="#analyse-descriptive-univariée-des-données">Analyse descriptive univariée des données</a>
+  <ul class="collapse">
+  <li><a href="#analyse-de-chaque-variable-explicative" id="toc-analyse-de-chaque-variable-explicative" class="nav-link" data-scroll-target="#analyse-de-chaque-variable-explicative">Analyse de chaque variable explicative</a></li>
+  </ul></li>
+  <li><a href="#analyse-descriptive-bivariée-des-données" id="toc-analyse-descriptive-bivariée-des-données" class="nav-link" data-scroll-target="#analyse-descriptive-bivariée-des-données">Analyse descriptive bivariée des données</a></li>
+  </ul></li>
+  <li><a href="#analyse-et-discussion-des-résultats" id="toc-analyse-et-discussion-des-résultats" class="nav-link" data-scroll-target="#analyse-et-discussion-des-résultats"><strong>Analyse et discussion des résultats</strong></a>
+  <ul class="collapse">
+  <li><a href="#modélisation-principale" id="toc-modélisation-principale" class="nav-link" data-scroll-target="#modélisation-principale">Modélisation principale</a></li>
+  <li><a href="#robustesse-des-résultats" id="toc-robustesse-des-résultats" class="nav-link" data-scroll-target="#robustesse-des-résultats">Robustesse des résultats</a></li>
+  <li><a href="#analyses-complémentaires" id="toc-analyses-complémentaires" class="nav-link" data-scroll-target="#analyses-complémentaires">Analyses complémentaires</a></li>
+  </ul></li>
+  <li><a href="#conclusion-générale-et-perspectives" id="toc-conclusion-générale-et-perspectives" class="nav-link" data-scroll-target="#conclusion-générale-et-perspectives"><strong>Conclusion générale et perspectives</strong></a></li>
+  <li><a href="#bibliographie---source-des-données" id="toc-bibliographie---source-des-données" class="nav-link" data-scroll-target="#bibliographie---source-des-données">Bibliographie - Source des données</a></li>
+  </ul>
+<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://colin.geind.re/"><i class="bi bi-link-45deg"></i>Colin</a></li><li><a href="https://dataforgood.fr/"><i class="bi bi-link-45deg"></i>Denis</a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -84,16 +110,6 @@ ul.task-list li input[type="checkbox"] {
 <p>Pour contrer ces biais, on introduit parfois des effets fixes “pays”, comme les membres de l’OCDE, les pays Latino-américains, etc.</p>
 <p>Un dernier problème que nous voulons aborder est celui de la barrière de la langue. Est-ce que tout le monde à la même perception du “bonheur”, ou est-ce que les mots, le langage utilisé pour définir cette notion change au point que la langue influence les réponses ? Mais de nombreuses études ont montré que l’ont arrivait relativement bien a apprécier le bonheur des autres, quelque soit notre pays d’origine et celui de l’autre, impliquant que le bonheur revêt un e définition globale relativement comprise partout (voir Sandvil, 1993 et Diner &amp; Lucas, 1999).</p>
 <p>Nous nous attendons à voir une corrélation entre l’indice de bonheur du WHR, et différents indicateurs socio-économiques. De plus, nous nous attendons a voir les biais culturels sus-cités.</p>
-<section id="plan" class="level3">
-<h3 class="anchored" data-anchor-id="plan">Plan :</h3>
-<ul>
-<li><p>Récupération des données</p></li>
-<li><p>Traitement des données</p></li>
-<li><p>Statistiques descriptives</p></li>
-<li><p>Comparaison de modèles</p></li>
-<li><p>Conclusion statistiques</p></li>
-</ul>
-</section>
 </section>
 <section id="cadre-méthodologique" class="level1">
 <h1>Cadre méthodologique</h1>
