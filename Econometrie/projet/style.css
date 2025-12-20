@@ -1,5 +1,5 @@
 body {
-    background: #ffebee;
+    background: transparent;
     color: #012622;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
@@ -10,11 +10,20 @@ body {
 
 .figure-img {
     border-radius: 12px;
-    box-shadow: 6px 6px 8px #71517b;
+    box-shadow: 2px 2px 4px #71517bc0;
+    transition: all 0.3s ease;
+}
+
+.figure-img:hover {
+    transform: scale(1.015);
 }
 
 h1, h2, h3 {
     color: #71517B;
+}
+
+p {
+    text-align: justify;
 }
 
 a {
@@ -27,47 +36,46 @@ a:hover {
     text-decoration: underline;
 }
 
-.figure-img:hover {
-    animation: glitter 1s infinite;
-    transform-origin: center;
+.MathJax {
+    color: #71517B;
 }
 
-.cell:hover {
-    animation: shakeZoom .7s infinite;
-    overflow: hidden;
+#quarto-content {
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 50px 0px;
 }
 
-@keyframes glitter {
-    0% {
-        box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
-        transform: rotateX(0deg) rotateY(0deg);
-    }
-    25% {
-        box-shadow: 0 0 20px #FF69B4, 0 0 30px #FF69B4, 0 0 40px #FF69B4, 0 0 50px #FF69B4;
-        transform: rotateX(15deg) rotateY(58deg);
-    }
-    50% {
-        box-shadow: 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 50px #00FFFF, 0 0 60px #00FFFF;
-        transform: rotateX(-70deg) rotateY(-15deg);
-    }
-    75% {
-        box-shadow: 0 0 20px #ADFF2F, 0 0 30px #ADFF2F, 0 0 40px #ADFF2F, 0 0 50px #ADFF2F;
-        transform: rotateX(10deg) rotateY(-30deg);
-    }
-    100% {
-        box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
-        transform: rotateX(0deg) rotateY(0deg);
-    }
+#TOC, main {
+    background-color: #fff0f2;
+    border-radius: 16px;
+    border: 1px dashed #71517B;
+    padding: 25px;
 }
 
-@keyframes shakeZoom {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
-    }
-    10%, 30%, 50%, 70%, 90% {
-        transform: translate(-2px, 2px) scale(1.625);
-    }
-    20%, 40%, 60%, 80% {
-        transform: translate(2px, -2px) scale(1.75);
-    }
+/* Fractal Plaid Background */
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(45deg, #ffebee 25%, transparent 25%) -50px 0/100px 100px,
+              linear-gradient(135deg, #f1dddd 25%, transparent 25%) -50px 0/100px 100px,
+              linear-gradient(45deg, transparent 75%, #fde6e9 75%) -50px 0/100px 100px,
+              linear-gradient(135deg, transparent 75%, #f3d8d8 75%) -50px 0/100px 100px;
+  background-color: #ffe7eb;
+  animation: animatePlaid 5s linear infinite;
+  z-index: -1;
+}
+
+/* Fractal Plaid Animation */
+@keyframes animatePlaid {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 100px 100px, -100px 100px, 100px -100px, -100px -100px;
+  }
 }

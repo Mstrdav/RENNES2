@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
 <link href="rendu_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="rendu_files/libs/bootstrap/bootstrap-fc17208dbcccf0e287f7e85e7f225126.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -49,7 +113,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#cadre-méthodologique" id="toc-cadre-méthodologique" class="nav-link" data-scroll-target="#cadre-méthodologique">Cadre méthodologique</a></li>
+  <li><a href="#plan" id="toc-plan" class="nav-link" data-scroll-target="#plan">Plan</a></li>
+  <li><a href="#cadre-méthodologique" id="toc-cadre-méthodologique" class="nav-link" data-scroll-target="#cadre-méthodologique">Cadre méthodologique</a>
+  <ul class="collapse">
+  <li><a href="#modèle-de-régression" id="toc-modèle-de-régression" class="nav-link" data-scroll-target="#modèle-de-régression">Modèle de régression</a></li>
+  <li><a href="#corrections-et-transformations-de-variables" id="toc-corrections-et-transformations-de-variables" class="nav-link" data-scroll-target="#corrections-et-transformations-de-variables">Corrections et transformations de variables</a></li>
+  </ul></li>
   <li><a href="#analyse-des-données" id="toc-analyse-des-données" class="nav-link" data-scroll-target="#analyse-des-données"><strong>Analyse des données</strong></a>
   <ul class="collapse">
   <li><a href="#cadre-des-données" id="toc-cadre-des-données" class="nav-link" data-scroll-target="#cadre-des-données">Cadre des données</a></li>
@@ -92,28 +161,123 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enlever les commentaires</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># étoffer le plan</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># numéroter les graphiques et tableaux</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># labeliser les axes</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pas de code R dans le rendu final html juste les graphiques et les commentaires</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># stat desc : décrire les résultats : interpréter ou analyser</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># selectionner les graphiques pertinents et ne pas tout montrer</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># un document de référence</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Ne pas utiliser le code de la variable dans l interprétation</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># spécifier nos sélections de variables si ce n'est déjà fait</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p><strong>JAOUEN Denis - GEINDRE Colin</strong></p>
 <p><a href="https://eco.univ-rennes.fr/master-mathematiques-appliquees-statistique"><strong>Master 1 MAS - Université de Rennes</strong></a> et <a href="https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html"><strong>Master 1 MAS - Université Rennes 2</strong></a></p>
 <p>La rédaction de ce document s’appuie sur l’utilisation d’IA générative, ainsi que sur des blocs de codes fournit sur des forums comme medium ou stack overflow. Les auteur.ice.s de ces blocs sont remercié.e.s en fin de document.</p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>Sommes-nous heureux ? L’étions-nous plus auparavant ? Quels modèles de société sont les plus heureux ? Et surtout, quelle est la recette du bonheur ? Questions difficiles, mais qui revettent un importance capitale pour chacun d’entre nous, mais aussi dans la recherche économique et sociale actuelle.</p>
-<p>Le terme de “Bonheur National Brut” (ou en anglais “Gross National Happiness”) est apparu pour la première fois au Bhutan, à la fin des années 1970. Jigme Singye Wangchuck, alors roi du pays, déclare “Gross National Happiness is more import than Gross Domestic Product”, une phrase qui a influencé le développement de pays, engageant les politiques nationales et locales autours d’une approche holistique de la notion de progrès, moins centrée sur les marqueurs socio-économiques classiques.</p>
-<p>Le GNHI, indice de bonheur national développé par le Bhutan, est maintenant utilisé dans de nombreux pays autours du monde. Il est construit sur un ensembles de marqueurs répartis dans 9 pôles considérés comme égaux.</p>
+<p>Sommes-nous heureux ? L’étions-nous plus auparavant ? Quels modèles de société sont les plus heureux ? Et surtout, quelle est la recette du bonheur ? Questions difficiles, mais qui revêtent une importance capitale pour chacun d’entre nous, notamment dans la recherche économique et sociale actuelle.</p>
+<p>Le terme de “Bonheur National Brut” (ou en anglais “Gross National Happiness”) est apparu pour la première fois au Bhutan, à la fin des années 1970. Jigme Singye Wangchuck, alors roi du pays, déclare “Gross National Happiness is more important than Gross Domestic Product”, une phrase qui a influencé le développement de pays, engageant les politiques nationales et locales autour d’une approche holistique de la notion de progrès, moins centrée sur les marqueurs socio-économiques classiques.</p>
+<p>Le GNHI, indice de bonheur national développé par le Bhutan, est maintenant utilisé dans de nombreux pays autours du monde. Il est construit sur un ensemble de marqueurs répartis dans 9 pôles considérés comme égaux.</p>
 <p>En effet, depuis trop longtemps, l’indice de développement d’un pays a été calculé sur des indices économiques : PIB, croissance, taux d’emploi, etc. Ce choix n’est pas neutre, il sert un système particulier qui ne met pas l’humain ou l’environnement au coeur de ses priorités. Cependant, de plus en plus de sociologues et d’économistes préconisent d’ajouter à ces mesures des marqueurs de bien-être sociétal. Mais comment mesurer le bonheur ? Existe-t-il des bases de données sérieuses et fiables permettant de répondre à nos questions ?</p>
 <p>Si le <a href="https://ophi.org.uk/gross-national-happiness">GNHI</a> permet un classement selon un index de bonheur, il est déjà construit sur un postulat, celui que le bonheur est expliqué par un ensemble de facteurs socio économiques définis. Si on veut démontrer ce postulat, on ne peut pas prendre le GNHI comme index de bonheur. Nous avons préféré étudier les résultats du World Happiness Report - de <a href="https://www.gallup.com/analytics/318875/global-research.aspx">Gallup</a>, étude annuelle construite sur un questionnaire utilisant des échelles de Cantril (la principale étant “Imaginez une échelle à 10 échelons, l’échelon 0 étant la pire vie que vous pourriez imaginer, le 10 la meilleure. Sur quel échelon êtes-vous actuellement ?”). D’autres études utilisent des échelles similaires, les échelles de Likert. On citera notamment l’Integrated Values Surveys, qui est celle avec la plus longue échelle de temps, mais que nous avons rejeté car le nombre de pays est plus restreint, et la formulation des questions a changé plusieurs fois. Les postulats sont alors plus simples, et on se mettra simplement d’accord sur le fait que :</p>
 <ul>
 <li><p>La distance mentale entre les différentes réponses au questionnaire est stable, c’est à dire que nous pouvons faire des mathématiques dessus (calculer des moyennes, etc.). On assume une échelle <strong>cardinale</strong> et pas simplement <strong>ordinale</strong>.</p></li>
 <li><p>Le bonheur est autodéterminé de manière précise. Nous assumons que l’erreur d’auto évaluation de son bonheur personel est une variable aléatoire qui suit une distribution normale. Ainsi, il n’y a pas de biais qui, par exemple, pousserait les personnes malheureuses à s’estimer plus heureuses qu’elles ne le sont.</p></li>
 </ul>
-<p>Ces hypothèses sont cohérentes avec la littérature scientifique, mais restent fortement débattues. En particulier, l’utilisation d’échelle cardinale plutôt qu’ordinale ne change que très peu les résultats des régression, comme l’ont démontré plusieurs économiste (Ferris, 2002). Celle-ci est de plus intuitive, et grandement facilitante pour nos calculs. Par contre, il existe un effet plafond/plancher : il est plus difficile de passer de 9 à 10 que de 5 à 6 ; l’échelle n’est probablement pas cardinale dans les extrèmes. Nous faisons là une approximation consciente. La deuxième hypothèse, elle, est corroborée par la loi des grand nombre (les données de Gallup sont les plus fournies au monde), et par les différentes études sur les marqueurs de bonheur (taux de suicide, expressions faciales), qui tendent à démontrer que les sujets ne mentent pas sur leur bonheur. Mais certaines cultures valorisent (latino-américaines) ou dévalorisent (Japon, Corée) socialement de se dire heureux, ce qui peut tirer les résultats vers le haut ou vers le bas. De plus, le tapis roulant hédonique, ou l’adaptation à ses conditions, ainsi que la désirabilité sociale qui pousse les répondants à paraître normaux aux yeux des enquêteurs, peuvent créer une homogénisation des résultats.</p>
+<p>Ces hypothèses sont cohérentes avec la littérature scientifique, mais restent fortement débattues. En particulier, l’utilisation d’échelle cardinale plutôt qu’ordinale ne change que très peu les résultats des régression, comme l’ont démontré plusieurs économistes (Ferris, 2002). Celle-ci est de plus intuitive, et grandement facilitante pour nos calculs. Par contre, il existe un effet plafond/plancher : il est plus difficile de passer de 9 à 10 que de 5 à 6 ; l’échelle n’est probablement pas cardinale dans les extrèmes. Nous faisons là une approximation consciente. La deuxième hypothèse, elle, est corroborée par la loi des grand nombre (les données de Gallup sont les plus fournies au monde), et par les différentes études sur les marqueurs de bonheur (taux de suicide, expressions faciales…), qui tendent à démontrer que les sujets ne mentent pas sur leur bonheur. Mais certaines cultures valorisent (latino-américaines) ou dévalorisent (Japon, Corée) socialement de se dire heureux, ce qui peut tirer les résultats vers le haut ou vers le bas. De plus, le tapis roulant hédonique, ou l’adaptation à ses conditions, ainsi que la désirabilité sociale qui pousse les répondants à paraître normaux aux yeux des enquêteurs, peuvent créer une homogénisation des résultats.</p>
 <p>Pour contrer ces biais, on introduit parfois des effets fixes “pays”, comme les membres de l’OCDE, les pays Latino-américains, etc.</p>
-<p>Un dernier problème que nous voulons aborder est celui de la barrière de la langue. Est-ce que tout le monde à la même perception du “bonheur”, ou est-ce que les mots, le langage utilisé pour définir cette notion change au point que la langue influence les réponses ? Mais de nombreuses études ont montré que l’ont arrivait relativement bien a apprécier le bonheur des autres, quelque soit notre pays d’origine et celui de l’autre, impliquant que le bonheur revêt un e définition globale relativement comprise partout (voir Sandvil, 1993 et Diner &amp; Lucas, 1999).</p>
+<p>Un dernier problème que nous voulons aborder est celui de la barrière de la langue. Est-ce que tout le monde à la même perception du “bonheur”, ou est-ce que les mots, le langage utilisé pour définir cette notion change au point que la langue influence les réponses ? Mais de nombreuses études ont montré que l’on arrivait relativement bien à apprécier le bonheur des autres, quelque soit notre pays d’origine et celui de l’autre, impliquant que le bonheur revêt une définition globale relativement comprise partout (voir Sandvil, 1993 et Diner &amp; Lucas, 1999).</p>
 <p>Nous nous attendons à voir une corrélation entre l’indice de bonheur du WHR, et différents indicateurs socio-économiques. De plus, nous nous attendons a voir les biais culturels sus-cités.</p>
+</section>
+<section id="plan" class="level1">
+<h1>Plan</h1>
+<ul>
+<li>Introduction</li>
+<li>Cadre méthodologique
+<ul>
+<li>Modèle de régression</li>
+<li>Corrections et transformations de variables</li>
+</ul></li>
+<li>Analyse des données
+<ul>
+<li>Cadre des données</li>
+<li>Pré-traitement des données
+<ul>
+<li>Données manquantes</li>
+<li>Suppression des doublons</li>
+<li>Recherche des outliers</li>
+<li>Transformation des données</li>
+</ul></li>
+<li>Analyses descriptives univariées
+<ul>
+<li>Variables explicatives</li>
+<li>Variable cible</li>
+</ul></li>
+<li>Analyses descriptives multivariées
+<ul>
+<li>Corrélations entre variables</li>
+<li>Analyse des interactions</li>
+</ul></li>
+</ul></li>
+<li>Résultats et discussion
+<ul>
+<li>Modélisation principale</li>
+<li>Robustesse des résultats</li>
+<li>Analyses complémentaires</li>
+</ul></li>
+<li>Conclusion</li>
+<li>Bibliographie</li>
+</ul>
 </section>
 <section id="cadre-méthodologique" class="level1">
 <h1>Cadre méthodologique</h1>
 <p>Le cadre méthodologique général est celui de la régression linéaire, avec une estimation des moindres carrés ordinaires. En fonction des données, des corrections éventuelles (white, MCG, etc.) pourront être envisagées. Pour chaque partie, une méthodologie plus précise sera discutée.</p>
+<section id="modèle-de-régression" class="level2">
+<h2 class="anchored" data-anchor-id="modèle-de-régression">Modèle de régression</h2>
+<p>Voici la formulation mathématique du modèle linéaire estimé par moindres carrés ordinaires (MCO), en notation matricielle. <span class="math display">\[
+y = X\beta + \varepsilon
+\]</span></p>
+<p>Dans notre cas, le modèle est formulé ainsi :</p>
+<p><span class="math display">\[
+\begin{align}
+  Happiness &amp;= \beta_0\\
+  &amp;+ \beta_1 Political\_Corruption + \beta_2 GDP\_per\_capita + \beta_3 Lifespan\\
+  &amp;+ \beta_4 Net\_Migration + \beta_5 Overweight\_Adults + \beta_6 Population\_density \\
+  &amp;+ \beta_7 KWH\_pp\_pc + \beta_8 Military\_Expenses + \beta_9 Population\_Growth \\
+  &amp;+ \beta_{10} Primary\_School\_Enrollment + \beta_{11} OCDE\\
+  &amp;+ \varepsilon
+\end{align}
+\]</span></p>
+<p>On estime alors les paramètres via la méthode des moindres carrés ordinaires : <span class="math display">\[
+\hat\beta{MCO} = \operatorname*{arg\,min}\beta \sum{\varepsilon_i^2} = (X'X)^{-1}X'y
+\]</span></p>
+<p>Cette méthode assume certaines hypothèses :</p>
+<ul>
+<li><p>Linéarité : la relation entre les variables explicatives et la variable cible est linéaire. (et la variable cible est continue)</p></li>
+<li><p>Exogénéité : les variables explicatives ne sont pas corrélées avec le terme d’erreur, <span class="math inline">\(E(X'\varepsilon) = 0\)</span>.</p></li>
+<li><p>Homoscédasticité : la variance des erreurs est constante, <span class="math inline">\(\operatorname{Var}(\varepsilon) = \sigma^2 I\)</span>.</p></li>
+<li><p>Normalité : les résidus sont distribuées normalement, <span class="math inline">\(\varepsilon \sim \mathcal{N}(0, \sigma^2)\)</span>.</p></li>
+<li><p>Absence d’autocorrélation des variables explicatives : les variables explicatives ne sont pas corrélées entre elles.</p></li>
+<li><p>Absence d’autocorrélation des résidus, <span class="math inline">\(\operatorname{Cov}(\varepsilon_i, \varepsilon_j) = 0\)</span> pour <span class="math inline">\(i \neq j\)</span>.</p></li>
+</ul>
+<p>Sous homoscédasticité : <span class="math inline">\(\operatorname{Var}(\hat\beta{MCO}) = \sigma^2 (X'X)^{-1}\)</span></p>
+<p>En présence d’hétéroscédasticité, la variance générale s’écrit avec la matrice diagonale <span class="math inline">\(Ω\)</span>, <span class="math inline">\((Var(ε)=Ω)\)</span> : <span class="math inline">\(\operatorname{Var}(\hat\beta{MCO}) = (X'X)^{-1} X' \Omega X (X'X)^{-1}\)</span></p>
+</section>
+<section id="corrections-et-transformations-de-variables" class="level2">
+<h2 class="anchored" data-anchor-id="corrections-et-transformations-de-variables">Corrections et transformations de variables</h2>
+<p>Exemples de transformations de variables et modèles correspondants (interprétations rapides) :</p>
+<ul>
+<li>Modèle linéaire en niveaux : <span class="math inline">\(y_i = \alpha + \beta x_i + u_i\)</span>. Effet absolu de x sur y.</li>
+<li>Log‑niveau (log(x) explicative) : <span class="math inline">\(y_i = \alpha + \beta \log(x_i) + u_i\)</span>. β = variation absolue de y pour une variation proportionnelle de x (approx. effet semi‑élasticité).</li>
+<li>Log‑log (log(y) vs log(x)) : <span class="math inline">\(\log(y_i) = \alpha + \beta \log(x_i) + u_i ]\)</span>. β = élasticité (pourcentage de y lorsque x varie de 1%).</li>
+<li>Quadratique / polynôme : <span class="math inline">\(y_i = \alpha + \beta_1 x_i + \beta_2 x_i^2 + u_i\)</span>. Permet capturer non‑linéarités (effets en U, concavité).</li>
+<li>Effet interactif : <span class="math inline">\(y_i = \alpha + \beta_1 x_i + \beta_2 D_i + \beta_3 (x_i \times D_i) + u_i\)</span>. Effet de x différent selon la modalité D. On étudie les effets croisés de la même façon.</li>
+</ul>
+</section>
 </section>
 <section id="analyse-des-données" class="level1">
 <h1><strong>Analyse des données</strong></h1>
@@ -274,14 +438,14 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -294,7 +458,7 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -304,7 +468,7 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -314,7 +478,7 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -336,18 +500,18 @@ Happiness                 125   5.46       1.12        2.86        5.48        7
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>On remarque ici les variables les plus et les moins corrélées. L’espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l’indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement.<br>
-Les autres variables ne semblent pas être corrélées drastiquement à l’indice de bonheur.</p>
+Les autres variables ne semblent pas être corrélées fortement à l’indice de bonheur.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>
@@ -358,22 +522,115 @@ Les autres variables ne semblent pas être corrélées drastiquement à l’indi
 <p>On doute de la linéarité entre l’indice de bonheur et la corruption politique car le nuage de point est très dispersé. De même pour la croissance de la population et les dépenses militaires.</p>
 <p>Finalement, on remarque une certaine linéarité positive entre l’indice de bonheur et l’espérance de vie à la naissance, les points semblent bien décrire une droite.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_ss_singapour <span class="ot">=</span> data[<span class="sc">-</span><span class="fu">which</span>(data<span class="sc">$</span>Code <span class="sc">==</span> <span class="st">"SGP"</span>),]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_ss_singapour, <span class="fu">aes_string</span>(<span class="at">x=</span><span class="st">"Population_Density"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm , <span class="at">color=</span><span class="st">"red"</span>, <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">se=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Linéarité de la densité de population sans Singapour"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_ss_somalie <span class="ot">=</span> data[<span class="sc">-</span><span class="fu">which</span>(data<span class="sc">$</span>Code <span class="sc">==</span> <span class="st">"SOM"</span>),]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_ss_somalie, <span class="fu">aes_string</span>(<span class="at">x=</span><span class="st">"Primary_School_Enrollment"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm , <span class="at">color=</span><span class="st">"red"</span>, <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">se=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Linéarité des inscriptions à l'école primaire sans la Somalie"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_ss_pak_usa <span class="ot">=</span> data[<span class="sc">-</span><span class="fu">which</span>(data<span class="sc">$</span>Code <span class="sc">==</span> <span class="st">"PAK"</span> <span class="sc">|</span>data<span class="sc">$</span>Code <span class="sc">==</span> <span class="st">"USA"</span> ),]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_ss_pak_usa, <span class="fu">aes_string</span>(<span class="at">x=</span><span class="st">"Net_Migration"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm , <span class="at">color=</span><span class="st">"red"</span>, <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">se=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Linéarité de la migration sans les USA ni le Pakistan"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>On voit que certaines variables sont corrélées, source de problème pour notre régression à venir. En voici les plus importantes :</p>
-<ul>
-<li><p>La corruption politique est corrélée négativement avec le PIB/hab, l’espérance de vie, le surpoids et la consommation énergétique.</p></li>
-<li><p>Le PIB/hab est corrélée positivement avec l’espérance de vie, le surpoids et la consommation énergétique.</p></li>
-<li><p>L’espérance de vie est corrélée positivement avec le surpoids et la consommation énergétique.</p></li>
-<li><p>Le surpoids est corrélée positivement avec la consommation énergétique.</p></li>
-</ul>
-<p>On a donc quatre variables qui semblent corrélées entre elles.</p>
+<p>Ici, retirer les individus les plus aberrants ne permet pas pour autant d’obtenir une linéarité de la relation entre l’indice de bonheur et les variables étudiées.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_PIB_log <span class="ot">=</span> data</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data_PIB_log<span class="sc">$</span>GDP_per_Capita <span class="ot">=</span> <span class="fu">log</span>(data_PIB_log<span class="sc">$</span>GDP_per_Capita)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_PIB_log, <span class="fu">aes_string</span>(<span class="at">x=</span><span class="st">"GDP_per_Capita"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm , <span class="at">color=</span><span class="st">"red"</span>, <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">se=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Linéarité du logarithme du PIB par habitant"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_KWH_log <span class="ot">=</span> data</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data_KWH_log<span class="sc">$</span>KWH_pp_pc  <span class="ot">=</span> <span class="fu">log</span>(data_KWH_log<span class="sc">$</span>KWH_pp_pc)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_KWH_log, <span class="fu">aes_string</span>(<span class="at">x=</span><span class="st">"KWH_pp_pc"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm , <span class="at">color=</span><span class="st">"red"</span>, <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">se=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Linéarité du logarithme de la consommmation énergétique"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_migration <span class="ot">=</span> data</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data_migration<span class="sc">$</span>Net_Migration  <span class="ot">=</span> <span class="fu">log</span>(data_migration<span class="sc">$</span>Net_Migration)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_migration, <span class="fu">aes_string</span>(<span class="at">x=</span><span class="st">"Net_Migration"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>)) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm , <span class="at">color=</span><span class="st">"red"</span>, <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">se=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Linéarité du logarithme de la migration"</span>, <span class="at">y=</span><span class="st">"Happiness"</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Appliquer un logarithme au PIB par habitant et à la consommation énergétique permet un lien linéaire très clair avec l’indice de bonheur. La relation est moins forte mais c’est aussi le cas avec la migration nette, sans même retirer les individus aberrants qui sont bien projetés sur la droite.</p>
+<p>Aucune modification classique (exp, log, carré) ne donne une meilleure linéarité aux autres variables (j’ai tout testé).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> OCDE,<span class="at">y=</span>Happiness)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">"orange"</span>, <span class="at">color=</span><span class="st">"black"</span>, <span class="at">alpha=</span><span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Boxplot du score de bonheur"</span>, <span class="at">y=</span><span class="st">"Score de bonheur"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="analyse-et-discussion-des-résultats" class="level1">
@@ -419,7 +676,32 @@ Multiple R-squared:  0.8115,    Adjusted R-squared:  0.7932
 F-statistic: 44.23 on 11 and 113 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>De prime abord, on constate d’après le test de Fisher, que notre modèle explique plus de 80% de la variance de l’indice duebonheur. Nos variables significatives, par ordre de significativité, sont l’espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l’OCDE et l’inscription à l’école primaire.</p>
+<p>De prime abord, on constate d’après le test de Fisher, que notre modèle explique plus de 80% de la variance de l’indice de bonheur. Nos variables significatives, par ordre de significativité, sont l’espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l’OCDE et l’inscription à l’école primaire.</p>
+<p>Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés</p>
+<p>TESTER DES MODELES DIFFERENTS</p>
+<p>LOG / CARRE / EFFETS CROISES</p>
+<p>COMPARAISON VISU<br>
+TEST D’ANOVA ENTRE CES MODELES</p>
+<p>EN BACKWARD, trifouiller avec les AIC</p>
+</section>
+<section id="robustesse-des-résultats" class="level2">
+<h2 class="anchored" data-anchor-id="robustesse-des-résultats">Robustesse des résultats</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>On voit que certaines variables sont corrélées, source de problème pour notre régression à venir bien qu’aucune ne passe le seuil critique de 0,8. En voici les plus importantes :</p>
+<ul>
+<li><p>La corruption politique est corrélée négativement avec le PIB/hab à -0,72.</p></li>
+<li><p>Le PIB/hab a une correlation positive à 0,72 avec la consommation énergétique et à 0,67 avec l’espérance de vie.</p></li>
+<li><p>L’espérance de vie est corrélée positivement avec le surpoids à 0,72.</p></li>
+</ul>
+<p>On a donc quatre variables qui semblent corrélées entre elles.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>     Political_Corruption                 KWH_pp_pc            GDP_per_Capita 
@@ -467,16 +749,26 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-17-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>On en est là !</p>
-<p>Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés</p>
-</section>
-<section id="robustesse-des-résultats" class="level2">
-<h2 class="anchored" data-anchor-id="robustesse-des-résultats">Robustesse des résultats</h2>
+<p>Le graphique peut nous faire douter de la normalité des résidus.</p>
 <p>Hypothèses des MCO - nomalités / hétéroscédasticité / …</p>
 </section>
 <section id="analyses-complémentaires" class="level2">
@@ -498,6 +790,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section>
 <section id="bibliographie---source-des-données" class="level1">
 <h1>Bibliographie - Source des données</h1>
+<p><a href="https://tex.stackexchange.com/questions/27028/what-is-the-difference-between-newline-and" class="uri">https://tex.stackexchange.com/questions/27028/what-is-the-difference-between-newline-and</a></p>
 </section>
 
 </main>

@@ -2,3 +2,8 @@
 credentials.*
 .RData
 .Rhistory
+*.RData
+*.rdb
+*.rdx
+/Econometrie/projet/rendu_cache
+/Econometrie/projet/rendu_files

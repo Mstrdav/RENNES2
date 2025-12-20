@@ -80,7 +80,8 @@ Nous nous attendons à voir une corrélation entre l'indice de bonheur du WHR, e
 
 -   Introduction
 -   Cadre méthodologique
-    -   Modèle de régression et correction
+    -   Modèle de régression
+    -   Corrections et transformations de variables
 -   Analyse des données
     -   Cadre des données
     -   Pré-traitement des données
@@ -94,36 +95,67 @@ Nous nous attendons à voir une corrélation entre l'indice de bonheur du WHR, e
     -   Analyses descriptives multivariées
         -   Corrélations entre variables
         -   Analyse des interactions
-- Résultats et discussion
+-   Résultats et discussion
     -   Modélisation principale
     -   Robustesse des résultats
     -   Analyses complémentaires
-- Conclusion
-- Bibliographie
+-   Conclusion
+-   Bibliographie
 
 # Cadre méthodologique
 
 Le cadre méthodologique général est celui de la régression linéaire, avec une estimation des moindres carrés ordinaires. En fonction des données, des corrections éventuelles (white, MCG, etc.) pourront être envisagées. Pour chaque partie, une méthodologie plus précise sera discutée.
 
-## Modèle de régression et corrections
+## Modèle de régression
 
-Voici la formulation mathématique du modèle linéaire estimé par moindres carrés ordinaires (MCO) :
+Voici la formulation mathématique du modèle linéaire estimé par moindres carrés ordinaires (MCO), en notation matricielle. $$
+y = X\beta + \varepsilon
+$$
 
--   Modèle en notation matricielle : $y = X\beta + \varepsilon,\quad \mathbb{E}[\varepsilon|X]=0$
+Dans notre cas, le modèle est formulé ainsi :
 
--   Estimation MCO : $\hat\beta{MCO} = \operatorname*{arg\,min}\beta \sum{\varepsilon_i^2} = (X'X)^{-1}X'y$
+$$
+\begin{align}
+  Happiness &= \beta_0\\
+  &+ \beta_1 Political\_Corruption + \beta_2 GDP\_per\_capita + \beta_3 Lifespan\\
+  &+ \beta_4 Net\_Migration + \beta_5 Overweight\_Adults + \beta_6 Population\_density \\
+  &+ \beta_7 KWH\_pp\_pc + \beta_8 Military\_Expenses + \beta_9 Population\_Growth \\
+  &+ \beta_{10} Primary\_School\_Enrollment + \beta_{11} OCDE\\
+  &+ \varepsilon
+\end{align}
+$$
 
--   Sous homoscédasticité $(\operatorname{Var}(\varepsilon)=\sigma^2 I)$ *:* $\operatorname{Var}(\hat\beta{MCO}) = \sigma^2 (X'X)^{-1}$
+On estime alors les paramètres via la méthode des moindres carrés ordinaires : $$
+\hat\beta{MCO} = \operatorname*{arg\,min}\beta \sum{\varepsilon_i^2} = (X'X)^{-1}X'y
+$$
 
--   En présence d'hétéroscédasticité, la variance générale s'écrit avec la matrice diagonale $Ω$, $(Var(ε)=Ω)$ : $\operatorname{Var}(\hat\beta{MCO}) = (X'X)^{-1} X' \Omega X (X'X)^{-1}$
+Cette méthode assume certaines hypothèses :
 
--   Exemples de transformations de variables et modèles correspondants (interprétations rapides) :
+-   Linéarité : la relation entre les variables explicatives et la variable cible est linéaire. (et la variable cible est continue)
 
-    -   Modèle linéaire en niveaux : $y_i = \alpha + \beta x_i + u_i$. Effet absolu de x sur y.
-    -   Log‑niveau (log(x) explicative) : $y_i = \alpha + \beta \log(x_i) + u_i$. β = variation absolue de y pour une variation proportionnelle de x (approx. effet semi‑élasticité).
-    -   Log‑log (log(y) vs log(x)) : $\log(y_i) = \alpha + \beta \log(x_i) + u_i ]$. β = élasticité (pourcentage de y lorsque x varie de 1%).
-    -   Quadratique / polynôme : $y_i = \alpha + \beta_1 x_i + \beta_2 x_i^2 + u_i$. Permet capturer non‑linéarités (effets en U, concavité).
-    -   Effet interactif : $y_i = \alpha + \beta_1 x_i + \beta_2 D_i + \beta_3 (x_i \times D_i) + u_i$. Effet de x différent selon la modalité D. On étudie les effets croisés de la même façon.
+-   Exogénéité : les variables explicatives ne sont pas corrélées avec le terme d'erreur, $E(X'\varepsilon) = 0$.
+
+-   Homoscédasticité : la variance des erreurs est constante, $\operatorname{Var}(\varepsilon) = \sigma^2 I$.
+
+-   Normalité : les résidus sont distribuées normalement, $\varepsilon \sim \mathcal{N}(0, \sigma^2)$.
+
+-   Absence d’autocorrélation des variables explicatives : les variables explicatives ne sont pas corrélées entre elles.
+
+-   Absence d’autocorrélation des résidus, $\operatorname{Cov}(\varepsilon_i, \varepsilon_j) = 0$ pour $i \neq j$.
+
+Sous homoscédasticité : $\operatorname{Var}(\hat\beta{MCO}) = \sigma^2 (X'X)^{-1}$
+
+En présence d'hétéroscédasticité, la variance générale s'écrit avec la matrice diagonale $Ω$, $(Var(ε)=Ω)$ : $\operatorname{Var}(\hat\beta{MCO}) = (X'X)^{-1} X' \Omega X (X'X)^{-1}$
+
+## Corrections et transformations de variables
+
+Exemples de transformations de variables et modèles correspondants (interprétations rapides) :
+
+-   Modèle linéaire en niveaux : $y_i = \alpha + \beta x_i + u_i$. Effet absolu de x sur y.
+-   Log‑niveau (log(x) explicative) : $y_i = \alpha + \beta \log(x_i) + u_i$. β = variation absolue de y pour une variation proportionnelle de x (approx. effet semi‑élasticité).
+-   Log‑log (log(y) vs log(x)) : $\log(y_i) = \alpha + \beta \log(x_i) + u_i ]$. β = élasticité (pourcentage de y lorsque x varie de 1%).
+-   Quadratique / polynôme : $y_i = \alpha + \beta_1 x_i + \beta_2 x_i^2 + u_i$. Permet capturer non‑linéarités (effets en U, concavité).
+-   Effet interactif : $y_i = \alpha + \beta_1 x_i + \beta_2 D_i + \beta_3 (x_i \times D_i) + u_i$. Effet de x différent selon la modalité D. On étudie les effets croisés de la même façon.
 
 # **Analyse des données**
 
@@ -444,7 +476,7 @@ par(mfrow = c(2,2))
 plot(reg1)
 par(mfrow = c(1,1))
 
-ols_plot_resid_hist(reg1)
+# ols_plot_resid_hist(reg1) # en commentaire parce que ça la trouve pas ??
 
 #Residual vs fitted
 plot(reg1, which = 1) #On voit une forme de trompette aux résidus
@@ -478,3 +510,5 @@ Perspectives d’amélioration ou de recherche future
 possible sources d'erreur : mauvaises mesures des données, simultanéité, variables omises
 
 # Bibliographie - Source des données
+
+<https://tex.stackexchange.com/questions/27028/what-is-the-difference-between-newline-and>
