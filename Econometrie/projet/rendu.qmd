@@ -169,7 +169,7 @@ Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous étudions
 Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, nous avons choisi de traiter les moyennes des données disponibles de 2013 à 2023. Certains jeux de données s'achèvent avant 2023, nous avons donc fait leurs moyennes jusqu'à la dernière année recensée. Cette décision a été motivée par notre envie de tirer des conclusions les plus larges possibles.
 
 | Code de la série | Définition | Unité | Source |
-|:---|----|:--:|---:|
+|:-----------------|------------------|:----------------:|-----------------:|
 | Code | Le code du pays | Caractères | \- |
 | Political_Corruption | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | [World Bank](https://data360.worldbank.org/en/indicator/) |
 | GDP_per_capita | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain par habitant | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD) |
@@ -522,17 +522,36 @@ shapiro.test(reg1$residuals)
 
 La p-value du test étant de 0,3309, on conserve l'hypothèse nulle stipulant que les résidus suivent une loi normale.
 
-On a donc bien ici des résidus homoscédastiques et normaux lmais une certaine multicolinéarité de nos variables explicatives. Dans la section suivante, on va donc essayer de perfectionner le modèle en commençant par résoudre ces problèmes de multicolinéarité.
+```{r}
+#Autocorrelation des résidus
+print('Test de Durbin-Watson :')
+dwtest(reg1)
+```
+
+Comme précédemment, on conserve ici l'hypothèse nulle : il n'y a pas d'autocorrélation des résidus.
+
+On a donc bien ici des résidus homoscédastiques, non-corrélés entre eux et normaux mais une certaine multicolinéarité de nos variables explicatives. Dans la section suivante, on va donc essayer de perfectionner le modèle en commençant par résoudre ces problèmes de multicolinéarité.
 
 ## Analyses complémentaires
 
-```{r}
+```{r echo=FALSE}
 #on met en log les variables linéarisées par log
 reglog <- lm(Happiness ~ Political_Corruption + log(KWH_pp_pc) + log(GDP_per_Capita) + Lifespan + log(Net_Migration) + Overweight_Adults + Population_Density + Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment, data = data)
 
 summary(reglog)
 
 
+
+```
+
+```{r echo=FALSE}
+summary(lm(Happiness ~ log(GDP_per_Capita), data = data))
+print("#########################      OCDE     ##########################")
+summary(lm(Happiness ~ log(GDP_per_Capita)  + OCDE, data = data))
+print("########################      Lifespan     ########################")
+summary(lm(Happiness ~ log(GDP_per_Capita) + Lifespan , data = data))
+print("####################      OCDE + Lifespan    #####################")
+summary(lm(Happiness ~ log(GDP_per_Capita) + Lifespan + OCDE, data = data))
 ```
 
 -   Transformation de variables / effets non linéaires LOG / CARRE / EFFETS CROISES
