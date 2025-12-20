@@ -80,6 +80,26 @@ Nous nous attendons à voir une corrélation entre l'indice de bonheur du WHR, e
 
 Le cadre méthodologique général est celui de la régression linéaire, avec une estimation des moindres carrés ordinaires. En fonction des données, des corrections éventuelles (white, MCG, etc.) pourront être envisagées. Pour chaque partie, une méthodologie plus précise sera discutée.
 
+## Modèle de régression et corrections
+
+Voici la formulation mathématique du modèle linéaire estimé par moindres carrés ordinaires (MCO) :
+
+-   Modèle en notation matricielle : $y = X\beta + \varepsilon,\quad \mathbb{E}[\varepsilon|X]=0$
+
+-   Estimation MCO : $\hat\beta{MCO} = \operatorname*{arg\,min}\beta \sum{\varepsilon_i^2} = (X'X)^{-1}X'y$
+
+-   Sous homoscédasticité $(\operatorname{Var}(\varepsilon)=\sigma^2 I)$ *:* $\operatorname{Var}(\hat\beta{MCO}) = \sigma^2 (X'X)^{-1}$
+
+-   En présence d'hétéroscédasticité, la variance générale s'écrit avec la matrice diagonale $Ω$, $(Var(ε)=Ω)$ : $\operatorname{Var}(\hat\beta{MCO}) = (X'X)^{-1} X' \Omega X (X'X)^{-1}$
+
+-   Exemples de transformations de variables et modèles correspondants (interprétations rapides) :
+
+    -   Modèle linéaire en niveaux : $y_i = \alpha + \beta x_i + u_i$. Effet absolu de x sur y.
+    -   Log‑niveau (log(x) explicative) : $y_i = \alpha + \beta \log(x_i) + u_i$. β = variation absolue de y pour une variation proportionnelle de x (approx. effet semi‑élasticité).
+    -   Log‑log (log(y) vs log(x)) : $\log(y_i) = \alpha + \beta \log(x_i) + u_i ]$. β = élasticité (pourcentage de y lorsque x varie de 1%).
+    -   Quadratique / polynôme : $y_i = \alpha + \beta_1 x_i + \beta_2 x_i^2 + u_i$. Permet capturer non‑linéarités (effets en U, concavité).
+    -   Effet interactif : $y_i = \alpha + \beta_1 x_i + \beta_2 D_i + \beta_3 (x_i \times D_i) + u_i$. Effet de x différent selon la modalité D. On étudie les effets croisés de la même façon.
+
 # **Analyse des données**
 
 ## Cadre des données
