@@ -28,6 +28,9 @@ library(car)
 library(lmtest)
 library(sandwich)
 library(corrplot)
+library(olsrr) #graohique des résidus
+library(gridExtra)
+
 ```
 
 ```{r}
@@ -212,7 +215,6 @@ for (i in 1:ncol(data_numeric)) {
   plots[[i]] <- p
 }
 plots = plots[-11]
-library(gridExtra)
 # nombre de colonnes voulu
 ncol_plot <- 2
 #do.call(grid.arrange, c(plots, ncol = ncol_plot))
@@ -266,7 +268,7 @@ abline(v = 0, lty = 2, col = "grey40")
 par(mar = c(5, 4, 4, 2) + 0.1)
 ```
 
-On remarque ici les variables les plus et les moins corrélées. L'espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l'indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement.\
+On remarque ici les variables les plus et les moins corrélées à l'indice du bonheur. L'espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l'indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement.\
 Les autres variables ne semblent pas être corrélées fortement à l'indice de bonheur.
 
 ```{r echo=FALSE, fig.height=12, fig.width=12}
@@ -282,7 +284,6 @@ for (i in 2:11) {
   scatter_plots[[i-1]] <- p
 }
 
-library(gridExtra)
 # nombre de colonnes voulu
 ncol_plot <- 3
 do.call(grid.arrange, c(scatter_plots, ncol = ncol_plot))
@@ -300,59 +301,72 @@ On doute de la linéarité entre l'indice de bonheur et la corruption politique 
 Finalement, on remarque une certaine linéarité positive entre l'indice de bonheur et l'espérance de vie à la naissance, les points semblent bien décrire une droite.
 
 ```{r}
+
+
 data_ss_singapour = data[-which(data$Code == "SGP"),]
-ggplot(data_ss_singapour, aes_string(x="Population_Density", y="Happiness")) +
+sspopplot = ggplot(data_ss_singapour, aes_string(x="Population_Density", y="Happiness")) +
     geom_point() +
     geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
-    labs(x="Linéarité de la densité de population sans Singapour", y="Happiness") +
+    labs(x="Densité de population sans Singapour", y="Happiness") +
     theme_minimal()
-
-
 
 
 data_ss_somalie = data[-which(data$Code == "SOM"),]
-ggplot(data_ss_somalie, aes_string(x="Primary_School_Enrollment", y="Happiness")) +
+ssschoolplot= ggplot(data_ss_somalie, aes_string(x="Primary_School_Enrollment", y="Happiness")) +
     geom_point() +
     geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
-    labs(x="Linéarité des inscriptions à l'école primaire sans la Somalie", y="Happiness") +
+    labs(x="Inscriptions à l'école primaire sans la Somalie", y="Happiness") +
     theme_minimal()
 
 data_ss_pak_usa = data[-which(data$Code == "PAK" |data$Code == "USA" ),]
-ggplot(data_ss_pak_usa, aes_string(x="Net_Migration", y="Happiness")) +
+ssmigrationplot = ggplot(data_ss_pak_usa, aes_string(x="Net_Migration", y="Happiness")) +
     geom_point() +
     geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
-    labs(x="Linéarité de la migration sans les USA ni le Pakistan", y="Happiness") +
+    labs(x="Migration sans les EU ni le Pakistan", y="Happiness") +
     theme_minimal()
+
+
+outlierplots = list(sspopplot,ssschoolplot, ssmigrationplot)
+
+
+do.call(grid.arrange, c(outlierplots, ncol = 2))
 ```
 
 Ici, retirer les individus les plus aberrants ne permet pas pour autant d'obtenir une linéarité de la relation entre l'indice de bonheur et les variables étudiées.
 
 ```{r}
+
+
 data_PIB_log = data
 data_PIB_log$GDP_per_Capita = log(data_PIB_log$GDP_per_Capita)
-ggplot(data_PIB_log, aes_string(x="GDP_per_Capita", y="Happiness")) +
+PIBplot = ggplot(data_PIB_log, aes_string(x="GDP_per_Capita", y="Happiness")) +
     geom_point() +
     geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
-    labs(x="Linéarité du logarithme du PIB par habitant", y="Happiness") +
+    labs(x="Logarithme du PIB par habitant", y="Happiness") +
     theme_minimal()
 
 
 data_KWH_log = data
 data_KWH_log$KWH_pp_pc  = log(data_KWH_log$KWH_pp_pc)
-ggplot(data_KWH_log, aes_string(x="KWH_pp_pc", y="Happiness")) +
+KWHplot = ggplot(data_KWH_log, aes_string(x="KWH_pp_pc", y="Happiness")) +
     geom_point() +
     geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
-    labs(x="Linéarité du logarithme de la consommmation énergétique", y="Happiness") +
+    labs(x="Logarithme de la consommmation énergétique", y="Happiness") +
     theme_minimal()
 
 
 data_migration = data
 data_migration$Net_Migration  = log(data_migration$Net_Migration)
-ggplot(data_migration, aes_string(x="Net_Migration", y="Happiness")) +
+migrationplot = ggplot(data_migration, aes_string(x="Net_Migration", y="Happiness")) +
     geom_point() +
     geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
-    labs(x="Linéarité du logarithme de la migration", y="Happiness") +
+    labs(x="Logarithme de la migration", y="Happiness") +
     theme_minimal()
+
+logplots = list(PIBplot,KWHplot,migrationplot)
+
+
+do.call(grid.arrange, c(logplots, ncol = 2))
 ```
 
 Appliquer un logarithme au PIB par habitant et à la consommation énergétique permet un lien linéaire très clair avec l'indice de bonheur. La relation est moins forte mais c'est aussi le cas avec la migration nette, sans même retirer les individus aberrants qui sont bien projetés sur la droite.
@@ -381,9 +395,11 @@ do.call(grid.arrange, c(box_plots, ncol = ncol_plot))
 ```{r}
 ggplot(data, aes(x = OCDE,y=Happiness)) +
   geom_boxplot(fill="orange", color="black", alpha=0.7) +
-  labs(title="Boxplot du score de bonheur", y="Score de bonheur") +
+  labs(title="Boxplot du bonheur en fonction de l'appartenance à l'OCDE", y="Score de bonheur") +
   theme_minimal()
 ```
+
+Il est clair que les pays membres de l'OCDE ont un bonheur bien plus élevé que les non-membres.
 
 # **Analyse et discussion des résultats**
 
@@ -402,8 +418,6 @@ De prime abord, on constate d'après le test de Fisher, que notre modèle expliq
 Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés
 
 TESTER DES MODELES DIFFERENTS
-
-LOG / CARRE / EFFETS CROISES
 
 COMPARAISON VISU\
 TEST D'ANOVA ENTRE CES MODELES
@@ -425,41 +439,71 @@ On voit que certaines variables sont corrélées, source de problème pour notre
 
 -   L'espérance de vie est corrélée positivement avec le surpoids à 0,72.
 
-On a donc quatre variables qui semblent corrélées entre elles.
+On a donc quatre variables qui semblent corrélées entre elles. Utilisons l'indice du VIF pour s'assurer du problème :
 
 ```{r echo=FALSE}
 # VIF pour contrôler la multicolinéarité
-print(vif(reg1))
 
+stargazer(vif(reg1)[1:5], median = TRUE, type = "text", title="VIF", digits=2)
+stargazer(vif(reg1)[6:9], median = TRUE, type = "text", digits=2)
+stargazer(vif(reg1)[10:11], median = TRUE, type = "text", digits=2)
+
+```
+
+Le VIF, indice de multicolinéarité, est supérieur à 4 pour la consommation énergétique, le PIB par habitant et l'espérance de vie. On considère 4 comme seuil critique et on admet un problème de multicolinéarité à résoudre prochainement.
+
+```{r echo=FALSE}
 # Test d'hétéroscédasticité (Breusch-Pagan) et coefficients robustes HC1
 
-print('Breusch-Pagan test :')
+print('Test de Breusch-Pagan :')
 print(bptest(reg1))
 
 print('Coefficients avec erreurs robustes (HC1) :')
 print(lmtest::coeftest(reg1, vcov. = sandwich::vcovHC(reg1, type = 'HC1')))
-  
-# Diagnostics graphiques rapides
-par(mfrow = c(2,2))
-plot(reg1)
-par(mfrow = c(1,1))
 
-ols_plot_resid_hist(reg1)
-
-#Residual vs fitted
-plot(reg1, which = 1) #On voit une forme de trompette aux résidus
-#normal QQplot
-plot(reg1, which=2) #SI NORMALITE DES RESIDUS : ILS SERAIENT SUR LA LIGNNE
 
 ```
 
-Le graphique peut nous faire douter de la normalité des résidus.
+Avec une p-value aussi haute au test de Breusch-Pagan, on choisit de ne pas rejeter l'hypothèse nulle : on considère bien que les résidus sont homoscédastiques, c'est à dire que la variance est constante.
 
-Hypothèses des MCO - nomalités / hétéroscédasticité / ...
+Je ne sais pas comment lire le test HC1 de lmtest
+
+```{r echo=FALSE}
+
+ols_plot_resid_hist(reg1) #j'arrive pas à rajouter un titre
+#Residual vs fitted
+plot(reg1, which = 1, main = "Résidus par rapport aux valeurs ajustées")
+#normal QQplot
+plot(reg1, which=2, main = "Résidus standardisés par rapport aux quantiles théoriques") #SI NORMALITE DES RESIDUS : ILS SERAIENT SUR LA LIGNNE
+
+
+```
+
+Le premier graphique nous montre que les résidus semblent suivre grossièrement une loi normale et on ne repère pas de forme spécifique dans le graphe des résidus par rapport aux valeurs ajustées.
+
+Cependant, les résidus ne sont pas disposés sur la droite définie par les quantiles théoriques. Pour s'assurer de leur normalité, on va procédé à un test de normalité.
+
+```{r echo=FALSE}
+print('Test de Shapiro-Wilk :')
+shapiro.test(reg1$residuals)
+```
+
+La p-value du test étant de 0,3309, on conserve l'hypothèse nulle stipulant que les résidus suivent une loi normale.
+
+On a donc bien ici des résidus homoscédastiques et normaux lmais une certaine multicolinéarité de nos variables explicatives. Dans la section suivante, on va donc essayer de perfectionner le modèle en commençant par résoudre ces problèmes de multicolinéarité.
 
 ## Analyses complémentaires
 
--   Transformation de variables / effets non linéaires
+```{r}
+#on met en log les variables linéarisées par log
+reglog <- lm(Happiness ~ Political_Corruption + log(KWH_pp_pc) + log(GDP_per_Capita) + Lifespan + log(Net_Migration) + Overweight_Adults + Population_Density + Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment, data = data)
+
+summary(reglog)
+
+
+```
+
+-   Transformation de variables / effets non linéaires LOG / CARRE / EFFETS CROISES
 
 -   Changement structurel
 
