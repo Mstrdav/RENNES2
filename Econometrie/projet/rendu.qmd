@@ -334,16 +334,10 @@ do.call(grid.arrange, c(box_plots, ncol = ncol_plot))
 ```
 
 ```{r}
-
-ggplot(data, aes(x="OCDE", y="Happiness")) +
-    geom_boxplot() +
-    scale_fill_viridis(discrete = TRUE, alpha=0.6) +
-    theme(
-      legend.position="none",
-      plot.title = element_text(size=11)
-    ) +
-    ggtitle("Boxplot du bonheur en fonction de l'OCDE") +
-    xlab("")
+ggplot(data, aes(x = OCDE,y=Happiness)) +
+  geom_boxplot(fill="orange", color="black", alpha=0.7) +
+  labs(title="Boxplot du score de bonheur", y="Score de bonheur") +
+  theme_minimal()
 ```
 
 # **Analyse et discussion des résultats**
