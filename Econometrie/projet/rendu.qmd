@@ -169,7 +169,7 @@ Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous étudions
 Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, nous avons choisi de traiter les moyennes des données disponibles de 2013 à 2023. Certains jeux de données s'achèvent avant 2023, nous avons donc fait leurs moyennes jusqu'à la dernière année recensée. Cette décision a été motivée par notre envie de tirer des conclusions les plus larges possibles.
 
 | Code de la série | Définition | Unité | Source |
-|:-----------------|------------------|:----------------:|-----------------:|
+|:---|----|:--:|---:|
 | Code | Le code du pays | Caractères | \- |
 | Political_Corruption | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | [World Bank](https://data360.worldbank.org/en/indicator/) |
 | GDP_per_capita | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain par habitant | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD) |
@@ -514,6 +514,25 @@ TEST D'ANOVA ENTRE CES MODELES
 
 EN BACKWARD, trifouiller avec les AIC
 
+```{r echo=FALSE, fig.height=12, fig.width=12}
+# Tracé des graphes de points et de la linéarité
+box_plots <- list()
+
+for (i in 2:11) {
+  p <- ggplot(data, aes_string(x="Happiness", y=data[[i]])) +
+    geom_boxplot(notch=FALSE, outlier.colour="red", outlier.shape=8,
+                outlier.size=4) +
+    labs(x="Happiness", y=colnames(data)[i]) + 
+    theme_minimal()
+  box_plots[[i-1]] <- p
+}
+
+# nombre de colonnes voulu
+ncol_plot <- 3
+do.call(grid.arrange, c(box_plots, ncol = ncol_plot))
+
+```
+
 ## Robustesse des résultats
 
 ```{r echo=FALSE}
@@ -594,15 +613,22 @@ On a donc bien ici des résidus homoscédastiques, non-corrélés entre eux et n
 
 ```{r echo=FALSE}
 #on met en log les variables linéarisées par log
-reglog <- lm(Happiness ~ Political_Corruption + log(KWH_pp_pc) + log(GDP_per_Capita) + Lifespan + log(Net_Migration) + Overweight_Adults + Population_Density + Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment, data = data)
 
-summary(reglog)
+reglog <- lm(Happiness ~ Political_Corruption + log(KWH_pp_pc) + log(GDP_per_Capita) + Lifespan + Net_Migration + Overweight_Adults + Population_Density + Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment, data = data)
 
+summary(reglog) #le niveau-log a un R2 ajusté un peu supérieur au niveau-niveau
 
 
 ```
 
 ```{r echo=FALSE}
+#Distance de Cooks
+plot(reglog, which = 4, main = "Distances de Cook")
+
+```
+
+```{r echo=FALSE}
+#En mode chasse d'étoile
 summary(lm(Happiness ~ log(GDP_per_Capita), data = data))
 print("#########################      OCDE     ##########################")
 summary(lm(Happiness ~ log(GDP_per_Capita)  + OCDE, data = data))
