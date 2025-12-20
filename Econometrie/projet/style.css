@@ -53,6 +53,22 @@ a:hover {
     padding: 25px;
 }
 
+.fig p {
+    text-align: center;
+    font-style: italic;
+    margin-top: 8px;
+    color: #fd8147e8;
+    font-size: 85%;
+}
+
+.fig .cell {
+    margin-bottom: 0;
+}
+
+.fig .figure {
+    margin-bottom: 0;
+}
+
 /* Fractal Plaid Background */
 html::before {
   content: '';
