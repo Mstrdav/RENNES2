@@ -94,12 +94,12 @@ Nous nous attendons à voir une corrélation entre l'indice de bonheur du WHR, e
     -   Analyses descriptives multivariées
         -   Corrélations entre variables
         -   Analyse des interactions
-- Résultats et discussion
+-   Résultats et discussion
     -   Modélisation principale
     -   Robustesse des résultats
     -   Analyses complémentaires
-- Conclusion
-- Bibliographie
+-   Conclusion
+-   Bibliographie
 
 # Cadre méthodologique
 
@@ -134,7 +134,7 @@ Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous étudions
 Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, nous avons choisi de traiter les moyennes des données disponibles de 2013 à 2023. Certains jeux de données s'achèvent avant 2023, nous avons donc fait leurs moyennes jusqu'à la dernière année recensée. Cette décision a été motivée par notre envie de tirer des conclusions les plus larges possibles.
 
 | Code de la série | Définition | Unité | Source |
-|:-----------------|------------------|:----------------:|-----------------:|
+|:---|----|:--:|---:|
 | Code | Le code du pays | Caractères | \- |
 | Political_Corruption | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | [World Bank](https://data360.worldbank.org/en/indicator/) |
 | GDP_per_capita | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain par habitant | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD) |
