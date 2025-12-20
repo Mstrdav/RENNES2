@@ -24,6 +24,10 @@ library(pastecs)
 library(stargazer)
 library(psych)
 library(ggplot2)
+library(car)
+library(lmtest)
+library(sandwich)
+library(corrplot)
 ```
 
 **JAOUEN Denis - GEINDRE Colin**
@@ -34,11 +38,11 @@ La rédaction de ce document s'appuie sur l'utilisation d'IA générative, ainsi
 
 # Introduction
 
-Sommes-nous heureux ? L'étions-nous plus auparavant ? Quels modèles de société sont les plus heureux ? Et surtout, quelle est la recette du bonheur ? Questions difficiles, mais qui revettent un importance capitale pour chacun d'entre nous, mais aussi dans la recherche économique et sociale actuelle.
+Sommes-nous heureux ? L'étions-nous plus auparavant ? Quels modèles de société sont les plus heureux ? Et surtout, quelle est la recette du bonheur ? Questions difficiles, mais qui revêtent une importance capitale pour chacun d'entre nous, notamment dans la recherche économique et sociale actuelle.
 
-Le terme de "Bonheur National Brut" (ou en anglais "Gross National Happiness") est apparu pour la première fois au Bhutan, à la fin des années 1970. Jigme Singye Wangchuck, alors roi du pays, déclare "Gross National Happiness is more import than Gross Domestic Product", une phrase qui a influencé le développement de pays, engageant les politiques nationales et locales autours d'une approche holistique de la notion de progrès, moins centrée sur les marqueurs socio-économiques classiques.
+Le terme de "Bonheur National Brut" (ou en anglais "Gross National Happiness") est apparu pour la première fois au Bhutan, à la fin des années 1970. Jigme Singye Wangchuck, alors roi du pays, déclare "Gross National Happiness is more important than Gross Domestic Product", une phrase qui a influencé le développement de pays, engageant les politiques nationales et locales autour d'une approche holistique de la notion de progrès, moins centrée sur les marqueurs socio-économiques classiques.
 
-Le GNHI, indice de bonheur national développé par le Bhutan, est maintenant utilisé dans de nombreux pays autours du monde. Il est construit sur un ensembles de marqueurs répartis dans 9 pôles considérés comme égaux.
+Le GNHI, indice de bonheur national développé par le Bhutan, est maintenant utilisé dans de nombreux pays autours du monde. Il est construit sur un ensemble de marqueurs répartis dans 9 pôles considérés comme égaux.
 
 En effet, depuis trop longtemps, l'indice de développement d'un pays a été calculé sur des indices économiques : PIB, croissance, taux d'emploi, etc. Ce choix n'est pas neutre, il sert un système particulier qui ne met pas l'humain ou l'environnement au coeur de ses priorités. Cependant, de plus en plus de sociologues et d'économistes préconisent d'ajouter à ces mesures des marqueurs de bien-être sociétal. Mais comment mesurer le bonheur ? Existe-t-il des bases de données sérieuses et fiables permettant de répondre à nos questions ?
 
@@ -48,11 +52,11 @@ Si le [GNHI](https://ophi.org.uk/gross-national-happiness) permet un classement 
 
 -   Le bonheur est autodéterminé de manière précise. Nous assumons que l'erreur d'auto évaluation de son bonheur personel est une variable aléatoire qui suit une distribution normale. Ainsi, il n'y a pas de biais qui, par exemple, pousserait les personnes malheureuses à s'estimer plus heureuses qu'elles ne le sont.
 
-Ces hypothèses sont cohérentes avec la littérature scientifique, mais restent fortement débattues. En particulier, l'utilisation d'échelle cardinale plutôt qu'ordinale ne change que très peu les résultats des régression, comme l'ont démontré plusieurs économiste (Ferris, 2002). Celle-ci est de plus intuitive, et grandement facilitante pour nos calculs. Par contre, il existe un effet plafond/plancher : il est plus difficile de passer de 9 à 10 que de 5 à 6 ; l'échelle n'est probablement pas cardinale dans les extrèmes. Nous faisons là une approximation consciente. La deuxième hypothèse, elle, est corroborée par la loi des grand nombre (les données de Gallup sont les plus fournies au monde), et par les différentes études sur les marqueurs de bonheur (taux de suicide, expressions faciales), qui tendent à démontrer que les sujets ne mentent pas sur leur bonheur. Mais certaines cultures valorisent (latino-américaines) ou dévalorisent (Japon, Corée) socialement de se dire heureux, ce qui peut tirer les résultats vers le haut ou vers le bas. De plus, le tapis roulant hédonique, ou l'adaptation à ses conditions, ainsi que la désirabilité sociale qui pousse les répondants à paraître normaux aux yeux des enquêteurs, peuvent créer une homogénisation des résultats.
+Ces hypothèses sont cohérentes avec la littérature scientifique, mais restent fortement débattues. En particulier, l'utilisation d'échelle cardinale plutôt qu'ordinale ne change que très peu les résultats des régression, comme l'ont démontré plusieurs économistes (Ferris, 2002). Celle-ci est de plus intuitive, et grandement facilitante pour nos calculs. Par contre, il existe un effet plafond/plancher : il est plus difficile de passer de 9 à 10 que de 5 à 6 ; l'échelle n'est probablement pas cardinale dans les extrèmes. Nous faisons là une approximation consciente. La deuxième hypothèse, elle, est corroborée par la loi des grand nombre (les données de Gallup sont les plus fournies au monde), et par les différentes études sur les marqueurs de bonheur (taux de suicide, expressions faciales...), qui tendent à démontrer que les sujets ne mentent pas sur leur bonheur. Mais certaines cultures valorisent (latino-américaines) ou dévalorisent (Japon, Corée) socialement de se dire heureux, ce qui peut tirer les résultats vers le haut ou vers le bas. De plus, le tapis roulant hédonique, ou l'adaptation à ses conditions, ainsi que la désirabilité sociale qui pousse les répondants à paraître normaux aux yeux des enquêteurs, peuvent créer une homogénisation des résultats.
 
 Pour contrer ces biais, on introduit parfois des effets fixes "pays", comme les membres de l'OCDE, les pays Latino-américains, etc.
 
-Un dernier problème que nous voulons aborder est celui de la barrière de la langue. Est-ce que tout le monde à la même perception du "bonheur", ou est-ce que les mots, le langage utilisé pour définir cette notion change au point que la langue influence les réponses ? Mais de nombreuses études ont montré que l'ont arrivait relativement bien a apprécier le bonheur des autres, quelque soit notre pays d'origine et celui de l'autre, impliquant que le bonheur revêt un e définition globale relativement comprise partout (voir Sandvil, 1993 et Diner & Lucas, 1999).
+Un dernier problème que nous voulons aborder est celui de la barrière de la langue. Est-ce que tout le monde à la même perception du "bonheur", ou est-ce que les mots, le langage utilisé pour définir cette notion change au point que la langue influence les réponses ? Mais de nombreuses études ont montré que l'on arrivait relativement bien à apprécier le bonheur des autres, quelque soit notre pays d'origine et celui de l'autre, impliquant que le bonheur revêt une définition globale relativement comprise partout (voir Sandvil, 1993 et Diner & Lucas, 1999).
 
 Nous nous attendons à voir une corrélation entre l'indice de bonheur du WHR, et différents indicateurs socio-économiques. De plus, nous nous attendons a voir les biais culturels sus-cités.
 
@@ -202,7 +206,7 @@ par(mar = c(5, 4, 4, 2) + 0.1)
 ```
 
 On remarque ici les variables les plus et les moins corrélées. L'espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l'indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement.\
-Les autres variables ne semblent pas être corrélées drastiquement à l'indice de bonheur.
+Les autres variables ne semblent pas être corrélées fortement à l'indice de bonheur.
 
 ```{r echo=FALSE, fig.height=12, fig.width=12}
 # Tracé des graphes de points et de la linéarité
@@ -234,23 +238,97 @@ On doute de la linéarité entre l'indice de bonheur et la corruption politique 
 
 Finalement, on remarque une certaine linéarité positive entre l'indice de bonheur et l'espérance de vie à la naissance, les points semblent bien décrire une droite.
 
-```{r echo=FALSE}
-# Corrélation entre les variables explicatives
-library(corrplot)
-corrplot(cor(data_numeric[,-ncol(data_numeric)]), method="shade", type = "lower", tl.col="black", tl.srt=45)
+```{r}
+data_ss_singapour = data[-which(data$Code == "SGP"),]
+ggplot(data_ss_singapour, aes_string(x="Population_Density", y="Happiness")) +
+    geom_point() +
+    geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
+    labs(x="Linéarité de la densité de population sans Singapour", y="Happiness") +
+    theme_minimal()
+
+
+
+
+data_ss_somalie = data[-which(data$Code == "SOM"),]
+ggplot(data_ss_somalie, aes_string(x="Primary_School_Enrollment", y="Happiness")) +
+    geom_point() +
+    geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
+    labs(x="Linéarité des inscriptions à l'école primaire sans la Somalie", y="Happiness") +
+    theme_minimal()
+
+data_ss_pak_usa = data[-which(data$Code == "PAK" |data$Code == "USA" ),]
+ggplot(data_ss_pak_usa, aes_string(x="Net_Migration", y="Happiness")) +
+    geom_point() +
+    geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
+    labs(x="Linéarité de la migration sans les USA ni le Pakistan", y="Happiness") +
+    theme_minimal()
 ```
 
-On voit que certaines variables sont corrélées, source de problème pour notre régression à venir. En voici les plus importantes :
+Ici, retirer les individus les plus aberrants ne permet pas pour autant d'obtenir une linéarité de la relation entre l'indice de bonheur et les variables étudiées.
 
--   La corruption politique est corrélée négativement avec le PIB/hab, l'espérance de vie, le surpoids et la consommation énergétique.
+```{r}
+data_PIB_log = data
+data_PIB_log$GDP_per_Capita = log(data_PIB_log$GDP_per_Capita)
+ggplot(data_PIB_log, aes_string(x="GDP_per_Capita", y="Happiness")) +
+    geom_point() +
+    geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
+    labs(x="Linéarité du logarithme du PIB par habitant", y="Happiness") +
+    theme_minimal()
 
--   Le PIB/hab est corrélée positivement avec l'espérance de vie, le surpoids et la consommation énergétique.
 
--   L'espérance de vie est corrélée positivement avec le surpoids et la consommation énergétique.
+data_KWH_log = data
+data_KWH_log$KWH_pp_pc  = log(data_KWH_log$KWH_pp_pc)
+ggplot(data_KWH_log, aes_string(x="KWH_pp_pc", y="Happiness")) +
+    geom_point() +
+    geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
+    labs(x="Linéarité du logarithme de la consommmation énergétique", y="Happiness") +
+    theme_minimal()
 
--   Le surpoids est corrélée positivement avec la consommation énergétique.
 
-On a donc quatre variables qui semblent corrélées entre elles.
+data_migration = data
+data_migration$Net_Migration  = log(data_migration$Net_Migration)
+ggplot(data_migration, aes_string(x="Net_Migration", y="Happiness")) +
+    geom_point() +
+    geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
+    labs(x="Linéarité du logarithme de la migration", y="Happiness") +
+    theme_minimal()
+```
+
+Appliquer un logarithme au PIB par habitant et à la consommation énergétique permet un lien linéaire très clair avec l'indice de bonheur. La relation est moins forte mais c'est aussi le cas avec la migration nette, sans même retirer les individus aberrants qui sont bien projetés sur la droite.
+
+Aucune modification classique (exp, log, carré) ne donne une meilleure linéarité aux autres variables (j'ai tout testé).
+
+```{r echo=FALSE, fig.height=12, fig.width=12}
+# Tracé des graphes de points et de la linéarité
+box_plots <- list()
+
+for (i in 2:11) {
+  p <- ggplot(data, aes_string(x="Happiness", y=data[[i]])) +
+    geom_boxplot(notch=FALSE, outlier.colour="red", outlier.shape=8,
+                outlier.size=4) +
+    labs(x="Happiness", y=colnames(data)[i]) + 
+    theme_minimal()
+  box_plots[[i-1]] <- p
+}
+
+# nombre de colonnes voulu
+ncol_plot <- 3
+do.call(grid.arrange, c(box_plots, ncol = ncol_plot))
+
+```
+
+```{r}
+
+ggplot(data, aes(x="OCDE", y="Happiness")) +
+    geom_boxplot() +
+    scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Boxplot du bonheur en fonction de l'OCDE") +
+    xlab("")
+```
 
 # **Analyse et discussion des résultats**
 
@@ -264,16 +342,42 @@ cat('\n--- Résumé du modèle (reg1) ---\n')
 print(summary(reg1))
 ```
 
-De prime abord, on constate d'après le test de Fisher, que notre modèle explique plus de 80% de la variance de l'indice duebonheur. Nos variables significatives, par ordre de significativité, sont l'espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l'OCDE et l'inscription à l'école primaire.
+De prime abord, on constate d'après le test de Fisher, que notre modèle explique plus de 80% de la variance de l'indice de bonheur. Nos variables significatives, par ordre de significativité, sont l'espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l'OCDE et l'inscription à l'école primaire.
+
+Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés
+
+TESTER DES MODELES DIFFERENTS
+
+LOG / CARRE / EFFETS CROISES
+
+COMPARAISON VISU\
+TEST D'ANOVA ENTRE CES MODELES
+
+EN BACKWARD, trifouiller avec les AIC
+
+## Robustesse des résultats
+
+```{r echo=FALSE}
+# Corrélation entre les variables explicatives
+corrplot(cor(data_numeric[,-ncol(data_numeric)]), method="shade", type = "lower", tl.col="black", tl.srt=25)
+```
+
+On voit que certaines variables sont corrélées, source de problème pour notre régression à venir bien qu'aucune ne passe le seuil critique de 0,8. En voici les plus importantes :
+
+-   La corruption politique est corrélée négativement avec le PIB/hab à -0,72.
+
+-   Le PIB/hab a une correlation positive à 0,72 avec la consommation énergétique et à 0,67 avec l'espérance de vie.
+
+-   L'espérance de vie est corrélée positivement avec le surpoids à 0,72.
+
+On a donc quatre variables qui semblent corrélées entre elles.
 
 ```{r echo=FALSE}
 # VIF pour contrôler la multicolinéarité
-library(car)
 print(vif(reg1))
 
 # Test d'hétéroscédasticité (Breusch-Pagan) et coefficients robustes HC1
 
-library(lmtest); library(sandwich)
 print('Breusch-Pagan test :')
 print(bptest(reg1))
 
@@ -284,13 +388,17 @@ print(lmtest::coeftest(reg1, vcov. = sandwich::vcovHC(reg1, type = 'HC1')))
 par(mfrow = c(2,2))
 plot(reg1)
 par(mfrow = c(1,1))
+
+ols_plot_resid_hist(reg1)
+
+#Residual vs fitted
+plot(reg1, which = 1) #On voit une forme de trompette aux résidus
+#normal QQplot
+plot(reg1, which=2) #SI NORMALITE DES RESIDUS : ILS SERAIENT SUR LA LIGNNE
+
 ```
 
-On en est là !
-
-Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés
-
-## Robustesse des résultats
+Le graphique peut nous faire douter de la normalité des résidus.
 
 Hypothèses des MCO - nomalités / hétéroscédasticité / ...
 
