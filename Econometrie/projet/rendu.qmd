@@ -76,6 +76,31 @@ Un dernier problème que nous voulons aborder est celui de la barrière de la la
 
 Nous nous attendons à voir une corrélation entre l'indice de bonheur du WHR, et différents indicateurs socio-économiques. De plus, nous nous attendons a voir les biais culturels sus-cités.
 
+# Plan
+
+-   Introduction
+-   Cadre méthodologique
+    -   Modèle de régression et correction
+-   Analyse des données
+    -   Cadre des données
+    -   Pré-traitement des données
+        -   Données manquantes
+        -   Suppression des doublons
+        -   Recherche des outliers
+        -   Transformation des données
+    -   Analyses descriptives univariées
+        -   Variables explicatives
+        -   Variable cible
+    -   Analyses descriptives multivariées
+        -   Corrélations entre variables
+        -   Analyse des interactions
+- Résultats et discussion
+    -   Modélisation principale
+    -   Robustesse des résultats
+    -   Analyses complémentaires
+- Conclusion
+- Bibliographie
+
 # Cadre méthodologique
 
 Le cadre méthodologique général est celui de la régression linéaire, avec une estimation des moindres carrés ordinaires. En fonction des données, des corrections éventuelles (white, MCG, etc.) pourront être envisagées. Pour chaque partie, une méthodologie plus précise sera discutée.
