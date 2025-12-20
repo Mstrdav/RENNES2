@@ -30,6 +30,22 @@ library(sandwich)
 library(corrplot)
 ```
 
+```{r}
+
+# Enlever les commentaires
+# étoffer le plan
+# numéroter les graphiques et tableaux
+# labeliser les axes
+# pas de code R dans le rendu final html juste les graphiques et les commentaires
+# stat desc : décrire les résultats : interpréter ou analyser
+# selectionner les graphiques pertinents et ne pas tout montrer
+# un document de référence
+# Ne pas utiliser le code de la variable dans l interprétation
+
+# spécifier nos sélections de variables si ce n'est déjà fait
+
+```
+
 **JAOUEN Denis - GEINDRE Colin**
 
 [**Master 1 MAS - Université de Rennes**](https://eco.univ-rennes.fr/master-mathematiques-appliquees-statistique) et [**Master 1 MAS - Université Rennes 2**](https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html)
