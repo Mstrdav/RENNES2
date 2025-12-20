@@ -1,0 +1,1118 @@
+---
+title: "Rapport d'économétrie : Qu'est-ce qui influence le prix d'une maison ?"   
+author: "Tao Levray et Matis Boudelier"
+date: "`r Sys.Date()`"
+format: html
+editor: visual
+output:
+  rmdformats::robobook:
+    highlight: kate
+    number_sections: TRUE
+    df_print: paged
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(cache = TRUE) #Activer le cache des chunks pour accélérer les recompilations
+options("install.lock"=FALSE) #Désactiver le verrouillage d’installation des packages
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) ## configure le chemin du dossier automatiquement
+```
+
+**LEVRAY Tao - BOUDELIER Matis**
+
+[**Master 1 MAS - Université Rennes 2**](https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html)
+
+[Pensez à numéroter vos tables et graphiques, cela vous permet de faire des rappels dans votre texte. Attention également au titre et à la bonne définition des axes. Chaque graphique est commenté, il est parfois préférable de les regrouper au sein d'une même fenêtre pour que le rapport soit plus agréable à lire. N'hésitez pas à faire des sélections de graphiques intéressants plutôt que de les présenter d'une manière mécanique. Il ne faut pas utiliser le code de vos variables dans vos commentaires mais revenir sur leur signification.]{style="color:red;"}
+
+# Introduction
+
+-   **Contexte et problématique**
+
+::: {align="justify"}
+L'achat d’un logement constitue, pour la majorité des individus, l’un des investissements financiers les plus significatifs au cours de leur vie. Le logement représente en effet la part la plus importante des dépenses des ménages, tout en constituant simultanément leur principal actif patrimonial.
+
+L’étude des fluctuations du marché immobilier et des déterminants susceptibles d’en influencer la trajectoire est alors un enjeu considérable. Une telle analyse permet non seulement de comprendre l’évolution de la richesse des ménages et celle des disparités économiques, mais également de mettre en évidence les effets des politiques publiques sur la stabilité financière. Les statistiques immobilières constituent ainsi un instrument d’observation essentiel, tant pour les citoyens que pour les autorités économiques et monétaires, soucieuses d’orienter leurs décisions en matière de politique économique, fiscale et d’aménagement du territoire.
+
+Dans ce rapport nous cherchons à répondre à la question suivante : Qu'est-ce qui influence le prix d'une maison ?
+:::
+
+-   **Motivation et intérêt du sujet**
+
+::: {align="justify"}
+L’analyse du marché immobilier constitue un champ d’étude particulièrement pertinent pour appréhender la complexité des mécanismes économiques contemporains. Travailler sur ce secteur offre l’opportunité d’en découvrir les structures internes, les interactions entre les variables économiques et les déterminants fondamentaux de la formation des prix. L’immobilier, par son rôle central dans la constitution du patrimoine des ménages, représente un domaine d’observation privilégié pour comprendre les dynamiques à l’œuvre entre offre, demande et politiques publiques.
+:::
+
+-   **Recherches et hypothèses**
+
+::: {align="justify"}
+Nous avons fait quelques recherches bibliographiques afin de nous rapprocher un peu plus du domaine de l'immobilier. Nous avons ainsi trouvé trois articles scientifiques sur le sujet.
+
+Dans l'introduction de son article nommé ["Le prix des attributs du logement"](https://www.persee.fr/doc/estat_0336-1454_2005_num_381_1_7210) en 2005, voici ce que Jean Cavailhès (Jean Cavailhès appartient au Centre d’économie et sociologie appliquées à l’agriculture et aux espaces ruraux, UMR, Inra-Dijon.) présente comme attributs influents pour le prix d'une maison : [la surface habitable, l'équipement sanitaire, l'accessibilité au centre d'emploi et la qualité sociale du voisinage.]{.underline}
+
+Nous avons également trouvé le [Manuel des indices des prix de l’immobilier résidentiel (IPIR)](https://www.imf.org/external/french/np/sta/rppi/rppif.pdf) écrit par EuroStat (Eurostat est une direction générale de la Commission européenne chargée de l'information statistique à l'échelle communautaire.). Dans la Partie 2 - Utilisations des indices des prix de l’immobilier résidentiel, nous retrouvons comme caractéristique influent en plus de celles données précédemment, [l'installation de système de chauffage ou de climatisation.]{.underline}
+
+Enfin, dans Les indices Notaires-Insee des prix des logements anciens publié par l'Insee en 2019, on retrouve que [la localisation, la distance en kilomètres à la commune de 50 000 habitants la plus proche, la surface habitable, la surface du terrain, le nombre de pièces, l’époque de construction, le nombre de salles de bains, le nombre de garages ou parkings, l’état du bien, l’étiquette énergétique, la présence d’une cave ou d’un sous-sol et le nombre de niveaux]{.underline} sont les caractéristiques retenus.
+
+Dans la présentation du jeu de données, un peu plus bas, on retrouve, comme variables explicatives supposées influentes dans les textes précédents, la surface habitable, le nombre de salles de bains, le nombre de place de parking, la présence d'un sous-sol, le nombre de niveaux ainsi que le chauffage et la climatisation. Même si ces articles scientifiques ne viennent pas des Etats-Unis, on peut quand même supposer que ces variables soient significatives dans nos modèles.
+
+On peut également supposer que, la présence de climatisation étant signe de richesse aux Etats-Unis, cet attribut devrait être très significatif, et l'effet des autres variables sur le prix devrait différer en fonction de la présence ou nom de ce système.
+:::
+
+-   **Objectifs et contributions du mémoire**
+
+::: {align="justify"}
+L'objectif de ce mémoire est de répondre à la problématique posée en testant sur des données réelles. Nous testerons aussi les affirmations des scientifiques présentées précédemment et notre hypothèse sur la significatvité de la climatisation.
+
+Nous avons également pu remarquer une relation non expliquée par les articles scientifiques entre la surface habitable (en ft²) et le prix (en dollars).
+:::
+
+-   **Plan du mémoire**
+
+::: {align="justify"}
+Dans la section suivante, nous allons présenter le cadre méthodologique, puis nous introduirons, prétraiterons et nettoierons nos données. Ensuite nous ferons des analyses descriptives univariées et bivariées, et nous étudierons la corrélation entre les variables. Par la suite, nous présenterons les modèles de régression choisis, puis des tests sur le modèle gardé, notamment l'analyse de robustesse des résultats et des analyses complémentaires en présentant d'autres modèles intéressants à étudier. Enfin nous conclurons sur notre problématique de départ et sur des perspectives d'amélioration.
+
+Vous trouverez également à la fin de ce rapport, notre bibliographie et les sources utilisées.
+:::
+
+# Cadre méthodologique
+
+-   **Choix méthodologiques : présenter le cadre d'une régression linéaire avec méthode d'estimation MCO, votre modèle avec votre équation principale**
+
+Voici les équations des modèles que nous allons faire tourner :
+
+-   Modèle complet (Modèle de référence) : $Prix_{i} = \beta_0 + \beta_{Surface} \times Surface + \beta \times X + \varepsilon_i$
+
+-   Modèle quadratique : $Prix_{i} = \beta_0 + \beta_{Surface} \times Surface + \beta_{surface²} \times Surface²  +\beta \times X + \varepsilon_i$
+
+-   Modèle log-log : $log(Prix_{i}) = \beta_0 + \beta_{Surface} \times log(Surface) + \beta \times X + \varepsilon_i$
+
+Avec $\beta$ le vecteur des coefficients pour chacune des autres variables explicatives contenues dans le jeu de données (présentées plus bas) et **X** la matrice contenant ces variables.
+
+-   **Justification des choix techniques, des stratégies d’estimation**
+
+::: {align="justify"}
+-   Nous allons utiliser la méthode de régression des Moindres Carrés Ordinaires (MCO). La méthode des MCO est une méthode statistique utilisée pour établir des corrélations entre des variables. Elle se base sur la minimisation de la somme des carrés des différences entre les valeurs observées et les valeurs prédites des données (appelées résidus).
+
+-   Les hypothèses des MCO sont les suivantes :
+
+    -   Les variables n'ont pas d'influence sur les bruits ($\varepsilon_i$) : l'espérance des bruits en fonction des variables est nulle
+    -   Homoscédasticité des bruits : Les variances des bruits sont égales
+    -   Décorrélation des bruits : Cov($\varepsilon_i$, $\varepsilon_j$)=0 $\forall$ i$\neq$j
+    -   La matrice de l'ensemble des variables explicatives doit être de rang plein (de dimension égale au nombre de $X_i$
+    -   Les bruits suivent une loi Normale de moyenne nulle et de variance notée $\sigma²$.
+
+-   Nous présentons plusieurs modèles pour comprendre la relation qu'il y a entre la surface et le prix d'une maison et pour avoir une interprétation la plus précise et économiquement correcte possible.
+:::
+
+# **Analyse des données**
+
+## Cadre des données
+
+::: {align="justify"}
+Nous allons étudier un jeu de données récupéré sur Kaggle nommé ["Housing Prices Dataset"](https://www.kaggle.com/datasets/yasserh/housing-prices-dataset). Ce jeu comporte un ensemble de 12 attributs récupérés sur 545 maisons situées aux Etats-Unis (probablement dans le Nord-Est du pays) ainsi que leur loyer.
+:::
+
+::: {align="center"}
+[*Dictionnaire des variables*]{.underline}
+
+| Nom | Définition | Unité | Source |
+|------------------|------------------|:----------------:|:----------------:|
+| *Price* | Prix du logement | en dollars | Kaggle |
+| *Area* | Superficie du logement | en ft² | Kaggle |
+| *Bedrooms* | Nombre de chambre |  | Kaggle |
+| *Bathrooms* | Nombre de salles de bains |  | Kaggle |
+| *Stories* | Nombre d'étages |  | Kaggle |
+| *Mainroad* | Indicatrice égale à 1 si la maison est prêt d'une route principale, 0 sinon |  | Kaggle |
+| *Guestroom* | Indicatrice égale à 1 s'il y a une chambre d'amis, 0 sinon |  | Kaggle |
+| *Basement* | Indicatrice égale à 1 s'il y a un sous-sol, 0 sinon |  | Kaggle |
+| *hotwaterheating* | Indicatrice égale à 1 s'il y a un chauffe-eau, 0 sinon |  | Kaggle |
+| *Airconditioning* | Indicatrice égale à 1 s'il y a une climatisation, 0 sinon |  | Kaggle |
+| *Parking* | Nombre de places de parking |  | Kaggle |
+| *prefarea* | Indicatrice égale à 1 si la maison fait partie d'un quartier préférentiel, 0 sinon |  | Kaggle |
+| *Furnishingstatus* | État d'ameublement de la maison avec 3 modalités : meublé, semi-meublé, nom-meublé |  | Kaggle |
+:::
+
+```{r, echo=FALSE, include = FALSE}
+
+############################# Environnement de travail #############################
+
+library(AER) # Functions, data sets, examples, demos, and vignettes for the book Christian Kleiber and Achim Zeileis (2008), Applied Econometrics with R, Springer-Verlag, New York
+library(car) #car: Companion to Applied Regression
+# Functions to Accompany J. Fox and S. Weisberg, An R Companion to Applied Regression, Third Edition, Sage, 2019.
+library(sandwich) # Robust Covariance Matrix Estimators
+library(lmtest) #Testing Linear Regression Models
+#A collection of tests, data sets, and examples for diagnostic checking in linear regression models. Furthermore, some generic tools for inference in parametric models are provided
+library(ggplot2) #Create Elegant Data Visualisations Using the Grammar of Graphics
+library(corrplot) #Provides a visual exploratory tool on correlation matrix that supports automatic variable reordering to help detect hidden patterns among variables
+library(stargazer)
+library(olsrr) #graphique des résidus
+library(lmtest)
+
+### Working directory 
+getwd()
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```
+
+## Prétraitement et nettoyage des données
+
+```{r, echo=FALSE}
+db <- read.csv("Housing.csv",header = TRUE,sep = ",")
+View(db)
+```
+
+::: {align="justify"}
+Nous pouvons voir que l'on a des variables qualitives. Nous voulons les transformer en facteurs puis créer une variable de comptage pour chaque niveau du facteur en lui attribuant 1 si la maison contient ce niveau du facteur et 0 sinon.
+:::
+
+```{r, echo=FALSE}
+Data_transformation <- function(X){
+  p = ncol(X)
+  indice_a_suppr <- c()
+  for (i in 1:p){
+    if(is.character(X[,i])){
+      indice_a_suppr <- c(indice_a_suppr,i)
+      X[,i] <- as.factor(X[,i])
+      k <- length(levels(X[,i]))
+      for(a in 1:k){
+        niv <- levels(X[,i])[a]
+        nouvelle_col <- paste0(names(X)[i],"_",niv)
+        X[[nouvelle_col]] <- (1*(X[,i]==niv))
+      }
+    } 
+    else if(max(X[,i])<10){ # ici on transforme nos variables de modalité en indicatrices.
+      X[,i] <- as.factor(X[,i])
+      p <- length(levels(X[,i]))
+      for(b in 1:p){
+        niv2 <-  levels(X[,i])[b]
+        nouvelle_col2 <- paste0(names(X)[i],"_",niv2)
+        X[[nouvelle_col2]] <- (1*(X[,i]==niv2))
+      }
+    }
+  }
+  # on garde bien toutes les colonnes, cela peut nous servir pour faire des graphiques.
+  return(X)
+}
+data_housing <- Data_transformation(db)
+View(data_housing)
+
+#ATTENTION : Il faudra, pour les variables "YES/NO", supprimer une des deux variables de comptage et pour les variables à trois niveaux, supprimer le niveau ayant le plus d'individus afin d'éviter les problèmes de colinéarité.
+
+#Il faudra également transformer les variables catégorielles (chambres et salle de bains) en indicatrice. Par exemple : 1chambre / 2chambre / 3chambre / 4chambre.
+
+#Ensuite, il faudra supprimer la modalité ayant l'effectif maximum. De même pour les indicatrices de nos variables de modalités, il faudra supprimer la modalité avec le plus grand effectif.
+```
+
+## Valeurs manquantes
+
+```{r, echo=FALSE, include = FALSE}
+nombre_NA <- sum(is.na(data_housing))
+nombre_NA
+```
+
+::: {align="justify"}
+On a aucune valeur manquante dans notre jeu de donnée.
+:::
+
+# Statistiques descriptives
+
+::: {align="justify"}
+Pour les statistiques descriptives, on va garder toutes les variables de notre jeu de donnée.
+
+Mais ce n'est pas le cas pour nos analyses via des modèles de regréssion.
+
+De plus, pour les variables "YES/NO", nous allons supprimer une des deux variables de comptage et pour les variables à trois niveaux, supprimer le niveau possédé par le plus de maisons. Nous faisons cela afin d'éviter les problèmes de mutlicolinéarité.
+
+On récupère les modalités que l'on va vouloir supprimer pour nos modèles de régression. On doit donc récupérer les modalités avec le plus grand effectif.
+:::
+
+```{r, echo=FALSE}
+variables_to_transform <- data_housing[,c(3:13)]
+```
+
+```{r, echo=FALSE, include = FALSE}
+
+terms_to_remove <- function(X){
+  p <- ncol(X)
+  nom_mod <- c()
+  for(i in 1:p){
+    nom_mod <- c(nom_mod,names(which.max(table(X[,i]))))
+  }
+  return (nom_mod)
+}
+name_mod_to_remove <- terms_to_remove(variables_to_transform)
+name_mod_to_remove
+```
+
+Avant de faire nos différents modèles on devra donc supprimer les indicatrices suivantes :
+
+-   bedrooms_3
+
+-   bathrooms_1
+
+-   stories_2
+
+-   mainroad_yes
+
+-   guestroom_no
+
+-   basement_no
+
+-   hotwaterheating_no
+
+-   airconditioning_no
+
+-   parking_0
+
+-   prefarea_no
+
+-   furnishingstatus_semi-furnished
+
+```{r, echo = FALSE}
+full_model_data <- data_housing[,-c(3:13,16,20,25,29,30,32,34,36,38,42,45)]
+```
+
+## Analyse descriptive univariée des données
+
+::: {align="justify"}
+Pour les statistiques descriptives, il est souvent plus intéressant de garder les variables avant leur transformation.
+
+On récupère d'un côté les variables quantitatives et de l'autre les variables quantitatives.
+:::
+
+```{r, echo=FALSE, include  = FALSE}
+names(data_housing)
+variables_quanti <- data_housing[,c(1:5,11)]
+variables_quali <- data_housing[,c(6:10,12,13)]
+```
+
+### Variables quantitatives :
+
+::: {align="justify"}
+Rappel des variables quantitatives : (Pour nos analyses univariées on garde comme variables quantitatives nos variables de modalités précedemment transformées en indicatrice.)
+
+-   le nombre de chambres ("bedrooms") : variable quantitative dicrète.
+
+-   le nombre de salles de bain ("bathrooms") : variable quantitative discrète.
+
+-   le nombre d'étages ("stories") : variable quantitative discrète.
+
+-   le nombre de place de parking ("parking") : variable quantitative discrète.
+
+-   la superficie ("area") : variable quantitative continue.
+
+-   le prix ("price") : variable quantitative continue.
+:::
+
+```{r, echo=FALSE}
+#par(mfrow=c(2,2)) # Divise l'écran en 4
+#boxplot(data_housing$bedrooms, main="distribution Chambres", col="orange",ylab = "nombre de chambre")
+#boxplot(data_housing$bathrooms, main=" distribution Salles de bain", col="lightblue",ylab = "nombre de salles de bains")
+#boxplot(data_housing$stories, main="distribution Étages", col="lightgreen",ylab = "nombre d'étages")
+#boxplot(data_housing$parking, main="distribution Parking", col="violetred3", ylab = "nombre de place")
+
+#par(mfrow=c(1,1))
+#boxplot(data_housing$price, main="Distribution du Prix", col="gold")
+#boxplot(data_housing$area, main="Distribution de la Surface", col="darkcyan")
+
+
+# histogramme chambres :
+#ggplot(data_housing, aes(x = as.numeric(bedrooms))) + 
+  #geom_histogram(fill = "orange", binwidth = 1, color = "black") + 
+  #ggtitle("Histogramme du nombre de chambres" ) + 
+  #xlab("Nombre de chambres") + 
+  #ylab("Effectifs")
+
+# Histogramme salle de bains : 
+
+#ggplot(data_housing, aes(x = as.numeric(bathrooms))) + 
+  #geom_histogram(fill = "lightblue", binwidth = 1, color = "black") + 
+  #ggtitle("Histogramme du nombre de salle de bain") + 
+  #xlab("Nombre de salle de bain") + 
+  #ylab("Effectifs")
+
+# Histogramme nombre d'étages : 
+
+#ggplot(data_housing, aes(x = as.numeric(stories))) + 
+  #geom_histogram(fill = "lightgreen", binwidth = 1, color = "black") + 
+  #ggtitle("Histogramme du nombre d'étages") + 
+  #xlab("Nombre d'étages") + 
+  #ylab("Effectifs")
+
+# Histogramme nombre de place de parkings : 
+
+#ggplot(data_housing, aes(x = as.numeric(parking))) + 
+ #geom_histogram(fill = "violetred3", binwidth = 1, color = "black") + 
+ #ggtitle("Histogramme du nombre de places de parkings") + 
+ #xlab("Nombre de places de parkings") + 
+ #ylab("Effectifs")
+```
+
+```{r, echo=FALSE, fig.cap="(1)"}
+# Histogramme prix de la maison : 
+
+ggplot(data_housing, aes(x = price)) + 
+  geom_histogram(fill = "gold", bins = 30,color = "black") + 
+  ggtitle("Histogramme de la répartition du prix") + xlab("Prix ($)") + 
+  ylab("Effectifs")
+```
+
+```{r, echo=FALSE, fig.cap="(2)"}
+# Histogramme surface de la maison 
+
+ggplot(data_housing, aes(x = area)) + 
+  geom_histogram(fill = "darkcyan", bins = 30, color = "black") + ggtitle("Histogramme de la répartition de la surface")+ xlab("surface (ft²)") + ylab("effectifs")
+```
+
+::: {align="justify"}
+On observe sur le graphique 1 que la majorité des prix sont sous les 5 millions de dollars, mais quelques biens très chers étirent la distribution. On retrouve la même observation sur le graphique 2 : la répartition des valeurs prises par la surface qui se concentre principalement autour de 4000 ft² mais certaines valeurs vont jusqu'à 16000 ft². Ces observations justifient la transformation logarithmique effectuée plus tard pour 'normaliser' ces deux variables.
+
+Concernant les autres variables, la majorité des maisons étudiées ont deux chambres, une salle de bain, 1 ou 2 étages et 1 place de parking.
+:::
+
+### Variables qualitatives :
+
+::: {align="justify"}
+Rappel de nos variables qualitatives :
+
+-   Accès à la route principale ("Mainroad") : Variable qualitative binaire.
+
+-   Présence d'une chambre d'ami ("guestroom") : variable qualitative binaire.
+
+-   Présence d'un sous-sol ("Basement") : variable qualitative binaire.
+
+-   Présence d'un système de chauffe-eau sanitaire ("hotwaterheating") : variable qualitative binaire.
+
+-   Présence de climatisation ("prefarea") : variable qualitative binaire.
+
+-   Emplacement priviligié ("prefarea)" : variable qualitative binaire.
+
+-   Niveau d'ameublement de la maison ("furnishingstatus").
+
+    -   Meublé ("furnished").
+
+    -   Moitié-meublé ("semifurnished").
+
+    -   Non-meublé ("unfurnished").
+:::
+
+```{r, echo=FALSE}
+#apply(variables_quali, MARGIN = 2, FUN = table)
+
+# Barplot de mainroad
+
+#barplot(table(variables_quali$mainroad),col = c("grey69","gold"),names= c("non","oui"), main = "Barplot de la présence d'une route principale")
+
+# Barplot de guestroom
+
+#barplot(table(variables_quali$guestroom),col = c("grey69","gold"),names= c("non","oui"), main = "Barplot de la présence d'une chambre d'amis")
+
+# Barplot de basement
+ 
+#barplot(table(variables_quali$basement),col = c("grey69","gold"),names= c("non","oui"), main = "Barplot de la présence d'un sous-sol")
+
+# Barplot de hotwaterheating
+
+#barplot(table(variables_quali$hotwaterheating),col = c("grey69","gold"),names= c("non","oui"), main = "Barplot de la présence d'un système de chauffe d'eau sanitaire")
+
+# Barplot de prefarea
+
+#barplot(table(variables_quali$prefarea),col = c("grey69","gold"),names= c("non","oui"), main = "Barplot de la présence dans un quartier préférentiel")
+
+# Barplot de furnishingstatues
+
+#barplot(table(variables_quali$furnishingstatus),col = c("gold","cyan","grey69"),names= c("meublé","semi-meublé","non-meublé"), main = "Barplot de l'ameublement de la maison")
+```
+
+::: {align="justify"}
+La très grande majorité des maisons sont près d'un axe principal, n'ont pas de chambres d'amis, ni de sous-sol, ni de système de chauffe-eau, n'appartiennent pas à un quartier préférentiel et il y a peu près autant de maison non-meublées, semi-meublées et meublées.
+:::
+
+## Analyse descriptive bivariée des données
+
+::: {align="justify"}
+La principale relation qui nous intéresse ici est celle entre le prix et la surface car cette dernière est la seule variable explicatives quantitative continue.
+:::
+
+```{r, echo=FALSE, fig.cap="(3)", message = FALSE}
+
+ggplot(data_housing, aes(x = area, y = price)) +
+  geom_point(alpha = 0.5, color = "darkblue") + # alpha pour voir la densité
+  geom_smooth(method = "lm", color = "red", se = FALSE) + # La ligne droite
+  geom_smooth(method = "loess", color = "green", se = FALSE) + # La courbe réelle
+  labs(title = "La relation entre la surface et le prix est-elle linéaire ?",
+       subtitle = "Comparaison entre ajustement linéaire (rouge) vs lissé (vert)",
+       x = "Surface (ft²)", y = "Prix ($)") +
+  theme_minimal()
+
+
+```
+
+::: {align="justify"}
+Le nuage de points montre une corrélation positive évidente entre les deux variables. Cependant, on remarque deux phénomènes :
+
+-   La dispersion des prix augmente avec la surface (forme de cône), signe d'hétéroscédasticité.
+
+-   La courbe verte, qui représente les tendances réelles, s'aplatit légèrement vers la droite, suggérant des rendements décroissants, et donc une relation non linéaire entre le prix et la surface.
+
+Pour les variables que l'on a transformé en indicatrice on peut faire des boxplots bivariés pour voir si une modalité se démarque des autres et influence le prix des maisons. Nous prenons ici l'exemple de la présence de la climatisation puis de la présence d'une chambre d'amis.
+:::
+
+```{r, echo=FALSE, fig.cap="(4)"}
+#### Boxplot pour la climatisation
+ggplot(data_housing, aes(x = airconditioning, y = price)) +
+  geom_boxplot(fill = "darkorchid", color = "palegoldenrod", alpha = 0.7) +
+  labs(title = "Distribution du Prix en fonction de la présence de climatisation",
+       x = "Présence de climatisation",
+       y = "Prix du Logement") +
+  theme_minimal()
+```
+
+```{r, echo=FALSE, fig.cap="(5)"}
+#### Boxplot pour la chambre d'amis
+ggplot(data_housing, aes(x = guestroom, y = price)) +
+  geom_boxplot(fill = "lightgray", color = "maroon", alpha = 0.7) +
+  labs(title = "Distribution du Prix en fonction de la présence d'une chambre d'amis",
+       x = "Présence d'une chambre d'amis",
+       y = "Prix du Logement") +
+  theme_minimal()
+
+
+```
+
+::: {align="justify"}
+Sur ces deux graphiques on peut voir la différence d'importance des ces deux variables :
+
+-   Pour la climatisation (graphique 4), les deux boîtes sont décalées (la médiane du prix des maisons muni de la climatisation est bien supérieure à la médiane du prix des maisons ne contenant pas). Ce qui semble en faveur de notre hypothèse qui dit que la climatisation serait très significative.
+
+-   Pour la chambre d'amis (graphique 5), bien que l'effet soit positif, les deux distributions se chevauchent beaucoup plus, ce qui laisse présager une significativité statistique plus faible.
+
+Ainsi, la significativité de la présence de la climatisation est plus forte que celle de la présence d'une chambre d'amis. Autrement dit, la climatisation a un impact plus prononcé et fait plus augmenter le prix de la maison que la chambre d'amis.
+:::
+
+```{r, echo=FALSE, fig.cap="(3)"}
+# Boxplot du nombre de chambre
+
+#ggplot(data_housing, aes(x = bedrooms, y = price)) +
+ # geom_boxplot(fill = "lightblue", color = "darkblue", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par Nombre de Chambres",
+   #    x = "Nombre de Chambres",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+
+# Boxplot du nombre de salle de bains 
+
+#ggplot(data_housing, aes(x = bathrooms, y = price)) +
+ # geom_boxplot(fill = "lightgreen", color = "darkgreen", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par Nombre de salle de bains",
+   #    x = "Nombre de salles de bains",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+
+# Boxplot du nombre d'étages 
+
+#ggplot(data_housing, aes(x = stories, y = price)) +
+ # geom_boxplot(fill = "pink", color = "purple", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par Nombre d'étages",
+   #    x = "Nombre d'étages",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+
+# Boxplot du nombre de place de parking 
+
+#ggplot(data_housing, aes(x = parking, y = price)) +
+ # geom_boxplot(fill = "gold", color = "black", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par Nombre de places de parking",
+   #    x = "Nombre de place de parking",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+
+# Boxplot de la présence d'une mainroad 
+
+#ggplot(data_housing, aes(x = mainroad, y = price)) +
+  #geom_boxplot(fill = "turquoise", color = "firebrick", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par la présence d'une route principal",
+   #    x = "Présence d'une route principal",
+  #     y = "Prix du Logement") +
+ # theme_minimal()
+
+
+# Boxplot de la présence d'une chambre d'amis
+
+#ggplot(data_housing, aes(x = guestroom, y = price)) +
+ # geom_boxplot(fill = "lightgray", color = "maroon", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par la présence d'une chambre d'amis",
+   #    x = "Présence d'une chambre d'amis",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+
+# Boxplot de la présence d'un sous-sol
+
+#ggplot(data_housing, aes(x = basement, y = price)) +
+ # geom_boxplot(fill = "coral", color = "forestgreen", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par la présence d'un sous-sol",
+   #    x = "Présence d'un sous-sol",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+
+# Boxplot de la présence d'un sytème de chauffe eau 
+
+#ggplot(data_housing, aes(x = hotwaterheating, y = price)) +
+ # geom_boxplot(fill = "dimgray", color = "peachpuff", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par la présence d'un système de chauffe eau",
+   #    x = "Présence d'un système de chauffe eau",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+
+# Boxplot de la présence de climatisation
+
+#ggplot(data_housing, aes(x = airconditioning, y = price)) +
+ # geom_boxplot(fill = "darkorchid", color = "palegoldenrod", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par la présence de climatisation",
+   #    x = "Présence de climatisation",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+
+# Boxplot de la présence dans un quartier préférentiel
+
+#ggplot(data_housing, aes(x = prefarea, y = price)) +
+ # geom_boxplot(fill = "brown", color = "lightblue", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par la présence dans un quartier préférentiel",
+   #    x = "Présence dans un quartier préférentiel",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+
+# Boxplot de l'ameublement de la maison
+
+#ggplot(data_housing, aes(x = furnishingstatus, y = price)) +
+ # geom_boxplot(fill = "springgreen", color = "saddlebrown", alpha = 0.7) +
+  #labs(title = "Distribution du Prix par l'ameublement de la maison",
+   #    x = "Ameublement de la maison",
+    #   y = "Prix du Logement") +
+  #theme_minimal()
+
+```
+
+## Corrélation des variables
+
+-   Corrélation de Pearson
+
+Pour rendre notre matrice de corrélation lisible, on va séparer nos variables en différentes catégories :
+
+-   La structure de la maison :
+
+    -   surface
+    -   nombre d'étages
+    -   nombre de chambres
+    -   nombre de salles de bains
+    -   présence d'un sous-sol
+
+-   Les équipements de la maison :
+
+    -   présence de la climatisation
+    -   système de chauffe-eau sanitaire
+    -   présence d'une chambre d'ami
+    -   degré d'ameublement de la maison
+    -   nombre de place de parking
+
+-   Environnement et accessibilité de la maison:
+
+    -   Rapprochement d'un axe principal
+    -   Localisation dans une zone préférentiel
+
+```{r, echo=FALSE, fig.cap = "(6)"}
+
+structural_data <- full_model_data[,c(1:13,16)]
+
+equipment_data <- full_model_data[,c(1,15,17:21,23,24)]
+
+environnement_data <- full_model_data[,c(1,14,22)]
+# Coefficient de corrélation
+matrice_cor_structural <- cor(structural_data, use = "pairwise.complete.obs")
+
+matrice_cor_equipement <- cor(equipment_data, use = "pairwise.complete.obs")
+
+matrice_cor_environnement <- cor(environnement_data, use = "pairwise.complete.obs")
+#matrice_cor
+corrplot(
+    matrice_cor_structural, 
+    
+    method = "circle",      
+    type = "lower",         
+    order = "hclust",       
+    diag = FALSE,           
+    
+    
+    tl.pos = "lt",  
+    tl.cex = 1,
+    
+    mar = c(0, 0, 2, 0),
+    cex.main = 0.8,
+    
+    
+    cl.pos = "r",           
+    cl.cex = 1, title = "Corrélation des variables structurelles de la maison"              
+)
+
+
+
+```
+
+```{r, echo = FALSE, fig.cap = "(7)"}
+
+corrplot(
+    matrice_cor_equipement, 
+    
+    method = "circle",      
+    type = "lower",         
+    order = "hclust",       
+    diag = FALSE,           
+    
+    
+    tl.pos = "t",           
+    mar = c(0, 0, 2, 0),
+    cex.main = 0.8,
+    
+    
+    cl.pos = "r",           
+    cl.cex = 0.6, title = "Corrélation des variables d'équipements de la maison",
+    
+)
+
+```
+
+```{r, echo = FALSE, fig.cap = "(8)"}
+
+corrplot(
+    matrice_cor_environnement, 
+    
+    method = "circle",      
+    type = "lower",         
+    order = "hclust",       
+    diag = FALSE,           
+    
+    tl.pos = "t",           
+     mar = c(0, 0, 2, 0),
+    cex.main = 0.8,
+   
+   
+    cl.pos = "r",          
+    cl.cex = 0.5,
+    
+    title = "Corrélation des variables de l'environnement et accéssibilité de la maison"              
+)
+
+```
+
+On remarque que le prix d'une maison est corrélé à plusieurs variables :
+
+-   Au fait d'avoir 2 salles de bain (coefficient de corrélation autour de 0.4 donc corrélation positive) : Avoir 2 salles de bain ferait augmenter le prix par rapport au fait d'en avoir qu'une (modalité absente).
+
+-   A la surface (coefficient de corrélation autour de 0.6 donc forte corrélation positive) : l'augmentation de la surface fait augmenter le prix.
+
+-   A la présence de climatisation (coefficient de corrélation autour de 0.6 donc forte corrélation positive) : l'acquisition d'un système de climatisation fait augmenter le prix de la maison.
+
+-   A l'éloignement d'un axe principal (coefficient de corrélation autour de -0.4 donc corrélation négative) : Le fait d'être éloigné d'une route principale fait baisser le prix de la maison.
+
+-   Au fait d'avoir 2 chambres (coefficient de corrélation autour de -0.3 donc corrélation négative) : Avoir 2 chambres ferait baisser le prix par rapport au fait d'en avoir 3 (modalité absente).
+
+De plus, la modalité non-meublé est corrélée négativement avec la modalité meublé (coefficient de corrélation autour de -0.5). Le fait qu'une maison ne soit pas meublée éloigne le fait qu'elle soit meublée (vérité générale).
+
+-   Multi-colinéarité :
+
+    -   test VIF :
+
+```{r, echo = FALSE}
+vif(lm(data = data_housing[,-c(3:13,16,20,25,29,30,32,34,36,38,42,45)],price~.))
+```
+
+Toutes les valeurs de VIF sont entre 1 et 2. Il n'y a donc problème de multicolinéarité pour aucune des variables explicatives.
+
+# **Analyse et discussion des résultats**
+
+## Comparaison des modèles
+
+::: {align="justify"}
+On commence par faire tourner les modèles présentés dans le cadre méthodologique.
+
+Rappel de l'équation du modèle complet :
+
+$Prix_{i} = \beta_0 + \beta_{Surface} \times Surface + \beta \times X + \varepsilon_i$
+:::
+
+```{r, echo=FALSE}
+
+### Modèle complet ###
+
+full_reg <- lm(data = full_model_data,price~.)
+
+#summary(full_reg)
+```
+
+Rappel de l'équation du modèle quadratique :
+
+$Prix_{i} = \beta_0 + \beta_{Surface} \times Surface + \beta_{surface²} \times Surface²  +\beta \times X + \varepsilon_i$
+
+```{r, echo = FALSE}
+
+### Modèle quadratique ###
+
+full_quadratic_model_data <- full_model_data
+full_quadratic_model_data$area_2 <- full_model_data$area * full_model_data$area
+
+full_quadratic_reg <- lm(price ~., data = full_quadratic_model_data)
+
+#summary(full_quadratic_reg)
+```
+
+Rappel de l'équation du modèle log-log :
+
+$log(Prix_{i}) = \beta_0 + \beta_{Surface} \times log(Surface) + \beta \times X + \varepsilon_i$
+
+Avec $\beta$ le vecteur des coefficients pour chacune des autres variables explicatives contenues dans le jeu de données (présentées plus bas) et **X** la matrice contenant ces variables.
+
+```{r,echo = FALSE}
+
+### Modèle log-log ###
+
+log_log_model_data <- full_model_data
+area <- log_log_model_data[["area"]]
+log_log_model_data$log_area <- log(area)
+log_log_model_data <- log_log_model_data[,-2]
+
+log_log_reg <- lm( log(price) ~ ., data=log_log_model_data)
+
+#summary(log_log_reg)
+```
+
+```{r,echo = FALSE}
+
+# Modèle complet et modèle quadratique
+
+stargazer(full_reg, full_quadratic_reg, title="Modèle complet (1) et modèle quadratique (2)",align=TRUE, type="text", digits=3)
+
+stargazer(log_log_reg,   title="Modèle log-log",align=TRUE, type="text", digits=3)
+```
+
+::: {align="justify"}
+Nous remarquons tout d'abord que les 3 modèles sont globalement satisfaisant (Test de Fisher global : F statistic). Cependant, en comparant les R² ajusté, les modèles quadratique et log-log ont une meilleur qualité d'ajustement. Nous allons montrer pourquoi nous préférons le modèle log-log.
+
+Supposons que nous voulons garder le modèle quadratique. On voit que la variable area² est significative au seuil de 5%. Essayons de comprendre ce que cela implique.
+
+L'effet marginal de la surface par rapport au prix se calcule de la manière suivante :
+
+$$ \frac{\partial \text{Price}}{\partial \text{Surface}} = \hat{\beta}_{Surface} + 2 \times \hat{\beta}_{Surface^2} \times \text{Surface} $$ En remplaçant par les valeurs obtenues précédemment, on obtient : $$ \frac{\partial \text{Price}}{\partial \text{Surface}} = 411.8 - 2 \times 0.01281 \times \text{Surface} $$ Premièrement on voit que l'effet marginal n'est pas constant donc cela confirme le lien non-linéaire entre ces deux variables. Calculons le point de retournement pour pouvoir décrire la relation de manière plus précise. On cherche le point de retournement, c'est à dire le point pour lequel l'effet marginal vaut 0. $$
+\begin{aligned}
+\frac{\partial \text{Price}}{\partial \text{Surface}} = \hat{\beta}_{Surface} + 2 \hat{\beta}_{Surface^2} \times \text{Surface} &= 0 \\
+2 \hat{\beta}_{Surface^2} \times \text{Surface} &= - \hat{\beta}_{Surface} \\
+\text{Surface}^* &= - \frac{\hat{\beta}_{Surface}}{2 \hat{\beta}_{Surface^2}} \\
+\text{Surface}^* &= \frac{411.8}{2 \times 0.01281} \\
+\text{Surface}^* &= 16073.38
+\end{aligned}
+$$ On peut donc séparer l'effet de la surface sur le prix en trois phases différentes :
+
+\- Phase 1 : surface \< 16073 ft² -\> L'effet marginal est positif, augmenter la surface fait augmenter le prix.
+
+\- Phase 2 : surface = 16073 ft² -\> L'effet marginal est nul, point de saturation, le prix est à son maximum (s'il n'était influencé que par la surface).
+
+\- Phase 3 : surface \> 16073 ft² -\> L'effet marginal est négatif, augmenter la surface fait théoriquement diminuer le prix.
+
+Le graphique suivant illustre comment le prix varie en fonction de la surface, et représente bien la concavité de notre effet marginal.
+:::
+
+```{r, echo = FALSE, fig.cap = "(9)"}
+fonc <- function(x){ return(411.8*x - (0.01281*x^2))}
+curve(fonc(x),0,32000, main = "Effet de la surface d'une maison sur son prix", xlab = 'surface (ft²)', ylab = 'Augmentation du prix pour 1 ft² de plus ($)')
+```
+
+::: {align="justify"}
+Le modèle quadratique que nous avons mis en place nous a permis de mettre en évidence la non-linéarité de la relation entre le prix et la surface. Maintenant le point de retournement amène à une conclusion contre-naturelle. L'augmentation de la surface ferait baisser le prix après avoir dépassé un certain seuil ? Si on regardait le prix du mètre carré, cela aurait du sens. Ici on se concentre plus sur le prix global de la maison.
+
+C'est pour cela que l'on va s'intéresser au modèle log-log.
+
+Nous avions vu dans l'analyse descriptive, que dans la distribution de maison en fonction de la surface et également en fonction du prix, il y avait des valeurs très éloignées de la médiane. Un modèle "log-log" va nous permettre de normaliser nos distributions. Il va aussi nous permettre de contrer l'effet non linéaire entre la surface et le prix et contrairement au modèle quadratique, ne va pas nous imposer un point de retournement qui implique des conclusions douteuses. Le modèle log-log va bien prendre en compte l'effet de saturation de la surface, au bout d'une certaine surface la courbe va s'applatir et non diminuer. L'avantage sera aussi dans l'interprétation. En économie, on préfère parler d'évolution en pourcentage et c'est de cette façon que l'on interprètera le modèle log-log. Ce qui fait plus de sens, au bout d'une certaine valeur de surface, ce n'est plus cette dernière qui fera énormément varier le prix, ce sera les autres caractéristiques de la maison.
+
+On va donc étudier plus en détails et tester le modèle log-log.
+
+Reprenons le résumé du modèle log-log.
+:::
+
+## Etude du modèle log-log
+
+### Qualité du modèle et significativité des variables explicatives
+
+::: {align="justify"}
+Reprenons le résumé du modèle log-log.
+:::
+
+```{r,echo = FALSE}
+summary(log_log_reg)
+```
+
+-   **Qualité d’ajustement du modèle**
+
+::: {align="justify"}
+On interprète seulement le R2 ajusté car il s'agit d'un régression multiple. Ici, 70.43% de la variance du prix des maisons est expliqué par le modèle c'est à dire par les variables explicatives : le logaritme de la superficie, le nombre de chambres (1, 2, 4, 5 ou 6), le nombre de salles de bain (2, 3 ou 4), le nombre d'étage (1,3 ou 4), le fait de ne pas être près d'une route principale, avoir une chambre d'amis, avoir un sous-sol, avoir un chauffe-eau, avoir la climatisation, le nombre de places de parking (1, 2 ou 3), l'appartenance à un quartier préférentiel et être meublé ou non.
+:::
+
+-   **Satisfaction globale du modèle**
+
+::: {align="justify"}
+On utilise le test de Fisher : H0 : tous les coefficients sont nuls sauf la constante
+
+La statistique du test de Fisher Fobs = 58.021 et la p-value: \< 2.2e-16 \<0.05 (5%) donc on rejette l'hypothèse nulle, il y a au moins un coefficient différent de zéro.
+
+Conclusion le modèle est globalement satisfaisant.
+:::
+
+-   **Variables significatives et interprétation**
+
+::: {align="justify"}
+Notre maison de référence comporte les modalités qui ne sont pas étudiées dans ce modèle, c'est-à-dire la maison qui a 3 chambres, 1 salle de bain, 2 étages, qui est près d'un axe principal, qui n'a pas de chambre d'amis, n'a pas de sous-sol, ni de chauffe-eau, ni de climatisation, ni de place de parking, ne se situe pas dans un quartier préférentiel, et est semi-meublée. Nous allons donc comparer nos modalités significatives en fonction de la modalité correspondante de cette maison.
+
+
+On utilise donc le Test de Student.
+
+-   Les modalités suivantes ne sont pas significatives (p-valeur supérieure à 0.2) donc nous n'allons pas étudier leurs effets : chambres (1,4,5 et 6), 3 places de parking, et non-meublée. 
+
+
+-   H0 : β_2=0, tobs = -2.888, pvalue = 0.004036 \<0.005 => 2 étoiles
+
+Le coefficient β_2 est significatif. Dans le cadre d'un modèle causal, le fait d'avoir 2 chambres fait baisser le prix de la maison de 7.2% par rapport à une maison ayant 3 chambres, toute chose égale par ailleurs.
+
+
+-   H0 : β_6=0, tobs = 6.937, pvalue \< 0.001 => 3 étoiles
+
+Le coefficient β_6 est très significatif. Dans le cadre d'un modèle causal, le fait d'avoir 2 salles de bain fait augmenter le prix de la maison de 16% par rapport à une maison n'en ayant qu'une, toute chose égale par ailleurs.
+
+
+-   H0 : β_7=0, tobs = 4.823 , pvalue \< 0.001 => 3 étoiles
+
+Le coefficient β_7 est très significatif. Dans le cadre d'un modèle causal, le fait d'avoir 3 salles de bain fait augmenter le prix de la maison de 32.6% par rapport à une maison n'en ayant qu'une, toute chose égale par ailleurs.
+
+
+-   H0 : β_8=0, tobs = 2.989 , pvalue = 0.002928 \< 0.01 => 2 étoiles
+
+Le coefficient β_8 est significatif. Dans le cadre d'un modèle causal, le fait d'avoir 4 salles de bain fait augmenter le prix de la maison de 64.3% par rapport à une maison n'en ayant qu'une, toute chose égale par ailleurs.
+
+
+-   H0 : β_9=0, tobs = -2.463 , pvalue = 0.014090 \< 0.05 => 2 étoiles
+
+Le coefficient β_9 est un peu significatif. Dans le cadre d'un modèle causal, le fait d'avoir 1 étage fait baisser le prix de la maison de 5.6% par rapport à une maison n'en ayant qu'une, toute chose égale par ailleurs.
+:::
+
+### Robustesse des résultats du modèle log-log
+
+#### - Normalité : Analyse des résidus
+
+-   **Représentation graphique des résidus :**
+
+```{r,echo = FALSE, message = FALSE, fig.cap = "(10)", warning=FALSE}
+par(mfrow=c(2,2))
+plot(log_log_reg, which = 2, id.n = 3, main = "graphique quantile-quantile des résidus")
+ols_plot_resid_hist(log_log_reg) 
+```
+
+```{r,echo = FALSE, message = FALSE, fig.cap = "(11)", warning=FALSE}
+plot(log_log_reg, which=2)
+```
+
+-   **Test de Shapiro :** H0 : Les résidus sont normalement distribués.
+
+```{r, echo=FALSE}
+shapiro.test(log_log_reg$residuals)
+```
+
+::: {align="justify"}
+Nous remarquons sur le graphique 9 que la courbe représente plutôt bien une gaussienne.
+
+Cependant, sur le graphique 10, on remarque un écart à la normalité pour les résidus des extrémités et pour le test de Shapiro, nous avons une p-valeur valant 0.06499. Au seuil de 5%, on ne rejette pas l'hypothèse nulle mais on a peu confiance.
+
+Pour améliorer cela, il pourrait mettre en place une estimation en utilisant la méthode du bootstrap.
+:::
+
+#### - Homoscédasticité
+
+-   **Représentation graphique :**
+
+```{r, echo = FALSE, message = FALSE, fig.cap = "(12)",warning=FALSE}
+plot(log_log_reg, which = 1) 
+```
+
+```{r, echo = FALSE, message = FALSE, fig.cap = "(13)",warning=FALSE}
+plot(log_log_reg, which = 3)
+```
+
+-   **Test de Breusch-Pagan :**
+
+```{r, echo = FALSE, fig.Cap = "Test numérique"}
+bptest(log_log_reg)
+```
+
+::: {align="justify"}
+On voit un nuage de points plutôt homogène sur le graphique 10 et la ligne rouge sur le graphique 11 est plutôt horizontale. On retrouve également nos points problématiques éloignés de la droite (maisons 545, 532 et 16). On pourrait supposer l'homoscédasticité.
+
+Cependant, on obtient une p-valeur de 0.02466 pour le test de Breusch-Pagan.
+
+Il est donc difficile d'accepter l'hypothèse nulle avec confiance.
+
+Pour résoudre ce problème, on va utiliser la correction de White en venant corrigé le calcul de la matrice de variance covariance des paramètres.
+:::
+
+```{r,echo=FALSE}
+#vcov(reg5)
+# On supprime l'individu 2 et la colonne bathrooms 4 qui pose problème ici.
+improve_homoscedasticity_log_log_model_data <- log_log_model_data[-2,-9]
+improve_homoscedasticity_log_log_reg <- lm( log(price) ~ ., data=improve_homoscedasticity_log_log_model_data)
+
+sturdy_cov <- hccm(improve_homoscedasticity_log_log_reg,type = "hc1")
+sturdy_reg <-  coeftest(improve_homoscedasticity_log_log_reg, vcov = sturdy_cov)
+
+
+stargazer(log_log_reg, sturdy_reg,
+  title="Comparaison de l'estimation MCO et MCO correction WHITE",
+  type="text", 
+  digits=3, 
+  column.labels=c("MCO","MCOWhite"),
+  dep.var.labels.include = FALSE,
+  model.numbers = FALSE,
+  dep.var.caption="Variable dépendante : 'Prix'",
+  model.names=FALSE) 
+```
+
+::: {align="justify"}
+On remarque que les paramètres ne changent pas car cette méthode permet de recalculer la variance des paramètres. Certaines variables deviennent donc moins ou plus significatives.
+:::
+
+### - Identification des points influents
+
+```{r, echo=FALSE, fig.cap = "(14)", warning=FALSE}
+## Distance de Cook: mesure l'influence d'une observation, les valeurs supérieures à 1 ou parfois à 0,5 indique un point influent
+plot(log_log_reg, which = 4)
+```
+
+```{r, echo=FALSE, fig.cap = "(15)", warning=FALSE}
+## Un autre graphique très utile pour le diagnostic d’un éventuel point influent sur la droite de régression est le graphique des résidus standardisés selon leur levier (“Residual vs Leverage”) sur lequel on superpose les limites pour la distance de Cook. Leverage = éléments diagonaux de H = X(X'X)-1X'  Si un point sur ce graphique se situe en dehors de l’intervalle définit par les lignes en pointillées, il s’agit d’une observation influente. 
+plot(log_log_reg, which = 5)
+```
+
+::: {align="justify"}
+La plus grande distance de Cook est inférieure à 0.05 sur le graphique 14 et sur le graphique 15, aucune point n'est en dehors de l'intervalle définit par les lignes en pointillés
+Ainsi, on peut dire qu'il n'y a pas de points influents dans ce modèle. 
+:::
+
+### - Test de moyenne nulle
+
+```{r, echo=FALSE}
+#moyennes = 0
+# Test (H0: moyenne résidus = 0; H1: moyenne résidus <> 0)
+t.test(log_log_reg$residuals)
+# la moyenne estimé est de -2.1544-16, l'intervalle de confiance contient la valeur nulle et la pvalue du test =1, au seuil de significativité de 0.1% on ne peut pas rejeter l’hypothèse que la moyenne des résidus soit nulle
+```
+
+::: {align="justify"}
+La moyenne des résidus estimée est de -5.6327e-16, l'intervalle de confiance contient la valeur nulle et la pvalue du test =1, au seuil de significativité de 0.1% on ne peut pas rejeter l’hypothèse que la moyenne des résidus soit nulle.
+:::
+
+## Analyses complémentaires
+
+### - Changement structurel
+
+::: {align="justify"}
+Nous avons remarquer dans l'analyse descriptive, que la présence de la climatisation aurait un impact sur le prix de la maison. On souhaite savoir si l'effet des autres variables serait différent en fonction de la présence ou l'absence de climatisation. On veut tester un changement structurel entre l'échantillon des maisons muni de la climatisation et celui des maisons n'en possédant pas. Pour cela nous allons utiliser un test de Chow.
+:::
+
+```{r, echo=FALSE}
+# création des 2 échantillons et estimations des deux sous modèles sur les échantillons
+data_aiconditioning = full_model_data[full_model_data$airconditioning_yes==1,] 
+airconditioning_reg = lm(price ~., data=data_aiconditioning)
+# on récupère la SCR
+scr_1 = sum(airconditioning_reg$residuals^2)
+#scr_1
+
+data_no_aiconditioning = full_model_data[full_model_data$airconditioning_yes==0,] 
+no_airconditioning_reg = lm(price~., data=data_no_aiconditioning)
+# on récupère la SCR
+scr_2 = sum(no_airconditioning_reg$residuals^2)
+#scr_2
+
+#modèle sur l'ensemble des individus
+scr_total = sum(full_reg$residuals^2)
+#scr_total
+
+#degres de liberte pour la formule du cours
+ddl_n = (full_reg$df.residual - (airconditioning_reg$df.residual + no_airconditioning_reg$df.residual))
+#ddl_n
+ddl_d = airconditioning_reg$df.residual + no_airconditioning_reg$df.residual
+#ddl_d
+```
+
+```{r, echo=FALSE}
+# Statistique du test de Chow
+FChow = ((scr_total-(scr_1+scr_2))/ddl_n)/((scr_1+scr_2)/ddl_d)
+FChow
+```
+
+```{r, echo=FALSE}
+# p-value
+pvalue = pf(FChow,ddl_n,ddl_d,lower.tail=FALSE)
+pvalue
+```
+
+::: {align="justify"}
+La pvalue du test est inférieure à 5%, on rejette l'hypothèse nulle, il existe un changement structurel. L'effet des variables explicatives sur le prix est différent en fonction de la présence de système de climatisation dans la maison. Ce résultat valide donc notre hypothèse de départ.
+:::
+
+### - Test sur l'hypothèse posée
+
+::: {align="justify"}
+Comme dit dans l'introduction, nous avons posé comme hypothèse, après lecture des articles scientifiques, que les variables suivantes étaient significatives : la surface habitable, le nombre de salles de bains, le nombre de place de parking, la présence d'un sous-sol, le nombre de niveaux ainsi que le chauffage et la climatisation.
+
+Testons cette hypothèse en analysant brièvement un modèle avec ces variables explicatives.
+:::
+
+```{r, echo=FALSE}
+# Modèle avec les variables significatives du modèle complet
+hypothesis_variables = full_model_data[,c(1,2,8:13,16:21)]
+hypothesis_reg <- lm(data = hypothesis_variables,price~.)
+summary(hypothesis_reg)
+```
+
+::: {align="justify"}
+Nous remarquons que toutes les variables explicatives utilisées dans ce modèle (hormis le fait d'avoir 3 places de parking) sont très significatives. Ces résultats sont donc en accord avec les affirmations des scientifiques présentées dans l'introduction.
+:::
+
+# **Conclusion générale et perspectives**
+
+Rappel de la problématique et de la méthodologie
+
+Synthèse des résultats principaux
+
+Contributions du mémoire, apports scientifiques et/ou applicatifs
+
+Perspectives d’amélioration ou de recherche future
+
+::: {align="justify"}
+**D'après les articles scientifiques présentés dans l'introduction de ce mémoire, d'autres attributs que ceux analysés dans ce rapport influencent le prix d'une maison, comme la date de construction, des potentielles rénovations récentes, la localisation l'étiquette énergétique, l'accessibilité au centre d'emploi ou encore la qualité sociale du voisinage. Le prix d'une maison dépend de beaucoup plus de mesures. Nos modèles pourraient donc être meilleurs en ayant d'autres mesures à analyser (par exemple celles indiquées dans la phrase précédentes). Cependant, certaines ne sont malheureusement pas mesurables.**
+:::
+
+# Bibliographie - Source des données
+
+-   <https://ec.europa.eu/eurostat/fr/web/main/data>
+
+-   <https://statistiques-locales.insee.fr/#c=home>
+
+-   <https://www.kaggle.com/datasets/yasserh/housing-prices-dataset>
+
+-   <https://www.persee.fr/doc/estat_0336-1454_2005_num_381_1_7210>
+
+-   <https://www.imf.org/external/french/np/sta/rppi/rppif.pdf>
+
+-   <https://www.elibrary.imf.org/display/book/9781498301565/9781498301565.xml>
