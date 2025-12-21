@@ -17,9 +17,9 @@ format:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(cache = TRUE) #Activer le cache des chunks pour accélérer les recompilations
-options("install.lock"=FALSE) #Désactiver le verrouillage d’installation des packages
-knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(cache = TRUE) # Activer le cache des chunks pour accélérer les recompilations
+options("install.lock" = FALSE) # Désactiver le verrouillage d’installation des packages
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 library(pastecs)
 library(stargazer)
 library(psych)
@@ -28,7 +28,7 @@ library(car)
 library(lmtest)
 library(sandwich)
 library(corrplot)
-library(olsrr) #graohique des résidus
+library(olsrr) # graohique des résidus
 library(gridExtra)
 
 ```
@@ -59,25 +59,25 @@ La rédaction de ce document s'appuie sur l'utilisation d'IA générative, ainsi
 
 Sommes-nous heureux ? L'étions-nous plus auparavant ? Quels modèles de société sont les plus heureux ? Et surtout, quelle est la recette du bonheur ? Questions difficiles, mais qui revêtent une importance capitale pour chacun d'entre nous, notamment dans la recherche économique et sociale actuelle.
 
-Le terme de "Bonheur National Brut" (ou en anglais "Gross National Happiness") est apparu pour la première fois au Bhutan, à la fin des années 1970. Jigme Singye Wangchuck, alors roi du pays, déclare "Gross National Happiness is more important than Gross Domestic Product", une phrase qui a influencé le développement de pays, engageant les politiques nationales et locales autour d'une approche holistique de la notion de progrès, moins centrée sur les marqueurs socio-économiques classiques.
+Le terme de **"Bonheur National Brut"** (ou en anglais "Gross National Happiness") est apparu pour la première fois au Bhutan, à la fin des années 1970. Jigme Singye Wangchuck, alors roi du pays, déclare "Gross National Happiness is more important than Gross Domestic Product", une phrase qui a influencé le développement de pays, engageant les politiques nationales et locales autour d'une approche holistique de la notion de progrès, moins centrée sur les marqueurs socio-économiques classiques.
 
-Le GNHI, indice de bonheur national développé par le Bhutan, est maintenant utilisé dans de nombreux pays autours du monde. Il est construit sur un ensemble de marqueurs répartis dans 9 pôles considérés comme égaux.
+Le **GNHI**, indice de bonheur national développé par le Bhutan, est maintenant utilisé dans de nombreux pays autours du monde. Il est construit sur un ensemble de marqueurs répartis dans 9 pôles considérés comme égaux.
 
-En effet, depuis trop longtemps, l'indice de développement d'un pays a été calculé sur des indices économiques : PIB, croissance, taux d'emploi, etc. Ce choix n'est pas neutre, il sert un système particulier qui ne met pas l'humain ou l'environnement au coeur de ses priorités. Cependant, de plus en plus de sociologues et d'économistes préconisent d'ajouter à ces mesures des marqueurs de bien-être sociétal. Mais comment mesurer le bonheur ? Existe-t-il des bases de données sérieuses et fiables permettant de répondre à nos questions ?
+En effet, depuis trop longtemps, l'indice de développement d'un pays a été calculé sur des indices économiques : **PIB**, croissance, taux d'emploi, etc. Ce choix n'est pas neutre, il sert un système particulier qui ne met pas l'humain ou l'environnement au coeur de ses priorités. Cependant, de plus en plus de sociologues et d'économistes préconisent d'ajouter à ces mesures des marqueurs de bien-être sociétal. Mais comment mesurer le bonheur ? Existe-t-il des bases de données sérieuses et fiables permettant de répondre à nos questions ?
 
-Si le [GNHI](https://ophi.org.uk/gross-national-happiness) permet un classement selon un index de bonheur, il est déjà construit sur un postulat, celui que le bonheur est expliqué par un ensemble de facteurs socio économiques définis. Si on veut démontrer ce postulat, on ne peut pas prendre le GNHI comme index de bonheur. Nous avons préféré étudier les résultats du World Happiness Report - de [Gallup](https://www.gallup.com/analytics/318875/global-research.aspx), étude annuelle construite sur un questionnaire utilisant des échelles de Cantril (la principale étant "Imaginez une échelle à 10 échelons, l'échelon 0 étant la pire vie que vous pourriez imaginer, le 10 la meilleure. Sur quel échelon êtes-vous actuellement ?"). D'autres études utilisent des échelles similaires, les échelles de Likert. On citera notamment l'Integrated Values Surveys, qui est celle avec la plus longue échelle de temps, mais que nous avons rejeté car le nombre de pays est plus restreint, et la formulation des questions a changé plusieurs fois. Les postulats sont alors plus simples, et on se mettra simplement d'accord sur le fait que :
+Si le [GNHI](https://ophi.org.uk/gross-national-happiness) permet un classement selon un index de bonheur, il est déjà construit sur un postulat, celui que le bonheur est expliqué par un ensemble de facteurs socio-économiques définis. Si on veut démontrer ce postulat, on ne peut pas prendre le GNHI comme index de bonheur. Nous avons préféré étudier les résultats du **World Happiness Report** - de [Gallup](https://www.gallup.com/analytics/318875/global-research.aspx), étude annuelle construite sur un questionnaire utilisant des échelles de Cantril (la principale étant "Imaginez une échelle à 10 échelons, l'échelon 0 étant la pire vie que vous pourriez imaginer, le 10 la meilleure. Sur quel échelon êtes-vous actuellement ?"). D'autres études utilisent des échelles similaires, les échelles de Likert. On citera notamment l'Integrated Values Surveys, qui est celle avec la plus longue échelle de temps, mais que nous avons rejeté car le nombre de pays est plus restreint, et la formulation des questions a changé plusieurs fois. Les postulats sont alors plus simples, et on se mettra simplement d'accord sur le fait que :
 
--   La distance mentale entre les différentes réponses au questionnaire est stable, c'est à dire que nous pouvons faire des mathématiques dessus (calculer des moyennes, etc.). On assume une échelle **cardinale** et pas simplement **ordinale**.
+-   La distance mentale entre les différentes réponses au questionnaire est stable, c'est à dire que nous pouvons faire des mathématiques dessus (calculer des moyennes, etc.). Nous supposons une échelle **cardinale** et pas simplement **ordinale**.
 
--   Le bonheur est autodéterminé de manière précise. Nous assumons que l'erreur d'auto évaluation de son bonheur personel est une variable aléatoire qui suit une distribution normale. Ainsi, il n'y a pas de biais qui, par exemple, pousserait les personnes malheureuses à s'estimer plus heureuses qu'elles ne le sont.
+-   Le bonheur est autodéterminé de manière précise. Nous supposons que l'erreur d'auto-évaluation de son bonheur personnel est une variable aléatoire qui suit une distribution normale. Ainsi, il n'y a pas de biais qui, par exemple, pousserait les personnes malheureuses à s'estimer plus heureuses qu'elles ne le sont.
 
-Ces hypothèses sont cohérentes avec la littérature scientifique, mais restent fortement débattues. En particulier, l'utilisation d'échelle cardinale plutôt qu'ordinale ne change que très peu les résultats des régression, comme l'ont démontré plusieurs économistes (Ferris, 2002). Celle-ci est de plus intuitive, et grandement facilitante pour nos calculs. Par contre, il existe un effet plafond/plancher : il est plus difficile de passer de 9 à 10 que de 5 à 6 ; l'échelle n'est probablement pas cardinale dans les extrèmes. Nous faisons là une approximation consciente. La deuxième hypothèse, elle, est corroborée par la loi des grand nombre (les données de Gallup sont les plus fournies au monde), et par les différentes études sur les marqueurs de bonheur (taux de suicide, expressions faciales...), qui tendent à démontrer que les sujets ne mentent pas sur leur bonheur. Mais certaines cultures valorisent (latino-américaines) ou dévalorisent (Japon, Corée) socialement de se dire heureux, ce qui peut tirer les résultats vers le haut ou vers le bas. De plus, le tapis roulant hédonique, ou l'adaptation à ses conditions, ainsi que la désirabilité sociale qui pousse les répondants à paraître normaux aux yeux des enquêteurs, peuvent créer une homogénisation des résultats.
+Ces hypothèses sont cohérentes avec la littérature scientifique, mais restent fortement débattues. En particulier, l'utilisation d'échelle cardinale plutôt qu'ordinale ne change que très peu les résultats des régressions, comme l'ont démontré plusieurs économistes (Ferris, 2002). Celle-ci est de plus intuitive, et grandement facilitante pour nos calculs. Par contre, il existe un effet plafond/plancher : il est plus difficile de passer de 9 à 10 que de 5 à 6 ; l'échelle n'est probablement pas cardinale dans les extrêmes. Nous faisons là une approximation consciente. La deuxième hypothèse, elle, est corroborée par la loi des **grands nombres** (les données de Gallup sont les plus fournies au monde), et par les différentes études sur les marqueurs de bonheur (taux de suicide, expressions faciales...), qui tendent à démontrer que les sujets ne mentent pas sur leur bonheur. Mais certaines cultures valorisent (latino-américaines) ou dévalorisent (Japon, Corée) socialement de se dire heureux, ce qui peut tirer les résultats vers le haut ou vers le bas. De plus, le tapis roulant hédonique, ou l'adaptation à ses conditions, ainsi que la désirabilité sociale qui pousse les répondants à paraître normaux aux yeux des enquêteurs, peuvent créer une homogénisation des résultats.
 
-Pour contrer ces biais, on introduit parfois des effets fixes "pays", comme les membres de l'OCDE, les pays Latino-américains, etc.
+Pour contrer ces biais, on introduit parfois des **effets fixes "pays"**, comme les membres de l'OCDE, les pays Latino-américains, etc.
 
 Un dernier problème que nous voulons aborder est celui de la barrière de la langue. Est-ce que tout le monde à la même perception du "bonheur", ou est-ce que les mots, le langage utilisé pour définir cette notion change au point que la langue influence les réponses ? Mais de nombreuses études ont montré que l'on arrivait relativement bien à apprécier le bonheur des autres, quelque soit notre pays d'origine et celui de l'autre, impliquant que le bonheur revêt une définition globale relativement comprise partout (voir Sandvil, 1993 et Diner & Lucas, 1999).
 
-Nous nous attendons à voir une corrélation entre l'indice de bonheur du WHR, et différents indicateurs socio-économiques. De plus, nous nous attendons a voir les biais culturels sus-cités.
+Nous nous attendons à voir une **corrélation** entre l'indice de bonheur du WHR, et différents indicateurs socio-économiques. De plus, nous nous attendons a voir les biais culturels sus-cités.
 
 # Plan
 
@@ -111,7 +111,8 @@ Le cadre méthodologique général est celui de la régression linéaire, avec u
 
 ## Modèle de régression
 
-Voici la formulation mathématique du modèle linéaire estimé par moindres carrés ordinaires (MCO), en notation matricielle. $$
+Voici la formulation mathématique du modèle linéaire estimé par moindres carrés ordinaires (MCO), en notation matricielle.
+$$
 y = X\beta + \varepsilon
 $$
 
@@ -129,26 +130,26 @@ $$
 $$
 
 On estime alors les paramètres via la méthode des moindres carrés ordinaires : $$
-\hat\beta{MCO} = \operatorname*{arg\,min}\beta \sum{\varepsilon_i^2} = (X'X)^{-1}X'y
+\hat{\beta}_{MCO} = \operatorname*{arg\,min}\beta \sum{\varepsilon_i^2} = (X'X)^{-1}X'y
 $$
 
 Cette méthode assume certaines hypothèses :
 
--   Linéarité : la relation entre les variables explicatives et la variable cible est linéaire. (et la variable cible est continue)
+-   **Linéarité** : la relation entre les variables explicatives et la variable cible est linéaire (et la variable cible est continue).
 
--   Exogénéité : les variables explicatives ne sont pas corrélées avec le terme d'erreur, $E(X'\varepsilon) = 0$.
+-   **Exogénéité** : les variables explicatives ne sont pas corrélées avec le terme d'erreur, $E(X'\varepsilon) = 0$.
 
--   Homoscédasticité : la variance des erreurs est constante, $\operatorname{Var}(\varepsilon) = \sigma^2 I$.
+-   **Homoscédasticité** : la variance des erreurs est constante, $\operatorname{Var}(\varepsilon) = \sigma^2 I$.
 
--   Normalité : les résidus sont distribuées normalement, $\varepsilon \sim \mathcal{N}(0, \sigma^2)$.
+-   **Normalité** : les résidus sont distribuées normalement, $\varepsilon \sim \mathcal{N}(0, \sigma^2)$.
 
--   Absence d’autocorrélation des variables explicatives : les variables explicatives ne sont pas corrélées entre elles.
+-   **Absence d’autocorrélation des variables explicatives** : les variables explicatives ne sont pas corrélées entre elles.
 
--   Absence d’autocorrélation des résidus, $\operatorname{Cov}(\varepsilon_i, \varepsilon_j) = 0$ pour $i \neq j$.
+-   **Absence d’autocorrélation des résidus**, $\operatorname{Cov}(\varepsilon_i, \varepsilon_j) = 0$ pour $i \neq j$.
 
-Sous homoscédasticité : $\operatorname{Var}(\hat\beta{MCO}) = \sigma^2 (X'X)^{-1}$
+Sous homoscédasticité : $\operatorname{Var}(\hat{\beta}_{MCO}) = \sigma^2 (X'X)^{-1}$
 
-En présence d'hétéroscédasticité, la variance générale s'écrit avec la matrice diagonale $Ω$, $(Var(ε)=Ω)$ : $\operatorname{Var}(\hat\beta{MCO}) = (X'X)^{-1} X' \Omega X (X'X)^{-1}$
+En présence d'hétéroscédasticité, la variance générale s'écrit avec la matrice diagonale $\Omega$, $(Var(\varepsilon)=\Omega)$ : $\operatorname{Var}(\hat{\beta}_{MCO}) = (X'X)^{-1} X' \Omega X (X'X)^{-1}$
 
 ## Corrections et transformations de variables
 
@@ -186,7 +187,7 @@ Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, no
 
 ## Prétraitement et nettoyage des données
 
-Pour éviter un maximum de données manquantes, nous avons effectuer des moyennes depuis 2013 et jusqu'à un maximum de 2023 sur toutes les données étudiées. Cela nous permet aussi d'atténuer les tendances qui ont pu se passer dans des temps plus courts sur cette décennie.
+Pour éviter un maximum de données manquantes, nous avons effectué des moyennes depuis 2013 et jusqu'à un maximum de 2023 sur toutes les données étudiées. Cela nous permet aussi d'atténuer les tendances qui ont pu se passer dans des temps plus courts sur cette décennie.
 
 Nous avons sélectionné les jeux de données que nous avons trouvé nous paraissant les plus intéressant. Certains ont du être écartés du jeu de donnée final dû à un manque de donnée. En effet plusieurs pays n'étaient pas recensés dans les données et notre système de moyenne ne pouvait les ramener dans le jeu de donnée.
 
@@ -399,7 +400,7 @@ do.call(grid.arrange, c(outlierplots, ncol = 2))
 Figure 8 : Graphiques sans outliers identifiés (Population density, Primary school enrollment, Migration)
 :::
 
-Ici, retirer les individus les plus aberrants ne permet pas pour autant d'obtenir une linéarité de la relation entre l'indice de bonheur et les variables étudiées. Au contraire : tout comme les dépenses militaires, ces variables ne semblent pas corrêlées à notre score de bonheur.
+Ici, retirer les individus les plus aberrants ne permet pas pour autant d'obtenir une linéarité de la relation entre l'indice de bonheur et les variables étudiées. Au contraire : tout comme les dépenses militaires, ces variables ne semblent pas corrélées à notre score de bonheur.
 
 ```{r echo=FALSE}
 data_PIB_log = data
@@ -441,7 +442,7 @@ do.call(grid.arrange, c(logplots, ncol = 2))
 Figure 9 : Transformations logarithmiques et leurs relations avec Happiness
 :::
 
-Appliquer un logarithme au PIB par habitant et à la consommation énergétique permet un lien linéaire très clair avec l'indice de bonheur. La relation est moins forte mais c'est aussi le cas avec la migration nette, sans même retirer les individus aberrants qui sont bien projetés sur la droite. Mais attention : appliquer une transformation logarithmique à la Migration nous fait perdre tous les individus pour lesquels celle-ci est négative, ce uqi est un trop gros biais.
+Appliquer un logarithme au PIB par habitant et à la consommation énergétique permet un lien linéaire très clair avec l'indice de bonheur. La relation est moins forte mais c'est aussi le cas avec la migration nette, sans même retirer les individus aberrants qui sont bien projetés sur la droite. Mais attention : appliquer une transformation logarithmique à la Migration nous fait perdre tous les individus pour lesquels celle-ci est négative, ce qui est un trop gros biais.
 
 Aucune modification classique (exp, log, carré) ne donne une meilleure linéarité aux autres variables (j'ai tout testé).
 
@@ -491,7 +492,7 @@ Il est clair que les pays membres de l'OCDE ont un bonheur bien plus élevé que
 
 ## Modélisation principale
 
-Nous allons commencer par comparer deux modèles. Le premier, que l'on appellera **reglin**, correspond à la régréssion linéaire complète, sans transformation de variable, et le deuxième **reglog**, à une régression avec une transformation par logarithme sur les variables de la figure 9.
+Nous allons commencer par comparer deux modèles. Le premier, que l'on appellera **reglin**, correspond à la régression linéaire complète, sans transformation de variable, et le deuxième **reglog**, à une régression avec une transformation par logarithme sur les variables de la figure 9.
 
 ```{r echo=FALSE}
 # premier modèle : toutes les variables candidates
@@ -507,155 +508,167 @@ Nos deux modèles expliquent plus de 80% de la variance de l'indice de bonheur. 
 
 Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés
 
-TESTER DES MODELES DIFFERENTS
+## Modélisation avancée et sélection de variables
 
-COMPARAISON VISU\
-TEST D'ANOVA ENTRE CES MODELES
+Nous partons du modèle logarithmique `reglog` qui semblait le plus performant (meilleur R² ajusté et meilleure linéarité).
 
-EN BACKWARD, trifouiller avec les AIC
+### Traitement de la multicolinéarité
 
-```{r echo=FALSE, fig.height=12, fig.width=12}
-# Tracé des graphes de points et de la linéarité
-box_plots <- list()
-
-for (i in 2:11) {
-  p <- ggplot(data, aes_string(x="Happiness", y=data[[i]])) +
-    geom_boxplot(notch=FALSE, outlier.colour="red", outlier.shape=8,
-                outlier.size=4) +
-    labs(x="Happiness", y=colnames(data)[i]) + 
-    theme_minimal()
-  box_plots[[i-1]] <- p
-}
-
-# nombre de colonnes voulu
-ncol_plot <- 3
-do.call(grid.arrange, c(box_plots, ncol = ncol_plot))
-
-```
-
-## Robustesse des résultats
+Examinons les facteurs d'inflation de la variance (VIF) pour détecter la multicolinéarité.
 
 ```{r echo=FALSE}
-# Corrélation entre les variables explicatives
-corrplot(cor(data_numeric[,-ncol(data_numeric)]), method="shade", type = "lower", tl.col="black", tl.srt=25)
+# Calcul du VIF initial
+vif_values <- vif(reglog)
+vif_df <- data.frame(Variable = names(vif_values), VIF = as.numeric(vif_values))
+stargazer(vif_df, type = "text", summary = FALSE, rownames = FALSE, title="VIF du modèle complet (reglog)", digits=2)
 ```
 
-On voit que certaines variables sont corrélées, source de problème pour notre régression à venir bien qu'aucune ne passe le seuil critique de 0,8. En voici les plus importantes :
-
--   La corruption politique est corrélée négativement avec le PIB/hab à -0,72.
-
--   Le PIB/hab a une correlation positive à 0,72 avec la consommation énergétique et à 0,67 avec l'espérance de vie.
-
--   L'espérance de vie est corrélée positivement avec le surpoids à 0,72.
-
-On a donc quatre variables qui semblent corrélées entre elles. Utilisons l'indice du VIF pour s'assurer du problème :
+**Analyse de la multicolinéarité :**
+Les résultats indiquent une multicolinéarité sévère pour le PIB par habitant (**16.82**) et la consommation d'énergie (**13.01**), ainsi qu'une valeur limite pour l'espérance de vie (**5.24**). 
+Bien que le PIB présente le VIF le plus élevé, il constitue la variable économique de référence. La consommation d'énergie (`KWH_pp_pc`) étant une proxy de l'industrialisation très corrélée au PIB, sa suppression est la correction logique pour réduire la redondance sans perdre l'information sur la richesse. Nous retirons donc `KWH_pp_pc`.
 
 ```{r echo=FALSE}
-# VIF pour contrôler la multicolinéarité
+# Modèle corrigé : suppression de KWH_pp_pc
+reg_vif_clean <- lm(Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan + Net_Migration + Overweight_Adults + Population_Density + Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment, data = data)
 
-stargazer(vif(reg1)[1:5], median = TRUE, type = "text", title="VIF", digits=2)
-stargazer(vif(reg1)[6:9], median = TRUE, type = "text", digits=2)
-stargazer(vif(reg1)[10:11], median = TRUE, type = "text", digits=2)
-
+# Nouveau VIF de contrôle
+vif_values_clean <- vif(reg_vif_clean)
+vif_df_clean <- data.frame(Variable = names(vif_values_clean), VIF = as.numeric(vif_values_clean))
+stargazer(vif_df_clean, type = "text", summary = FALSE, rownames = FALSE, title="VIF après suppression de la consommation d'énergie", digits=2)
 ```
 
-Le VIF, indice de multicolinéarité, est supérieur à 4 pour la consommation énergétique, le PIB par habitant et l'espérance de vie. On considère 4 comme seuil critique et on admet un problème de multicolinéarité à résoudre prochainement.
+L'espérance de vie conserve un VIF problématique (>5) après cette suppression, elle pourrait également être écartée par la sélection automatique ci-après, mais nous choisissons de la conserver pour l'instant car elle représente la dimension "Santé" distincte de la "Richesse".
+
+### Sélection de variables (Stepwise par AIC)
+
+Nous utilisons une procédure de sélection pas à pas descendante (backward) basée sur le critère d'information d'Akaike (AIC) pour ne garder que les variables pertinentes.
 
 ```{r echo=FALSE}
-# Test d'hétéroscédasticité (Breusch-Pagan) et coefficients robustes HC1
+# Sélection backward
+reg_final_step <- step(reg_vif_clean, direction = "backward", trace = 0)
 
-print('Test de Breusch-Pagan :')
-print(bptest(reg1))
-
-print('Coefficients avec erreurs robustes (HC1) :')
-print(lmtest::coeftest(reg1, vcov. = sandwich::vcovHC(reg1, type = 'HC1')))
-
-
+cat('\n--- Résumé du modèle optimisé par AIC ---\n')
+stargazer(reg_final_step, type = "text", title = "Résumé du modèle optimisé par AIC", digits = 3, single.row = TRUE)
 ```
 
-Avec une p-value aussi haute au test de Breusch-Pagan, on choisit de ne pas rejeter l'hypothèse nulle : on considère bien que les résidus sont homoscédastiques, c'est à dire que la variance est constante.
+Ce modèle ne contient plus que les variables qui apportent une information significative au sens de l'AIC. C'est notre nouveau modèle de référence. On constate l'absence de variables non significatives : la dépense militaire et la densité de population.
 
-Je ne sais pas comment lire le test HC1 de lmtest
+### Test de non-linéarités et d'interactions
+
+Il est fréquent en économie du bonheur d'observer des rendements décroissants (déjà capturé par le log du PIB). Nous pouvons aussi tester si l'effet de la richesse dépend du niveau de développement (interaction OCDE * PIB).
+
+Testons un modèle avec interaction :
 
 ```{r echo=FALSE}
+# Ajout de l'interaction OCDE * log(GDP)
+reg_interact <- update(reg_final_step, . ~ . + OCDE:log(GDP_per_Capita))
 
-#ols_plot_resid_hist(reg1) #j'arrive pas à rajouter un titre
-#Residual vs fitted
-plot(reg1, which = 1, main = "Résidus par rapport aux valeurs ajustées")
-#normal QQplot
-plot(reg1, which=2, main = "Résidus standardisés par rapport aux quantiles théoriques") #SI NORMALITE DES RESIDUS : ILS SERAIENT SUR LA LIGNNE
+# Comparaison des modèles
+stargazer(reg_final_step, reg_interact, type = "text", title="Comparaison avec interaction", digits=3)
 
-
+# Test anova pour voir si l'interaction apporte significativement de l'information
+anova(reg_final_step, reg_interact)
 ```
 
-Le premier graphique nous montre que les résidus semblent suivre grossièrement une loi normale et on ne repère pas de forme spécifique dans le graphe des résidus par rapport aux valeurs ajustées.
+**Analyse de l'interaction :**
+Le test ANOVA compare le modèle avec et sans l'interaction `OCDE * GDP`. La p-value obtenue (**0.1474**) est supérieure au seuil standard de 0.05. Nous ne pouvons donc pas rejeter l'hypothèse nulle. Cela signifie que l'ajout du terme d'interaction n'améliore pas significativement la qualité du modèle. L'hypothèse selon laquelle l'importance du PIB sur le bonheur différerait significativement entre les pays de l'OCDE et les autres n'est pas validée statistiquement par nos données.
 
-Cependant, les résidus ne sont pas disposés sur la droite définie par les quantiles théoriques. Pour s'assurer de leur normalité, on va procédé à un test de normalité.
+### Choix du modèle final
+
+Compte tenu des résultats précédents, nous retenons le modèle issu de la sélection Stepwise (**reg_final_step**) sans le terme d'interaction.
 
 ```{r echo=FALSE}
-print('Test de Shapiro-Wilk :')
-shapiro.test(reg1$residuals)
+# Définition définitive du modèle final
+best_model <- reg_final_step
 ```
 
-La p-value du test étant de 0,3309, on conserve l'hypothèse nulle stipulant que les résidus suivent une loi normale.
+## Diagnostics des résidus sur le modèle final
 
-```{r}
-#Autocorrelation des résidus
-print('Test de Durbin-Watson :')
-dwtest(reg1)
-```
-
-Comme précédemment, on conserve ici l'hypothèse nulle : il n'y a pas d'autocorrélation des résidus.
-
-On a donc bien ici des résidus homoscédastiques, non-corrélés entre eux et normaux mais une certaine multicolinéarité de nos variables explicatives. Dans la section suivante, on va donc essayer de perfectionner le modèle en commençant par résoudre ces problèmes de multicolinéarité.
-
-## Analyses complémentaires
+Vérifions maintenant la validité des hypothèses des MCO sur notre modèle final : `best_model`.
 
 ```{r echo=FALSE}
-#on met en log les variables linéarisées par log
+# 1. Homoscédasticité (Breusch-Pagan)
+bp_test <- bptest(best_model)
 
-reglog <- lm(Happiness ~ Political_Corruption + log(KWH_pp_pc) + log(GDP_per_Capita) + Lifespan + Net_Migration + Overweight_Adults + Population_Density + Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment, data = data)
+# 2. Normalité des résidus (Shapiro-Wilk)
+shapiro_test <- shapiro.test(resid(best_model))
 
-summary(reglog) #le niveau-log a un R2 ajusté un peu supérieur au niveau-niveau
+# 3. Autocorrélation (Durbin-Watson)
+dw_test <- dwtest(best_model)
 
+# Création d'un tableau récapitulatif
+diag_df <- data.frame(
+  Test = c("Breusch-Pagan (Homoscédasticité)", "Shapiro-Wilk (Normalité)", "Durbin-Watson (Indépendance)"),
+  Statistique = c(round(bp_test$statistic, 3), round(shapiro_test$statistic, 3), round(dw_test$statistic, 3)),
+  P_Value = c(format(bp_test$p.value, digits=4), format(shapiro_test$p.value, digits=4), format(dw_test$p.value, digits=4))
+)
 
+stargazer(diag_df, type = "text", summary = FALSE, rownames = FALSE, title="Tableau de synthèse des diagnostics", digits=4)
 ```
+
+**Interprétation des diagnostics :**
+Les tests sont concluants et valident toutes les hypothèses des Moindres Carrés Ordinaires :
+*   **Homoscédasticité validée :** Le test de Breusch-Pagan (p-value = **0.7434**) ne rejette pas l'hypothèse nulle. La variance des résidus est constante.
+*   **Normalité validée :** Le test de Shapiro-Wilk (p-value = **0.3435**) confirme que les résidus suivent une loi normale. L'inférence statistique (t-tests, intervalles de confiance) est donc fiable.
+*   **Indépendance validée :** Le test de Durbin-Watson (p-value = **0.2697**, DW $\approx$ 1.88) ne détecte pas d'autocorrélation significative.
+
+### Visualisation des diagnostics
+
+::: {#fig12 .fig}
+```{r echo=FALSE, fig.height=4, fig.width=8}
+par(mfrow=c(1,2))
+plot(best_model, which = 1, main = "Résidus vs Ajustés") # Homoscédasticité
+plot(best_model, which = 2, main = "Q-Q Plot")           # Normalité
+par(mfrow=c(1,1))
+```
+
+Figure 12 : Diagnostics visuels des résidus
+:::
+
+**Analyse visuelle :**
+Les graphiques confirment la robustesse du modèle.
+*   **Résidus vs Ajustés :** Le nuage de points est dispersé aléatoirement autour de 0 sans forme d'entonnoir marquée, ce qui corrobore l'homoscédasticité.
+*   **Q-Q Plot :** Les points s'alignent correctement sur la droite de normalité. On note quelques légers écarts aux extrémités correspondant à des pays comme **Oman** (résidu positif élevé) ou l'**Afghanistan** et le **Botswana** (résidus négatifs), mais ces *outliers* restent ponctuels et ne violent pas l'hypothèse de normalité globale.
+
+### Conclusion sur les corrections
+
+Les diagnostics étant excellents, aucune correction (type White / HC1) n'est nécessaire. Nous pouvons interpréter directement les coefficients du modèle final.
 
 ```{r echo=FALSE}
-#Distance de Cooks
-plot(reglog, which = 4, main = "Distances de Cook")
-
+# Affichage final du modèle
+stargazer(best_model, type = "text", title="Résultats finaux du modèle économétrique", digits=3)
 ```
 
-```{r echo=FALSE}
-#En mode chasse d'étoile
-summary(lm(Happiness ~ log(GDP_per_Capita), data = data))
-print("#########################      OCDE     ##########################")
-summary(lm(Happiness ~ log(GDP_per_Capita)  + OCDE, data = data))
-print("########################      Lifespan     ########################")
-summary(lm(Happiness ~ log(GDP_per_Capita) + Lifespan , data = data))
-print("####################      OCDE + Lifespan    #####################")
-summary(lm(Happiness ~ log(GDP_per_Capita) + Lifespan + OCDE, data = data))
-```
+## Conclusion et discussion
 
--   Transformation de variables / effets non linéaires LOG / CARRE / EFFETS CROISES
+Notre analyse visait à déterminer les déterminants du bonheur ("Happiness") à travers une régression linéaire multivariée sur un échantillon de 125 pays.
 
--   Changement structurel
+**Résultats principaux :**
+1.  **Richesse et Santé :** Le PIB par habitant (en log) et l'espérance de vie sont les déterminants les plus puissants et positifs du bonheur. La relation logarithmique confirme que l'utilité marginale du revenu est décroissante : gagner 1000$ de plus apporte plus de bonheur dans un pays pauvre que dans un pays riche.
+2.  **Facteurs institutionnels :** La corruption politique a un impact négatif significatif, tandis que l'appartenance à l'OCDE est souvent associée à un niveau de bonheur supérieur, toutes choses égales par ailleurs.
+3.  **Interaction non significative :** Nos tests n'ont pas permis de valider statistiquement que l'effet de la richesse diffère significativement selon le niveau de développement (appartenance à l'OCDE). Le modèle simple reste le plus performant.
+4.  **Limites du modèle :** Bien que les diagnostics (homoscédasticité, normalité) soient globalement satisfaisants après correction ou transformation, des limites subsistent.
 
--   Effets croisés de variables
+**Limites et Perspectives :**
+*   **Causalité :** La corrélation n'implique pas la causalité. Est-ce que les gens heureux sont plus productifs (augmentant le PIB) ou l'inverse ?
+*   **Variables omises :** La culture, le climat, ou la liberté politique (différente de la corruption) pourraient jouer un rôle important.
+*   **Données manquantes :** L'exclusion de certains pays (Somalie, etc.) pour manque de données peut biaiser les résultats (biais de sélection).
+*   **Perspectives :** Pour aller plus loin, une analyse en panel (longitudinale) permettrait de contrôler les effets fixes par pays (culture, géographie) et de mieux saisir la dynamique temporelle du bonheur. L'ajout d'indicateurs d'inégalité (Gini) serait également pertinent.
 
-# **Conclusion générale et perspectives**
+# Bibliographie
 
-Rappel de la problématique et de la méthodologie
+1.  **Easterlin, R. A.** (1974). "Does Economic Growth Improve the Human Lot? Some Empirical Evidence". *Nations and Households in Economic Growth*.
+2.  **Gallup World Poll**. Methodology for the World Happiness Report.
+3.  **Kanto Fiaferana**, [Cours de régression linéaire](https://pyrrhamide.github.io/regressions/reg-lin.html)
+4.  **Quarto**, [Quarto](https://quarto.org/)
+5.  Ludovic C. & mathandy, [StackExchange](https://tex.stackexchange.com/questions/145657/align-equation-left)
+6.  **Esteban Ortiz-Ospina, Max Roser** (2013, last update: 2024). [Happiness and life satisfaction](https://ourworldindata.org/happiness-and-life-satisfaction)
 
-Synthèse des résultats principaux
+**Sources des données :**
+*   World Happiness Report (Happiness Score)
+*   World Bank (GDP, Lifespan, Corruption, etc.)
+*   Our World in Data (Energy, Military, Population)
 
-Contributions du mémoire, apports scientifiques et/ou applicatifs
-
-Perspectives d’amélioration ou de recherche future
-
-possible sources d'erreur : mauvaises mesures des données, simultanéité, variables omises
-
-# Bibliographie - Source des données
-
-<https://tex.stackexchange.com/questions/27028/what-is-the-difference-between-newline-and>
+**Utilisation d'outils d'intelligence artificielle :**
+*   GPT-mini-o5
+*   Gemini 3 Pro
