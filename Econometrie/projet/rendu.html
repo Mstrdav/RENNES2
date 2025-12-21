@@ -143,6 +143,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#visualisation-des-diagnostics" id="toc-visualisation-des-diagnostics" class="nav-link" data-scroll-target="#visualisation-des-diagnostics">Visualisation des diagnostics</a></li>
   <li><a href="#conclusion-sur-les-corrections" id="toc-conclusion-sur-les-corrections" class="nav-link" data-scroll-target="#conclusion-sur-les-corrections">Conclusion sur les corrections</a></li>
+  <li><a href="#analyse-des-points-influents" id="toc-analyse-des-points-influents" class="nav-link" data-scroll-target="#analyse-des-points-influents">Analyse des points influents</a></li>
   </ul></li>
   <li><a href="#conclusion-et-discussion" id="toc-conclusion-et-discussion" class="nav-link" data-scroll-target="#conclusion-et-discussion">Conclusion et discussion</a></li>
   </ul></li>
@@ -236,8 +237,10 @@ window.Quarto = {
 <li>Résultats et discussion
 <ul>
 <li>Modélisation principale</li>
-<li>Robustesse des résultats</li>
-<li>Analyses complémentaires</li>
+<li>Modélisation avancée et sélection de variables</li>
+<li>Diagnostics des résidus sur le modèle final</li>
+<li>Analyse des points influents</li>
+<li>Conclusion sur les corrections</li>
 </ul></li>
 <li>Conclusion</li>
 <li>Bibliographie</li>
@@ -388,7 +391,7 @@ y = X\beta + \varepsilon
 </section>
 <section id="prétraitement-et-nettoyage-des-données" class="level2">
 <h2 class="anchored" data-anchor-id="prétraitement-et-nettoyage-des-données">Prétraitement et nettoyage des données</h2>
-<p>Pour éviter un maximum de données manquantes, nous avons effectué des moyennes depuis 2013 et jusqu’à un maximum de 2023 sur toutes les données étudiées. Cela nous permet aussi d’atténuer les tendances qui ont pu se passer dans des temps plus courts sur cette décennie.</p>
+<p>Pour éviter un maximum de données manquantes, nous avons effectué des <strong>moyennes</strong> depuis 2013 et jusqu’à un maximum de 2023 sur toutes les données étudiées. Cela nous permet aussi d’atténuer les tendances qui ont pu se passer dans des temps plus courts sur cette décennie.</p>
 <p>Nous avons sélectionné les jeux de données que nous avons trouvé nous paraissant les plus intéressant. Certains ont du être écartés du jeu de donnée final dû à un manque de donnée. En effet plusieurs pays n’étaient pas recensés dans les données et notre système de moyenne ne pouvait les ramener dans le jeu de donnée.</p>
 </section>
 <section id="analyse-descriptive-univariée-des-données" class="level2">
@@ -415,7 +418,7 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 </div>
 </div>
 <p>On voit tout de suite, par comparaison de la moyenne et de la médiane de chaque variable certaines tendances : le PIB par habitant contient des individus qui tirent la moyenne vers le haut, idem pour la migration, le KWH par habitant et la densité de population.</p>
-<p>En étudiant les minimums, maximums, étendues et écarts-type de ces quatre variables, on remarque qu’il ne s’agit probablement que de quelques individus dont les valeurs très fortes déforment les moyennes. Par exemple, la densité de population a une étendue de 7812, une médiane de 80 et un écart -type de seulement 65. On s’attend à observer dans ces variables des petits groupes d’individus aux valeurs très élevées.</p>
+<p>En étudiant les minimums, maximums, étendues et écarts-type de ces quatre variables, on remarque qu’il ne s’agit probablement que de quelques individus dont les valeurs très fortes déforment les moyennes. Par exemple, la densité de population a une étendue de 7812, une médiane de 80 et un écart -type de seulement 65. On s’attend à observer dans ces variables des <strong>petits groupes d’individus</strong> aux valeurs très élevées.</p>
 <p>Un effet inverse et de moindre importance peut aussi être constaté quand au surpoids des adultes. On voit que la moyenne est légèrement tirée vers le bas.</p>
 <p>Les dépenses militaires ayant une moyenne légèrement plus élevée que la médiane et un écart-type faible malgré un maximum assez élevé, on s’attend à observer très peu d’individus avec des valeurs très élevées mais une concentration importante des individus autour de la médiane.</p>
 <p>Le reste des variables ont l’air d’être peu dispersées. On peut s’atttendre à y voir une répartition normale des valeurs.</p>
@@ -488,11 +491,11 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 <p>La corruption politique, le surpoids et l’espérance de vie ne semblent pas suivre des lois classiques.</p>
 <p>On remarque immédiatement les individus les plus aberrants qui referont surface dans les graphiques suivants et dont nous parlerons plus tard:</p>
 <ul>
-<li><p>On repère dans l’histogramme de l’inscription à l’école primaire un individu atypique proche de 0, il s’agit de la Somalie avec moins de 9% d’inscrits.</p></li>
-<li><p>De la même manière dans l’histogramme de la densité de population, on repère Singapour avec une densité titanesque de près de 8000 habitants au km2.</p></li>
-<li><p>Dans l’histogramme de la migration, le Pakistan apparait tout à gauche avec plus d’1,5 million de migration nettte négative et les Etats-Unis tout à droite avec plus d’1,2 million de migration nette positive.</p></li>
-<li><p>Le Luxembourg est l’individu tout à droite de l’histogramme du PIB par habitant.</p></li>
-<li><p>Et le Qatar est l’individu tout à droite dans l’histogramme de la consommation énergétique.</p></li>
+<li><p>On repère dans l’histogramme de l’inscription à l’école primaire un individu atypique proche de 0, il s’agit de la <strong>Somalie</strong> avec moins de 9% d’inscrits.</p></li>
+<li><p>De la même manière dans l’histogramme de la densité de population, on repère <strong>Singapour</strong> avec une densité titanesque de près de 8000 habitants au km2.</p></li>
+<li><p>Dans l’histogramme de la migration, le <strong>Pakistan</strong> apparait tout à gauche avec plus d’1,5 million de migration nettte négative et les <strong>Etats-Unis</strong> tout à droite avec plus d’1,2 million de migration nette positive.</p></li>
+<li><p>Le <strong>Luxembourg</strong> est l’individu tout à droite de l’histogramme du PIB par habitant.</p></li>
+<li><p>Et le <strong>Qatar</strong> est l’individu tout à droite dans l’histogramme de la consommation énergétique.</p></li>
 </ul>
 </section>
 </section>
@@ -834,7 +837,12 @@ Durbin-Watson (Indépendance)       1.8850    0.2697
 ----------------------------------------------------</code></pre>
 </div>
 </div>
-<p><strong>Interprétation des diagnostics :</strong> Les tests sont concluants et valident toutes les hypothèses des Moindres Carrés Ordinaires : * <strong>Homoscédasticité validée :</strong> Le test de Breusch-Pagan (p-value = <strong>0.7434</strong>) ne rejette pas l’hypothèse nulle. La variance des résidus est constante. * <strong>Normalité validée :</strong> Le test de Shapiro-Wilk (p-value = <strong>0.3435</strong>) confirme que les résidus suivent une loi normale. L’inférence statistique (t-tests, intervalles de confiance) est donc fiable. * <strong>Indépendance validée :</strong> Le test de Durbin-Watson (p-value = <strong>0.2697</strong>, DW <span class="math inline">\(\approx\)</span> 1.88) ne détecte pas d’autocorrélation significative.</p>
+<p><strong>Interprétation des diagnostics :</strong> Les tests sont concluants et valident toutes les hypothèses des Moindres Carrés Ordinaires :</p>
+<ul>
+<li><p><strong>Homoscédasticité validée :</strong> Le test de Breusch-Pagan (p-value = <strong>0.7434</strong>) ne rejette pas l’hypothèse nulle. La variance des résidus est constante.</p></li>
+<li><p><strong>Normalité validée :</strong> Le test de Shapiro-Wilk (p-value = <strong>0.3435</strong>) confirme que les résidus suivent une loi normale. L’inférence statistique (t-tests, intervalles de confiance) est donc fiable.</p></li>
+<li><p><strong>Indépendance validée :</strong> Le test de Durbin-Watson (p-value = <strong>0.2697</strong>, DW <span class="math inline">\(\approx\)</span> 1.88) ne détecte pas d’autocorrélation significative.</p></li>
+</ul>
 <section id="visualisation-des-diagnostics" class="level3">
 <h3 class="anchored" data-anchor-id="visualisation-des-diagnostics">Visualisation des diagnostics</h3>
 <div id="fig12" class="fig">
@@ -849,11 +857,37 @@ Durbin-Watson (Indépendance)       1.8850    0.2697
 </div>
 <p>Figure 12 : Diagnostics visuels des résidus</p>
 </div>
-<p><strong>Analyse visuelle :</strong> Les graphiques confirment la robustesse du modèle. * <strong>Résidus vs Ajustés :</strong> Le nuage de points est dispersé aléatoirement autour de 0 sans forme d’entonnoir marquée, ce qui corrobore l’homoscédasticité. * <strong>Q-Q Plot :</strong> Les points s’alignent correctement sur la droite de normalité. On note quelques légers écarts aux extrémités correspondant à des pays comme <strong>Oman</strong> (résidu positif élevé) ou l’<strong>Afghanistan</strong> et le <strong>Botswana</strong> (résidus négatifs), mais ces <em>outliers</em> restent ponctuels et ne violent pas l’hypothèse de normalité globale.</p>
+<p><strong>Analyse visuelle :</strong> Les graphiques confirment la robustesse du modèle.</p>
+<ul>
+<li><p><strong>Résidus vs Ajustés :</strong> Le nuage de points est dispersé aléatoirement autour de 0 sans forme d’entonnoir marquée, ce qui corrobore l’homoscédasticité.</p></li>
+<li><p><strong>Q-Q Plot :</strong> Les points s’alignent correctement sur la droite de normalité. On note quelques légers écarts aux extrémités correspondant à des pays comme <strong>Oman</strong> (résidu positif élevé) ou l’<strong>Afghanistan</strong> et le <strong>Botswana</strong> (résidus négatifs), mais ces <em>outliers</em> restent ponctuels et ne violent pas l’hypothèse de normalité globale.</p></li>
+</ul>
 </section>
 <section id="conclusion-sur-les-corrections" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion-sur-les-corrections">Conclusion sur les corrections</h3>
 <p>Les diagnostics étant excellents, aucune correction (type White / HC1) n’est nécessaire. Nous pouvons interpréter directement les coefficients du modèle final.</p>
+</section>
+<section id="analyse-des-points-influents" class="level3">
+<h3 class="anchored" data-anchor-id="analyse-des-points-influents">Analyse des points influents</h3>
+<p>Nous complétons les diagnostics par une analyse des points influents (points leviers et outliers) qui pourraient biaiser l’estimation.</p>
+<div id="fig13" class="fig">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure 13 : Détection des points influents (Distance de Cook et Effet Levier)</p>
+</div>
+<p><strong>Analyse des points influents :</strong> L’analyse de la distance de Cook met en évidence trois pays : <strong>Oman</strong>, la <strong>Somalie</strong> et la <strong>Jordanie</strong>.</p>
+<ul>
+<li><p><strong>Distance de Cook :</strong> Bien que ces pays dépassent le seuil théorique de sensibilité (<span class="math inline">\(4/n \approx 0.03\)</span>), aucune observation ne s’approche du seuil critique de 0.5 ou 1. Ils influencent le modèle sans le déstabiliser.</p></li>
+<li><p><strong>Levier vs Résidus :</strong> La <strong>Somalie</strong> se distingue par un fort effet de levier (probablement dû à ses valeurs extrêmes en scolarisation, ou des valeurs manquantes trop lissées par notre pré traitement), mais son résidu reste modéré. <strong>Oman</strong> et la <strong>Jordanie</strong> ont des résidus plus importants, suggérant que le modèle explique moins bien leur niveau de bonheur spécifique (facteurs géopolitiques ou culturels non capturés).</p></li>
+</ul>
+<p>En conclusion, bien que ces pays atypiques existent, ils ne remettent pas en cause la validité globale du modèle.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -905,19 +939,35 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <section id="conclusion-et-discussion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion-et-discussion">Conclusion et discussion</h2>
 <p>Notre analyse visait à déterminer les déterminants du bonheur (“Happiness”) à travers une régression linéaire multivariée sur un échantillon de 125 pays.</p>
-<p><strong>Résultats principaux :</strong> 1. <strong>Richesse et Santé :</strong> Le PIB par habitant (en log) et l’espérance de vie sont les déterminants les plus puissants et positifs du bonheur. La relation logarithmique confirme que l’utilité marginale du revenu est décroissante : gagner 1000$ de plus apporte plus de bonheur dans un pays pauvre que dans un pays riche. 2. <strong>Facteurs institutionnels :</strong> La corruption politique a un impact négatif significatif, tandis que l’appartenance à l’OCDE est souvent associée à un niveau de bonheur supérieur, toutes choses égales par ailleurs. 3. <strong>Interaction non significative :</strong> Nos tests n’ont pas permis de valider statistiquement que l’effet de la richesse diffère significativement selon le niveau de développement (appartenance à l’OCDE). Le modèle simple reste le plus performant. 4. <strong>Limites du modèle :</strong> Bien que les diagnostics (homoscédasticité, normalité) soient globalement satisfaisants après correction ou transformation, des limites subsistent.</p>
-<p><strong>Limites et Perspectives :</strong> * <strong>Causalité :</strong> La corrélation n’implique pas la causalité. Est-ce que les gens heureux sont plus productifs (augmentant le PIB) ou l’inverse ? * <strong>Variables omises :</strong> La culture, le climat, ou la liberté politique (différente de la corruption) pourraient jouer un rôle important. * <strong>Données manquantes :</strong> L’exclusion de certains pays (Somalie, etc.) pour manque de données peut biaiser les résultats (biais de sélection). * <strong>Perspectives :</strong> Pour aller plus loin, une analyse en panel (longitudinale) permettrait de contrôler les effets fixes par pays (culture, géographie) et de mieux saisir la dynamique temporelle du bonheur. L’ajout d’indicateurs d’inégalité (Gini) serait également pertinent.</p>
+<p><strong>Résultats principaux :</strong></p>
+<ol type="1">
+<li><strong>Richesse et Santé :</strong> Le PIB par habitant (en log) et l’espérance de vie sont les déterminants les plus puissants et positifs du bonheur. La relation logarithmique confirme que l’utilité marginale du revenu est décroissante : gagner 1000$ de plus apporte plus de bonheur dans un pays pauvre que dans un pays riche.</li>
+<li><strong>Facteurs institutionnels :</strong> La corruption politique a un impact négatif significatif, tandis que l’appartenance à l’OCDE est souvent associée à un niveau de bonheur supérieur, toutes choses égales par ailleurs.</li>
+<li><strong>Interaction non significative :</strong> Nos tests n’ont pas permis de valider statistiquement que l’effet de la richesse diffère significativement selon le niveau de développement (appartenance à l’OCDE). Le modèle simple reste le plus performant.</li>
+<li><strong>Robustesse et Points influents :</strong> Les diagnostics (homoscédasticité, normalité) sont satisfaisants. L’analyse des points influents a identifié la Somalie (fort levier) et Oman (résidu élevé) comme des cas particuliers, mais leur impact reste limité et ne biaise pas les conclusions générales.</li>
+<li><strong>Limites du modèle :</strong> Bien que les diagnostics soient globalement satisfaisants, des limites inhérentes aux données transversales subsistent.</li>
+</ol>
+<p><strong>Limites et Perspectives :</strong></p>
+<ul>
+<li><p><strong>Causalité :</strong> La corrélation n’implique pas la causalité. Est-ce que les gens heureux sont plus productifs (augmentant le PIB) ou l’inverse ?</p></li>
+<li><p><strong>Variables omises :</strong> La culture, le climat, ou la liberté politique (différente de la corruption) pourraient jouer un rôle important.</p></li>
+<li><p><strong>Données manquantes :</strong> L’exclusion de certains pays (Somalie, etc.) pour manque de données peut biaiser les résultats (biais de sélection).</p></li>
+<li><p><strong>Perspectives :</strong> Pour aller plus loin, une analyse en panel (longitudinale) permettrait de contrôler les effets fixes par pays (culture, géographie) et de mieux saisir la dynamique temporelle du bonheur. L’ajout d’indicateurs d’inégalité (Gini) serait également pertinent.</p></li>
+</ul>
 </section>
 </section>
 <section id="bibliographie" class="level1">
 <h1>Bibliographie</h1>
 <ol type="1">
-<li><strong>Helliwell, J. F., et al.</strong> (2024). <em>World Happiness Report 2024</em>. Sustainable Development Solutions Network.</li>
 <li><strong>Easterlin, R. A.</strong> (1974). “Does Economic Growth Improve the Human Lot? Some Empirical Evidence”. <em>Nations and Households in Economic Growth</em>.</li>
-<li><strong>Kuznets, S.</strong> (1955). “Economic Growth and Income Inequality”. <em>American Economic Review</em>.</li>
 <li><strong>Gallup World Poll</strong>. Methodology for the World Happiness Report.</li>
+<li><strong>Kanto Fiaferana</strong>, <a href="https://pyrrhamide.github.io/regressions/reg-lin.html">Cours de régression linéaire</a></li>
+<li><strong>Quarto</strong>, <a href="https://quarto.org/">Quarto</a></li>
+<li>Ludovic C. &amp; mathandy, <a href="https://tex.stackexchange.com/questions/145657/align-equation-left">StackExchange</a></li>
+<li><strong>Esteban Ortiz-Ospina, Max Roser</strong> (2013, last update: 2024). <a href="https://ourworldindata.org/happiness-and-life-satisfaction">Happiness and life satisfaction</a></li>
 </ol>
-<p><strong>Sources des données :</strong> * World Happiness Report (Happiness Score) * World Bank (GDP, Lifespan, Corruption, etc.) * Our World in Data (Energy, Military, Population)</p>
+<p><strong>Sources des données :</strong> - World Happiness Report (Happiness Score) - World Bank (GDP, Lifespan, Corruption, etc.) - Our World in Data (Energy, Military, Population)</p>
+<p><strong>Utilisation d’outils d’intelligence artificielle :</strong> - GPT-mini-o5 - Gemini 3 Pro</p>
 </section>
 
 </main>
