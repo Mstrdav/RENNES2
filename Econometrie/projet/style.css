@@ -1,7 +1,7 @@
 body {
     background: transparent;
     color: #012622;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-family: "Calibri", sans-serif;
 }
 
 .figure {
@@ -56,9 +56,9 @@ a:hover {
 .fig p {
     text-align: center;
     font-style: italic;
-    margin-top: 8px;
-    color: #fd8147e8;
-    font-size: 85%;
+    margin-top: 2px;
+    color: lab(9.63% 26.17 -17.03 / 0.91);
+    font-size: 130%;
 }
 
 .fig .cell {

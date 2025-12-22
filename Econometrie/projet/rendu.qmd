@@ -33,7 +33,7 @@ library(gridExtra)
 library(tidyverse)
 ```
 
-**JAOUEN Denis - GEINDRE Colin**
+**GEINDRE Colin - JAOUEN Denis**
 
 [**Master 1 MAS - Université de Rennes**](https://eco.univ-rennes.fr/master-mathematiques-appliquees-statistique) et [**Master 1 MAS - Université Rennes 2**](https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html)
 
@@ -185,6 +185,10 @@ data <- read.csv(file = "donnees.csv", row.names = 2)[, -1] # pour enlever la co
 data$OCDE <- as.factor(data$OCDE)
 ```
 
+------------------------------------------------------------------------
+
+<center>
+
 ::: {#tab1 .fig}
 Tableau 1 : Statistiques descriptives des variables étudiées
 
@@ -197,6 +201,10 @@ stargazer(data_numeric,
 )
 ```
 :::
+
+------------------------------------------------------------------------
+
+</center>
 
 On voit tout de suite, par comparaison de la moyenne et de la médiane de chaque variable certaines tendances : le PIB par habitant contient des individus qui tirent la moyenne vers le haut, idem pour la migration, le KWH par habitant et la densité de population.
 
@@ -548,6 +556,10 @@ Il est clair que les pays membres de l'OCDE ont un bonheur bien plus élevé que
 
 Nous allons commencer par comparer deux modèles. Le premier, que l'on appellera **reglin**, correspond à la régression linéaire complète, sans transformation de variable, et le deuxième **reglog**, à une régression avec une transformation par logarithme sur les variables de la figure 9.
 
+------------------------------------------------------------------------
+
+<center>
+
 ::: {#tab2 .fig}
 Tableau 2 : Résumés de reglin et reglog
 
@@ -563,6 +575,10 @@ stargazer(reglin, reglog, type = "text", digits = 2,  single.row = TRUE)
 ```
 :::
 
+</center>
+
+------------------------------------------------------------------------
+
 Nos deux modèles expliquent plus de 80% de la variance de l'indice de bonheur. Cependant, le modèle avec transformation logarithmique (reglog) a un R² ajusté légèrement supérieur, ce qui indique une meilleure capacité explicative. Nos variables significatives, par ordre de significativité, sont l'espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l'OCDE et l'inscription à l'école primaire.
 
 Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés
@@ -575,6 +591,10 @@ Nous partons du modèle logarithmique `reglog` qui semblait le plus performant (
 
 Examinons les facteurs d'inflation de la variance (VIF) pour détecter la multicolinéarité.
 
+------------------------------------------------------------------------
+
+<center>
+
 ::: {#tab3 .fig}
 Tableau 3 : VIF des variables du modèle complet (reglog)
 
@@ -586,7 +606,15 @@ stargazer(vif_df, type = "text", summary = FALSE, rownames = FALSE, digits = 2)
 ```
 :::
 
+</center>
+
+------------------------------------------------------------------------
+
 **Analyse de la multicolinéarité :** Les résultats indiquent une multicolinéarité sévère pour le PIB par habitant (**16.82**) et la consommation d'énergie (**13.01**), ainsi qu'une valeur limite pour l'espérance de vie (**5.24**). Bien que le PIB présente le VIF le plus élevé, il constitue la variable économique de référence. La consommation d'énergie (`KWH_pp_pc`) étant une proxy de l'industrialisation très corrélée au PIB, sa suppression est la correction logique pour réduire la redondance sans perdre l'information sur la richesse. Nous retirons donc `KWH_pp_pc`.
+
+------------------------------------------------------------------------
+
+<center>
 
 ::: {#tab4 .fig}
 Tableau 4 : VIF des variables de reglog près suppression de la consommation d'énergie
@@ -602,11 +630,19 @@ stargazer(vif_df_clean, type = "text", summary = FALSE, rownames = FALSE, digits
 ```
 :::
 
+</center>
+
+------------------------------------------------------------------------
+
 L'espérance de vie conserve un VIF problématique (\>5) après cette suppression, elle pourrait également être écartée par la sélection automatique ci-après, mais nous choisissons de la conserver pour l'instant car elle représente la dimension "Santé" distincte de la "Richesse".
 
 ### Sélection de variables (Stepwise par AIC)
 
 Nous utilisons une procédure de sélection pas à pas descendante (backward) basée sur le critère d'information d'Akaike (AIC) pour ne garder que les variables pertinentes.
+
+------------------------------------------------------------------------
+
+<center>
 
 ::: {#tab5 .fig}
 Tableau 5 : Résumé du modèle optimisé par AIC
@@ -619,6 +655,10 @@ stargazer(reg_final_step, type = "text", digits = 3, single.row = TRUE)
 ```
 :::
 
+</center>
+
+------------------------------------------------------------------------
+
 Ce modèle ne contient plus que les variables qui apportent une information significative au sens de l'AIC. C'est notre nouveau modèle de référence. On constate l'absence de variables non significatives : la dépense militaire et la densité de population.
 
 ### Test de non-linéarités et d'interactions
@@ -626,6 +666,10 @@ Ce modèle ne contient plus que les variables qui apportent une information sign
 Il est fréquent en économie du bonheur d'observer des rendements décroissants (déjà capturé par le log du PIB). Nous pouvons aussi tester si l'effet de la richesse dépend du niveau de développement (interaction OCDE \* PIB).
 
 Testons un modèle avec interaction :
+
+------------------------------------------------------------------------
+
+<center>
 
 ::: {#tab6 .fig}
 Tableau 6 : Résumés du modèle final et du modèle avec interaction
@@ -640,16 +684,32 @@ stargazer(reg_final_step, reg_interact, type = "text", digits = 3,   single.row 
 ```
 :::
 
------------------------------------------------------------------------------------------------------------------------
+</center>
+
+------------------------------------------------------------------------
+
+<center>
 
 ::: {#tab7 .fig}
 Tableau 7 : Test d'anova entre le modèle final et celui avec interaction
 
 ```{r echo=FALSE}
 # Test anova pour voir si l'interaction apporte significativement de l'information
-anova(reg_final_step, reg_interact)
+bop = anova(reg_final_step, reg_interact)
+cat("Modèle Final: 
+Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan + Overweight_Adults 
++ Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment")
+cat("Modèle avec Interaction : 
+Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan + Overweight_Adults
++ Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment 
++ log(GDP_per_Capita)*OCDE")
+stargazer(bop, type = "text",  digits = 3, summary = FALSE)
 ```
 :::
+
+</center>
+
+------------------------------------------------------------------------
 
 **Analyse de l'interaction :** Le test ANOVA compare le modèle avec et sans l'interaction `OCDE * GDP`. La p-value obtenue (**0.1474**) est supérieure au seuil standard de 0.05. Nous ne pouvons donc pas rejeter l'hypothèse nulle. Cela signifie que l'ajout du terme d'interaction n'améliore pas significativement la qualité du modèle. L'hypothèse selon laquelle l'importance du PIB sur le bonheur différerait significativement entre les pays de l'OCDE et les autres n'est pas validée statistiquement par nos données.
 
@@ -665,6 +725,10 @@ best_model <- reg_final_step
 ## Diagnostics des résidus sur le modèle final
 
 Vérifions maintenant la validité des hypothèses des MCO sur notre modèle final : `best_model`.
+
+------------------------------------------------------------------------
+
+<center>
 
 ::: {#tab8 .fig}
 Tableau 8 : Tableau de synthèse des diagnostics
@@ -689,6 +753,10 @@ diag_df <- data.frame(
 stargazer(diag_df, type = "text", summary = FALSE, rownames = FALSE,  digits = 4)
 ```
 :::
+
+</center>
+
+------------------------------------------------------------------------
 
 **Interprétation des diagnostics :** Les tests sont concluants et valident toutes les hypothèses des Moindres Carrés Ordinaires :
 
@@ -746,6 +814,10 @@ Figure 14 : Détection des points influents (Distance de Cook et Effet Levier)
 
 En conclusion, bien que ces pays atypiques existent, ils ne remettent pas en cause la validité globale du modèle.
 
+------------------------------------------------------------------------
+
+<center>
+
 ::: {#tab9 .fig}
 Tableau 9 : Résultats finaux du modèle économétrique
 
@@ -755,6 +827,10 @@ Tableau 9 : Résultats finaux du modèle économétrique
 stargazer(best_model, type = "text",  digits = 3,  single.row = TRUE)
 ```
 :::
+
+</center>
+
+------------------------------------------------------------------------
 
 ## Conclusion et discussion
 

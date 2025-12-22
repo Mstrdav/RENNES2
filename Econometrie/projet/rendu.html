@@ -136,7 +136,7 @@ window.Quarto = {
 </header>
 
 
-<p><strong>JAOUEN Denis - GEINDRE Colin</strong></p>
+<p><strong>GEINDRE Colin - JAOUEN Denis</strong></p>
 <p><a href="https://eco.univ-rennes.fr/master-mathematiques-appliquees-statistique"><strong>Master 1 MAS - Université de Rennes</strong></a> et <a href="https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html"><strong>Master 1 MAS - Université Rennes 2</strong></a></p>
 <p>La rédaction de ce document s’appuie sur l’utilisation d’IA générative, ainsi que sur des blocs de codes fournit sur des forums comme medium ou stack overflow. Les auteur.ice.s de ces blocs sont remercié.e.s en fin de document.</p>
 <section id="introduction" class="level1">
@@ -347,6 +347,8 @@ y = X\beta + \varepsilon
 </section>
 <section id="analyse-descriptive-univariée-des-données" class="level2">
 <h2 class="anchored" data-anchor-id="analyse-descriptive-univariée-des-données">Analyse descriptive univariée des données</h2>
+<hr>
+<center>
 <div id="tab1" class="fig">
 <p>Tableau 1 : Statistiques descriptives des variables étudiées</p>
 <div class="cell">
@@ -370,6 +372,8 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 </div>
 </div>
 </div>
+<hr>
+</center>
 <p>On voit tout de suite, par comparaison de la moyenne et de la médiane de chaque variable certaines tendances : le PIB par habitant contient des individus qui tirent la moyenne vers le haut, idem pour la migration, le KWH par habitant et la densité de population.</p>
 <p>En étudiant les minimums, maximums, étendues et écarts-type de ces quatre variables, on remarque qu’il ne s’agit probablement que de quelques individus dont les valeurs très fortes déforment les moyennes. Par exemple, la densité de population a une étendue de 7812, une médiane de 80 et un écart -type de seulement 65. On s’attend à observer dans ces variables des <strong>petits groupes d’individus</strong> aux valeurs très élevées.</p>
 <p>Un effet inverse et de moindre importance peut aussi être constaté quand au surpoids des adultes. On voit que la moyenne est légèrement tirée vers le bas.</p>
@@ -562,6 +566,8 @@ Les autres variables sont peu ou très peu corrélées à l’indice de bonheur.
 <section id="modélisation-principale" class="level2">
 <h2 class="anchored" data-anchor-id="modélisation-principale">Modélisation principale</h2>
 <p>Nous allons commencer par comparer deux modèles. Le premier, que l’on appellera <strong>reglin</strong>, correspond à la régression linéaire complète, sans transformation de variable, et le deuxième <strong>reglog</strong>, à une régression avec une transformation par logarithme sur les variables de la figure 9.</p>
+<hr>
+<center>
 <div id="tab2" class="fig">
 <p>Tableau 2 : Résumés de reglin et reglog</p>
 <div class="cell">
@@ -598,6 +604,8 @@ Note:                                  *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</cod
 </div>
 </div>
 </div>
+</center>
+<hr>
 <p>Nos deux modèles expliquent plus de 80% de la variance de l’indice de bonheur. Cependant, le modèle avec transformation logarithmique (reglog) a un R² ajusté légèrement supérieur, ce qui indique une meilleure capacité explicative. Nos variables significatives, par ordre de significativité, sont l’espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l’OCDE et l’inscription à l’école primaire.</p>
 <p>Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés</p>
 </section>
@@ -607,6 +615,8 @@ Note:                                  *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</cod
 <section id="traitement-de-la-multicolinéarité" class="level3">
 <h3 class="anchored" data-anchor-id="traitement-de-la-multicolinéarité">Traitement de la multicolinéarité</h3>
 <p>Examinons les facteurs d’inflation de la variance (VIF) pour détecter la multicolinéarité.</p>
+<hr>
+<center>
 <div id="tab3" class="fig">
 <p>Tableau 3 : VIF des variables du modèle complet (reglog)</p>
 <div class="cell">
@@ -630,7 +640,11 @@ Primary_School_Enrollment 1.05
 </div>
 </div>
 </div>
+</center>
+<hr>
 <p><strong>Analyse de la multicolinéarité :</strong> Les résultats indiquent une multicolinéarité sévère pour le PIB par habitant (<strong>16.82</strong>) et la consommation d’énergie (<strong>13.01</strong>), ainsi qu’une valeur limite pour l’espérance de vie (<strong>5.24</strong>). Bien que le PIB présente le VIF le plus élevé, il constitue la variable économique de référence. La consommation d’énergie (<code>KWH_pp_pc</code>) étant une proxy de l’industrialisation très corrélée au PIB, sa suppression est la correction logique pour réduire la redondance sans perdre l’information sur la richesse. Nous retirons donc <code>KWH_pp_pc</code>.</p>
+<hr>
+<center>
 <div id="tab4" class="fig">
 <p>Tableau 4 : VIF des variables de reglog près suppression de la consommation d’énergie</p>
 <div class="cell">
@@ -653,11 +667,15 @@ Primary_School_Enrollment 1.05
 </div>
 </div>
 </div>
+</center>
+<hr>
 <p>L’espérance de vie conserve un VIF problématique (&gt;5) après cette suppression, elle pourrait également être écartée par la sélection automatique ci-après, mais nous choisissons de la conserver pour l’instant car elle représente la dimension “Santé” distincte de la “Richesse”.</p>
 </section>
 <section id="sélection-de-variables-stepwise-par-aic" class="level3">
 <h3 class="anchored" data-anchor-id="sélection-de-variables-stepwise-par-aic">Sélection de variables (Stepwise par AIC)</h3>
 <p>Nous utilisons une procédure de sélection pas à pas descendante (backward) basée sur le critère d’information d’Akaike (AIC) pour ne garder que les variables pertinentes.</p>
+<hr>
+<center>
 <div id="tab5" class="fig">
 <p>Tableau 5 : Résumé du modèle optimisé par AIC</p>
 <div class="cell">
@@ -688,12 +706,16 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 </div>
 </div>
+</center>
+<hr>
 <p>Ce modèle ne contient plus que les variables qui apportent une information significative au sens de l’AIC. C’est notre nouveau modèle de référence. On constate l’absence de variables non significatives : la dépense militaire et la densité de population.</p>
 </section>
 <section id="test-de-non-linéarités-et-dinteractions" class="level3">
 <h3 class="anchored" data-anchor-id="test-de-non-linéarités-et-dinteractions">Test de non-linéarités et d’interactions</h3>
 <p>Il est fréquent en économie du bonheur d’observer des rendements décroissants (déjà capturé par le log du PIB). Nous pouvons aussi tester si l’effet de la richesse dépend du niveau de développement (interaction OCDE * PIB).</p>
 <p>Testons un modèle avec interaction :</p>
+<hr>
+<center>
 <div id="tab6" class="fig">
 <p>Tableau 6 : Résumés du modèle final et du modèle avec interaction</p>
 <div class="cell">
@@ -726,25 +748,36 @@ Note:                                         *p&lt;0.1; **p&lt;0.05; ***p&lt;0.
 </div>
 </div>
 </div>
+</center>
 <hr>
+<center>
 <div id="tab7" class="fig">
 <p>Tableau 7 : Test d’anova entre le modèle final et celui avec interaction</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Model 1: Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan + 
-    Overweight_Adults + Military_Expenses + Population_Growth + 
-    OCDE + Primary_School_Enrollment
-Model 2: Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan + 
-    Overweight_Adults + Military_Expenses + Population_Growth + 
-    OCDE + Primary_School_Enrollment + log(GDP_per_Capita):OCDE
-  Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
-1    116 27.164                           
-2    115 26.670  1   0.49339 2.1275 0.1474</code></pre>
+<pre><code>Modèle Final: 
+Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan + Overweight_Adults 
++ Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Modèle avec Interaction : 
+Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan + Overweight_Adults
++ Military_Expenses + Population_Growth + OCDE + Primary_School_Enrollment 
++ log(GDP_per_Capita)*OCDE</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+==========================================
+  Res.Df  RSS   Df Sum of Sq   F   Pr(&gt; F)
+------------------------------------------
+1  116   27.164                           
+2  115   26.670 1    0.493   2.127  0.147 
+------------------------------------------</code></pre>
 </div>
 </div>
 </div>
+</center>
+<hr>
 <p><strong>Analyse de l’interaction :</strong> Le test ANOVA compare le modèle avec et sans l’interaction <code>OCDE * GDP</code>. La p-value obtenue (<strong>0.1474</strong>) est supérieure au seuil standard de 0.05. Nous ne pouvons donc pas rejeter l’hypothèse nulle. Cela signifie que l’ajout du terme d’interaction n’améliore pas significativement la qualité du modèle. L’hypothèse selon laquelle l’importance du PIB sur le bonheur différerait significativement entre les pays de l’OCDE et les autres n’est pas validée statistiquement par nos données.</p>
 </section>
 <section id="choix-du-modèle-final" class="level3">
@@ -755,6 +788,8 @@ Model 2: Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan +
 <section id="diagnostics-des-résidus-sur-le-modèle-final" class="level2">
 <h2 class="anchored" data-anchor-id="diagnostics-des-résidus-sur-le-modèle-final">Diagnostics des résidus sur le modèle final</h2>
 <p>Vérifions maintenant la validité des hypothèses des MCO sur notre modèle final : <code>best_model</code>.</p>
+<hr>
+<center>
 <div id="tab8" class="fig">
 <p>Tableau 8 : Tableau de synthèse des diagnostics</p>
 <div class="cell">
@@ -770,6 +805,8 @@ Durbin-Watson (Indépendance)       1.8850    0.2697
 </div>
 </div>
 </div>
+</center>
+<hr>
 <p><strong>Interprétation des diagnostics :</strong> Les tests sont concluants et valident toutes les hypothèses des Moindres Carrés Ordinaires :</p>
 <ul>
 <li><p><strong>Homoscédasticité validée :</strong> Le test de Breusch-Pagan (p-value = <strong>0.7434</strong>) ne rejette pas l’hypothèse nulle. La variance des résidus est constante.</p></li>
@@ -821,6 +858,8 @@ Durbin-Watson (Indépendance)       1.8850    0.2697
 <li><p><strong>Levier vs Résidus :</strong> La <strong>Somalie</strong> se distingue par un fort effet de levier (probablement dû à ses valeurs extrêmes en scolarisation, ou des valeurs manquantes trop lissées par notre pré traitement), mais son résidu reste modéré. <strong>Oman</strong>, le <strong>Botswana</strong> et la <strong>Jordanie</strong> ont des résidus plus importants, suggérant que le modèle explique moins bien leur niveau de bonheur spécifique (facteurs géopolitiques ou culturels non capturés).</p></li>
 </ul>
 <p>En conclusion, bien que ces pays atypiques existent, ils ne remettent pas en cause la validité globale du modèle.</p>
+<hr>
+<center>
 <div id="tab9" class="fig">
 <p>Tableau 9 : Résultats finaux du modèle économétrique</p>
 <div class="cell">
@@ -851,6 +890,8 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 </div>
 </div>
+</center>
+<hr>
 </section>
 </section>
 <section id="conclusion-et-discussion" class="level2">
