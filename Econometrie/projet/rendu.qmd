@@ -173,16 +173,16 @@ Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, no
 | Code de la série | Définition | Unité | Source |
 |:-----------------|------------------|:----------------:|-----------------:|
 | Code | Le code du pays | Caractères | \- |
-| Corruption politique | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | [World Bank](https://data360.worldbank.org/en/indicator/) |
-| PIB par habitant | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain par habitant | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD) |
-| Espérance de vie | La moyenne de 2013 à 202O de l'espérance de vie à la naissance | En années | [World Bank](https://data360.worldbank.org/en/indicator/WB_ESG_SP_DYN_LE00_IN) |
-| Migration nette | La moyenne de 2013 à 2020 de la migration nette | En nombre de personnes | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_SM_POP_NETM) |
-| Surpoids | La moyenne de 2013 à 2016 de la proportion d'adulte de 18 ans et plus dont l'IMC est supérieur à 25. | En pourcentage | [World Bank](https://data360.worldbank.org/en/indicator/WB_HNP_SH_STA_OWAD_ZS) |
-| Densité de population | La moyenne de 2013 à 2021 de la densité de population en nombre d'habitant à la mi-année par kilomètres carrés | En habitant par kilomètre carré | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_EN_POP_DNST) |
-| Consommation énergétique | La moyenne de 2013 à 2023 de la consommation en kilowattheure par personne | En kilowattheure par personne | [World Bank](https://ourworldindata.org/grapher/per-capita-energy-use?overlay=download-data) |
-| Dépenses militaires | La moyenne de 2013 à 2023 du pourcentage du PIB dédié à la dépense militaire | En pourcentage du PIB | [Our World in Data](https://ourworldindata.org/grapher/military-spending-as-a-share-of-gdp-sipri?overlay=download-data) |
-| Croissance de population | La moyenne de 2013 à 2023 de la croissance en pourcentage de la population | En pourcentage | [Our World in Data](https://ourworldindata.org/grapher/population-growth-rates?tab=map&overlay=download-data) |
-| Inscriptions à l'école primaire | La moyenne de 2013 à 2022 du nombre d'étudiant inscrits en école primaire divisé par la population du groupe d'age multiplié par 100 | En pourcentage | [World Bank](https://data360.worldbank.org/en/indicator/WB_ESG_SE_PRM_ENRR) |
+| Political_Corruption | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | [World Bank](https://data360.worldbank.org/en/indicator/) |
+| GDP_per_capita | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain par habitant | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD) |
+| Lifespan | La moyenne de 2013 à 202O de l'espérance de vie à la naissance | En années | [World Bank](https://data360.worldbank.org/en/indicator/WB_ESG_SP_DYN_LE00_IN) |
+| Net_Migration | La moyenne de 2013 à 2020 de la migration nette | En nombre de personnes | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_SM_POP_NETM) |
+| Overweight_Adults | La moyenne de 2013 à 2016 de la proportion d'adulte de 18 ans et plus dont l'IMC est supérieur à 25. | En pourcentage | [World Bank](https://data360.worldbank.org/en/indicator/WB_HNP_SH_STA_OWAD_ZS) |
+| Population_density | La moyenne de 2013 à 2021 de la densité de population en nombre d'habitant à la mi-année par kilomètres carrés | En habitant par kilomètre carré | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_EN_POP_DNST) |
+| KWH_pp_pc | La moyenne de 2013 à 2023 de la consommation en kilowattheure par personne | En kilowattheure par personne | [World Bank](https://ourworldindata.org/grapher/per-capita-energy-use?overlay=download-data) |
+| Military_Expenses | La moyenne de 2013 à 2023 du pourcentage du PIB dédié à la dépense militaire | En pourcentage du PIB | [Our World in Data](https://ourworldindata.org/grapher/military-spending-as-a-share-of-gdp-sipri?overlay=download-data) |
+| Population_Growth | La moyenne de 2013 à 2023 de la croissance en pourcentage de la population | En pourcentage | [Our World in Data](https://ourworldindata.org/grapher/population-growth-rates?tab=map&overlay=download-data) |
+| Primary_School_Enrollment | La moyenne de 2013 à 2022 du nombre d'étudiant inscrits en école primaire divisé par la population du groupe d'age multiplié par 100 | En pourcentage | [World Bank](https://data360.worldbank.org/en/indicator/WB_ESG_SE_PRM_ENRR) |
 | OCDE | Une indicatrice avec 1 si le pays est membre de l'OCDE et 0 sinon | Indicatrice | [OCDE](https://www.oecd.org/en/about/members-partners.html) |
 | Happiness | La moyenne de 2013 à 2023 de l'indice du bonheur calculé par le World Happiness Index | Index allant de 0 à 10 | [World Happiness Report](https://www.worldhappiness.report/data-sharing/) |
 
