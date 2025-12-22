@@ -173,7 +173,7 @@ Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, no
 | Code de la série | Définition | Unité | Source |
 |:-----------------|------------------|:----------------:|-----------------:|
 | Code | Le code du pays | Caractères | \- |
-| Political_Corruption | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | [World Bank](https://data360.worldbank.org/en/indicator/) |
+| S | La moyenne de 2013 à 2023 d'un index de corruption politique allant de 0 à 1 | Index allant de 0 à 1 | [World Bank](https://data360.worldbank.org/en/indicator/) |
 | GDP_per_capita | La moyenne de 2013 à 2023 du PIB par habitant | En dollar américain par habitant | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_PCAP_CD) |
 | Lifespan | La moyenne de 2013 à 202O de l'espérance de vie à la naissance | En années | [World Bank](https://data360.worldbank.org/en/indicator/WB_ESG_SP_DYN_LE00_IN) |
 | Net_Migration | La moyenne de 2013 à 2020 de la migration nette | En nombre de personnes | [World Bank](https://data360.worldbank.org/en/indicator/WB_WDI_SM_POP_NETM) |
