@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,56 +20,20 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
 <script src="rendu_files/libs/clipboard/clipboard.min.js"></script>
 <script src="rendu_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="rendu_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="rendu_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="rendu_files/libs/quarto-html/popper.min.js"></script>
 <script src="rendu_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="rendu_files/libs/quarto-html/anchor.min.js"></script>
 <link href="rendu_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="rendu_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="rendu_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="rendu_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="rendu_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="rendu_files/libs/bootstrap/bootstrap-fc17208dbcccf0e287f7e85e7f225126.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="rendu_files/libs/bootstrap/bootstrap-50d1c276428054b407166721b449f8cf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -85,7 +49,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+      if (mathElements[i].tagName == "SPAN") {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -172,19 +136,6 @@ window.Quarto = {
 </header>
 
 
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enlever les commentaires</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># étoffer le plan</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># numéroter les graphiques et tableaux</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># labeliser les axes</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pas de code R dans le rendu final html juste les graphiques et les commentaires</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># stat desc : décrire les résultats : interpréter ou analyser</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># selectionner les graphiques pertinents et ne pas tout montrer</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># un document de référence</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Ne pas utiliser le code de la variable dans l interprétation</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># spécifier nos sélections de variables si ce n'est déjà fait</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 <p><strong>JAOUEN Denis - GEINDRE Colin</strong></p>
 <p><a href="https://eco.univ-rennes.fr/master-mathematiques-appliquees-statistique"><strong>Master 1 MAS - Université de Rennes</strong></a> et <a href="https://formations.univ-rennes2.fr/fr/formations/master-37/master-mention-mathematiques-appliquees-statistique-parcours-sciences-des-donnees-intelligence-artificielle-JFTJBMKM.html"><strong>Master 1 MAS - Université Rennes 2</strong></a></p>
 <p>La rédaction de ce document s’appuie sur l’utilisation d’IA générative, ainsi que sur des blocs de codes fournit sur des forums comme medium ou stack overflow. Les auteur.ice.s de ces blocs sont remercié.e.s en fin de document.</p>
@@ -315,7 +266,7 @@ y = X\beta + \varepsilon
 <td style="text-align: right;">-</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Political_Corruption</td>
+<td style="text-align: left;">S</td>
 <td>La moyenne de 2013 à 2023 d’un index de corruption politique allant de 0 à 1</td>
 <td style="text-align: center;">Index allant de 0 à 1</td>
 <td style="text-align: right;"><a href="https://data360.worldbank.org/en/indicator/">World Bank</a></td>
@@ -396,10 +347,11 @@ y = X\beta + \varepsilon
 </section>
 <section id="analyse-descriptive-univariée-des-données" class="level2">
 <h2 class="anchored" data-anchor-id="analyse-descriptive-univariée-des-données">Analyse descriptive univariée des données</h2>
+<div id="tab1" class="fig">
+<p>Tableau 1 : Statistiques descriptives des variables étudiées</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Statistiques descriptives
 ===================================================================================
 Statistic                   Mean     St. Dev.       Min       Median       Max     
 -----------------------------------------------------------------------------------
@@ -417,6 +369,7 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 -----------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
+</div>
 <p>On voit tout de suite, par comparaison de la moyenne et de la médiane de chaque variable certaines tendances : le PIB par habitant contient des individus qui tirent la moyenne vers le haut, idem pour la migration, le KWH par habitant et la densité de population.</p>
 <p>En étudiant les minimums, maximums, étendues et écarts-type de ces quatre variables, on remarque qu’il ne s’agit probablement que de quelques individus dont les valeurs très fortes déforment les moyennes. Par exemple, la densité de population a une étendue de 7812, une médiane de 80 et un écart -type de seulement 65. On s’attend à observer dans ces variables des <strong>petits groupes d’individus</strong> aux valeurs très élevées.</p>
 <p>Un effet inverse et de moindre importance peut aussi être constaté quand au surpoids des adultes. On voit que la moyenne est légèrement tirée vers le bas.</p>
@@ -427,7 +380,7 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -439,18 +392,31 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Figure 2 : Boxplot du score de bonheur</p>
 </div>
-<p>A première vue, l’histogramme nous indique que l’indice du bonheur semble difficilement suivre une loi normale. On repère cela à une certaine symétrie et une concentration d’indivus autour du centre, particulièrement deux pics : l’un proche de 4,5 et le second de 6.</p>
-<p>Le boxplot du bonheur présente une répartition très équilibrée de notre variable explicative. On n’y repère pas de tendances particulières si ce n’est que les deux quarts les moins heureux sont légèrement plus grands.</p>
+<p>A première vue, la fig.1 semble difficilement suivre une loi normale. On repère cela à une certaine symétrie et une concentration d’indivus autour du centre, particulièrement deux pics : l’un proche de 4,5 et le second de 6.</p>
+<p>La fig.2 présente une répartition très équilibrée de notre variable explicative. On n’y repère pas de tendances particulières si ce n’est que les deux quarts les moins heureux sont légèrement plus grands.</p>
 <section id="analyse-de-chaque-variable-explicative" class="level3">
 <h3 class="anchored" data-anchor-id="analyse-de-chaque-variable-explicative">Analyse de chaque variable explicative</h3>
 <div id="fig3" class="fig">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure 3 : Histogrammes des variables ayant une distribution proche de la normale</p>
+</div>
+<p>Au vu de la symétrie de leurs histogrammes on peut considérer que la croissance de la population, l’inscription à l’école primaire, les dépenses militaires et la migration peuvent suivre des lois normales.</p>
+<div id="fig4" class="fig">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -460,10 +426,10 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 </div>
 </div>
 </div>
-<p>Figure 3 : Histogrammes sélectionnés (Population growth, Primary school enrollment, Military expenses, Net migration)</p>
+<p>Figure 4 : Histogrammes des variables ayant une distribution décroissante</p>
 </div>
-<p>Au vu de la symétrie de leurs histogrammes on peut considérer que la croissance de la population, l’inscription à l’école primaire, les dépenses militaires et la migration peuvent suivre des lois normales.</p>
-<div id="fig4" class="fig">
+<p>La consommation d’énergie, la densité de population et le PIB par habitant semblent suivre des lois inverses avec une importante concentration des individus dans les valeurs basses et de moins en moins d’individus ayant des valeurs élevées.</p>
+<div id="fig5" class="fig">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -473,22 +439,10 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 </div>
 </div>
 </div>
-<p>Figure 4 : Histogrammes sélectionnés (GDP per capita, Population density, KWH per capita)</p>
+<p>Figure 5 : Histogrammes des variables ayant une distribution peu claire</p>
 </div>
-<p>La consommation d’énergie, la densité de population et le PIB par habitant semblent suivre des lois inverses.</p>
-<div id="fig5" class="fig">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Figure 5 : Histogrammes sélectionnés (Political corruption, Lifespan at birth, Overweight)</p>
-</div>
-<p>La corruption politique, le surpoids et l’espérance de vie ne semblent pas suivre des lois classiques.</p>
+<p>On visualise deux pics de surreprésentation (autour de 25 et 55) dans l’histogramme du surpoids et une certaine absence des individus dans les valeurs moyennes (entre 30 et 50). On peut voir une concentration des espérances de vie au delà de 70 ans.</p>
+<p>Ces histogrammes ne nous sont d’une grande utilité si ce n’est pour dire que la corruption politique, le surpoids et l’espérance de vie ne semblent pas suivre des lois classiques. Les nuages de point et les boxplots nous seront peut-être plus utiles pour analyser ces variables.</p>
 <p>On remarque immédiatement les individus les plus aberrants qui referont surface dans les graphiques suivants et dont nous parlerons plus tard:</p>
 <ul>
 <li><p>On repère dans l’histogramme de l’inscription à l’école primaire un individu atypique proche de 0, il s’agit de la <strong>Somalie</strong> avec moins de 9% d’inscrits.</p></li>
@@ -506,7 +460,7 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -514,77 +468,93 @@ Happiness                   5.46       1.12        2.86        5.48        7.67
 <p>Figure 6 : Corrélations des variables explicatives avec l’indice de bonheur</p>
 </div>
 <p>On remarque ici les variables les plus et les moins corrélées à l’indice du bonheur. L’espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l’indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement.<br>
-Les autres variables ne semblent pas être corrélées fortement à l’indice de bonheur.</p>
+Les autres variables sont peu ou très peu corrélées à l’indice de bonheur.</p>
+<p>On va voir par la suite que ces correlations se traduisent en relations linéaires avec des droites décroissantes pour les variables corrélées négativement et inversement. On verra aussi que les variables avec les plus petites corrélations ont les coefficients directeurs les plus faibles et inversement.</p>
 <div id="fig7" class="fig">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 7 : Nuages de points entre chaque variable explicative et l’indice de bonheur</p>
+<p>Figure 7 : Nuage de points entre l’espérance de vie et l’indice de bonheur</p>
 </div>
-<p>A nouveau, on retrouve les individus aberrants repérés plus tôt qui déforment complètement les graphiques sur l’inscription à l’école primaire, la densité de population et la migration nette. Il serait bon de voir la répartition de ces graphes sans ces individus.</p>
-<p>Dans le graphe du surpoids par l’indice de bonheur, on repère comme dans l’histogramme du surpoids deux pics de surreprésentation.</p>
-<p>La entre l’indice de bonheur et le PIB/hab semble logarithmique avec une concentation forte des individus vers les valeurs les plus faibles. De même pour le graphe de la consommation énergétique.</p>
-<p>On doute de la linéarité entre l’indice de bonheur et la corruption politique car le nuage de point est très dispersé. De même pour la croissance de la population.</p>
-<p>Finalement, on remarque une certaine linéarité positive entre l’indice de bonheur et l’espérance de vie à la naissance, les points semblent bien décrire une droite.</p>
+<p>Premièrement, on remarque une bonne linéarité positive entre l’indice de bonheur et l’espérance de vie à la naissance, les points semblent bien décrire une droite. C’est notre variable la plus corrélée à l’indice de bonheur et la mieux représentée linéairement.</p>
 <div id="fig8" class="fig">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 8 : Graphiques sans outliers identifiés (Population density, Primary school enrollment, Migration)</p>
+<p>Figure 8 : Nuages de points assez dispersés</p>
 </div>
-<p>Ici, retirer les individus les plus aberrants ne permet pas pour autant d’obtenir une linéarité de la relation entre l’indice de bonheur et les variables étudiées. Au contraire : tout comme les dépenses militaires, ces variables ne semblent pas corrélées à notre score de bonheur.</p>
+<p>Ensuite, nous avons trois variables qui ont une relation linéaire avec l’indice de bonheur mais dont les nuages de points sont très dispersés : la corruption politique, la croissance de population et le surpoids.</p>
+<p>On remarque dans le nuage de point de la corruption politique un ensemble d’individus très proches, des pays heureux et peu corrompus qui ensemble ont un effet important sur la droite de linéarité et qui lui donne son aspect décroissant.</p>
+<p>On remarque également les deux concentration d’individus dans le graphe du surpoids, comme on pouvait l’apercevoir dans l’histogramme du surpoids (fig.&nbsp;5).</p>
+<p>Notre quatrième graphe représente les dépenses militaires : la variable la moins corrélée à l’indice de bonheur (fig.&nbsp;6). Sans surprise, on ne voit pas de linéarité avec l’indice de bonheur, la droite est horizontale et le nuage de point est très dispersé bien qu’on aperçoive les quelques individus dont le budget alloué aux dépenses militaires est plus élevé.</p>
 <div id="fig9" class="fig">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 9 : Transformations logarithmiques et leurs relations avec Happiness</p>
+<p>Figure 9 : Nuages de points les plus concentrés avec et sans les individus les plus aberrants</p>
 </div>
-<p>Appliquer un logarithme au PIB par habitant et à la consommation énergétique permet un lien linéaire très clair avec l’indice de bonheur. La relation est moins forte mais c’est aussi le cas avec la migration nette, sans même retirer les individus aberrants qui sont bien projetés sur la droite. Mais attention : appliquer une transformation logarithmique à la Migration nous fait perdre tous les individus pour lesquels celle-ci est négative, ce qui est un trop gros biais.</p>
-<p>Aucune modification classique (exp, log, carré) ne donne une meilleure linéarité aux autres variables (j’ai tout testé).</p>
+<p>Voyons maintenant les variables dont les individus sont très concentrés, mettant en évidence certains individus aberrants repérés plus tôt (figure 3 et 4) : les USA et le Pakistan pour la migration, Singapour pour la densité de population et la Somalie pour le taux d’inscription à l’école primaire.</p>
+<p>Cela dit, ces individus ne sont pas mal projetés vis-à-vis des droites de relation linéaire avec l’indice de bonheur. Ils ne semblent pas avoir d’effet particulièrement grand sur leurs droites respectives. Leur unicité à un effet très important sur leurs intervalles de confiance respectifs (indiqués en bleu clair. Le manque d’individu dans les extrémités des graphes créé un intervalle de confiance très large, ne nous permettant qu’une faible prévision quant à la relation entre la variable concernée et l’indice de bonheur.</p>
+<p>Afin d’observer les nuages de points concentrés de plus près, nous avons retiré les individus aberrants susnommés dans les graphes aux points bleus. Comme on peut le voir, cela ne permet pas d’obtenir une linéarité claire de la relation entre l’indice de bonheur et les variables étudiées. Tout comme les dépenses militaires, ces variables ne semblent pas ou peu corrélées à notre score de bonheur et leur forte concentration d’individus complique toute étude visuelle du lien avec le bonheur.</p>
 <div id="fig10" class="fig">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 10 : Boxplots des variables explilcatives</p>
+<p>Figure 10 : Nuages de points avec l’indice de bonheur des variables bénéficiant d’une transformation logarithmique et lesdites transformations</p>
 </div>
-<p>Un affichage en boîtes à moustache permet de repérer très facilement les <strong>outliers</strong>, ces individus qui étirent fortement la distribution. En effet, sur la figure 10, on peut comparer une distribution classique, celle de la corruption politique, avec des distribution perturbée par des individus extrêmes (PIB, Migration, Densité de population, dépenses militaires ou Taux de scolarisation par exemple).</p>
+<p>Enfin, nous nous intéressons à des transformations de variables dont les graphes initiaux ne donnait pas une belle linéarité avec l’indice de bonheur. Le PIB/hab et la consommation énergétique ont une forte concentration des individus autour des valeurs faibles et quelques individus aux valeurs élevées décrivant originellement une relation plus logarithmique que linéaire.</p>
+<p>Appliquer un logarithme au PIB par habitant et à la consommation énergétique permet un lien linéaire très clair avec l’indice de bonheur. La transformation resserre également l’intervalle de confiance, nous assurant d’une bonne relation linéaire. Cette réalisation nous indique que nous obtiendrons de meilleurs modèles en utilisant ces transformations logarithmiques plutôt que les variables originelles..</p>
 <div id="fig11" class="fig">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 11 : Boxplot du bonheur en fonction de l’appartenance à l’OCDE</p>
+<p>Figure 11 : Boxplots des variables explicatives</p>
 </div>
-<p>Il est clair que les pays membres de l’OCDE ont un bonheur bien plus élevé que les non-membres.</p>
+<p>Un affichage en boîtes à moustache permet de repérer très facilement les <strong>outliers</strong>, ces individus qui étirent fortement la distribution. En effet, sur la figure 10, on peut comparer une distribution classique, celle de la corruption politique, avec des distribution perturbée par des individus extrêmes (PIB, Migration, Densité de population, dépenses militaires ou Taux de scolarisation par exemple).</p>
+<p>A nouveau, on remarque une importante concentration des individus pour ce qui est de la migration, la densité de population et les inscriptions à l’école primaire. On visualise bien la concentration des pays les plus pauvres dans la moitié basse de boxplot du PIB par habitant qui nous a poussé à tester une transformation logarithmique.</p>
+<div id="fig12" class="fig">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="rendu_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure 12 : Boxplot du bonheur en fonction de l’appartenance à l’OCDE</p>
+</div>
+<p>Il est clair que les pays membres de l’OCDE ont un bonheur bien plus élevé que les non-membres. On s’attend donc à observer une certaine significativité de l’OCDE dans notre modèle.</p>
 </section>
 </section>
 <section id="analyse-et-discussion-des-résultats" class="level1">
@@ -592,69 +562,40 @@ Les autres variables ne semblent pas être corrélées fortement à l’indice d
 <section id="modélisation-principale" class="level2">
 <h2 class="anchored" data-anchor-id="modélisation-principale">Modélisation principale</h2>
 <p>Nous allons commencer par comparer deux modèles. Le premier, que l’on appellera <strong>reglin</strong>, correspond à la régression linéaire complète, sans transformation de variable, et le deuxième <strong>reglog</strong>, à une régression avec une transformation par logarithme sur les variables de la figure 9.</p>
+<div id="tab2" class="fig">
+<p>Tableau 2 : Résumés de reglin et reglog</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
---- Résumé du modèle (reg1) ---</code></pre>
+==================================================================
+                                       Dependent variable:        
+                               -----------------------------------
+                                            Happiness             
+                                      (1)               (2)       
+------------------------------------------------------------------
+Political_Corruption              0.32 (0.26)      0.51** (0.26)  
+KWH_pp_pc                       0.0000 (0.0000)                   
+GDP_per_Capita                 0.0000*** (0.0000)                 
+log(KWH_pp_pc)                                      0.06 (0.10)   
+log(GDP_per_Capita)                                0.38*** (0.12) 
+Lifespan                         0.06*** (0.01)    0.04*** (0.01) 
+Net_Migration                   -0.0000 (0.0000)  -0.0000 (0.0000)
+Overweight_Adults               0.02*** (0.005)    0.01* (0.005)  
+Population_Density              -0.0000 (0.0001)  0.0000 (0.0001) 
+Military_Expenses                -0.09** (0.04)    -0.09** (0.04) 
+Population_Growth                 0.04 (0.05)      0.13*** (0.05) 
+OCDE1                            0.40** (0.17)     0.44*** (0.16) 
+Primary_School_Enrollment       -0.01** (0.003)    -0.01* (0.003) 
+Constant                          0.76 (0.85)      -1.41* (0.80)  
+------------------------------------------------------------------
+Observations                          125               125       
+R2                                    0.81              0.83      
+Adjusted R2                           0.79              0.81      
+Residual Std. Error (df = 113)        0.51              0.49      
+F Statistic (df = 11; 113)          44.23***          49.40***    
+==================================================================
+Note:                                  *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-===========================================================
-                                   Dependent variable:     
-                               ----------------------------
-                                        Happiness          
-                                    (1)            (2)     
------------------------------------------------------------
-Political_Corruption                0.32         0.51**    
-                                   (0.26)        (0.26)    
-                                                           
-KWH_pp_pc                          0.0000                  
-                                  (0.0000)                 
-                                                           
-GDP_per_Capita                   0.0000***                 
-                                  (0.0000)                 
-                                                           
-log(KWH_pp_pc)                                    0.06     
-                                                 (0.10)    
-                                                           
-log(GDP_per_Capita)                              0.38***   
-                                                 (0.12)    
-                                                           
-Lifespan                          0.06***        0.04***   
-                                   (0.01)        (0.01)    
-                                                           
-Net_Migration                     -0.0000        -0.0000   
-                                  (0.0000)      (0.0000)   
-                                                           
-Overweight_Adults                 0.02***         0.01*    
-                                  (0.005)        (0.005)   
-                                                           
-Population_Density                -0.0000        0.0000    
-                                  (0.0001)      (0.0001)   
-                                                           
-Military_Expenses                 -0.09**        -0.09**   
-                                   (0.04)        (0.04)    
-                                                           
-Population_Growth                   0.04         0.13***   
-                                   (0.05)        (0.05)    
-                                                           
-OCDE1                              0.40**        0.44***   
-                                   (0.17)        (0.16)    
-                                                           
-Primary_School_Enrollment         -0.01**        -0.01*    
-                                  (0.003)        (0.003)   
-                                                           
-Constant                            0.76         -1.41*    
-                                   (0.85)        (0.80)    
-                                                           
------------------------------------------------------------
-Observations                        125            125     
-R2                                  0.81          0.83     
-Adjusted R2                         0.79          0.81     
-Residual Std. Error (df = 113)      0.51          0.49     
-F Statistic (df = 11; 113)        44.23***      49.40***   
-===========================================================
-Note:                           *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 </div>
 <p>Nos deux modèles expliquent plus de 80% de la variance de l’indice de bonheur. Cependant, le modèle avec transformation logarithmique (reglog) a un R² ajusté légèrement supérieur, ce qui indique une meilleure capacité explicative. Nos variables significatives, par ordre de significativité, sont l’espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l’OCDE et l’inscription à l’école primaire.</p>
@@ -666,10 +607,11 @@ Note:                           *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre
 <section id="traitement-de-la-multicolinéarité" class="level3">
 <h3 class="anchored" data-anchor-id="traitement-de-la-multicolinéarité">Traitement de la multicolinéarité</h3>
 <p>Examinons les facteurs d’inflation de la variance (VIF) pour détecter la multicolinéarité.</p>
+<div id="tab3" class="fig">
+<p>Tableau 3 : VIF des variables du modèle complet (reglog)</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-VIF du modèle complet (reglog)
 ===============================
 Variable                   VIF 
 -------------------------------
@@ -687,11 +629,13 @@ Primary_School_Enrollment 1.05
 -------------------------------</code></pre>
 </div>
 </div>
+</div>
 <p><strong>Analyse de la multicolinéarité :</strong> Les résultats indiquent une multicolinéarité sévère pour le PIB par habitant (<strong>16.82</strong>) et la consommation d’énergie (<strong>13.01</strong>), ainsi qu’une valeur limite pour l’espérance de vie (<strong>5.24</strong>). Bien que le PIB présente le VIF le plus élevé, il constitue la variable économique de référence. La consommation d’énergie (<code>KWH_pp_pc</code>) étant une proxy de l’industrialisation très corrélée au PIB, sa suppression est la correction logique pour réduire la redondance sans perdre l’information sur la richesse. Nous retirons donc <code>KWH_pp_pc</code>.</p>
+<div id="tab4" class="fig">
+<p>Tableau 4 : VIF des variables de reglog près suppression de la consommation d’énergie</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-VIF après suppression de la consommation d'énergie
 ==============================
 Variable                  VIF 
 ------------------------------
@@ -708,19 +652,17 @@ Primary_School_Enrollment 1.05
 ------------------------------</code></pre>
 </div>
 </div>
+</div>
 <p>L’espérance de vie conserve un VIF problématique (&gt;5) après cette suppression, elle pourrait également être écartée par la sélection automatique ci-après, mais nous choisissons de la conserver pour l’instant car elle représente la dimension “Santé” distincte de la “Richesse”.</p>
 </section>
 <section id="sélection-de-variables-stepwise-par-aic" class="level3">
 <h3 class="anchored" data-anchor-id="sélection-de-variables-stepwise-par-aic">Sélection de variables (Stepwise par AIC)</h3>
 <p>Nous utilisons une procédure de sélection pas à pas descendante (backward) basée sur le critère d’information d’Akaike (AIC) pour ne garder que les variables pertinentes.</p>
+<div id="tab5" class="fig">
+<p>Tableau 5 : Résumé du modèle optimisé par AIC</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
---- Résumé du modèle optimisé par AIC ---</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Résumé du modèle optimisé par AIC
 =====================================================
                               Dependent variable:    
                           ---------------------------
@@ -745,52 +687,34 @@ F Statistic                 69.122*** (df = 8; 116)
 Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 </div>
+</div>
 <p>Ce modèle ne contient plus que les variables qui apportent une information significative au sens de l’AIC. C’est notre nouveau modèle de référence. On constate l’absence de variables non significatives : la dépense militaire et la densité de population.</p>
 </section>
 <section id="test-de-non-linéarités-et-dinteractions" class="level3">
 <h3 class="anchored" data-anchor-id="test-de-non-linéarités-et-dinteractions">Test de non-linéarités et d’interactions</h3>
 <p>Il est fréquent en économie du bonheur d’observer des rendements décroissants (déjà capturé par le log du PIB). Nous pouvons aussi tester si l’effet de la richesse dépend du niveau de développement (interaction OCDE * PIB).</p>
 <p>Testons un modèle avec interaction :</p>
+<div id="tab6" class="fig">
+<p>Tableau 6 : Résumés du modèle final et du modèle avec interaction</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Comparaison avec interaction
 =========================================================================
                                         Dependent variable:              
                           -----------------------------------------------
                                              Happiness                   
                                     (1)                     (2)          
 -------------------------------------------------------------------------
-Political_Corruption              0.545**                 0.560**        
-                                  (0.248)                 (0.247)        
-                                                                         
-log(GDP_per_Capita)              0.438***                0.400***        
-                                  (0.076)                 (0.080)        
-                                                                         
-Lifespan                         0.042***                0.043***        
-                                  (0.011)                 (0.011)        
-                                                                         
-Overweight_Adults                 0.008*                  0.010**        
-                                  (0.004)                 (0.005)        
-                                                                         
-Military_Expenses                -0.081**                -0.076**        
-                                  (0.033)                 (0.033)        
-                                                                         
-Population_Growth                0.118***                 0.106**        
-                                  (0.043)                 (0.044)        
-                                                                         
-OCDE1                            0.396***                 -1.835         
-                                  (0.148)                 (1.537)        
-                                                                         
-Primary_School_Enrollment        -0.007**                 -0.006*        
-                                  (0.003)                 (0.003)        
-                                                                         
-log(GDP_per_Capita):OCDE1                                  0.219         
-                                                          (0.150)        
-                                                                         
-Constant                          -1.484*                 -1.298*        
-                                  (0.766)                 (0.772)        
-                                                                         
+Political_Corruption          0.545** (0.248)         0.560** (0.247)    
+log(GDP_per_Capita)          0.438*** (0.076)        0.400*** (0.080)    
+Lifespan                     0.042*** (0.011)        0.043*** (0.011)    
+Overweight_Adults             0.008* (0.004)          0.010** (0.005)    
+Military_Expenses            -0.081** (0.033)        -0.076** (0.033)    
+Population_Growth            0.118*** (0.043)         0.106** (0.044)    
+OCDE1                        0.396*** (0.148)         -1.835 (1.537)     
+Primary_School_Enrollment    -0.007** (0.003)         -0.006* (0.003)    
+log(GDP_per_Capita):OCDE1                              0.219 (0.150)     
+Constant                      -1.484* (0.766)         -1.298* (0.772)    
 -------------------------------------------------------------------------
 Observations                        125                     125          
 R2                                 0.827                   0.830         
@@ -800,6 +724,12 @@ F Statistic               69.122*** (df = 8; 116) 62.275*** (df = 9; 115)
 =========================================================================
 Note:                                         *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
+</div>
+</div>
+<hr>
+<div id="tab7" class="fig">
+<p>Tableau 7 : Test d’anova entre le modèle final et celui avec interaction</p>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -814,6 +744,7 @@ Model 2: Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan +
 2    115 26.670  1   0.49339 2.1275 0.1474</code></pre>
 </div>
 </div>
+</div>
 <p><strong>Analyse de l’interaction :</strong> Le test ANOVA compare le modèle avec et sans l’interaction <code>OCDE * GDP</code>. La p-value obtenue (<strong>0.1474</strong>) est supérieure au seuil standard de 0.05. Nous ne pouvons donc pas rejeter l’hypothèse nulle. Cela signifie que l’ajout du terme d’interaction n’améliore pas significativement la qualité du modèle. L’hypothèse selon laquelle l’importance du PIB sur le bonheur différerait significativement entre les pays de l’OCDE et les autres n’est pas validée statistiquement par nos données.</p>
 </section>
 <section id="choix-du-modèle-final" class="level3">
@@ -824,10 +755,11 @@ Model 2: Happiness ~ Political_Corruption + log(GDP_per_Capita) + Lifespan +
 <section id="diagnostics-des-résidus-sur-le-modèle-final" class="level2">
 <h2 class="anchored" data-anchor-id="diagnostics-des-résidus-sur-le-modèle-final">Diagnostics des résidus sur le modèle final</h2>
 <p>Vérifions maintenant la validité des hypothèses des MCO sur notre modèle final : <code>best_model</code>.</p>
+<div id="tab8" class="fig">
+<p>Tableau 8 : Tableau de synthèse des diagnostics</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Tableau de synthèse des diagnostics
 ====================================================
 Test                             Statistique P_Value
 ----------------------------------------------------
@@ -835,6 +767,7 @@ Breusch-Pagan (Homoscédasticité)   5.1320    0.7434
 Shapiro-Wilk (Normalité)           0.9880    0.3435 
 Durbin-Watson (Indépendance)       1.8850    0.2697 
 ----------------------------------------------------</code></pre>
+</div>
 </div>
 </div>
 <p><strong>Interprétation des diagnostics :</strong> Les tests sont concluants et valident toutes les hypothèses des Moindres Carrés Ordinaires :</p>
@@ -845,17 +778,17 @@ Durbin-Watson (Indépendance)       1.8850    0.2697
 </ul>
 <section id="visualisation-des-diagnostics" class="level3">
 <h3 class="anchored" data-anchor-id="visualisation-des-diagnostics">Visualisation des diagnostics</h3>
-<div id="fig12" class="fig">
+<div id="fig13" class="fig">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 12 : Diagnostics visuels des résidus</p>
+<p>Figure 13 : Diagnostics visuels des résidus</p>
 </div>
 <p><strong>Analyse visuelle :</strong> Les graphiques confirment la robustesse du modèle.</p>
 <ul>
@@ -870,60 +803,43 @@ Durbin-Watson (Indépendance)       1.8850    0.2697
 <section id="analyse-des-points-influents" class="level3">
 <h3 class="anchored" data-anchor-id="analyse-des-points-influents">Analyse des points influents</h3>
 <p>Nous complétons les diagnostics par une analyse des points influents (points leviers et outliers) qui pourraient biaiser l’estimation.</p>
-<div id="fig13" class="fig">
+<div id="fig14" class="fig">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="rendu_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="rendu_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Figure 13 : Détection des points influents (Distance de Cook et Effet Levier)</p>
+<p>Figure 14 : Détection des points influents (Distance de Cook et Effet Levier)</p>
 </div>
-<p><strong>Analyse des points influents :</strong> L’analyse de la distance de Cook met en évidence trois pays : <strong>Oman</strong>, la <strong>Somalie</strong> et la <strong>Jordanie</strong>.</p>
+<p><strong>Analyse des points influents :</strong> L’analyse de la distance de Cook met en évidence quatre pays : <strong>Oman</strong>, la <strong>Somalie,</strong> la <strong>Jordanie</strong> et le <strong>Botswana</strong> par ordre d’importance.</p>
 <ul>
 <li><p><strong>Distance de Cook :</strong> Bien que ces pays dépassent le seuil théorique de sensibilité (<span class="math inline">\(4/n \approx 0.03\)</span>), aucune observation ne s’approche du seuil critique de 0.5 ou 1. Ils influencent le modèle sans le déstabiliser.</p></li>
-<li><p><strong>Levier vs Résidus :</strong> La <strong>Somalie</strong> se distingue par un fort effet de levier (probablement dû à ses valeurs extrêmes en scolarisation, ou des valeurs manquantes trop lissées par notre pré traitement), mais son résidu reste modéré. <strong>Oman</strong> et la <strong>Jordanie</strong> ont des résidus plus importants, suggérant que le modèle explique moins bien leur niveau de bonheur spécifique (facteurs géopolitiques ou culturels non capturés).</p></li>
+<li><p><strong>Levier vs Résidus :</strong> La <strong>Somalie</strong> se distingue par un fort effet de levier (probablement dû à ses valeurs extrêmes en scolarisation, ou des valeurs manquantes trop lissées par notre pré traitement), mais son résidu reste modéré. <strong>Oman</strong>, le <strong>Botswana</strong> et la <strong>Jordanie</strong> ont des résidus plus importants, suggérant que le modèle explique moins bien leur niveau de bonheur spécifique (facteurs géopolitiques ou culturels non capturés).</p></li>
 </ul>
 <p>En conclusion, bien que ces pays atypiques existent, ils ne remettent pas en cause la validité globale du modèle.</p>
+<div id="tab9" class="fig">
+<p>Tableau 9 : Résultats finaux du modèle économétrique</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Résultats finaux du modèle économétrique
 =====================================================
                               Dependent variable:    
                           ---------------------------
                                    Happiness         
 -----------------------------------------------------
-Political_Corruption                0.545**          
-                                    (0.248)          
-                                                     
-log(GDP_per_Capita)                0.438***          
-                                    (0.076)          
-                                                     
-Lifespan                           0.042***          
-                                    (0.011)          
-                                                     
-Overweight_Adults                   0.008*           
-                                    (0.004)          
-                                                     
-Military_Expenses                  -0.081**          
-                                    (0.033)          
-                                                     
-Population_Growth                  0.118***          
-                                    (0.043)          
-                                                     
-OCDE1                              0.396***          
-                                    (0.148)          
-                                                     
-Primary_School_Enrollment          -0.007**          
-                                    (0.003)          
-                                                     
-Constant                            -1.484*          
-                                    (0.766)          
-                                                     
+Political_Corruption            0.545** (0.248)      
+log(GDP_per_Capita)            0.438*** (0.076)      
+Lifespan                       0.042*** (0.011)      
+Overweight_Adults               0.008* (0.004)       
+Military_Expenses              -0.081** (0.033)      
+Population_Growth              0.118*** (0.043)      
+OCDE1                          0.396*** (0.148)      
+Primary_School_Enrollment      -0.007** (0.003)      
+Constant                        -1.484* (0.766)      
 -----------------------------------------------------
 Observations                          125            
 R2                                   0.827           
@@ -932,6 +848,7 @@ Residual Std. Error            0.484 (df = 116)
 F Statistic                 69.122*** (df = 8; 116)  
 =====================================================
 Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
 </div>
 </div>
 </section>
@@ -1023,14 +940,13 @@ Note:                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
