@@ -1,0 +1,97 @@
+body {
+    background: transparent;
+    color: #012622;
+    font-family: "Calibri", sans-serif;
+}
+
+.figure {
+    padding: 14px;
+}
+
+.figure-img {
+    border-radius: 12px;
+    box-shadow: 2px 2px 4px #71517bc0;
+    transition: all 0.3s ease;
+}
+
+.figure-img:hover {
+    transform: scale(1.015);
+}
+
+h1, h2, h3 {
+    color: #71517B;
+}
+
+p {
+    text-align: justify;
+}
+
+a {
+    color: #EE4266;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.MathJax {
+    color: #71517B;
+}
+
+#quarto-content {
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 50px 0px;
+}
+
+#TOC, main {
+    background-color: #fff0f2;
+    border-radius: 16px;
+    border: 1px dashed #71517B;
+    padding: 25px;
+}
+
+.fig p {
+    text-align: center;
+    font-style: italic;
+    margin-top: 2px;
+    color: lab(9.63% 26.17 -17.03 / 0.91);
+    font-size: 130%;
+}
+
+.fig .cell {
+    margin-bottom: 0;
+}
+
+.fig .figure {
+    margin-bottom: 0;
+}
+
+/* Fractal Plaid Background */
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(45deg, #ffebee 25%, transparent 25%) -50px 0/100px 100px,
+              linear-gradient(135deg, #f1dddd 25%, transparent 25%) -50px 0/100px 100px,
+              linear-gradient(45deg, transparent 75%, #fde6e9 75%) -50px 0/100px 100px,
+              linear-gradient(135deg, transparent 75%, #f3d8d8 75%) -50px 0/100px 100px;
+  background-color: #ffe7eb;
+  animation: animatePlaid 5s linear infinite;
+  z-index: -1;
+}
+
+/* Fractal Plaid Animation */
+@keyframes animatePlaid {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 100px 100px, -100px 100px, 100px -100px, -100px -100px;
+  }
+}

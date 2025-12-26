@@ -41,6 +41,9 @@ dim(popgrowth_moyenne) #239
 View(popgrowth_moyenne)
 
 
+popgrowth = popgrowth[which(popgrowth$Year == 2023, arr.ind = TRUE),]
+dim(popgrowth)
+
 militarydepense = read.csv("militaryspendingpgdp.csv", dec= ".", header = TRUE, sep = ",")
 summary(militarydepense)
 View(militarydepense)
@@ -190,7 +193,7 @@ View(happiness)
 happiness = happiness[which(happiness$Year >= 2013 & happiness$Year <=2023, arr.ind = TRUE),]
 
 happiness_moyenne = tapply(happiness$Life.evaluation..3.year.average., happiness$Country.name, mean, na.rm=TRUE)
-happiness_moyenne = as.data.frame(happiness_moyenne)
+happiness_moyenne = as.data.frame(happiness_moyenne)z
 library(tibble)
 happiness_moyenne <- tibble::rownames_to_column(happiness_moyenne, "Country.name")
 anyNA(happiness_moyenne)
@@ -216,7 +219,7 @@ donnees$happiness_moyenne =donnees$happiness_moyenne2
 donnees = donnees[,-14]
 
 
-write.csv(donnees, "donnees.csv")
+#write.csv(donnees, "donnees.csv")
 donnees = read.csv("donnees.csv", sep =",", dec=".", header = TRUE)
 
 dim(donnees)
@@ -236,22 +239,36 @@ donnees = donnees[,-1]
 names(donnees) = c("Name", "Code", "Political_Corruption","GDP_per_Capita","Lifespan","Net_Migration","Overweight_Adults","Population_Density","KWH_pp_pc","Military_Expenses","Population_Growth","Primary_School_Enrollment","OCDE","Happiness")
 
 
+########################################################################
 
 
+Startcountries = read.csv("WorldHappinessIndex.csv", sep  =";", dec  =",", header = TRUE)
+Startcountries = Startcountries[which(Startcountries$Year == 2023, arr.ind = TRUE),][,-c(1,4:28)]
+View(Startcountries)
+names(Startcountries) = c("Rank", "Country")
+endcountries  = as.data.frame(rownames(data))
+names(endcountries) = c("Country")
+dim(Startcountries)
+dim(endcountries)
+endcountrieslist = c(endcountries$Country)
+Startcountrieslist = c(Startcountries$Country)
+missing = c()
+
+for (i in Startcountrieslist){
+  if (!(i %in% endcountrieslist)){
+    missing = c(missing,i)
+  }
+}
+missing = as.data.frame(missing)
 
 
+OCDE_countries = c("Australia","Austria","Belgium","Canada","Chile","Colombia","Costa Rica","Czechia","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Israel","Italy","Japan","Korea","Latvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovak Republic","Slovenia","Spain","Sweden","Switzerland","Türkiye","United Kingdom","United States")
+missing$OCDE = 0
+for (i in 1:nrow(missing)){ if (missing$Pays_perdus[i] %in% OCDE_countries) {
+  missing$OCDE[i] = 1
+}}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+names(missing) = c("Pays_perdus")
+write.csv(missing, "Pays_perdus.csv")
+dim(missing)
 

@@ -138,21 +138,24 @@ En présence d'hétéroscédasticité, la variance générale s'écrit avec la m
 
 ## Corrections et transformations de variables
 
-Exemples de transformations de variables et modèles correspondants (interprétations rapides) :
+On peut opérer des transformations de varibales pour que notre modèle soit plus explicatif ou plus robuste. En voici quelques exemples ainisi que leurs modèles correspondants :
 
--   Modèle linéaire en niveaux : $y_i = \alpha + \beta x_i + u_i$. Effet absolu de x sur y.
--   Log‑niveau (log(x) explicative) : $y_i = \alpha + \beta \log(x_i) + u_i$. β = variation absolue de y pour une variation proportionnelle de x (approx. effet semi‑élasticité).
--   Log‑log (log(y) vs log(x)) : $\log(y_i) = \alpha + \beta \log(x_i) + u_i ]$. β = élasticité (pourcentage de y lorsque x varie de 1%).
--   Quadratique / polynôme : $y_i = \alpha + \beta_1 x_i + \beta_2 x_i^2 + u_i$. Permet capturer non‑linéarités (effets en U, concavité).
--   Effet interactif : $y_i = \alpha + \beta_1 x_i + \beta_2 D_i + \beta_3 (x_i \times D_i) + u_i$. Effet de x différent selon la modalité D. On étudie les effets croisés de la même façon.
+-   Modèle niveau - niveau : $y_i = \alpha + \beta x_i + u_i$. Ici, β donne un effet absolu de x sur y.
+-   Modèle Log‑niveau : $y_i = \alpha + \beta \log(x_i) + u_i$. Ici, β est la variation absolue de y pour une variation proportionnelle de x (approx. effet semi‑élasticité).
+-   Modèle Log‑log : $\log(y_i) = \alpha + \beta \log(x_i) + u_i$. Ici, β représente l'élasticité, lepourcentage de y lorsque x varie de 1%.
+-   Modèle quadratique : $y_i = \alpha + \beta_1 x_i + \beta_2 x_i^2 + u_i$. Permet de capturer des capturer des effets non‑linéaires comme les effets convexe ou concave.
+-   Modèle avec interaction : $y_i = \alpha + \beta_1 x_i + \beta_2 D_i + \beta_3 (x_i \times D_i) + u_i$. Donne un effet de x différent selon la modalité D. On étudie les effets croisés de la même façon.
 
 # Analyse des données
 
 ## Cadre des données
 
-Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous étudions les pays du monde entier, en particulier les 147 référencés par le world happiness report. Après sélection de nos variables, il nous reste 125 pays à étudier.
+Nous avons tenté d'avoir le cadre le plus global possible. Ainsi nous tendons d'étudier les 147 pays référencés par le world happiness report. Après sélection de nos variables et traitement des données, il nous reste 125 pays à étudier.
 
-Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, nous avons choisi de traiter les moyennes des données disponibles de 2013 à 2023. Certains jeux de données s'achèvent avant 2023, nous avons donc fait leurs moyennes jusqu'à la dernière année recensée. Cette décision a été motivée par notre envie de tirer des conclusions les plus larges possibles.
+<center>
+
+::: {#tab1 .fig}
+Tableau 1 : Variables étudiées
 
 | Code de la série | Définition | Unité | Source |
 |:-----------------|------------------|:----------------:|-----------------:|
@@ -169,28 +172,63 @@ Ayant des données allant de 1789 à 2024 et beaucoup de données manquantes, no
 | Primary_School_Enrollment | La moyenne de 2013 à 2022 du nombre d'étudiant inscrits en école primaire divisé par la population du groupe d'age multiplié par 100 | En pourcentage | [World Bank](https://data360.worldbank.org/en/indicator/WB_ESG_SE_PRM_ENRR) |
 | OCDE | Une indicatrice avec 1 si le pays est membre de l'OCDE et 0 sinon | Indicatrice | [OCDE](https://www.oecd.org/en/about/members-partners.html) |
 | Happiness | La moyenne de 2013 à 2023 de l'indice du bonheur calculé par le World Happiness Index | Index allant de 0 à 10 | [World Happiness Report](https://www.worldhappiness.report/data-sharing/) |
+:::
+
+</center>
 
 ## Prétraitement et nettoyage des données
 
-Pour éviter un maximum de données manquantes, nous avons effectué des **moyennes** depuis 2013 et jusqu'à un maximum de 2023 sur toutes les données étudiées. Cela nous permet aussi d'atténuer les tendances qui ont pu se passer dans des temps plus courts sur cette décennie.
+Ayant des données allant de 1789 à 2024, nous avons effectué des **moyennes** depuis 2013 et jusqu'à un maximum de 2023 sur toutes les données étudiées.
 
-Nous avons sélectionné les jeux de données que nous avons trouvé nous paraissant les plus intéressant. Certains ont du être écartés du jeu de donnée final dû à un manque de donnée. En effet plusieurs pays n'étaient pas recensés dans les données et notre système de moyenne ne pouvait les ramener dans le jeu de donnée.
+Cette approche nous donne deux avantages. Le premier est de récolter un maximum d'individus malgré un grand nombre de données manquantes. Le second est d'atténuer les tendances qui on pu se passer dans des temps plus courts sur cette décennie, limitant les individus aberrants dans nos données.
+
+Intéressons nous brièvement aux 26 pays exclus par notre sélection de jeux de données :
+
+<center>
+
+------------------------------------------------------------------------
+
+::: {#tab2 .fig}
+Tableau 2 : Pays exclus par notre sélection de données
+
+```{r echo=FALSE}
+Pays_perdus <- as.data.frame(read.csv(file = "Pays_perdus.csv")[, -1])
+names(Pays_perdus) = c("Pays_perdus","OCDE")
+
+stargazer(Pays_perdus,
+    type = "text",
+    summary = FALSE
+)
+```
+:::
+
+------------------------------------------------------------------------
+
+</center>
+
+On voit premièrement la présence de territoires dont l'existence administrative ou l'indépendance est contestée avec Hong Kong, Taiwan, le Kosovo et la Palestine.
+
+Parmi les 22 autres pays, on voit qu'on n'a pas exclusivement des pays pauvres, petits ou peu influents. Cependant, en observant la variable OCDE, on s'aperçoit qu'il n'y a que 13,6% de ces pays qui sont membres de l'OCDE alors que dans nos données restantes, 34,4% des pays sont membres.
+
+On reconnait donc qu'on perd majoritairement des pays en développement et des pays du Sud global. Cela dit, rien ici ne nous permet, à première vue, de penser que ces pays affecteraient significativement notre modèle. On accepte de donc de tirer des conclusions générales malgré leur absence.
 
 ## Analyse descriptive univariée des données
+
+Voyons maintenant de plus près les données restantes que nous allons utiliser.
 
 ```{r echo=FALSE}
 # import des données
 data <- read.csv(file = "donnees.csv", row.names = 2)[, -1] # pour enlever la colonne "numero"
 # transform OCDE variable into factor
-data$OCDE <- as.factor(data$OCDE)
+data$OCDE <- as.factor(data$OCDE) #32 OCDE 93 non membres
 ```
 
 ------------------------------------------------------------------------
 
 <center>
 
-::: {#tab1 .fig}
-Tableau 1 : Statistiques descriptives des variables étudiées
+::: {#tab3 .fig}
+Tableau 3 : Statistiques descriptives des variables étudiées
 
 ```{r echo=FALSE}
 # Etude des statistiques descriptives
@@ -206,21 +244,23 @@ stargazer(data_numeric,
 
 </center>
 
-On voit tout de suite, par comparaison de la moyenne et de la médiane de chaque variable certaines tendances : le PIB par habitant contient des individus qui tirent la moyenne vers le haut, idem pour la migration, le KWH par habitant et la densité de population.
+On voit tout de suite, par comparaison de la moyenne et de la médiane de chaque variable, certaines tendances : le PIB par habitant contient des individus qui tirent la moyenne vers le haut, idem pour la migration, le KWH par habitant et la densité de population.
 
-En étudiant les minimums, maximums, étendues et écarts-type de ces quatre variables, on remarque qu'il ne s'agit probablement que de quelques individus dont les valeurs très fortes déforment les moyennes. Par exemple, la densité de population a une étendue de 7812, une médiane de 80 et un écart -type de seulement 65. On s'attend à observer dans ces variables des **petits groupes d'individus** aux valeurs très élevées.
+En étudiant les minimums, maximums, et écarts-type de ces quatre variables, on remarque qu'il ne s'agit probablement que de quelques individus dont les valeurs très fortes déforment les moyennes. Par exemple, la densité de population a une étendue de 7812, une médiane de 80 et un écart -type de seulement 65. On s'attend à observer dans ces variables des **petits groupes d'individus** aux valeurs très élevées.
 
-Un effet inverse et de moindre importance peut aussi être constaté quand au surpoids des adultes. On voit que la moyenne est légèrement tirée vers le bas.
+Un effet inverse et de moindre importance peut aussi être constaté quand au surpoids des adultes. On voit que la moyenne est légèrement tirée en dessous de la médiane.
 
 Les dépenses militaires ayant une moyenne légèrement plus élevée que la médiane et un écart-type faible malgré un maximum assez élevé, on s'attend à observer très peu d'individus avec des valeurs très élevées mais une concentration importante des individus autour de la médiane.
 
 Le reste des variables ont l'air d'être peu dispersées. On peut s'atttendre à y voir une répartition normale des valeurs.
 
+À présent, intéressons nous à la variable que l'on cherche à expliquer :
+
 ::: {#fig1 .fig}
 ```{r echo=FALSE, fig.height=4, fig.width=6}
 # histogramme de la variable cible
 ggplot(data, aes(x = Happiness)) +
-    geom_histogram(binwidth = 0.25, fill = "salmon1", color = "white", alpha = 0.7) +
+    geom_histogram(binwidth = 0.25, fill = "salmon1", color = "red", alpha = 0.7) +
     labs(y = "Score de bonheur", x = "Fréquence") +
     theme_minimal()
 ```
@@ -233,7 +273,7 @@ Figure 1 : Histogramme du score de bonheur
 # boxplot de la variable cible
 ggplot(data, aes(y = Happiness)) +
     stat_boxplot(geom='errorbar', linetype=1, width=0.2) +
-    geom_boxplot(fill = "salmon1", color = "black", alpha = 0.7) +
+    geom_boxplot(fill = "lightblue", color = "blue", alpha = 0.7) +
     labs(y = "Score de bonheur", x  = "") 
 ```
 
@@ -242,7 +282,7 @@ Figure 2 : Boxplot du score de bonheur
 
 A première vue, la fig.1 semble difficilement suivre une loi normale. On repère cela à une certaine symétrie et une concentration d'indivus autour du centre, particulièrement deux pics : l'un proche de 4,5 et le second de 6.
 
-La fig.2 présente une répartition très équilibrée de notre variable explicative. On n'y repère pas de tendances particulières si ce n'est que les deux quarts les moins heureux sont légèrement plus grands.
+La fig.2 présente une répartition très équilibrée de notre variable explicative. On n'y repère pas de tendances particulières si ce n'est que les deux quarts les moins heureux sont légèrement plus grands. On dénote l'absence d'individus aberrants : les valeurs sont toutes réparties de manière équilibrée.
 
 ### Analyse de chaque variable explicative
 
@@ -251,38 +291,55 @@ plots <- list()
 
 nomsdevar = c("Corruption politique", "PIB par habitant", "Espérance de vie", "Migration nette", "Surpoids", "Densité de population", "Consommation énergétique", "Dépenses militaires", "Croissance de population", "Inscriptions à l'école primaire")
 
+numerohistogramme = c("Histogramme n°8","Histogramme n°5","Histogramme n°9","Histogramme n°1","Histogramme n°10","Histogramme n°6","Histogramme n°7","Histogramme n°2","Histogramme n°3","Histogramme n°4")
+
 
 for (i in 1:ncol(data_numeric)) {
     p <- ggplot(data_numeric, aes_string(x = data_numeric[[i]])) +
-        geom_histogram(binwidth = diff(range(data_numeric[[i]])) / 20, fill = "salmon1", color = "white", alpha = 0.7) +
-        labs(x = "Fréquence" , y = nomsdevar[i]) +
+        geom_histogram(binwidth = diff(range(data_numeric[[i]])) / 20, fill = "salmon1", color = "red", alpha = 0.7) +
+        labs(x = numerohistogramme[i] , y = nomsdevar[i]) +
         theme_minimal() +
         theme(plot.margin = grid::unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
     plots[[i]] <- p
 }
 plots <- plots[-11]
 
+
 ```
 
 ::: {#fig3 .fig}
 ```{r echo=FALSE, fig.height=5, fig.width=7}
+
 do.call(grid.arrange, c(plots[c(4, 8, 9, 10)], ncol = 2))
 ```
 
 Figure 3 : Histogrammes des variables ayant une distribution proche de la normale
 :::
 
-Au vu de la symétrie de leurs histogrammes on peut considérer que la croissance de la population, l'inscription à l'école primaire, les dépenses militaires et la migration peuvent suivre des lois normales.
+Au vu de la symétrie de leurs histogrammes on peut considérer que la croissance de la population, l'inscription à l'école primaire, les dépenses militaires et la migration peuvent être proches de lois normales.
 
 ::: {#fig4 .fig}
 ```{r echo=FALSE, fig.height=5, fig.width=7}
-do.call(grid.arrange, c(plots[c(2, 6, 7)], ncol = 2))
+
+data_ss_singapour <- data[-which(data$Code == "SGP"), ]
+
+histosssingapour = ggplot(data_ss_singapour, aes_string(x = data_ss_singapour$Population_Density)) +
+        geom_histogram(binwidth = diff(range(data_ss_singapour$Population_Density)) / 20, fill = "lightblue", color = "blue", alpha = 0.7) +
+        labs(x = "Histogramme n°6b" , y = nomsdevar[6]) +
+        theme_minimal() +
+        theme(plot.margin = grid::unit(c(0.5, 0.5, 0.5, 0.5), "cm"))
+
+do.call(grid.arrange, c(c(plots[c(2, 6, 7)], histosssingapour), ncol = 2))
+
+
 ```
 
 Figure 4 : Histogrammes des variables ayant une distribution décroissante
 :::
 
 La consommation d'énergie, la densité de population et le PIB par habitant semblent suivre des lois inverses avec une importante concentration des individus dans les valeurs basses et de moins en moins d'individus ayant des valeurs élevées.
+
+Dans l'histogramme de la densité de population (6), il y a un seul individu, à près de 8000 habitants par km carré : Singapour. On le retire un instant pour "zoomer" sur la fréquence des individus dans les valeurs les plus faibles (cf. 6b). On y voit que la répartition ne suit pas tout à fait une loi inverse puisque le pic de population n'est pas au début. On ne peut pas pour autant associer la densité de population à une loi normale, plutôt à une loi du Chi-deux.
 
 ::: {#fig5 .fig}
 ```{r echo=FALSE, fig.height=5, fig.width=7}
@@ -292,21 +349,58 @@ do.call(grid.arrange, c(plots[c(1, 3, 5)], ncol = 2))
 Figure 5 : Histogrammes des variables ayant une distribution peu claire
 :::
 
-On visualise deux pics de surreprésentation (autour de 25 et 55) dans l'histogramme du surpoids et une certaine absence des individus dans les valeurs moyennes (entre 30 et 50). On peut voir une concentration des espérances de vie au delà de 70 ans.
+Ces derniers histogrammes ne nous sont pas d'une grande utilité si ce n'est pour dire que la corruption politique, le surpoids et l'espérance de vie ne semblent pas suivre des lois classiques. Les nuages de point et les boxplots nous seront peut-être plus utiles pour analyser ces variables.
 
-Ces histogrammes ne nous sont d'une grande utilité si ce n'est pour dire que la corruption politique, le surpoids et l'espérance de vie ne semblent pas suivre des lois classiques. Les nuages de point et les boxplots nous seront peut-être plus utiles pour analyser ces variables.
+Cela dit, on visualise deux pics de surreprésentation (autour de 25 et 55) dans l'histogramme du surpoids (10) et une certaine absence des individus dans les valeurs moyennes (entre 30 et 50). On peut également voir une concentration des espérances de vie au delà de 70 ans (9).
 
-On remarque immédiatement les individus les plus aberrants qui referont surface dans les graphiques suivants et dont nous parlerons plus tard:
+```{r echo=FALSE}
+nomsboxplots = c("Boxplot n°1","Boxplot n°2","Boxplot n°3","Boxplot n°4","Boxplot n°5","Boxplot n°6")
 
--   On repère dans l'histogramme de l'inscription à l'école primaire un individu atypique proche de 0, il s'agit de la **Somalie** avec moins de 9% d'inscrits.
+box_plots <- list()
+j <- 1
 
--   De la même manière dans l'histogramme de la densité de population, on repère **Singapour** avec une densité titanesque de près de 8000 habitants au km2.
+for (i in c(2, 3, 5, 7, 11,9)) {
+    p <- ggplot(data, aes_string(y = data[[i]])) +
+        stat_boxplot(geom='errorbar', linetype=1, width=0.2, color = "blue") +
+        geom_boxplot(
+            color =  'blue',fill = 'lightblue',  
+            outlier.colour = "salmon", outlier.size = 4, notch = TRUE, 
+        notchwidth = 0.9
+            ) +
+        labs(y = nomsdevar[i-1], x = nomsboxplots[j])
+        theme_minimal()
+    box_plots[[j]] <- p
+    j <- j + 1
+    
+}
 
--   Dans l'histogramme de la migration, le **Pakistan** apparait tout à gauche avec plus d'1,5 million de migration nettte négative et les **Etats-Unis** tout à droite avec plus d'1,2 million de migration nette positive.
+# nombre de colonnes voulu
+ncol_plot <- 3
+```
 
--   Le **Luxembourg** est l'individu tout à droite de l'histogramme du PIB par habitant.
+::: {#fig11 .fig}
+```{r echo=FALSE, fig.height=6, fig.width=8}
+do.call(grid.arrange, c(box_plots, ncol = ncol_plot))
+```
 
--   Et le **Qatar** est l'individu tout à droite dans l'histogramme de la consommation énergétique.
+Figure 6 : Boxplots des variables explicatives
+:::
+
+On peut comparer ici une distribution équilibrée et espacée, celle de la corruption politique, avec des distributions très concentrées pour les boxplots 3 à 6 et une distribution inégale pour ce qui est du PIB par habitant.
+
+Comme sur les graphes précédents (fig 3 et 4), on remarque une importante concentration des individus pour ce qui est de la migration, la densité de population et les inscriptions à l'école primaire. On visualise bien la concentration des pays les plus pauvres dans la moitié basse de boxplot du PIB par habitant qui nous a poussé à tester une transformation logarithmique.
+
+Un affichage en boîte à moustache permet de repérer très facilement les **outliers**, les individus les plus aberrants qui referont surface dans les graphiques suivants :
+
+-   On repère dans le boxplot de l'inscription à l'école primaire (fig 6 - Boxplot n°5) un individu atypique proche de 0, il s'agit de la **Somalie** avec moins de 9% d'inscrits.
+
+-   De la même manière dans le boxplot de la densité de population (fig 6 - Boxplot n°4), on repère à nouveau **Singapour** avec une densité titanesque de près de 8000 habitants au km2.
+
+-   Dans le boxplot de la migration (fig 6 - Boxplot n°3),, le **Pakistan** apparait tout en bas avec plus d'1,5 million de migration nettte négative et les **Etats-Unis** tout en haut avec plus d'1,2 million de migration nette positive.
+
+-   Le **Luxembourg** est l'individu avec le PIB le plus élevé (fig 6 - Boxplot n°2).
+
+-   Et le **Qatar** est l'individu tout à droite dans l'histogramme de la consommation énergétique (fig 4 - histogramme n° 7).
 
 ## Analyse descriptive bivariée des données
 
@@ -334,13 +428,13 @@ barplot(cors_sorted,
 
 ```
 
-Figure 6 : Corrélations des variables explicatives avec l'indice de bonheur
+Figure 7 : Corrélations des variables explicatives avec l'indice de bonheur
 :::
 
-On remarque ici les variables les plus et les moins corrélées à l'indice du bonheur. L'espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélées positivement avec l'indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement.\
+On remarque ici les variables les plus et les moins corrélées à l'indice du bonheur. L'espérance de vie, le PIB/hab, le surpoids et la consommation énergétique sont très corrélés positivement avec l'indice de bonheur tandis que la corruption politique et la croissance de population semblent elles être corrélées négativement.\
 Les autres variables sont peu ou très peu corrélées à l'indice de bonheur.
 
-On va voir par la suite que ces correlations se traduisent en relations linéaires avec des droites décroissantes pour les variables corrélées négativement et inversement. On verra aussi que les variables avec les plus petites corrélations ont les coefficients directeurs les plus faibles et inversement.
+On va voir par la suite que ces corrélations se traduisent en relations linéaires avec des droites décroissantes pour les variables corrélées négativement et inversement. On verra aussi que les variables avec les plus petites corrélations ont les coefficients directeurs les plus faibles et inversement.
 
 ::: {#fig7 .fig}
 ```{r echo=FALSE, fig.height=6, fig.width=8}
@@ -361,10 +455,10 @@ for (i in 2:11) {
 do.call(grid.arrange, c(scatter_plots[c(3)], ncol = 1))
 ```
 
-Figure 7 : Nuage de points entre l'espérance de vie et l'indice de bonheur
+Figure 8 : Nuage de points entre l'espérance de vie et l'indice de bonheur
 :::
 
-Premièrement, on remarque une bonne linéarité positive entre l'indice de bonheur et l'espérance de vie à la naissance, les points semblent bien décrire une droite. C'est notre variable la plus corrélée à l'indice de bonheur et la mieux représentée linéairement.
+Premièrement, on remarque une bonne linéarité positive entre l'indice de bonheur et l'espérance de vie à la naissance, les points semblent bien décrire une droite. C'est notre variable la plus corrélée à l'indice de bonheur et, sans surprise, la mieux représentée linéairement.
 
 ::: {#fig8 .fig}
 ```{r echo=FALSE, fig.height=6, fig.width=8}
@@ -372,14 +466,14 @@ Premièrement, on remarque une bonne linéarité positive entre l'indice de bonh
 do.call(grid.arrange, c(scatter_plots[c(1,5,9,8)], ncol = 2))
 ```
 
-Figure 8 : Nuages de points assez dispersés
+Figure 9 : Nuages de points assez dispersés
 :::
 
 Ensuite, nous avons trois variables qui ont une relation linéaire avec l'indice de bonheur mais dont les nuages de points sont très dispersés : la corruption politique, la croissance de population et le surpoids.
 
 On remarque dans le nuage de point de la corruption politique un ensemble d'individus très proches, des pays heureux et peu corrompus qui ensemble ont un effet important sur la droite de linéarité et qui lui donne son aspect décroissant.
 
-On remarque également les deux concentration d'individus dans le graphe du surpoids, comme on pouvait l'apercevoir dans l'histogramme du surpoids (fig. 5).
+On remarque également les deux concentrations d'individus dans le graphe du surpoids, comme on pouvait l'apercevoir dans l'histogramme du surpoids (fig. 5).
 
 Notre quatrième graphe représente les dépenses militaires : la variable la moins corrélée à l'indice de bonheur (fig. 6). Sans surprise, on ne voit pas de linéarité avec l'indice de bonheur, la droite est horizontale et le nuage de point est très dispersé bien qu'on aperçoive les quelques individus dont le budget alloué aux dépenses militaires est plus élevé.
 
@@ -448,12 +542,14 @@ aberrant_plots = c(scatter_migration, scatter_densite, scatter_ecole,outlierplot
 do.call(grid.arrange, c(aberrant_plots, ncol = 3))
 ```
 
-Figure 9 : Nuages de points les plus concentrés avec et sans les individus les plus aberrants
+Figure 10 : Nuages de points les plus concentrés avec et sans leurs individus les plus aberrants
 :::
 
 Voyons maintenant les variables dont les individus sont très concentrés, mettant en évidence certains individus aberrants repérés plus tôt (figure 3 et 4) : les USA et le Pakistan pour la migration, Singapour pour la densité de population et la Somalie pour le taux d'inscription à l'école primaire.
 
-Cela dit, ces individus ne sont pas mal projetés vis-à-vis des droites de relation linéaire avec l'indice de bonheur. Ils ne semblent pas avoir d'effet particulièrement grand sur leurs droites respectives. Leur unicité à un effet très important sur leurs intervalles de confiance respectifs (indiqués en bleu clair. Le manque d'individu dans les extrémités des graphes créé un intervalle de confiance très large, ne nous permettant qu'une faible prévision quant à la relation entre la variable concernée et l'indice de bonheur.
+Cela dit, ces individus ne sont pas mal projetés vis-à-vis des droites de relation linéaire avec l'indice de bonheur. Ils ne semblent pas avoir d'effet important sur leurs droites respectives. Seuls le Pakistan et la Somalie aplatissent légèrement leurs droites.
+
+Leur unicité à cependant un effet très important sur leurs intervalles de confiance respectifs (indiqués en bleu clair. Le manque d'individu dans les extrémités des graphes créé un intervalle de confiance très large, ne nous permettant qu'une faible prévision quant à la relation entre la variable concernée et l'indice de bonheur.
 
 Afin d'observer les nuages de points concentrés de plus près, nous avons retiré les individus aberrants susnommés dans les graphes aux points bleus. Comme on peut le voir, cela ne permet pas d'obtenir une linéarité claire de la relation entre l'indice de bonheur et les variables étudiées. Tout comme les dépenses militaires, ces variables ne semblent pas ou peu corrélées à notre score de bonheur et leur forte concentration d'individus complique toute étude visuelle du lien avec le bonheur.
 
@@ -493,75 +589,43 @@ logplots <- list(PIBplot, KWHplot, migrationplot)
 do.call(grid.arrange, c(scatter_plots[c(2,7)],logplots[c(1,2)], ncol = 2))
 ```
 
-Figure 10 : Nuages de points avec l'indice de bonheur des variables bénéficiant d'une transformation logarithmique et lesdites transformations
+Figure 11 : Nuages de points avec l'indice de bonheur des variables bénéficiant d'une transformation logarithmique et lesdites transformations
 :::
 
-Enfin, nous nous intéressons à des transformations de variables dont les graphes initiaux ne donnait pas une belle linéarité avec l'indice de bonheur. Le PIB/hab et la consommation énergétique ont une forte concentration des individus autour des valeurs faibles et quelques individus aux valeurs élevées décrivant originellement une relation plus logarithmique que linéaire.
+Enfin, nous nous intéressons à des transformations de variables dont les graphes initiaux ne donnaient pas une belle linéarité avec l'indice de bonheur. Le PIB/hab et la consommation énergétique ont une forte concentration des individus autour des valeurs faibles et quelques individus aux valeurs élevées décrivant originellement une relation plus logarithmique que linéaire.
 
-Appliquer un logarithme au PIB par habitant et à la consommation énergétique permet un lien linéaire très clair avec l'indice de bonheur. La transformation resserre également l'intervalle de confiance, nous assurant d'une bonne relation linéaire. Cette réalisation nous indique que nous obtiendrons de meilleurs modèles en utilisant ces transformations logarithmiques plutôt que les variables originelles..
-
-```{r echo=FALSE}
-box_plots <- list()
-j <- 1
-
-for (i in c(2, 3, 5, 7, 11,9)) {
-    p <- ggplot(data, aes_string(y = data[[i]])) +
-        stat_boxplot(geom='errorbar', linetype=1, width=0.2, color = "blue") +
-        geom_boxplot(
-            color =  'blue',fill = 'lightblue',  
-            outlier.colour = "salmon", outlier.size = 4, notch = TRUE, 
-        notchwidth = 0.9
-            ) +
-        labs(y = nomsdevar[i-1], x = "")
-        theme_minimal()
-    box_plots[[j]] <- p
-    j <- j + 1
-}
-
-# nombre de colonnes voulu
-ncol_plot <- 3
-```
-
-::: {#fig11 .fig}
-```{r echo=FALSE, fig.height=6, fig.width=8}
-do.call(grid.arrange, c(box_plots, ncol = ncol_plot))
-```
-
-Figure 11 : Boxplots des variables explicatives
-:::
-
-Un affichage en boîtes à moustache permet de repérer très facilement les **outliers**, ces individus qui étirent fortement la distribution. En effet, sur la figure 10, on peut comparer une distribution classique, celle de la corruption politique, avec des distribution perturbée par des individus extrêmes (PIB, Migration, Densité de population, dépenses militaires ou Taux de scolarisation par exemple).
-
-A nouveau, on remarque une importante concentration des individus pour ce qui est de la migration, la densité de population et les inscriptions à l'école primaire. On visualise bien la concentration des pays les plus pauvres dans la moitié basse de boxplot du PIB par habitant qui nous a poussé à tester une transformation logarithmique.
+Appliquer un logarithme au PIB par habitant et à la consommation énergétique permet un lien linéaire très clair avec l'indice de bonheur. La transformation resserre également l'intervalle de confiance, nous assurant d'une bonne relation linéaire. Cette réalisation nous indique que nous obtiendrons de meilleurs modèles en utilisant ces transformations logarithmiques plutôt que les variables originelles.
 
 ::: {#fig12 .fig}
-```{r echo=FALSE}
+```{r echo=FALSE, fig.height=6, fig.width=8}
 ggplot(data, aes(x = OCDE, y = Happiness)) +
-    stat_boxplot(geom='errorbar', linetype=1, width=0.2, color = "blue")+
-    geom_boxplot(color =  'blue',fill = "lightblue", alpha = 0.7, 
+    stat_boxplot(geom='errorbar', linetype=1, width=0.2, 
+                 color ="blue")+
+    geom_boxplot(color =  'blue',fill = c("salmon","lightblue"), alpha = 0.7, 
             outlier.colour = "salmon", outlier.size = 4, notch = TRUE, 
         notchwidth = 0.9) +
     labs(x = "Appartenance à l'OCDE", y = "Indice de bonheur") +
-    theme_minimal()
+    theme_minimal() +
+    scale_x_discrete(labels = c("93 non-membres", '32 membres'))
 ```
 
 Figure 12 : Boxplot du bonheur en fonction de l'appartenance à l'OCDE
 :::
 
-Il est clair que les pays membres de l'OCDE ont un bonheur bien plus élevé que les non-membres. On s'attend donc à observer une certaine significativité de l'OCDE dans notre modèle.
+Le pays membre le moins heureux étant plus heureux que la majorité de pays non-membres, il est clair que les pays membres de l'OCDE ont un bonheur bien plus élevé que les non-membres. On s'attend donc à observer une certaine significativité de l'OCDE dans notre modèle.
 
 # **Analyse et discussion des résultats**
 
 ## Modélisation principale
 
-Nous allons commencer par comparer deux modèles. Le premier, que l'on appellera **reglin**, correspond à la régression linéaire complète, sans transformation de variable, et le deuxième **reglog**, à une régression avec une transformation par logarithme sur les variables de la figure 9.
+Nous allons commencer par comparer deux modèles. Le premier, que l'on appellera **reglin**, correspond à la régression linéaire complète, sans transformation de variable, et le deuxième **reglog**, à une régression avec une transformation par logarithme sur les variables modifiées en figure 11.
 
 ------------------------------------------------------------------------
 
 <center>
 
-::: {#tab2 .fig}
-Tableau 2 : Résumés de reglin et reglog
+::: {#tab4 .fig}
+Tableau 4 : Résumés de reglin et reglog
 
 ```{r echo=FALSE}
 # premier modèle : toutes les variables candidates
@@ -579,24 +643,24 @@ stargazer(reglin, reglog, type = "text", digits = 2,  single.row = TRUE)
 
 ------------------------------------------------------------------------
 
-Nos deux modèles expliquent plus de 80% de la variance de l'indice de bonheur. Cependant, le modèle avec transformation logarithmique (reglog) a un R² ajusté légèrement supérieur, ce qui indique une meilleure capacité explicative. Nos variables significatives, par ordre de significativité, sont l'espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l'OCDE et l'inscription à l'école primaire.
+Nos deux modèles expliquent plus de 80% de la variance de l'indice de bonheur. Cependant, le modèle avec transformation logarithmique (reglog) a un R² ajusté légèrement supérieur, ce qui indique une meilleure capacité explicative.
 
-Présentation et interprétation des résultats obtenus : utiliser un tableau récapitulatif des modèles principaux testés
+Nos variables significatives, par ordre de significativité, sont l'espérance de vie, le surpoids, le PIB par habitant, la dépense militaire, la participation à l'OCDE et l'inscription à l'école primaire.
 
 ## Modélisation avancée et sélection de variables
 
-Nous partons du modèle logarithmique `reglog` qui semblait le plus performant (meilleur R² ajusté et meilleure linéarité).
+Nous partons du modèle logarithmique `reglog` qui semble le plus performant de par son meilleur R² ajusté.
 
 ### Traitement de la multicolinéarité
 
-Examinons les facteurs d'inflation de la variance (VIF) pour détecter la multicolinéarité.
+Examinons les facteurs d'inflation de la variance (VIF) pour détecter une potentielle multicolinéarité entre les variables.
 
 ------------------------------------------------------------------------
 
 <center>
 
-::: {#tab3 .fig}
-Tableau 3 : VIF des variables du modèle complet (reglog)
+::: {#tab5 .fig}
+Tableau 5 : VIF des variables du modèle complet (reglog)
 
 ```{r echo=FALSE}
 # Calcul du VIF initial
@@ -616,8 +680,8 @@ stargazer(vif_df, type = "text", summary = FALSE, rownames = FALSE, digits = 2)
 
 <center>
 
-::: {#tab4 .fig}
-Tableau 4 : VIF des variables de reglog près suppression de la consommation d'énergie
+::: {#tab6 .fig}
+Tableau 6 : VIF des variables de reglog après suppression de la consommation d'énergie
 
 ```{r echo=FALSE}
 # Modèle corrigé : suppression de KWH_pp_pc
@@ -644,8 +708,8 @@ Nous utilisons une procédure de sélection pas à pas descendante (backward) ba
 
 <center>
 
-::: {#tab5 .fig}
-Tableau 5 : Résumé du modèle optimisé par AIC
+::: {#tab7 .fig}
+Tableau 7 : Résumé du modèle optimisé par AIC
 
 ```{r echo=FALSE}
 # Sélection backward
@@ -659,24 +723,26 @@ stargazer(reg_final_step, type = "text", digits = 3, single.row = TRUE)
 
 ------------------------------------------------------------------------
 
-Ce modèle ne contient plus que les variables qui apportent une information significative au sens de l'AIC. C'est notre nouveau modèle de référence. On constate l'absence de variables non significatives : la dépense militaire et la densité de population.
+Ce modèle ne contient plus que les variables qui apportent une information significative au sens de l'AIC. C'est notre nouveau modèle de référence.
+
+On constate l'absence de variables précédemment non significatives : la dépense militaire et la densité de population.
 
 ### Test de non-linéarités et d'interactions
 
-Il est fréquent en économie du bonheur d'observer des rendements décroissants (déjà capturé par le log du PIB). Nous pouvons aussi tester si l'effet de la richesse dépend du niveau de développement (interaction OCDE \* PIB).
+Il est fréquent en économie du bonheur d'observer des rendements décroissants (déjà capturé par le logarithme du PIB). Nous pouvons aussi tester si l'effet de la richesse dépend du niveau de développement avec l'interaction OCDE x PIB.
 
-Testons un modèle avec interaction :
+Testons un modèle avec cette interaction :
 
 ------------------------------------------------------------------------
 
 <center>
 
-::: {#tab6 .fig}
-Tableau 6 : Résumés du modèle final et du modèle avec interaction
+::: {#tab8 .fig}
+Tableau 8 : Résumés du modèle final et du modèle avec interaction
 
 ```{r echo=FALSE}
 # Ajout de l'interaction OCDE * log(GDP)
-reg_interact <- update(reg_final_step, . ~ . + OCDE:log(GDP_per_Capita))
+reg_interact <- update(reg_final_step, . ~ . + OCDE*log(GDP_per_Capita))
 
 # Comparaison des modèles
 stargazer(reg_final_step, reg_interact, type = "text", digits = 3,   single.row = TRUE)
@@ -690,8 +756,8 @@ stargazer(reg_final_step, reg_interact, type = "text", digits = 3,   single.row 
 
 <center>
 
-::: {#tab7 .fig}
-Tableau 7 : Test d'anova entre le modèle final et celui avec interaction
+::: {#tab9 .fig}
+Tableau 9 : Test d'anova entre le modèle final et celui avec interaction
 
 ```{r echo=FALSE}
 # Test anova pour voir si l'interaction apporte significativement de l'information
@@ -711,11 +777,11 @@ stargazer(bop, type = "text",  digits = 3, summary = FALSE)
 
 ------------------------------------------------------------------------
 
-**Analyse de l'interaction :** Le test ANOVA compare le modèle avec et sans l'interaction `OCDE * GDP`. La p-value obtenue (**0.1474**) est supérieure au seuil standard de 0.05. Nous ne pouvons donc pas rejeter l'hypothèse nulle. Cela signifie que l'ajout du terme d'interaction n'améliore pas significativement la qualité du modèle. L'hypothèse selon laquelle l'importance du PIB sur le bonheur différerait significativement entre les pays de l'OCDE et les autres n'est pas validée statistiquement par nos données.
+**Analyse de l'interaction :** Le test ANOVA compare le modèle avec et sans l'interaction `OCDE * GDP`. La p-value obtenue (**0.147**) est supérieure au seuil standard de 0.05. Cela signifie que l'ajout du terme d'interaction n'améliore pas significativement la qualité du modèle. L'hypothèse selon laquelle l'importance du PIB sur le bonheur différerait significativement entre les pays de l'OCDE et les autres n'est pas validée statistiquement par nos données.
 
 ### Choix du modèle final
 
-Compte tenu des résultats précédents, nous retenons le modèle issu de la sélection Stepwise (**reg_final_step**) sans le terme d'interaction.
+Compte tenu des résultats précédents, nous retenons le modèle issu de la sélection Stepwise sans le terme d'interaction comme notre modèle final expliquant l'indice de bonheur.
 
 ```{r echo=FALSE}
 # Définition définitive du modèle final
@@ -724,14 +790,14 @@ best_model <- reg_final_step
 
 ## Diagnostics des résidus sur le modèle final
 
-Vérifions maintenant la validité des hypothèses des MCO sur notre modèle final : `best_model`.
+Vérifions maintenant la validité des hypothèses des MCO (citées en introduction) sur notre modèle final : `best_model`.
 
 ------------------------------------------------------------------------
 
 <center>
 
-::: {#tab8 .fig}
-Tableau 8 : Tableau de synthèse des diagnostics
+::: {#tab10 .fig}
+Tableau 10 : Tableau de synthèse des diagnostics
 
 ```{r echo=FALSE}
 # 1. Homoscédasticité (Breusch-Pagan)
@@ -764,15 +830,18 @@ stargazer(diag_df, type = "text", summary = FALSE, rownames = FALSE,  digits = 4
 
 -   **Normalité validée :** Le test de Shapiro-Wilk (p-value = **0.3435**) confirme que les résidus suivent une loi normale. L'inférence statistique (t-tests, intervalles de confiance) est donc fiable.
 
--   **Indépendance validée :** Le test de Durbin-Watson (p-value = **0.2697**, DW $\approx$ 1.88) ne détecte pas d'autocorrélation significative.
+-   **Indépendance validée :** Le test de Durbin-Watson (p-value = **0.2697**) ne détecte pas d'autocorrélation significative.
 
 ### Visualisation des diagnostics
 
 ::: {#fig13 .fig}
 ```{r echo=FALSE, fig.height=4, fig.width=8}
 par(mfrow = c(1, 2))
-plot(best_model, which = 1, main = "Résidus vs Ajustés") # Homoscédasticité
-plot(best_model, which = 2, main = "Q-Q Plot") # Normalité
+plot(best_model, which = 1, main = "Résidus vs Ajustés", col = "blue", pch = 1) 
+
+
+# Homoscédasticité
+plot(best_model, which = 2, main = "Q-Q Plot", col = 'red',  pch = 4) # Normalité
 par(mfrow = c(1, 1))
 ```
 
@@ -781,7 +850,7 @@ Figure 13 : Diagnostics visuels des résidus
 
 **Analyse visuelle :** Les graphiques confirment la robustesse du modèle.
 
--   **Résidus vs Ajustés :** Le nuage de points est dispersé aléatoirement autour de 0 sans forme d'entonnoir marquée, ce qui corrobore l'homoscédasticité.
+-   **Résidus vs Ajustés :** Le nuage de points est dispersé aléatoirement autour de 0 sans forme marquée, ce qui corrobore l'homoscédasticité.
 
 -   **Q-Q Plot :** Les points s'alignent correctement sur la droite de normalité. On note quelques légers écarts aux extrémités correspondant à des pays comme **Oman** (résidu positif élevé) ou l'**Afghanistan** et le **Botswana** (résidus négatifs), mais ces *outliers* restent ponctuels et ne violent pas l'hypothèse de normalité globale.
 
@@ -796,9 +865,9 @@ Nous complétons les diagnostics par une analyse des points influents (points le
 ::: {#fig14 .fig}
 ```{r echo=FALSE, fig.height=4, fig.width=8}
 par(mfrow = c(1, 2))
-plot(best_model, which = 4, main = "Distance de Cook")
+plot(best_model, which = 4, main = "Distance de Cook", col = 'blue')
 abline(0.03, 0, col = "red", lty = 2)
-plot(best_model, which = 5, main = "Résidus vs Levier")
+plot(best_model, which = 5, main = "Résidus vs Levier", col = 'red',  pch = 4)
 par(mfrow = c(1, 1))
 
 ```
@@ -810,7 +879,7 @@ Figure 14 : Détection des points influents (Distance de Cook et Effet Levier)
 
 -   **Distance de Cook :** Bien que ces pays dépassent le seuil théorique de sensibilité ($4/n \approx 0.03$), aucune observation ne s'approche du seuil critique de 0.5 ou 1. Ils influencent le modèle sans le déstabiliser.
 
--   **Levier vs Résidus :** La **Somalie** se distingue par un fort effet de levier (probablement dû à ses valeurs extrêmes en scolarisation, ou des valeurs manquantes trop lissées par notre pré traitement), mais son résidu reste modéré. **Oman**, le **Botswana** et la **Jordanie** ont des résidus plus importants, suggérant que le modèle explique moins bien leur niveau de bonheur spécifique (facteurs géopolitiques ou culturels non capturés).
+-   **Levier vs Résidus :** La **Somalie** se distingue par un fort effet de levier (probablement dû à sa valeur extrême en scolarisation, ou des valeurs manquantes trop lissées par notre pré traitement), mais son résidu reste modéré. **Oman**, le **Botswana** et la **Jordanie** ont des résidus plus importants, suggérant que le modèle explique moins bien leur niveau de bonheur spécifique. On peut supposer qu'il existe dans leurs cas des facteurs géopolitiques ou culturels non capturés par notre modèle.
 
 En conclusion, bien que ces pays atypiques existent, ils ne remettent pas en cause la validité globale du modèle.
 
@@ -818,8 +887,8 @@ En conclusion, bien que ces pays atypiques existent, ils ne remettent pas en cau
 
 <center>
 
-::: {#tab9 .fig}
-Tableau 9 : Résultats finaux du modèle économétrique
+::: {#tab11 .fig}
+Tableau 11 : Résultats finaux du modèle économétrique
 
 ```{r echo=FALSE}
 # Affichage final du modèle
