@@ -1,0 +1,3532 @@
+[
+    {
+        "id": 18,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Avenue de Rochester à gauche de l'entrée du parking face au 2 square Armand de la Rouerie",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-05-01T02:00:00",
+        "date_fin": "2026-04-03T02:00:00"
+    },
+    {
+        "id": 86,
+        "quartier": "7 - Les Melliers",
+        "localisation": "face au 48 Avenue Monseigneur Mouézy",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux sur réseaux ou ouvrages de télécommunications",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 104,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Avenue Général George S. Patton face au n°3 de la rue Marbaudais",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-17T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 1,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 98 au 106 Rue de Vern",
+        "type": "Neutralisation de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2024-09-23T02:00:00",
+        "date_fin": "2026-08-14T02:00:00"
+    },
+    {
+        "id": 6,
+        "quartier": "35240 - le Rheu + 35353 - Vezin-le-Coquet",
+        "localisation": "le Pont de Verrière,à l'intersection de la Route de Vezin et de la Route départementale 68",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2024-10-29T01:00:00",
+        "date_fin": "2026-06-30T02:00:00"
+    },
+    {
+        "id": 8,
+        "quartier": "35240 - le Rheu + 35353 - Vezin-le-Coquet",
+        "localisation": "le Pont de Verrière,à l'intersection de la Route de Vezin et de la Route départementale 68",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2024-11-18T01:00:00",
+        "date_fin": "2026-06-30T02:00:00"
+    },
+    {
+        "id": 12,
+        "quartier": "1 - Centre",
+        "localisation": "du 47 au 50bis Boulevard de Chézy, dans la contre-allée",
+        "type": "Circulation à double sens",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-01-06T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 14,
+        "quartier": "1 - Centre",
+        "localisation": "du 47 au 50bis Boulevard de Chézy, dans la contre-allée",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-01-06T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 15,
+        "quartier": "35240 - le Rheu + 35353 - Vezin-le-Coquet",
+        "localisation": "le Pont de Verrière,à l'intersection de la Route de Vezin et de la Route départementale 68",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-02-03T01:00:00",
+        "date_fin": "2027-03-05T01:00:00"
+    },
+    {
+        "id": 21,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "71 Rue Alphonse Guérin",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux d'installation de chantier",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-06-27T02:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 35,
+        "quartier": "35055 - Chantepie + 35352 - Vern-sur-Seiche",
+        "localisation": "rue de la Hallerais entre la rue du pré long et la VC5 Chantepie déviation des 2 sens de circulation\nrue de la Hallerais depuis le rond point de l'hermine et jusqu'à la rue du pré long deviation un sens de circulation",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2025-10-06T02:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 47,
+        "quartier": "12 - Bréquigny",
+        "localisation": "du 32 au 36 Rue Frédéric Le Guyader dans les deux sens",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-10-27T01:00:00",
+        "date_fin": "2026-10-27T01:00:00"
+    },
+    {
+        "id": 62,
+        "quartier": "35281 - Saint-Jacques-de-la-Lande",
+        "localisation": "Rue de la Pilate, du 148 jusqu'à la Rue des Vingt-cinq Fusillés",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2025-11-30T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 73,
+        "quartier": "4 - Saint Martin",
+        "localisation": "Rue de Plaisance, de la Rue Armand Rébillon jusqu'au 12,Rue Victor Ségalen, de la Rue Louis Rossel jusqu'à la Rue de Plaisance",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 75,
+        "quartier": "7 - Les Melliers",
+        "localisation": "171 Rue de Vern",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux désaffectation de parcelle",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-04T01:00:00",
+        "date_fin": "2026-12-31T01:00:00"
+    },
+    {
+        "id": 79,
+        "quartier": "35065 - la Chapelle-Thouarault",
+        "localisation": "les Rochers - Rue de la Petite Champagne",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-08T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 78,
+        "quartier": "35139 - Laillé",
+        "localisation": "Rue du Stade",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-08T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 82,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "Avenue de Guyenne à partir du numéro 23 et jusqu'a la zone de retournement en bout de l'Avenue",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-11T01:00:00",
+        "date_fin": "2026-03-04T01:00:00"
+    },
+    {
+        "id": 97,
+        "quartier": "8 - Sud gare",
+        "localisation": "11 Rue Joüon des Longrais",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages de télécommunications",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 99,
+        "quartier": "35180 - Miniac-sous-Bécherel",
+        "localisation": "9 le Fresne",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 101,
+        "quartier": "35180 - Miniac-sous-Bécherel",
+        "localisation": "9 le Fresne",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 89,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 171 au 197 Rue de Châteaugiron dans les deux sens",
+        "type": "Limitation de vitesse",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-07-03T02:00:00"
+    },
+    {
+        "id": 91,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 171 au 197 Rue de Châteaugiron dans les deux sens",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-07-03T02:00:00"
+    },
+    {
+        "id": 110,
+        "quartier": "12 - Bréquigny",
+        "localisation": "7 Rue de Suède",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages de transport ou distribution de chaleur",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-23T01:00:00",
+        "date_fin": "2026-01-19T01:00:00"
+    },
+    {
+        "id": 111,
+        "quartier": "12 - Bréquigny",
+        "localisation": "7 Rue de Suède",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de transport ou distribution de chaleur",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-23T01:00:00",
+        "date_fin": "2026-01-19T01:00:00"
+    },
+    {
+        "id": 114,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "Avenue Charles et Raymonde Tillon dans le sens Ouest-Est",
+        "type": "Interdiction de tourner",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 126,
+        "quartier": "6 - Jeanne d'Arc / Longs Champs / Beaulieu",
+        "localisation": "118 Boulevard de Metz",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de gaz",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-02T01:00:00",
+        "date_fin": "2026-01-14T01:00:00"
+    },
+    {
+        "id": 150,
+        "quartier": "8 - Sud gare",
+        "localisation": "Rue Pierre Le Baud, Rue Sirodot",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-07T01:00:00"
+    },
+    {
+        "id": 220,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "2 Rue de la Croix Connue",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 196,
+        "quartier": "35001 - Acigné",
+        "localisation": "11Rue des Rosiers",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 231,
+        "quartier": "35058 - la Chapelle-Chaussée",
+        "localisation": "au droit du lieudit l'Alleu",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 128,
+        "quartier": "4 - Saint Martin",
+        "localisation": "Rue Antoine de Saint-Exupéry",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 162,
+        "quartier": "35245 - Romillé",
+        "localisation": "7 Rue des Trois Evêchés",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 212,
+        "quartier": "8 - Sud gare",
+        "localisation": "2 Rue Jean Bras,8 Boulevard Gaëtan Hervé",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages d'eau potable",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 218,
+        "quartier": "7 - Les Melliers",
+        "localisation": "face au 95 Rue de Vern",
+        "type": "Circulation alternée",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 144,
+        "quartier": "4 - Saint Martin",
+        "localisation": "Rue de Saint-Malo, du 212 jusqu'à la Rue Jules Bodin",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 175,
+        "quartier": "7 - Les Melliers",
+        "localisation": "face au 68 Boulevard Villebois-Mareuil",
+        "type": "Circulation alternée",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 154,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Avenue Général George S. Patton, de la Rue du Poirier Nivet jusqu'à la Rue du Gast",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 140,
+        "quartier": "35059 - la Chapelle-des-Fougeretz",
+        "localisation": "les Piltières",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 164,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "à l'intersection de la Rue de Lorient et de la Rue Charles et Paul Géniaux",
+        "type": "Interdiction de tourner",
+        "libelle": "travaux d'aménagement pour le Trambus",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 141,
+        "quartier": "35139 - Laillé + 35363 - Pont-Péan",
+        "localisation": "la Longrais, La Maussinière, Rue des Cormiers, La Petite Bétuaudais",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 171,
+        "quartier": "8 - Sud gare + 8 - Sud gare",
+        "localisation": "Rue Pierre Le Baud",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-03-20T01:00:00"
+    },
+    {
+        "id": 210,
+        "quartier": "7 - Les Melliers",
+        "localisation": "face au 125 Rue Saint-Hélier",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux travaux pour le bassin St Hélier",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-05-01T02:00:00"
+    },
+    {
+        "id": 213,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Square Louis Armand, de la Rue Saint-Hélier jusqu'au 2",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-05-01T02:00:00"
+    },
+    {
+        "id": 216,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Square Louis Armand, de la Rue Saint-Hélier jusqu'au 2",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-05-01T02:00:00"
+    },
+    {
+        "id": 242,
+        "quartier": "35353 - Vezin-le-Coquet",
+        "localisation": "Route de Lorient : depuis l'intersection de la rue Manoir de Servigné sur 150 ml  de part et d'autres, soit section comprise entre Cuisinella et la limite d'agglomération (entrée du parking du lidl)",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-01-07T01:00:00"
+    },
+    {
+        "id": 244,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue des Melliers",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 233,
+        "quartier": "9 - Cleunay / Arsenal - Redon / La Courrouze",
+        "localisation": "Avenue Jules Maniez, de la Place Jeanne Laurent jusqu'au Boulevard Pierre Mendès-France et seulement dans le sens Ouest-Est",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 253,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "1 Rue François Bizette,39 Rue Paul Bert",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de gaz",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-21T01:00:00"
+    },
+    {
+        "id": 266,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "au 23 -25Avenue Chardonnet, au droit de la chaufferie",
+        "type": "Mise en impasse",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-08T01:00:00",
+        "date_fin": "2026-01-08T01:00:00"
+    },
+    {
+        "id": 259,
+        "quartier": "14 - Zone Industrielle Nord",
+        "localisation": "Rue du Chesnay Beauregard",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-08T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 278,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "Rue du Chêne Germain",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-22T01:00:00"
+    },
+    {
+        "id": 302,
+        "quartier": "35275 - Saint-Gilles",
+        "localisation": "au droit du n°20 Rue du Prieuré",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 283,
+        "quartier": "35080 - Cintré",
+        "localisation": "Rue des Charmes, du Chemin du Pâtis Cochet jusqu'au 1, Allée des Sports",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 277,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "Contour de l'Eglise",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 307,
+        "quartier": "4 - Saint Martin",
+        "localisation": "12 Rue Olivier de Serres",
+        "type": "Circulation interdite",
+        "libelle": "travaux de grutage",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-13T01:00:00",
+        "date_fin": "2026-01-13T01:00:00"
+    },
+    {
+        "id": 305,
+        "quartier": "1 - Centre",
+        "localisation": "Rue des Portes Mordelaises, entre la rue de Juillet et le porche",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-13T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 321,
+        "quartier": "11 - Le Blosne",
+        "localisation": "du 20quater au 22 Avenue Henri Fréville",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 322,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "20 Rue du Courtil",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 315,
+        "quartier": "35120 - Gévezé",
+        "localisation": "32 le Claret",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-02-19T01:00:00"
+    },
+    {
+        "id": 350,
+        "quartier": "35047 - Bruz",
+        "localisation": "Rue des Tilleuls",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-03-06T01:00:00"
+    },
+    {
+        "id": 5,
+        "quartier": "9 - Cleunay / Arsenal - Redon / La Courrouze",
+        "localisation": "Rue Jules Lallemand, de la Rue Ferdinand de Lesseps jusqu'à la Rue Paul Lerebours-Pigeonnière",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2024-10-09T02:00:00",
+        "date_fin": "2026-10-09T02:00:00"
+    },
+    {
+        "id": 11,
+        "quartier": "1 - Centre",
+        "localisation": "du 47 au 50bis Boulevard de Chézy, dans la contre-allée",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-01-06T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 24,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "du 3 au 9 Rue de Gascogne",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-09-01T02:00:00",
+        "date_fin": "2026-02-28T01:00:00"
+    },
+    {
+        "id": 31,
+        "quartier": "35055 - Chantepie + 35352 - Vern-sur-Seiche",
+        "localisation": "rue de la Hallerais entre la rue du pré long et la VC5 Chantepie déviation des 2 sens de circulation\nrue de la Hallerais depuis le rond point de l'hermine et jusqu'à la rue du pré long deviation un sens de circulation",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2025-09-29T02:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 33,
+        "quartier": "35066 - Chartres-de-Bretagne",
+        "localisation": "Rue Pierre et Marie Curie",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-10-01T02:00:00",
+        "date_fin": "2026-01-31T01:00:00"
+    },
+    {
+        "id": 34,
+        "quartier": "35055 - Chantepie + 35352 - Vern-sur-Seiche",
+        "localisation": "rue de la Hallerais entre la rue du pré long et la VC5 Chantepie déviation des 2 sens de circulation\nrue de la Hallerais depuis le rond point de l'hermine et jusqu'à la rue du pré long deviation un sens de circulation",
+        "type": "Limitation de vitesse",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-10-06T02:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 40,
+        "quartier": "35250 - Saint-Armel",
+        "localisation": "Chemin de la Ry",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-10-20T02:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 44,
+        "quartier": "1 - Centre",
+        "localisation": "du 33 au 41 Rue Legraverend",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2025-10-27T01:00:00",
+        "date_fin": "2026-03-31T02:00:00"
+    },
+    {
+        "id": 45,
+        "quartier": "1 - Centre",
+        "localisation": "45 Rue Legraverend",
+        "type": "Mesure libre stationnement",
+        "libelle": "travaux de construction de bâtiment",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-10-27T01:00:00",
+        "date_fin": "2026-03-31T02:00:00"
+    },
+    {
+        "id": 46,
+        "quartier": "12 - Bréquigny",
+        "localisation": "du 32 au 36 Rue Frédéric Le Guyader dans les deux sens",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-10-27T01:00:00",
+        "date_fin": "2026-10-27T01:00:00"
+    },
+    {
+        "id": 49,
+        "quartier": "35353 - Vezin-le-Coquet",
+        "localisation": "Route de Lorient : depuis la voie de sortie Rue des Maréchales (Maître Kanter)  jusqu'à 70 ml après l'intersection de la Rue du Manoir de Servigné (entrée parking du Lidl )",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-11-06T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 51,
+        "quartier": "35088 - Corps-Nuds",
+        "localisation": "ZAC les Grands Sillons",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-11-17T01:00:00",
+        "date_fin": "2026-02-20T01:00:00"
+    },
+    {
+        "id": 52,
+        "quartier": "9 - Cleunay / Arsenal - Redon / La Courrouze",
+        "localisation": "du 20A au 22 Boulevard de Guines",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-11-19T01:00:00",
+        "date_fin": "2026-11-20T01:00:00"
+    },
+    {
+        "id": 61,
+        "quartier": "1 - Centre",
+        "localisation": "Rue Nantaise, de la Place Maréchal Foch jusqu'au 10",
+        "type": "Interruption de circulation travaux",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-11-28T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 66,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "du 21 Rue des Mesliers",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 64,
+        "quartier": "35353 - Vezin-le-Coquet",
+        "localisation": "Rue des Maréchales :  voie de sortie de la rue Maréchales (Maître Kanter) et au droit de  la route de Lorient",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-03-06T01:00:00"
+    },
+    {
+        "id": 100,
+        "quartier": "35208 - Orgères",
+        "localisation": "Rue de Rennes",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 88,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 171 au 197 Rue de Châteaugiron dans les deux sens",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-07-03T02:00:00"
+    },
+    {
+        "id": 102,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Rue Levot, du 8 jusqu'à la Rue de Lorient",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-16T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 109,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet + 7 - Les Melliers",
+        "localisation": "Boulevard Villebois-Mareuil, Boulevard Villebois-Mareuil",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-22T01:00:00",
+        "date_fin": "2026-03-27T01:00:00"
+    },
+    {
+        "id": 118,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "du 10 au 16 Rue Constant Véron",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-02-20T01:00:00"
+    },
+    {
+        "id": 120,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "du 10 au 16 Rue Constant Véron",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-02-20T01:00:00"
+    },
+    {
+        "id": 123,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "27 Avenue Chardonnet",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-29T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 125,
+        "quartier": "12 - Bréquigny",
+        "localisation": "à l'intersection de l'Avenue du Canada et du Rond-point dans le sens Sud vers le Nord",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-01T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 180,
+        "quartier": "35206 - Noyal-Châtillon-sur-Seiche",
+        "localisation": "Voie communale 301",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 176,
+        "quartier": "35208 - Orgères",
+        "localisation": "3 Rue de Pont-Péan",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux sur réseaux ou ouvrages d'eaux usées / assainissement",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 135,
+        "quartier": "8 - Sud gare",
+        "localisation": "78 Rue de Riaval",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-13T01:00:00"
+    },
+    {
+        "id": 131,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "face au 10 Allée de Brno",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de gaz",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 149,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue des Veyettes au droit et à l'avancement des travaux",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 178,
+        "quartier": "35120 - Gévezé",
+        "localisation": "le Placis Bréal",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 181,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Square Ludovic Trarieux au droit et à l'avancement des travaux",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 184,
+        "quartier": "35065 - la Chapelle-Thouarault",
+        "localisation": "4-6 Rue de l'Eglise",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 188,
+        "quartier": "35047 - Bruz",
+        "localisation": "Rue des Tilleuls",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 215,
+        "quartier": "35065 - la Chapelle-Thouarault",
+        "localisation": "Rue de l'Eglise, de la Rue du Champ Rollé jusqu'au 1,à l'intersection de la Rue du Champ Rollé et de la Rue de l'Eglise",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 174,
+        "quartier": "11 - Le Blosne",
+        "localisation": "Allée de Varsovie",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 155,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue Michel Colomb, de la Rue André Pailheret jusqu'à la Rue de Châteaugiron",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 185,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "à l'intersection de la Rue de Lorient et du Boulevard Marbeuf",
+        "type": "Interdiction de tourner",
+        "libelle": "travaux pour les aménagements du Trambus",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 189,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "à l'intersection de la Rue de la Cochardière et de la Rue Saint-Martin",
+        "type": "Mise en impasse",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 146,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Avenue Général George S. Patton, de la Rue du Poirier Nivet jusqu'à la Rue du Gast",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 229,
+        "quartier": "35055 - Chantepie",
+        "localisation": "Avenue des Deux Ruisseaux",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 161,
+        "quartier": "35363 - Pont-Péan",
+        "localisation": "Rue de la Gibotière",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-20T01:00:00"
+    },
+    {
+        "id": 246,
+        "quartier": "35281 - Saint-Jacques-de-la-Lande",
+        "localisation": "Chemin des Landriaux",
+        "type": "Circulation interdite",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-01-27T01:00:00"
+    },
+    {
+        "id": 234,
+        "quartier": "35206 - Noyal-Châtillon-sur-Seiche",
+        "localisation": "RD82 Rue de Saint-Erblon, de la Rue du Coudray jusqu'au Boulevard Victor Hugo",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 241,
+        "quartier": "35189 - Montgermont",
+        "localisation": "Boulevard d'Emeraude  :section entre la limite d'agglomération de Montgermont et le rond-point des Marais (RD29), Rond-point de la Bégassière",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 254,
+        "quartier": "6 - Jeanne d'Arc / Longs Champs / Beaulieu",
+        "localisation": "260 Rue de Fougères",
+        "type": "Circulation alternée",
+        "libelle": "travaux sur réseaux ou ouvrages de gaz",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-21T01:00:00"
+    },
+    {
+        "id": 247,
+        "quartier": "6 - Jeanne d'Arc / Longs Champs / Beaulieu",
+        "localisation": "260 Rue de Fougères",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages de gaz",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-21T01:00:00"
+    },
+    {
+        "id": 261,
+        "quartier": "35047 - Bruz",
+        "localisation": "la Roche Marguerite",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-08T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 288,
+        "quartier": "1 - Centre",
+        "localisation": "Rue de l'Hermine",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 282,
+        "quartier": "35081 - Clayes",
+        "localisation": "Allée des Peupliers",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 295,
+        "quartier": "35055 - Chantepie",
+        "localisation": "6 Rue d'Hallouvry",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 306,
+        "quartier": "4 - Saint Martin",
+        "localisation": "12 Rue Olivier de Serres",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux de grutage",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-13T01:00:00",
+        "date_fin": "2026-01-13T01:00:00"
+    },
+    {
+        "id": 311,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "39 Rue François-Charles Oberthür",
+        "type": "Circulation interdite",
+        "libelle": "travaux sur réseaux ou ouvrages d'eaux usées / assainissement",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-14T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 326,
+        "quartier": "35120 - Gévezé",
+        "localisation": "la Vieille Rue",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 328,
+        "quartier": "35334 - Thorigné-Fouillard",
+        "localisation": "Impasse Fragonard,Rue Toulouse-Lautrec,Rue Charles Gounod,Avenue du Maréchal Leclerc",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-03-13T01:00:00"
+    },
+    {
+        "id": 333,
+        "quartier": "35065 - la Chapelle-Thouarault",
+        "localisation": "18 Rue du Commerce",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-22T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 336,
+        "quartier": "35066 - Chartres-de-Bretagne + 35281 - Saint-Jacques-de-la-Lande",
+        "localisation": "Rue Pierre et Marie Curie",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-26T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 338,
+        "quartier": "35001 - Acigné",
+        "localisation": "du 11 au 19 Allée des Hortensias",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-28T01:00:00",
+        "date_fin": "2026-02-09T01:00:00"
+    },
+    {
+        "id": 341,
+        "quartier": "11 - Le Blosne",
+        "localisation": "du 20quater au 22 Avenue Henri Fréville",
+        "type": "Neutralisation de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 347,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "75 Rue de Rennes",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 2,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue de Vern, de la Rue Le Dantec jusqu'au 95",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2024-09-23T02:00:00",
+        "date_fin": "2026-08-14T02:00:00"
+    },
+    {
+        "id": 9,
+        "quartier": "8 - Sud gare",
+        "localisation": "Rue Louis Blériot",
+        "type": "Mise en impasse",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2024-12-04T01:00:00",
+        "date_fin": "2027-05-31T02:00:00"
+    },
+    {
+        "id": 10,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "sur la piste cyclable Avenue Jacqueline de Romilly, de l'Avenue Germaine Dulac jusqu'à l'Avenue André Malraux",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2024-12-31T01:00:00",
+        "date_fin": "2027-12-31T01:00:00"
+    },
+    {
+        "id": 17,
+        "quartier": "35240 - le Rheu + 35353 - Vezin-le-Coquet",
+        "localisation": "Route de Lorient : section depuis la limite d'agglomération jusqu'à la Rue des Maréchales",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-02-24T01:00:00",
+        "date_fin": "2026-05-26T02:00:00"
+    },
+    {
+        "id": 16,
+        "quartier": "35240 - le Rheu",
+        "localisation": "Route départementale 224 : section depuis la limite d'agglomération de Le Rheu jusqu'au carrefour à feux RN24, Route départementale 129 : intersection au lieudit Le Plessix Saucourt et la RN24",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-02-24T01:00:00",
+        "date_fin": "2026-05-26T02:00:00"
+    },
+    {
+        "id": 22,
+        "quartier": "1 - Centre",
+        "localisation": "Boulevard du Colombier, dans le parking situé entre la Rue du 7ème d'Artillerie et la Rue du Père Janvier",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-08-04T02:00:00",
+        "date_fin": "2026-03-31T02:00:00"
+    },
+    {
+        "id": 26,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "à l'intersection du Boulevard d'Anjou et de l'Avenue de Guyenne",
+        "type": "Circulation interdite",
+        "libelle": "travaux de la prolongation de la ligne de métro A",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-09-01T02:00:00",
+        "date_fin": "2026-02-28T01:00:00"
+    },
+    {
+        "id": 29,
+        "quartier": "12 - Bréquigny",
+        "localisation": "Rue des Sources",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-09-22T02:00:00",
+        "date_fin": "2026-12-31T01:00:00"
+    },
+    {
+        "id": 30,
+        "quartier": "12 - Bréquigny",
+        "localisation": "Rue des Sources",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-09-22T02:00:00",
+        "date_fin": "2026-12-31T01:00:00"
+    },
+    {
+        "id": 36,
+        "quartier": "12 - Bréquigny",
+        "localisation": "le Moulin de Charbonnière",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-10-07T02:00:00",
+        "date_fin": "2026-05-31T02:00:00"
+    },
+    {
+        "id": 37,
+        "quartier": "4 - Saint Martin",
+        "localisation": "Rue Amiral Gaspard de Coligny, du Boulevard de la Robiquette jusqu'à l'Avenue Germaine Dulac",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-10-09T02:00:00",
+        "date_fin": "2027-11-30T01:00:00"
+    },
+    {
+        "id": 38,
+        "quartier": "35250 - Saint-Armel",
+        "localisation": "1 Chemin de la Ry",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur voirie",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-10-10T02:00:00",
+        "date_fin": "2026-08-28T02:00:00"
+    },
+    {
+        "id": 39,
+        "quartier": "35250 - Saint-Armel",
+        "localisation": "Chemin de la Ry",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-10-20T02:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 43,
+        "quartier": "12 - Bréquigny",
+        "localisation": "du 32 au 36 Rue Frédéric Le Guyader dans les deux sens",
+        "type": "Limitation de vitesse",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-10-27T01:00:00",
+        "date_fin": "2026-10-27T01:00:00"
+    },
+    {
+        "id": 54,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "12 Rue de Mordelles, Inconnu Mode doux non dénommé",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-11-24T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 56,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "Chemin des Nouettes",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-11-24T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 59,
+        "quartier": "1 - Centre",
+        "localisation": "Rue Nantaise, de la Place Maréchal Foch jusqu'au 10",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-11-28T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 65,
+        "quartier": "4 - Saint Martin",
+        "localisation": "Rue de Plaisance, de la Rue Armand Rébillon jusqu'au 12,Rue Victor Ségalen, de la Rue Louis Rossel jusqu'à la Rue de Plaisance",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 69,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "du 21 Rue des Mesliers",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 70,
+        "quartier": "35353 - Vezin-le-Coquet",
+        "localisation": "Route de Lorient : depuis la voie de sortie Rue des Maréchales (Maître Kanter)  jusqu'à 70 ml après l'intersection de la Rue du Manoir de Servigné (entrée parking du Lidl )",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-03-06T01:00:00"
+    },
+    {
+        "id": 72,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte + 3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Rue du Manoir de Servigné : depuis  l'intersection de la Route de Lorient jusqu'à l'intersection de la Rue du Marais, Rue des Maréchales : depuis l'intersection Route de Lorient ( Kiloutou) et sur 50 ml vers la Rue des Maréchales",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-03-06T01:00:00"
+    },
+    {
+        "id": 71,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Avenue Général George S. Patton, de la Rue Franz Heller jusqu'au Boulevard d'Armorique",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-03-13T01:00:00"
+    },
+    {
+        "id": 77,
+        "quartier": "9 - Cleunay / Arsenal - Redon / La Courrouze",
+        "localisation": "du 150 au 152 Rue Eugène Pottier",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-08T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 83,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "Avenue de Guyenne à partir du numéro 23 et jusqu'a la zone de retournement en bout de l'Avenue",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-11T01:00:00",
+        "date_fin": "2026-03-04T01:00:00"
+    },
+    {
+        "id": 84,
+        "quartier": "35189 - Montgermont",
+        "localisation": "Rue Newton",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 117,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "Avenue Charles et Raymonde Tillon  à l'intersection de la rue Doyen Denis Leroy et dans le sens Est-Ouest",
+        "type": "Interdiction de tourner",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 113,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "à l'intersection de l'Avenue Sir Winston Churchill et de l'Avenue Charles et Raymonde Tillon",
+        "type": "Interdiction de tourner",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 124,
+        "quartier": "35275 - Saint-Gilles",
+        "localisation": "la Croix Denieul - la Lande du Mortier",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-29T01:00:00",
+        "date_fin": "2026-02-28T01:00:00"
+    },
+    {
+        "id": 228,
+        "quartier": "11 - Le Blosne",
+        "localisation": "Route de la Saudrais",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-08T01:00:00"
+    },
+    {
+        "id": 199,
+        "quartier": "35001 - Acigné",
+        "localisation": "11Rue des Rosiers",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 224,
+        "quartier": "35210 - Pacé",
+        "localisation": "17 Chemin de Mondonin",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 232,
+        "quartier": "35275 - Saint-Gilles",
+        "localisation": "4 Rue du Gripail",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 130,
+        "quartier": "7 - Les Melliers",
+        "localisation": "14 Rue des Veyettes",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages d'eau potable",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 160,
+        "quartier": "35245 - Romillé",
+        "localisation": "7 Rue des Trois Evêchés",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 169,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue des Veyettes au droit et à l'avancement des travaux",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 207,
+        "quartier": "35065 - la Chapelle-Thouarault",
+        "localisation": "Rue de l'Eglise, de la Rue du Champ Rollé jusqu'au 1,à l'intersection de la Rue du Champ Rollé et de la Rue de l'Eglise",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 217,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue Louis Foucqueron, de la Rue de Vern jusqu'au 5",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 223,
+        "quartier": "1 - Centre",
+        "localisation": "1 Rue de la Psalette",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de gaz",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 230,
+        "quartier": "35210 - Pacé",
+        "localisation": "4 les Landelles",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 225,
+        "quartier": "1 - Centre",
+        "localisation": "au N° 52 Boulevard de la Liberté et angle de rue Poullain-Duparc",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 198,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "Rond-point Rue de la Rigourdière",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 193,
+        "quartier": "35245 - Romillé",
+        "localisation": "à l'intersection de la Rue de Perronaye et de la Route départementale 28",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 194,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "Rue Grande Rue - Rue Anne de Bretagne - Rue de la Rossignolière - Rue du Parc",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 211,
+        "quartier": "8 - Sud gare + 8 - Sud gare",
+        "localisation": "Rue Sirodot, Rue de la Courrouze, Rue Pierre Le Baud",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 200,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Rue Brindejonc des Moulinais, de la Rue de Lorient jusqu'à la Rue Etienne Pinault",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 197,
+        "quartier": "35245 - Romillé",
+        "localisation": "1 le Vivier Bourgneuf",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-05T01:00:00"
+    },
+    {
+        "id": 195,
+        "quartier": "35245 - Romillé",
+        "localisation": "1 le Vivier Bourgneuf",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-05T01:00:00"
+    },
+    {
+        "id": 163,
+        "quartier": "1 - Centre + 2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet + 3 - Bourg l'Evesque / La Touche / Moulin du Comte + 4 - Saint Martin + 6 - Jeanne d'Arc / Longs Champs / Beaulieu + 7 - Les Melliers + 8 - Sud gare + 9 - Cleunay / Arsenal - Redon / La Courrouze + 10 - Villejean / Beauregard + 11 - Le Blosne + 12 - Bréquigny + 14 - Zone Industrielle Nord + 1 - Centre + 2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet + 3 - Bourg l'Evesque / La Touche / Moulin du Comte + 4 - Saint Martin + 6 - Jeanne d'Arc / Longs Champs / Beaulieu + 7 - Les Melliers + 8 - Sud gare + 9 - Cleunay / Arsenal - Redon / La Courrouze + 10 - Villejean / Beauregard + 11 - Le Blosne + 12 - Bréquigny + 14 - Zone Industrielle Nord",
+        "localisation": "Boulevard Albert Burloud, Boulevard Georges Clemenceau, Rue de Châtillon, Boulevard Oscar Leroux, Boulevard Léon Grimault, Villa de Moravie, Cours de Bohême, Square de Galicie, Allée de Croatie, Place du Landrel, Rue Monsieur Vincent, Rue Ronsard, Avenue Monseigneur Mouézy, Avenue Louis Barthou, Boulevard de la Liberté, Boulevard de La Tour d'Auvergne, Rue de Brest, Rue de Saint-Malo, Boulevard des Trois Croix, Avenue Gros Malhon, Avenue Jules Ferry, Rue Hippolyte Vatar, Allée Louise Weiss",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-03-06T01:00:00"
+    },
+    {
+        "id": 133,
+        "quartier": "1 - Centre + 2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet + 3 - Bourg l'Evesque / La Touche / Moulin du Comte + 4 - Saint Martin + 6 - Jeanne d'Arc / Longs Champs / Beaulieu + 7 - Les Melliers + 8 - Sud gare + 9 - Cleunay / Arsenal - Redon / La Courrouze + 10 - Villejean / Beauregard + 11 - Le Blosne + 12 - Bréquigny + 14 - Zone Industrielle Nord + 1 - Centre + 2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet + 3 - Bourg l'Evesque / La Touche / Moulin du Comte + 4 - Saint Martin + 6 - Jeanne d'Arc / Longs Champs / Beaulieu + 7 - Les Melliers + 8 - Sud gare + 9 - Cleunay / Arsenal - Redon / La Courrouze + 10 - Villejean / Beauregard + 11 - Le Blosne + 12 - Bréquigny + 14 - Zone Industrielle Nord",
+        "localisation": "Boulevard Albert Burloud, Boulevard Georges Clemenceau, Rue de Châtillon, Boulevard Oscar Leroux, Boulevard Léon Grimault, Villa de Moravie, Cours de Bohême, Square de Galicie, Allée de Croatie, Place du Landrel, Rue Monsieur Vincent, Rue Ronsard, Avenue Monseigneur Mouézy, Avenue Louis Barthou, Boulevard de la Liberté, Boulevard de La Tour d'Auvergne, Rue de Brest, Rue de Saint-Malo, Boulevard des Trois Croix, Avenue Gros Malhon, Avenue Jules Ferry, Rue Hippolyte Vatar, Allée Louise Weiss",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-03-06T01:00:00"
+    },
+    {
+        "id": 214,
+        "quartier": "7 - Les Melliers",
+        "localisation": "face au 125 Rue Saint-Hélier",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux travaux pour le bassin St Hélier",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-05-01T02:00:00"
+    },
+    {
+        "id": 235,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 30 Rue Monsieur Vincent",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-01-08T01:00:00"
+    },
+    {
+        "id": 240,
+        "quartier": "13 - Secteur Rural + 13 - Secteur Rural",
+        "localisation": "Route du Meuble, Route départementale 637",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 238,
+        "quartier": "35189 - Montgermont",
+        "localisation": "Boulevard d'Emeraude  :section entre la limite d'agglomération de Montgermont et le rond-point des Marais (RD29), Rond-point de la Bégassière",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 237,
+        "quartier": "35189 - Montgermont",
+        "localisation": "Boulevard d'Emeraude  :section entre la limite d'agglomération de Montgermont et le rond-point des Marais (RD29), Rond-point de la Bégassière",
+        "type": "Limitation de vitesse",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 255,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Rue Levot, du 3 jusqu'à la Rue de La Bletterie,Rue de La Bletterie, de la Rue Levot jusqu'à la Rue Kerviler",
+        "type": "Circulation à double sens",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-07T01:00:00"
+    },
+    {
+        "id": 258,
+        "quartier": "35139 - Laillé",
+        "localisation": "cours du Chapelier / place André Recipon et Impasse du tonnelier /rue de la cale de Chancors",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 264,
+        "quartier": "7 - Les Melliers",
+        "localisation": "face au 25 Rue de la Motte Baril",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-08T01:00:00",
+        "date_fin": "2026-01-08T01:00:00"
+    },
+    {
+        "id": 260,
+        "quartier": "35047 - Bruz",
+        "localisation": "Route départementale 77,  de Pierrefitte jusqu'à la Roche Marguerite",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-08T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 268,
+        "quartier": "1 - Centre + 2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "Rue Saint-Martin, de la Rue de la Cochardière jusqu'au 15",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-09T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 269,
+        "quartier": "35001 - Acigné",
+        "localisation": "du 2 au 9 Allée des Hortensias",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-09T01:00:00",
+        "date_fin": "2026-01-28T01:00:00"
+    },
+    {
+        "id": 271,
+        "quartier": "35024 - Betton",
+        "localisation": "Avenue de la Haye-Renaud, au passage à niveau n°7",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-11T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 291,
+        "quartier": "9 - Cleunay / Arsenal - Redon / La Courrouze",
+        "localisation": "Rue Postuminus, de la Rue d'Inkermann jusqu'au Boulevard Saint-Conwoïon et seulement dans le sens Ouest-Est",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-14T01:00:00"
+    },
+    {
+        "id": 289,
+        "quartier": "4 - Saint Martin",
+        "localisation": "du 46 au 76 Canal Saint-Martin",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 275,
+        "quartier": "35047 - Bruz",
+        "localisation": "du 3B au 1A rue Gaudrine",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-31T01:00:00"
+    },
+    {
+        "id": 273,
+        "quartier": "35047 - Bruz + 35281 - Saint-Jacques-de-la-Lande",
+        "localisation": "du 34 au 25bis Rue Jules Vallès",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-02-12T01:00:00"
+    },
+    {
+        "id": 300,
+        "quartier": "35210 - Pacé",
+        "localisation": "Avenue Charles Le Goffic - Boulevard Nonimoé - Rue Lamenais",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-02-28T01:00:00"
+    },
+    {
+        "id": 304,
+        "quartier": "1 - Centre",
+        "localisation": "1 Rue de l'Alma",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-13T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 310,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "39 Rue François-Charles Oberthür",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages d'eaux usées / assainissement",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-14T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 309,
+        "quartier": "35210 - Pacé",
+        "localisation": "10 Rue de la Chalotais",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-14T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 312,
+        "quartier": "35047 - Bruz + 35139 - Laillé",
+        "localisation": "Voie communale 17 de Chaton à la Bézirais ainsi que la voie verte de la Bézirais au Sq. Frédéric Mistral à Laillé",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-16T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 327,
+        "quartier": "35204 - Nouvoitou",
+        "localisation": "7 la Barbotais",
+        "type": "Circulation interdite",
+        "libelle": "travaux sur réseaux ou ouvrages d'eaux pluviales",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 320,
+        "quartier": "35047 - Bruz + 35139 - Laillé",
+        "localisation": "Voie communale 17 de Chaton à la Bézirais ainsi que la voie verte de la Bézirais au Sq. Frédéric Mistral à Laillé",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 323,
+        "quartier": "12 - Bréquigny",
+        "localisation": "du 18 Rue d'Houlbert",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 324,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "20 Rue du Courtil",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 325,
+        "quartier": "35066 - Chartres-de-Bretagne",
+        "localisation": "Parking Rue de la Conterie",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 329,
+        "quartier": "35334 - Thorigné-Fouillard",
+        "localisation": "Impasse Fragonard,Rue Toulouse-Lautrec,Rue Charles Gounod,Avenue du Maréchal Leclerc",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-03-13T01:00:00"
+    },
+    {
+        "id": 346,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "75 Rue de Rennes",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 348,
+        "quartier": "35210 - Pacé",
+        "localisation": "7 Rue Bertrand d'Argentré",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 352,
+        "quartier": "35210 - Pacé",
+        "localisation": "7 Rue Bertrand d'Argentré",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 343,
+        "quartier": "35047 - Bruz",
+        "localisation": "Rue des Tilleuls",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-03-06T01:00:00"
+    },
+    {
+        "id": 3,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue de Vern, de la Rue Le Dantec jusqu'au 95",
+        "type": "Neutralisation de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2024-09-23T02:00:00",
+        "date_fin": "2026-08-14T02:00:00"
+    },
+    {
+        "id": 19,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "71 Rue Alphonse Guérin",
+        "type": "Circulation interdite",
+        "libelle": "travaux d'installation de chantier",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-06-27T02:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 25,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "Avenue de Guyenne, du Boulevard d'Anjou jusqu'à la Rue de Gascogne",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-09-01T02:00:00",
+        "date_fin": "2026-02-28T01:00:00"
+    },
+    {
+        "id": 23,
+        "quartier": "1 - Centre",
+        "localisation": "Rue d'Antrain, de la Place Saint-Jean Eudes jusqu'à la Rue de Bonne Nouvelle. Par sections, à l'avancement.",
+        "type": "Mise en impasse",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-09-01T02:00:00",
+        "date_fin": "2026-04-30T02:00:00"
+    },
+    {
+        "id": 27,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Piste cyclable Châteaugiron, du Boulevard Léon Bourgeois jusqu'à la rocade",
+        "type": "Voie réservée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-09-10T02:00:00",
+        "date_fin": "2026-06-26T02:00:00"
+    },
+    {
+        "id": 53,
+        "quartier": "8 - Sud gare",
+        "localisation": "du 11 au 15 Rue de Quineleu sur terrain vague Rennes Metropole et Territoire public",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-11-22T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 60,
+        "quartier": "1 - Centre",
+        "localisation": "Rue Nantaise, de la Place Maréchal Foch jusqu'au 10",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-11-28T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 67,
+        "quartier": "35032 - Bourgbarré + 35208 - Orgères",
+        "localisation": "la Barre",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 93,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "face au 25 Rue Professeurs Alphonse et Abel Pellé",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de télécommunications",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 95,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "face au 25 Rue Professeurs Alphonse et Abel Pellé",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux sur réseaux ou ouvrages de télécommunications",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 92,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 257 au 249 Rue de Châteaugiron",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 85,
+        "quartier": "35189 - Montgermont",
+        "localisation": "Rue Newton",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 94,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 171 au 197 Rue de Châteaugiron dans les deux sens",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-07-03T02:00:00"
+    },
+    {
+        "id": 103,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Avenue Général George S. Patton face au n°3 de la rue Marbaudais",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-17T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 105,
+        "quartier": "35352 - Vern-sur-Seiche",
+        "localisation": "Chemin des Marais et rue Queffelec",
+        "type": "Sens interdit (ou sens unique)",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-19T01:00:00",
+        "date_fin": "2026-02-14T01:00:00"
+    },
+    {
+        "id": 107,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "Voie communale 3,  de la Victoire jusqu'à le Roquet",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-22T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 108,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet + 7 - Les Melliers",
+        "localisation": "Boulevard Villebois-Mareuil, Boulevard Villebois-Mareuil",
+        "type": "Voie réservée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-22T01:00:00",
+        "date_fin": "2026-03-27T01:00:00"
+    },
+    {
+        "id": 121,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Allée Aline Landais, Rue de la Petite Touche",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-02-20T01:00:00"
+    },
+    {
+        "id": 116,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Allée Aline Landais, Rue de la Petite Touche",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-02-20T01:00:00"
+    },
+    {
+        "id": 134,
+        "quartier": "35001 - Acigné",
+        "localisation": "3 Allée des Chênes",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 151,
+        "quartier": "8 - Sud gare",
+        "localisation": "37 Rue de la Boulais",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages d'eau potable",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 142,
+        "quartier": "35334 - Thorigné-Fouillard",
+        "localisation": "le Petit Beauséjour",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-10T01:00:00"
+    },
+    {
+        "id": 132,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue Paul Langevin au droit et à l'avancement des travaux",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 219,
+        "quartier": "35055 - Chantepie",
+        "localisation": "du 2 Allée de Brocéliande",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 227,
+        "quartier": "35047 - Bruz",
+        "localisation": "Rue des Tilleuls",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 137,
+        "quartier": "35363 - Pont-Péan",
+        "localisation": "5 la Luhardière",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 158,
+        "quartier": "4 - Saint Martin",
+        "localisation": "du 240 au 256 Rue de Saint-Malo",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 191,
+        "quartier": "11 - Le Blosne",
+        "localisation": "Rue de la Tisza",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 173,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "Rue Grande Rue - Rue Anne de Bretagne - Rue de la Rossignolière - Rue du Parc",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 205,
+        "quartier": "8 - Sud gare + 8 - Sud gare",
+        "localisation": "Rue Sirodot, Rue de la Courrouze, Rue Pierre Le Baud",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 168,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "Rue Pierre Loti",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 159,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue de Châteaugiron, de la Rue Michel Colomb jusqu'au 40",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 157,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue de Châteaugiron, de la Rue Michel Colomb jusqu'au 40",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 201,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Rue de Lorient, de la Rue Kerviler jusqu'au Boulevard Marbeuf",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 203,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Rue de Lorient, du Square Simone Morand jusqu'au 81",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 221,
+        "quartier": "35245 - Romillé",
+        "localisation": "30 ter l'Hôtellerie",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-05T01:00:00"
+    },
+    {
+        "id": 136,
+        "quartier": "35120 - Gévezé",
+        "localisation": "6 le Domaine Cormier",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-05T01:00:00"
+    },
+    {
+        "id": 222,
+        "quartier": "35245 - Romillé",
+        "localisation": "30 ter l'Hôtellerie",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-05T01:00:00"
+    },
+    {
+        "id": 139,
+        "quartier": "35139 - Laillé",
+        "localisation": "Bellevue, Buttes de Caran, Caran",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 209,
+        "quartier": "8 - Sud gare",
+        "localisation": "Rue Sirodot, Rue Pierre Le Baud",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-03-20T01:00:00"
+    },
+    {
+        "id": 179,
+        "quartier": "8 - Sud gare + 8 - Sud gare",
+        "localisation": "Rue Pierre Le Baud",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-03-20T01:00:00"
+    },
+    {
+        "id": 236,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "Rue Alexandra David-Néel",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 245,
+        "quartier": "35281 - Saint-Jacques-de-la-Lande",
+        "localisation": "la Calvenais",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-01-27T01:00:00"
+    },
+    {
+        "id": 248,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "3 Rue Levot",
+        "type": "Circulation interdite",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-07T01:00:00"
+    },
+    {
+        "id": 250,
+        "quartier": "12 - Bréquigny + 12 - Bréquigny",
+        "localisation": "Boulevard Albert 1er, de la Rue de Nantes jusqu'à l'Avenue Georges Graff",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-14T01:00:00"
+    },
+    {
+        "id": 263,
+        "quartier": "7 - Les Melliers",
+        "localisation": "face au 25 Rue de la Motte Baril",
+        "type": "Circulation alternée",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-08T01:00:00",
+        "date_fin": "2026-01-08T01:00:00"
+    },
+    {
+        "id": 267,
+        "quartier": "35001 - Acigné",
+        "localisation": "3 Rue de Calais",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-09T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 287,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "du 13 au 16 Rue Brindejonc des Moulinais",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-13T01:00:00"
+    },
+    {
+        "id": 292,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "8 Boulevard Villebois-Mareuil",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages d'eau potable",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 294,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "24 Boulevard Villebois-Mareuil",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux d'installation de chantier",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 284,
+        "quartier": "35080 - Cintré",
+        "localisation": "Rue des Charmes, du Chemin du Pâtis Cochet jusqu'au 1, Allée des Sports",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 280,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "Contour de l'Eglise",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 272,
+        "quartier": "8 - Sud gare",
+        "localisation": "10 Rue Bernard Salmon",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 293,
+        "quartier": "4 - Saint Martin",
+        "localisation": "du 46 au 76 Canal Saint-Martin",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 285,
+        "quartier": "35206 - Noyal-Châtillon-sur-Seiche",
+        "localisation": "Rue Gustave Eiffel",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 281,
+        "quartier": "35047 - Bruz + 35066 - Chartres-de-Bretagne",
+        "localisation": "la Garenne de Pan",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 279,
+        "quartier": "35210 - Pacé",
+        "localisation": "Avenue Charles Le Goffic - Boulevard Nonimoé - Rue Lamenais",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-02-28T01:00:00"
+    },
+    {
+        "id": 303,
+        "quartier": "35066 - Chartres-de-Bretagne",
+        "localisation": "Avenue de la Chapelle",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-06-20T02:00:00"
+    },
+    {
+        "id": 308,
+        "quartier": "35210 - Pacé",
+        "localisation": "10 Rue de la Chalotais",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-14T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 316,
+        "quartier": "8 - Sud gare",
+        "localisation": "du 82 au 94 Rue Paul Féval",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-19T01:00:00"
+    },
+    {
+        "id": 319,
+        "quartier": "8 - Sud gare",
+        "localisation": "du 82 au 94 Rue Paul Féval",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-19T01:00:00"
+    },
+    {
+        "id": 314,
+        "quartier": "35334 - Thorigné-Fouillard",
+        "localisation": "Rue Nationale section comprise entre la Jutauderie et la Rue Guynemer",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 318,
+        "quartier": "35210 - Pacé",
+        "localisation": "Avenue de Baiersdorf",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 331,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Rue Paul Henri Spaak",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 330,
+        "quartier": "35353 - Vezin-le-Coquet",
+        "localisation": "Rue du Petit Pré,à l'intersection de la Rue du Petit Pré et de la Rue Lieutenant-Colonel Dubois,Rue Lieutenant-Colonel Dubois, de la Rue du Petit Pré jusqu'au 22",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-03-13T01:00:00"
+    },
+    {
+        "id": 335,
+        "quartier": "35022 - Bécherel",
+        "localisation": "Résidence les Saules",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-26T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 337,
+        "quartier": "35055 - Chantepie",
+        "localisation": "du 18 le Hil",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-27T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 342,
+        "quartier": "8 - Sud gare",
+        "localisation": "7 Rue René Desfontaines",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux de grutage",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-05T01:00:00"
+    },
+    {
+        "id": 344,
+        "quartier": "11 - Le Blosne",
+        "localisation": "du 20quater au 22 Avenue Henri Fréville",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 349,
+        "quartier": "35120 - Gévezé",
+        "localisation": "15 au 21 Rue de Rennes",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 353,
+        "quartier": "1 - Centre",
+        "localisation": "du n° 7 au n° 9B Rue du 7ème d'Artillerie",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-02-05T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 4,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 98 au 106 Rue de Vern",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2024-09-23T02:00:00",
+        "date_fin": "2026-08-14T02:00:00"
+    },
+    {
+        "id": 7,
+        "quartier": "35240 - le Rheu + 35353 - Vezin-le-Coquet",
+        "localisation": "le Pont de Verrière,à l'intersection de la Route de Vezin et de la Route départementale 68",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2024-10-29T01:00:00",
+        "date_fin": "2026-06-30T02:00:00"
+    },
+    {
+        "id": 13,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "Rue du Mottay",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2025-01-06T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 20,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "71 Rue Alphonse Guérin",
+        "type": "Circulation alternée",
+        "libelle": "travaux d'installation de chantier",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-06-27T02:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 28,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Rue de la Motte-Brûlon, de la Rue Gustave Toudouze jusqu'au 22",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2025-09-12T02:00:00",
+        "date_fin": "2026-06-26T02:00:00"
+    },
+    {
+        "id": 32,
+        "quartier": "35055 - Chantepie + 35352 - Vern-sur-Seiche",
+        "localisation": "rue de la Hallerais entre la rue du pré long et la VC5 Chantepie déviation des 2 sens de circulation\nrue de la Hallerais depuis le rond point de l'hermine et jusqu'à la rue du pré long deviation un sens de circulation",
+        "type": "Limitation de vitesse",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-09-29T02:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 42,
+        "quartier": "35266 - Saint-Erblon + 35352 - Vern-sur-Seiche",
+        "localisation": "le Haut de la Lande",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-10-20T02:00:00",
+        "date_fin": "2026-01-20T01:00:00"
+    },
+    {
+        "id": 41,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Avenue de Rochester, de l'Avenue Général George S. Patton jusqu'à la Rue Poullart des Places sur la partie Nord",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-10-20T02:00:00",
+        "date_fin": "2026-06-30T02:00:00"
+    },
+    {
+        "id": 48,
+        "quartier": "12 - Bréquigny",
+        "localisation": "du 32 au 36 Rue Frédéric Le Guyader dans les deux sens",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-10-27T01:00:00",
+        "date_fin": "2026-10-27T01:00:00"
+    },
+    {
+        "id": 50,
+        "quartier": "12 - Bréquigny",
+        "localisation": "face au 22 Avenue Henri Fréville",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux de mise en place d'un arrêt de régulations horaire de bus pendant les travaux sur les quais bus",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-11-17T01:00:00",
+        "date_fin": "2026-01-31T01:00:00"
+    },
+    {
+        "id": 55,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "12 Rue de Mordelles, Inconnu Mode doux non dénommé",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2025-11-24T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 57,
+        "quartier": "35047 - Bruz",
+        "localisation": "Boulevard Louis Pasteur, de la Rue Gaudrine jusqu'à la Rue Duguesclin",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2025-11-24T01:00:00",
+        "date_fin": "2026-04-10T02:00:00"
+    },
+    {
+        "id": 58,
+        "quartier": "35047 - Bruz",
+        "localisation": "Boulevard Louis Pasteur, de la Rue Gaudrine jusqu'à la Rue Duguesclin",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-11-24T01:00:00",
+        "date_fin": "2026-04-10T02:00:00"
+    },
+    {
+        "id": 63,
+        "quartier": "35281 - Saint-Jacques-de-la-Lande",
+        "localisation": "Rue de la Pilate, du 148 jusqu'à la Rue des Vingt-cinq Fusillés",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-11-30T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 68,
+        "quartier": "35353 - Vezin-le-Coquet",
+        "localisation": "25 Rue des Maréchales (stationnement le long de Ecolaines), Allée de l'Enclos (parking), Rue des Maréchales (parking allée de l'enclos)",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-01T01:00:00",
+        "date_fin": "2026-03-06T01:00:00"
+    },
+    {
+        "id": 74,
+        "quartier": "7 - Les Melliers",
+        "localisation": "171 Rue de Vern",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux désaffectation de parcelle",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-04T01:00:00",
+        "date_fin": "2026-12-31T01:00:00"
+    },
+    {
+        "id": 80,
+        "quartier": "35065 - la Chapelle-Thouarault",
+        "localisation": "les Rochers - Rue de la Petite Champagne",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-08T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 76,
+        "quartier": "9 - Cleunay / Arsenal - Redon / La Courrouze",
+        "localisation": "du 150 au 152 Rue Eugène Pottier",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-08T01:00:00",
+        "date_fin": "2026-07-31T02:00:00"
+    },
+    {
+        "id": 81,
+        "quartier": "1 - Centre",
+        "localisation": "Quai Duguay-Trouin, à l'avancement des travaux, Pont de la Mission, Pont de Nemours, Quai Lamennais",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-10T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 98,
+        "quartier": "8 - Sud gare",
+        "localisation": "11 Rue Joüon des Longrais",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de télécommunications",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 87,
+        "quartier": "7 - Les Melliers",
+        "localisation": "face au 48 Avenue Monseigneur Mouézy",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de télécommunications",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 96,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 257 au 249 Rue de Châteaugiron",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-01-15T01:00:00"
+    },
+    {
+        "id": 90,
+        "quartier": "7 - Les Melliers",
+        "localisation": "du 171 au 197 Rue de Châteaugiron dans les deux sens",
+        "type": "Mesure libre circulation",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-15T01:00:00",
+        "date_fin": "2026-07-03T02:00:00"
+    },
+    {
+        "id": 106,
+        "quartier": "35204 - Nouvoitou",
+        "localisation": "Crotigné",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-19T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 112,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "à l'intersection de l'Avenue Sir Winston Churchill et de l'Avenue Charles et Raymonde Tillon",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 115,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "à l'intersection de l'Avenue Sir Winston Churchill et de l'Avenue Charles et Raymonde Tillon",
+        "type": "Interdiction de tourner",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 119,
+        "quartier": "10 - Villejean / Beauregard",
+        "localisation": "Avenue Charles et Raymonde Tillon, à partir du numéro 26 et sur une distance d'environ 250 m et dans les 2 sens de circulation.",
+        "type": "Neutralisation de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2025-12-24T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 122,
+        "quartier": "2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "face au 3 Rue Duboys des Sauzais,4 Rue Duboys des Sauzais",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de télécommunications",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2025-12-29T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 183,
+        "quartier": "35206 - Noyal-Châtillon-sur-Seiche",
+        "localisation": "Voie communale 301",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 152,
+        "quartier": "7 - Les Melliers",
+        "localisation": "14 Rue des Veyettes",
+        "type": "Circulation alternée",
+        "libelle": "travaux sur réseaux ou ouvrages d'eau potable",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 127,
+        "quartier": "8 - Sud gare",
+        "localisation": "37 Rue de la Boulais",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages d'eau potable",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 138,
+        "quartier": "8 - Sud gare",
+        "localisation": "Rue Joüon des Longrais",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-10T01:00:00"
+    },
+    {
+        "id": 147,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "247 Avenue Général George S. Patton",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages de télécommunications",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-10T01:00:00"
+    },
+    {
+        "id": 129,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Square Ludovic Trarieux au droit et à l'avancement des travaux",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 153,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue Paul Langevin au droit et à l'avancement des travaux",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 167,
+        "quartier": "35120 - Gévezé",
+        "localisation": "le Placis Bréal",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 186,
+        "quartier": "35047 - Bruz",
+        "localisation": "Boulevard Louis Pasteur au niveau du rond point de l'Orguenais",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 206,
+        "quartier": "8 - Sud gare",
+        "localisation": "2 Rue Jean Bras,8 Boulevard Gaëtan Hervé",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages d'eau potable",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 145,
+        "quartier": "7 - Les Melliers",
+        "localisation": "6 Place du Ronceray",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-22T01:00:00"
+    },
+    {
+        "id": 182,
+        "quartier": "35245 - Romillé",
+        "localisation": "à l'intersection de la Rue de Perronaye et  de Prairie du Bignon",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 170,
+        "quartier": "11 - Le Blosne",
+        "localisation": "Allée de Varsovie",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 192,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Rue Charles et Paul Géniaux, de la Rue de Lorient jusqu'à Allée Jean-François Le Gonidec et seulement dans le sens Sud-Nord",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 156,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue Michel Colomb, de la Rue André Pailheret jusqu'à la Rue de Châteaugiron",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 148,
+        "quartier": "7 - Les Melliers",
+        "localisation": "face au 68 Boulevard Villebois-Mareuil",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 187,
+        "quartier": "11 - Le Blosne",
+        "localisation": "Rue de la Tisza",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 190,
+        "quartier": "1 - Centre + 2 - Thabor / Saint-Hélier / Alphonse Guérin / Baud-Chardonnet",
+        "localisation": "Rue Saint-Martin, de la Rue de la Cochardière jusqu'au 15",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 165,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "Rue Pierre Loti",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 202,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Boulevard Marbeuf, de la Rue de Lorient jusqu'à la Rue Kerviler et seulement dans le sens Ouest-Est",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 204,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Boulevard Marbeuf, de la Rue Kerviler jusqu'à la Rue de Lorient et seulement dans le sens Est-Ouest",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 177,
+        "quartier": "35363 - Pont-Péan",
+        "localisation": "14 Rue de Bellevue",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux sur réseaux ou ouvrages de fibre optique",
+        "niv_perturbation": null,
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-03T01:00:00"
+    },
+    {
+        "id": 172,
+        "quartier": "35363 - Pont-Péan",
+        "localisation": "Rue de la Gibotière",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-20T01:00:00"
+    },
+    {
+        "id": 226,
+        "quartier": "35139 - Laillé + 35363 - Pont-Péan",
+        "localisation": "Route départementale 277",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-02-28T01:00:00"
+    },
+    {
+        "id": 143,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Allée d'Hennebont, Rue du Blavet, Allée de Port-Louis",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-03-13T01:00:00"
+    },
+    {
+        "id": 166,
+        "quartier": "5 - Maurepas / Bellangerais",
+        "localisation": "Allée d'Hennebont, Rue du Blavet, Allée de Port-Louis",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-03-13T01:00:00"
+    },
+    {
+        "id": 208,
+        "quartier": "8 - Sud gare",
+        "localisation": "Rue Sirodot, Rue Pierre Le Baud",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-05T01:00:00",
+        "date_fin": "2026-03-20T01:00:00"
+    },
+    {
+        "id": 243,
+        "quartier": "7 - Les Melliers",
+        "localisation": "Rue des Melliers",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 239,
+        "quartier": "35189 - Montgermont",
+        "localisation": "Boulevard d'Emeraude  :section entre la limite d'agglomération de Montgermont et le rond-point des Marais (RD29), Rond-point de la Bégassière",
+        "type": "Interdiction de dépasser",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-06T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 252,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "2 Rue de la Gare",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-07T01:00:00"
+    },
+    {
+        "id": 256,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "3 Rue Levot",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-07T01:00:00"
+    },
+    {
+        "id": 251,
+        "quartier": "35131 - l'Hermitage",
+        "localisation": "2 Rue de la Gare",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-07T01:00:00"
+    },
+    {
+        "id": 257,
+        "quartier": "35051 - Cesson-Sévigné",
+        "localisation": "3 Rue des Myosotis",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 249,
+        "quartier": "12 - Bréquigny + 12 - Bréquigny",
+        "localisation": "Boulevard Albert 1er, de la Rue de Nantes jusqu'à l'Avenue Georges Graff",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-07T01:00:00",
+        "date_fin": "2026-01-14T01:00:00"
+    },
+    {
+        "id": 262,
+        "quartier": "14 - Zone Industrielle Nord",
+        "localisation": "Rue du Chesnay Beauregard",
+        "type": "Neutralisation de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-08T01:00:00",
+        "date_fin": "2026-01-09T01:00:00"
+    },
+    {
+        "id": 265,
+        "quartier": "35047 - Bruz + 35139 - Laillé",
+        "localisation": "Châton",
+        "type": "Circulation alternée",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-08T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 270,
+        "quartier": "35001 - Acigné",
+        "localisation": "du 2 au 9 Allée des Hortensias",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-09T01:00:00",
+        "date_fin": "2026-01-28T01:00:00"
+    },
+    {
+        "id": 286,
+        "quartier": "3 - Bourg l'Evesque / La Touche / Moulin du Comte",
+        "localisation": "Rue Brindejonc des Moulinais, de la Rue de Lorient jusqu'à la Rue Etienne Pinault",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-13T01:00:00"
+    },
+    {
+        "id": 290,
+        "quartier": "9 - Cleunay / Arsenal - Redon / La Courrouze",
+        "localisation": "55 Boulevard de La Tour d'Auvergne",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages d'eau potable",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-14T01:00:00"
+    },
+    {
+        "id": 301,
+        "quartier": "35275 - Saint-Gilles",
+        "localisation": "39 bis le Breilhaye",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-16T01:00:00"
+    },
+    {
+        "id": 299,
+        "quartier": "35275 - Saint-Gilles",
+        "localisation": "au droit du n°20 Rue du Prieuré",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 298,
+        "quartier": "35055 - Chantepie",
+        "localisation": "17 les Cormiers",
+        "type": "Rétrécissement temporaire de largeur de voie - PLATEFORMES",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 274,
+        "quartier": "8 - Sud gare",
+        "localisation": "10 Rue Bernard Salmon",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux sur réseaux ou ouvrages électriques",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 296,
+        "quartier": "35055 - Chantepie",
+        "localisation": "Parking au 59 Avenue André Bonnin",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 276,
+        "quartier": "35206 - Noyal-Châtillon-sur-Seiche",
+        "localisation": "Voie communale 301",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-02-27T01:00:00"
+    },
+    {
+        "id": 297,
+        "quartier": "35250 - Saint-Armel",
+        "localisation": "Rue de la Mairie",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Secteur à éviter",
+        "date_deb": "2026-01-12T01:00:00",
+        "date_fin": "2026-05-31T02:00:00"
+    },
+    {
+        "id": 317,
+        "quartier": "8 - Sud gare",
+        "localisation": "face au 44bis Rue de l'Alma",
+        "type": "Rétrécissement temporaire de largeur de voie",
+        "libelle": "travaux de grutage",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-19T01:00:00"
+    },
+    {
+        "id": 313,
+        "quartier": "11 - Le Blosne",
+        "localisation": "du 20quater au 22 Avenue Henri Fréville",
+        "type": "Neutralisation de voie",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-19T01:00:00",
+        "date_fin": "2026-01-23T01:00:00"
+    },
+    {
+        "id": 332,
+        "quartier": "35024 - Betton",
+        "localisation": "Route du Landret au passage à niveau n°8",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact limité",
+        "date_deb": "2026-01-20T01:00:00",
+        "date_fin": "2026-01-30T01:00:00"
+    },
+    {
+        "id": 334,
+        "quartier": "35022 - Bécherel",
+        "localisation": "Résidence les Saules",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-26T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    },
+    {
+        "id": 339,
+        "quartier": "35001 - Acigné",
+        "localisation": "du 11 au 19 Allée des Hortensias",
+        "type": "Interdiction de stationnement",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-01-28T01:00:00",
+        "date_fin": "2026-02-09T01:00:00"
+    },
+    {
+        "id": 345,
+        "quartier": "35079 - Chevaigné",
+        "localisation": "le Breil au passage à niveau n°9",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-04T01:00:00"
+    },
+    {
+        "id": 351,
+        "quartier": "35120 - Gévezé",
+        "localisation": "15 au 21 Rue de Rennes",
+        "type": "MESURE DVPNO - MJC + OR",
+        "libelle": "travaux",
+        "niv_perturbation": "Impact nul",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-06T01:00:00"
+    },
+    {
+        "id": 340,
+        "quartier": "35196 - Mordelles",
+        "localisation": "du 26 Route de Chavagne vers et jusqu'au chemin menant à la STEP",
+        "type": "Circulation interdite",
+        "libelle": "travaux",
+        "niv_perturbation": "Circulation difficile",
+        "date_deb": "2026-02-02T01:00:00",
+        "date_fin": "2026-02-13T01:00:00"
+    }
+]
