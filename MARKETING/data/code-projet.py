@@ -21,5 +21,4 @@ print(table_exemple.groupby('TYPE_PANIER')['age'].mean())
 
 print(table_exemple.groupby('TYPE_PANIER')['ID_LEAD'].count())
 
-# modif
 
