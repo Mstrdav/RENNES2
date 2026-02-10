@@ -1,4 +1,4 @@
-# SUJET D’ÉVALUATION – « OUTILS ET MÉTHODES »
+# SUJET D’ÉVALUATION – « OUTILS DE MESURE »
 
 ## Objectif
 Conduire une étude de validation d’un capteur de puissance de pédalage à travers la mise en place d’un protocole de comparaison.
