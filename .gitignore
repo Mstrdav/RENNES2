@@ -7,3 +7,5 @@ credentials.*
 *.rdx
 /Econometrie/projet/rendu_cache
 /Econometrie/projet/rendu_files
+# Windows/WSL artifacts
+*:Zone.Identifier
