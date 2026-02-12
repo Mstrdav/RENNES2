@@ -1,0 +1,17 @@
+Chargé 19 fichiers.
+--- Analyse des Sprints ---
+CV Moyen Wahoo (Sprints): 18.15%
+CV Moyen Assioma (Sprints): 18.64%
+--- Analyse Steady State (150W) ---
+CV Moyen Wahoo (150W): 35.30%
+CV Moyen Assioma (150W): 35.48%
+--- Analyse Corrélation Globale ---
+Corrélation Globale (r): 0.9416
+R²: 0.8865
+Équation: y = 0.96x + 13.45
+--- Analyse Bland-Altman ---
+Biais Moyen: 5.93 W
+LoA Sup (+1.96 SD): 116.67 W
+LoA Inf (-1.96 SD): -104.80 W
+
+Analyse terminée. Figures sauvegardées dans rapport/figures/
