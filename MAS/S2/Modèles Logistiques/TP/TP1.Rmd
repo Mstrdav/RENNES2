@@ -1,0 +1,121 @@
+---
+title: "TP1"
+output: html_document
+---
+
+```{r data_import}
+eucalyptus <- read.delim(file = "eucalyptus.txt", sep = " ")[,-1]
+
+library(ggplot2)
+
+ggplot(eucalyptus) + aes(x = circ, y = ht) + geom_point() + theme_void()
+```
+
+```{r}
+glm1 <- glm(ht ~ circ, family = "gaussian", data = eucalyptus)
+glm2 <- glm(ht ~ circ + sqrt(circ), family = "gaussian", data = eucalyptus)
+glm3 <- glm(ht ~ sqrt(circ), family = "gaussian", data = eucalyptus)
+```
+
+### Comparaison des modèles, anova
+
+```{r comparaison}
+anova(glm1, glm2)
+anova(glm3, glm2)
+```
+
+```{r kfold}
+library(boot)
+set.seed(1312)
+glm1.err.10 <- sqrt(cv.glm(eucalyptus, glm1, K=10)$delta[2])
+glm2.err.10 <- sqrt(cv.glm(eucalyptus, glm2, K=10)$delta[2])
+glm3.err.10 <- sqrt(cv.glm(eucalyptus, glm3, K=10)$delta[2])
+
+glm1.err.10
+glm2.err.10
+glm3.err.10
+```
+
+```{r intervalle}
+paste("Prédiction des modèles pour un arbre de circonférence 50cm")
+paste("----------------------------------------------------------")
+paste("GLM1: ", predict.glm(glm1, data.frame(circ = 50)))
+paste("GLM2: ", predict.glm(glm2, data.frame(circ = 50)))
+paste("GLM3: ", predict.glm(glm3, data.frame(circ = 50)))
+
+# intervalle de confiance
+glm2.lm <- lm(glm2)
+
+glm2.predict <- predict.glm(glm2, data.frame(circ = 50), se.fit = TRUE, type = "response")
+ic_min <- glm2.predict$fit - glm2.predict$se.fit
+ic_max <- glm2.predict$fit + glm2.predict$se.fit
+
+print("")
+print("Intervalle de confiance à 95%")
+paste("-----------------------------")
+paste("GLM1 (estimate) : ", glm2.predict$fit)
+paste("GLM1 (IC 95%) : [", round(ic_min, 3), ";", round(ic_max, 3), "]")
+```
+
+# Exercice 2
+
+## 1. Expliquez pourquoi l'utilisation d'un modèle de Poisson est adaptée.
+
+-> On utilise un modèle de poisson car on est face à une variable de comptage.
+
+## 2. Construction de 3 modèles de Poisson avec les 3 variables explicatives.
+
+### (a) 
+
+```{r }
+brooklyn <- read.csv("BikeBrooklynBridge.csv")
+# passage en factor (plus de coefficients du coup)
+brooklyn$Precipitation <- as.factor(brooklyn$Precipitation)
+
+brooklyn.glmfull <- glm(Count ~ Precipitation + Low.Temp + High.Temp, brooklyn, family = "poisson")
+brooklyn.glm1 <- glm(Count ~ Low.Temp + High.Temp, brooklyn, family = "poisson")
+brooklyn.glm2 <- glm(Count ~ Precipitation + High.Temp, brooklyn, family = "poisson")
+brooklyn.glm3 <- glm(Count ~ Precipitation + Low.Temp, brooklyn, family = "poisson")
+```
+
+### (b) Summary, je skip
+
+### (c) anova et kfold
+
+```{r comparaison}
+set.seed(1312)
+anova(brooklyn.glm1, brooklyn.glmfull)
+anova(brooklyn.glm2, brooklyn.glmfull)
+anova(brooklyn.glm3, brooklyn.glmfull)
+
+#kfold
+print("Erreur K-Fold")
+paste("GLM Full: ", sqrt(cv.glm(brooklyn, brooklyn.glmfull, K = 10)$delta[2]))
+paste("GLM 1: ", sqrt(cv.glm(brooklyn, brooklyn.glm1, K = 10)$delta[2]))
+paste("GLM 2: ", sqrt(cv.glm(brooklyn, brooklyn.glm2, K = 10)$delta[2]))
+paste("GLM 3: ", sqrt(cv.glm(brooklyn, brooklyn.glm3, K = 10)$delta[2]))
+
+# "GLM Full:  574.682857337886"
+# "GLM 1:  668.653137501415"
+# "GLM 2:  581.529079921715"
+# "GLM 3:  666.694345754039"
+```
+
+## 3. Precipitation en facteur (intégré au code)
+
+## 4. Effet croisé precipitation:high.temp
+
+### (a) nouveau modèle
+
+```{r effets_croises}
+brooklyn.glmcross <- glm(Count ~ Precipitation + High.Temp + Low.Temp + Precipitation:High.Temp, brooklyn, family = "poisson")
+```
+
+### (b) Comparaison
+
+```{r compcross}
+set.seed(1312)
+anova(brooklyn.glmfull, brooklyn.glmcross)
+paste("GLM cross: ", sqrt(cv.glm(brooklyn, brooklyn.glmcross, K = 10)$delta[2]))
+```
+

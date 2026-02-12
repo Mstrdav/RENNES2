@@ -1,0 +1,7 @@
+"Nom","Sexe","Fievre","Toux","Test1","Test2","Test3","Test4"
+"Chloe","F","P","P","N","N","N","N"
+"Florian","H","P","P","P","P","N","P"
+"Marie","F","N","N","P","N","P","P"
+"Margaux","F","P","N","P","N","P","N"
+"Antonin","H","N","N","P","P","P","N"
+"Celine","F","P","P","P","N","N","N"
