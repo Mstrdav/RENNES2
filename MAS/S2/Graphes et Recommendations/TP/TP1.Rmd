@@ -1,0 +1,151 @@
+---
+title: "TP1 Graphes et Recommendations"
+output: html_document
+author: "Colin G."
+---
+
+```{r modularity}
+library(igraph)
+library(tidygraph)
+library(networkdata)
+G_igraph <- make_graph(c(1,2,1,3,1,4,4,5,4,6),directed = FALSE)
+G_tidy <- as_tbl_graph(G_igraph)
+plot(G_tidy,layout = layout_with_fr)
+
+membership = c(1,2,1,2,1,2) # low modularity
+# membership = c(1,1,1,2,2,2) # higher modularity
+
+A <- as_adjacency_matrix(G_igraph, sparse = FALSE)
+k <- degree(G_igraph)
+m <- gsize(G_igraph)
+n <- gorder(G_igraph)
+
+# --- Calcul Manuel de Q ---
+Q_calcul <- 0
+deux_m <- 2 * m
+
+for (i in 1:n) {
+  for (j in 1:n) {
+    if (membership[i] == membership[j]) {
+      # Présence d'arrête
+      A_ij <- A[i, j]
+      
+      # Probabilité attendue d'une arête par hasard
+      P_ij <- (k[i] * k[j]) / deux_m
+      
+      # Somme
+      Q_calcul <- Q_calcul + (A_ij - P_ij)
+    }
+  }
+}
+
+Q_final <- Q_calcul / deux_m
+
+print(paste("Modularité calculée à la main :", Q_final))
+print(paste("Modularité fonction igraph    :", modularity(G_igraph, membership)))
+```
+
+```{r}
+G1 <- make_full_graph(3)
+G2 <- make_full_graph(3)
+G3 <- make_full_graph(2)
+G4 <- make_full_graph(3)
+G5 <- make_full_graph(3)
+G <- G1+G2+G3+G4+G5
+G <- add.edges(G, c(6,7))
+G <- add.edges(G, c(3,7))
+G <- add.edges(G, c(8,9))
+G <- add.edges(G, c(8,12))
+plot(G)
+```
+
+```{r}
+edge_betweenness(G)
+ceb <- cluster_edge_betweenness(G)
+
+# 1. Couleurs basées sur les communautés avec transparence (alpha)
+library(RColorBrewer)
+n_comm <- length(ceb)
+palette <- brewer.pal(max(3, n_comm), "Set1") # Utilisation d'une palette qualitative
+V(G)$color <- adjustcolor(palette[membership(ceb)], alpha.f = 0.8)
+
+# 2. Taille proportionnelle au "Degré" (nombre de connexions)
+# Cela met en valeur les hubs importants
+deg <- degree(G)
+V(G)$size <- deg * 8 + 2 
+
+# 3. Esthétique de bordure
+V(G)$frame.color <- "transparent"
+V(G)$frame.width <- 0.5
+
+# 1. Rendre les arêtes fines et claires
+E(G)$width <- 0.5
+E(G)$color <- adjustcolor("grey70", alpha.f = 0.5)
+
+# 2. Courber les arêtes (évite les chevauchements rigides)
+E(G)$curved <- 0.2
+
+plot(ceb, G, vertex.label = LETTERS[1:length(E(G))])
+```
+
+```{r}
+cl <- cluster_louvain(G)
+plot(cl, G)
+```
+
+```{r}
+co <- cluster_optimal(G)
+plot(co, G)
+```
+
+
+# avec Karate
+
+```{r}
+library(igraphdata)
+K <- upgrade_graph(karate)
+
+edge_betweenness(K)
+ceb <- cluster_edge_betweenness(K)
+
+# 1. Couleurs basées sur les communautés avec transparence (alpha)
+library(RColorBrewer)
+n_comm <- length(ceb)
+palette <- brewer.pal(max(3, n_comm), "Set1") # Utilisation d'une palette qualitative
+V(K)$color <- adjustcolor(palette[membership(ceb)], alpha.f = 0.8)
+
+# 2. Taille proportionnelle au "Degré" (nombre de connexions)
+# Cela met en valeur les hubs importants
+deg <- degree(K)
+V(K)$size <- deg * 200 + 500
+
+# 3. Esthétique de bordure
+V(K)$frame.color <- "transparent"
+V(K)$frame.width <- 0.5
+
+# 1. Rendre les arêtes fines et claires
+E(K)$width <- 0.5
+E(K)$color <- adjustcolor("grey70", alpha.f = 0.5)
+
+# 2. Courber les arêtes (évite les chevauchements rigides)
+E(K)$curved <- 0.2
+
+karate.plot.eb <- plot(ceb, K, layout = layout_with_graphopt,rescale = FALSE)
+
+```
+
+```{r}
+cl <- cluster_louvain(K)
+karate.plot.louvain <- plot(cl, K, layout = layout_with_graphopt,rescale = FALSE)
+```
+
+```{r}
+co <- cluster_optimal(K)
+karate.plot.optimal <- plot(co, K, layout = layout_with_graphopt,rescale = FALSE)
+```
+
+```{r}
+modularity(ceb, K)
+modularity(cl, K)
+modularity(co, K)
+```

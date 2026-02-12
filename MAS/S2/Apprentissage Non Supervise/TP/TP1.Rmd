@@ -1,0 +1,283 @@
+---
+title: "TP 1 : Distances & Introduction à la CAH"
+author: "M1 MAS"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+# Installation automatique de FactoMineR si nécessaire
+if(!require(FactoMineR)) install.packages("FactoMineR")
+library(FactoMineR)
+
+```
+
+## Exercice 1 : Données quantitatives
+
+Importation et Distances 
+
+**Question 1 :** La fonction `dist` de base dans R permet de calculer plusieurs types de distances : *euclidean, maximum, manhattan, canberra, binary, et minkowski*.
+
+**Question 2 :** Importation et calcul de la distance euclidienne.
+
+```{r ex1_q2}
+# Importation (Source: 4)
+df_produits <- read.delim("Product_appreciation.txt", header=TRUE, row.names=1, sep = ",")
+print(df_produits)
+
+# Calcul de la matrice de distance (Euclidienne par défaut)
+dist_mat_euc <- dist(df_produits, method = "euclidean")
+
+print(round(dist_mat_euc, 2))
+
+```
+
+### Analyse des résultats
+
+**Question 3 :** Quels produits sont les plus proches ? 
+
+```{r ex1_q3}
+mat_euc <- as.matrix(dist_mat_euc)
+# On remplace la diagonale (0) par Inf pour trouver le vrai minimum
+diag(mat_euc) <- Inf
+min_val <- min(mat_euc)
+indices <- which(mat_euc == min_val, arr.ind = TRUE)
+
+p1 <- rownames(mat_euc)[indices[1,1]]
+p2 <- rownames(mat_euc)[indices[1,2]]
+
+cat("La distance minimale est de", min_val, "\n")
+cat("Les produits les plus proches sont :", p1, "et", p2, "\n")
+
+```
+
+---
+
+## Exercice 2 : Données qualitatives
+
+Transformation des données 
+
+**Question 1 :** Transformation en tableau disjonctif complet.
+
+```{r ex2_q1}
+df_medical <- read.table("Fictive_medical_data.txt", header=TRUE, row.names=1, sep = ",")
+
+# Utilisation de FactoMineR (Source: 16)
+# Note: tab.disjonctif ne fonctionne que sur les facteurs, on s'assure de la conversion
+for(i in 1:ncol(df_medical)) df_medical[,i] <- as.factor(df_medical[,i])
+
+tab_disj <- tab.disjonctif(df_medical)
+print(tab_disj)
+
+```
+
+Programmation des distances 
+
+**Question 2 & 3 :** Définition des fonctions Sokal & Michener et Jaccard, et test sur vecteurs .
+
+Formules de dissimilarité :
+
+* **Sokal & Michener** : (Mismatches) / Total
+* **Jaccard** : (Mismatches 1-0 ou 0-1) / (Total - Matches 0-0)
+
+```{r ex2_q2_q3}
+# Fonctions
+dist_sokal_michener <- function(x, y) {
+  # Dissimilarité = nombre de différences / nombre total de variables
+  return(sum(x != y) / length(x))
+}
+
+dist_jaccard <- function(x, y) {
+  # a = 1-1, b = 1-0, c = 0-1
+  # Jaccard dissimilarity = (b + c) / (a + b + c)
+  # Donc on ignore les cas 0-0
+  b_plus_c <- sum(x != y) # Différents
+  a <- sum(x == 1 & y == 1) # 1 et 1
+  
+  if((a + b_plus_c) == 0) return(0) # Protection div par 0
+  return(b_plus_c / (a + b_plus_c))
+}
+
+# Test sur l'exemple du sujet
+xi <- c(1,0,0,0,1,1)
+xj <- c(1,0,0,1,0,0)
+
+cat("Test Sokal & Michener :", dist_sokal_michener(xi, xj), "\n")
+cat("Test Jaccard :", dist_jaccard(xi, xj), "\n")
+
+```
+
+Matrices de dissimilarités et Analyse 
+
+**Questions 4 & 5 :** Calcul sur les données médicales.
+
+```{r ex2_q4_q5}
+# Le tableau disjonctif est déjà binaire (0/1)
+data_bin <- as.matrix(tab_disj)
+n <- nrow(data_bin)
+mat_sokal <- matrix(0, n, n, dimnames = list(rownames(data_bin), rownames(data_bin)))
+mat_jaccard <- matrix(0, n, n, dimnames = list(rownames(data_bin), rownames(data_bin)))
+
+for (i in 1:n) {
+  for (j in 1:n) {
+    mat_sokal[i, j] <- dist_sokal_michener(data_bin[i, ], data_bin[j, ])
+    mat_jaccard[i, j] <- dist_jaccard(data_bin[i, ], data_bin[j, ])
+  }
+}
+
+print("Matrice Sokal & Michener (extrait):")
+print(round(mat_sokal, 3))
+
+print("Matrice Jaccard (extrait):")
+print(round(mat_jaccard, 3))
+
+# Individus les plus proches (Sokal)
+diag(mat_sokal) <- Inf
+min_s <- min(mat_sokal)
+inds_s <- which(mat_sokal == min_s, arr.ind=TRUE)[1,]
+cat("\nPlus proches (Sokal) :", rownames(mat_sokal)[inds_s[1]], "et", rownames(mat_sokal)[inds_s[2]], "( d =", min_s,")\n")
+
+# Individus les plus proches (Jaccard)
+diag(mat_jaccard) <- Inf
+min_j <- min(mat_jaccard)
+inds_j <- which(mat_jaccard == min_j, arr.ind=TRUE)[1,]
+cat("Plus proches (Jaccard) :", rownames(mat_jaccard)[inds_j[1]], "et", rownames(mat_jaccard)[inds_j[2]], "( d =", min_j,")\n")
+
+```
+
+---
+
+## Exercice Facultatif : Distance du Khi-2
+
+**Questions 1 & 2 :** Programmation et test sur Chloé et Margaux.
+
+
+```{r ex_facultatif}
+# Fonction distance du Chi2 entre deux profils lignes i et j
+dist_chi2_manual <- function(row_i, row_j, data_matrix) {
+  # Somme totale du tableau
+  N <- sum(data_matrix)
+  # Marges colonnes (p_k)
+  col_sums <- colSums(data_matrix)
+  p_k <- col_sums / N
+  
+  # Profils lignes (divisés par leur somme ligne respective)
+  prof_i <- row_i / sum(row_i)
+  prof_j <- row_j / sum(row_j)
+  
+  # Formule distance chi2 pondérée par l'inverse des marges colonnes
+  # d²(i,j) = sum [ (1/p_k) * (prof_i_k - prof_j_k)^2 ]
+  d2 <- sum( (1/p_k) * (prof_i - prof_j)^2 )
+  return(sqrt(d2))
+}
+
+# Application à Chloé et Margaux (Exercice 2)
+# Chloé est la ligne 1, Margaux est la ligne 4
+
+data_bin
+
+row_chloe <- data_bin["Chloe", ]
+row_margaux <- data_bin["Margaux", ]
+
+d_chi2 <- dist_chi2_manual(row_chloe, row_margaux, data_bin)
+cat("Distance du Chi2 entre Chloé et Margaux :", round(d_chi2, 4))
+
+```
+
+---
+
+## Exercice 3 : CAH
+
+Nous reprenons l'exemple du cours avec 5 points dans .
+
+```{r ex3_setup}
+# Définition des points M1 à M5
+df_points <- data.frame(
+  x = c(0, 4, 0, 0, 3),
+  y = c(3, 3, 2, 0, 2)
+)
+rownames(df_points) <- c("M1", "M2", "M3", "M4", "M5")
+
+# 1. Nuage de points
+plot(df_points$x, df_points$y, pch=19, col="blue", 
+     xlim=c(-1,5), ylim=c(-1,4), xlab="X", ylab="Y", 
+     main="Nuage de points")
+text(df_points$x, df_points$y, labels=rownames(df_points), pos=4)
+grid()
+
+```
+
+**Question 3 :** Matrice de distance euclidienne au carré.
+
+```{r ex3_dist}
+# Distance euclidienne
+d_euc <- dist(df_points, method="euclidean")
+# Au carré
+d_sq <- d_euc^2
+print("Matrice des distances au carré :")
+print(d_sq)
+
+```
+
+### Classification Ascendante Hiérarchique (CAH)
+
+Nous comparons ici trois méthodes d'agrégation :
+
+1. 
+**Saut Minimal** (Single Linkage) 
+
+
+2. 
+**Saut Maximal** (Complete Linkage) 
+
+
+3. 
+**Ward** (Ward.D2) 
+
+
+
+```{r ex3_hclust, fig.width=10, fig.height=4}
+par(mfrow=c(1,3)) # Affichage côte à côte
+
+# 1. Saut Minimal
+hc_single <- hclust(d_sq, method="single")
+plot(hc_single, main="Saut Minimal (Single)", sub="", xlab="")
+
+# 2. Saut Maximal
+hc_complete <- hclust(d_sq, method="complete")
+plot(hc_complete, main="Saut Maximal (Complete)", sub="", xlab="")
+
+# 3. Ward (Sur distance au carré -> ward.D2)
+hc_ward <- hclust(d_sq, method="ward.D2")
+plot(hc_ward, main="Ward", sub="", xlab="")
+
+```
+
+### Analyse des partitions
+
+**Question 6, 8, 9 :** Choix du nombre de groupes.
+Pour le **Saut Minimal**, on observe un saut important de hauteur, suggérant une coupure.
+
+```{r ex3_partitions}
+# Exemple de partition en 2 groupes pour Ward
+groups_ward <- cutree(hc_ward, k=2)
+cat("Partition Ward (k=2) :\n")
+print(groups_ward)
+
+# [cite_start]Visualisation de la hauteur (Saut Minimal) [cite: 33]
+par(mfrow=c(1,1))
+plot(hc_single$height, type="b", main="Hauteurs de fusion (Saut Minimal)", 
+     ylab="Hauteur", xlab="Étape")
+
+```
+
+Conclusion: Les différentes méthodes d'agrégation peuvent donner des dendrogrammes différents. Le saut minimal a tendance à créer des effets de chaînage, tandis que la méthode de Ward tente de minimiser l'inertie intra-classe, créant souvent des groupes plus compacts et équilibrés.
+
+```
+
+```
